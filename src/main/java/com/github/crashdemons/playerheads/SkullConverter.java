@@ -1,6 +1,7 @@
 
 package com.github.crashdemons.playerheads;
 
+import com.github.crashdemons.playerheads.compatibility.CompatibilityAdapter;
 import java.util.UUID;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -58,8 +59,8 @@ public final class SkullConverter {
      * @param mat The material to check.
      * @return true: the material is a playerhead. false: the material is not a playerhead.
      */
-    public static boolean isPlayerHead(Material mat){
-        return (mat==Material.PLAYER_HEAD || mat==Material.PLAYER_WALL_HEAD);
+    public static boolean isPlayerHead(Material mat){//TODO: XXX CANT DETERMINE IF SKULL IS PLAYER FROM Material - need DataValue! 
+        return TexturedSkullType.get(mat)==TexturedSkullType.PLAYER;//return (mat==Material.PLAYER_HEAD || mat==Material.PLAYER_WALL_HEAD);
     }
     
     /**
@@ -70,7 +71,7 @@ public final class SkullConverter {
      * @return the owning player of the skull
      */
     public static OfflinePlayer getSkullOwningPlayer(SkullMeta skullMeta){
-        OfflinePlayer op = skullMeta.getOwningPlayer();
+        OfflinePlayer op = CompatibilityAdapter.getOwningPlayer(skullMeta);//skullMeta.getOwningPlayer();
         if(op!=null) return op;
         return ProfileUtils.getProfilePlayer(skullMeta);
     }
@@ -82,7 +83,7 @@ public final class SkullConverter {
      * @return the username of the head's owner
      */
     public static OfflinePlayer getSkullOwningPlayer(Skull skullBlockState){
-        OfflinePlayer op = skullBlockState.getOwningPlayer();
+        OfflinePlayer op = CompatibilityAdapter.getOwningPlayer(skullBlockState);//skullBlockState.getOwningPlayer();
         if(op!=null) return op;
         return ProfileUtils.getProfilePlayer(skullBlockState);
     }
@@ -94,7 +95,7 @@ public final class SkullConverter {
      */
     public static String getSkullOwner(SkullMeta skullMeta){
         String owner=null;
-        OfflinePlayer op = skullMeta.getOwningPlayer();
+        OfflinePlayer op = CompatibilityAdapter.getOwningPlayer(skullMeta);//skullMeta.getOwningPlayer();
         if(op==null) op = ProfileUtils.getProfilePlayer(skullMeta);//this does happen on textured heads with a profile but without an OwningPlayer
         if(op!=null) owner=op.getName();
         if(owner==null) owner=skullMeta.getOwner();
@@ -107,7 +108,7 @@ public final class SkullConverter {
      */
     public static String getSkullOwner(Skull skullBlockState){
         String owner=null;
-        OfflinePlayer op = skullBlockState.getOwningPlayer();
+        OfflinePlayer op = CompatibilityAdapter.getOwningPlayer(skullBlockState);//skullBlockState.getOwningPlayer();
         if(op==null) op = ProfileUtils.getProfilePlayer(skullBlockState);
         if(op!=null) owner=op.getName();
         if(owner==null) owner=skullBlockState.getOwner();
@@ -165,7 +166,7 @@ public final class SkullConverter {
         if(type==null || type!=TexturedSkullType.PLAYER) return type;//don't really need to check null here, but it's more explicit this way.
         //now we're checking legacy player skulls
         Material mat = stack.getType();
-        if(mat!=Material.PLAYER_HEAD && mat!=Material.PLAYER_WALL_HEAD) return null;
+        if(!isPlayerHead(mat)) return null;
         SkullMeta skullState = (SkullMeta) stack.getItemMeta();
         String owner=getSkullOwner(skullState);
         if(owner==null) return TexturedSkullType.PLAYER;//we cannot resolve an owner name for this playerhead, so it can only be considered a Player
@@ -228,7 +229,7 @@ public final class SkullConverter {
         if(type==null || type!=TexturedSkullType.PLAYER) return type;//don't really need to check null here, but it's more explicit this way.
         //now we're checking legacy player skulls
         Material mat = state.getType();
-        if(mat!=Material.PLAYER_HEAD && mat!=Material.PLAYER_WALL_HEAD) return null;
+        if(!isPlayerHead(mat)) return null;
         Skull skullState = (Skull) state;
         String owner=getSkullOwner(skullState);
         if(owner==null) return TexturedSkullType.PLAYER;//we cannot resolve an owner name for this playerhead, so it can only be considered a Player

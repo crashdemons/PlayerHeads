@@ -6,6 +6,7 @@
 package com.github.crashdemons.playerheads;
 
 import java.util.UUID;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.junit.After;
@@ -14,14 +15,20 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
  * Tests TexturedSkullType
  * @author crash
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({Bukkit.class})
 public class TexturedSkullTypeTest {
     
     public TexturedSkullTypeTest() {
+        Mocks.setupFakeServerVersion();
     }
     
     @BeforeClass

@@ -9,6 +9,8 @@ import com.github.crashdemons.playerheads.SkullConverter;
 import com.github.crashdemons.playerheads.SkullManager;
 import com.github.crashdemons.playerheads.TexturedSkullType;
 import com.github.crashdemons.playerheads.antispam.PlayerDeathSpamPreventer;
+import com.github.crashdemons.playerheads.compatibility.CompatibilityAdapter;
+import com.github.crashdemons.playerheads.compatibility.CompatibleGameRule;
 
 import java.util.List;
 import java.util.Random;
@@ -37,8 +39,6 @@ import org.shininet.bukkit.playerheads.events.PlayerDropHeadEvent;
 
 import fr.neatmonster.nocheatplus.checks.CheckType;
 import fr.neatmonster.nocheatplus.hooks.NCPExemptionManager;
-import org.bukkit.GameRule;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.block.BlockState;
 
 /**
@@ -71,13 +71,13 @@ class PlayerHeadsListener implements Listener {
         double lootingrate = 1;
 
         if (killer != null) {
-            ItemStack weapon = killer.getEquipment().getItemInMainHand();
+            ItemStack weapon = CompatibilityAdapter.getItemInMainHand(killer);//killer.getEquipment().getItemInMainHand();
             if (weapon != null) {
                 lootingrate = 1 + (plugin.configFile.getDouble("lootingrate") * weapon.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS));
             }
         }
         EntityType entityType = event.getEntityType();//entity type of the thing dying.
-        TexturedSkullType skullType = SkullConverter.skullTypeFromEntityType(entityType);
+        TexturedSkullType skullType = SkullConverter.skullTypeFromEntityType(entityType);//TODO: XXXXX NEED SKELETON COMPATIBILITY XXXXX 
         if(skullType==null) return;//entity type is one we don't support - don't attempt to handle heads for it.
         String mobDropConfig = skullType.getConfigName();
         Double droprate = plugin.configFile.getDouble(mobDropConfig);
@@ -91,7 +91,7 @@ class PlayerHeadsListener implements Listener {
                 if (droprate < 0) return;//if droprate is <0, don't modify drops
                 event.getDrops().removeIf(
                         itemStack -> 
-                                itemStack.getType() == Material.WITHER_SKELETON_SKULL
+                                SkullConverter.skullTypeFromItemStack(itemStack)==TexturedSkullType.WITHER_SKELETON
                 );
                 MobDeathHelper(event, skullType, droprate * lootingrate);
                 break;
@@ -134,7 +134,7 @@ class PlayerHeadsListener implements Listener {
         }   
         
         //drop item naturally if the drops will be modified by another plugin or gamerule.
-        if (plugin.configFile.getBoolean("antideathchest") || player.getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY)) {
+        if (plugin.configFile.getBoolean("antideathchest") || CompatibleGameRule.KEEP_INVENTORY.getBool(player.getWorld())) {
             Location location = player.getLocation();
             location.getWorld().dropItemNaturally(location, drop);
         } else {
@@ -275,7 +275,7 @@ class PlayerHeadsListener implements Listener {
                 }
 
                 plugin.getServer().getPluginManager().callEvent(new PlayerAnimationEvent(player));
-                plugin.getServer().getPluginManager().callEvent(new BlockDamageEvent(player, block, player.getEquipment().getItemInMainHand(), true));
+                plugin.getServer().getPluginManager().callEvent(new BlockDamageEvent(player, block, CompatibilityAdapter.getItemInMainHand(player), true));//player.getEquipment().getItemInMainHand()
 
                 FakeBlockBreakEvent fakebreak = new FakeBlockBreakEvent(block, player);
                 plugin.getServer().getPluginManager().callEvent(fakebreak);

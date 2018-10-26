@@ -5,21 +5,28 @@
  */
 package com.github.crashdemons.playerheads;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.EntityType;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 import org.shininet.bukkit.playerheads.LegacySkullType;
 
 /**
  *
  * @author crash
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({Bukkit.class})
 public class SkullConverterTest {
     
     public SkullConverterTest() {
+        Mocks.setupFakeServerVersion();
     }
 
     @Test

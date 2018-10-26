@@ -1,6 +1,8 @@
 
 package com.github.crashdemons.playerheads;
 
+import com.github.crashdemons.playerheads.compatibility.CompatibilityAdapter;
+import com.github.crashdemons.playerheads.compatibility.CompatibleSkullMaterial;
 import java.util.UUID;
 import java.util.ArrayList;
 import org.bukkit.Bukkit;
@@ -42,7 +44,7 @@ public final class SkullManager {
      * @param owner The OfflinePlayer owning to own the head.
      */
     private static void applyOwningPlayer(SkullMeta headMeta,OfflinePlayer owner){
-        headMeta.setOwningPlayer( owner );
+        CompatibilityAdapter.setOwningPlayer(headMeta, owner);//headMeta.setOwningPlayer( owner );
     }
     /**
      * Sets a display name for the playerhead item's meta
@@ -87,17 +89,17 @@ public final class SkullManager {
      * @return The ItemStack of heads desired.
      */
     public static ItemStack MobSkull(TexturedSkullType type,int quantity,boolean useVanillaHeads){
-        Material mat = type.getMaterial();
+        CompatibleSkullMaterial mat = type.getCompatibleMaterial();
         
         
         if(type.hasDedicatedItem()){
             if(useVanillaHeads)
-                return new ItemStack(mat,quantity);
-            else mat=Material.PLAYER_HEAD;
+                return mat.getItemStack(quantity);//new ItemStack(mat,quantity);
+            else mat=CompatibleSkullMaterial.PLAYER;
         }
         
         //System.out.println("Player-head");
-        ItemStack stack = new ItemStack(mat,quantity);
+        ItemStack stack = mat.getItemStack(quantity);//new ItemStack(mat,quantity);
         SkullMeta headMeta = (SkullMeta) stack.getItemMeta();
         //applyOwningPlayer(headMeta,Bukkit.getOfflinePlayer(type.getOwner()));
         applyTexture(headMeta,type.getOwner(),type.getTexture());
@@ -110,7 +112,7 @@ public final class SkullManager {
         return PlayerSkull(owner,Config.defaultStackSize);
     }
     private static ItemStack PlayerSkull(OfflinePlayer owner, int quantity){
-        ItemStack stack = new ItemStack(Material.PLAYER_HEAD,quantity);
+        ItemStack stack = CompatibleSkullMaterial.PLAYER.getItemStack(quantity);//new ItemStack(Material.PLAYER_HEAD,quantity);
         SkullMeta headMeta = (SkullMeta) stack.getItemMeta();
         String name=null;
         if(owner!=null){
