@@ -5,6 +5,8 @@
 package org.shininet.bukkit.playerheads;
 
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
+import com.github.crashdemons.playerheads.compatibility.CompatibilityProvider;
+import java.util.ServiceLoader;
 import net.gravitydevelopment.updater.Updater;
 import java.util.logging.Logger;
 
@@ -48,6 +50,9 @@ public final class PlayerHeads extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         logger = getLogger();
+        
+        
+        
         configFile = getConfig();
         configFile.options().copyDefaults(true);
         saveDefaultConfig();
@@ -60,6 +65,9 @@ public final class PlayerHeads extends JavaPlugin implements Listener {
         PlayerHeadsCommandExecutor commandExecutor = new PlayerHeadsCommandExecutor(this);
         getServer().getPluginManager().registerEvents(listener, this);
         getCommand("PlayerHeads").setExecutor(commandExecutor);
+        
+        
+        logger.info("Compatibility: "+Compatibility.getProvider().getVersion());
     }
     
     /**

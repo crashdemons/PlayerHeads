@@ -5,10 +5,13 @@
  */
 package com.github.crashdemons.playerheads.compatibility.bukkit_1_13;
 
+import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import com.github.crashdemons.playerheads.compatibility.CompatibilityProvider;
 import com.github.crashdemons.playerheads.compatibility.SkullDetails;
 import com.github.crashdemons.playerheads.compatibility.SkullType;
+import org.bukkit.GameRule;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.World;
 import org.bukkit.block.Skull;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -30,5 +33,6 @@ public class Provider implements CompatibilityProvider {
     @Override public boolean setOwner(Skull skullBlockState, String owner){ return skullBlockState.setOwner(owner); }
     @Override public ItemStack getItemInMainHand(Player p){ return p.getEquipment().getItemInMainHand(); }
     @Override public void setItemInMainHand(Player p,ItemStack s){ p.getEquipment().setItemInMainHand(s); }
-    public SkullDetails getSkullDetails(SkullType type){ return new SkullDetails_113(type); }
+    @Override public SkullDetails getSkullDetails(SkullType type){ return new SkullDetails_113(type); }
+    @Override public boolean getKeepInventory(World world){ return world.getGameRuleValue(GameRule.KEEP_INVENTORY); }
 }

@@ -71,7 +71,7 @@ public final class SkullConverter {
      * @return the owning player of the skull
      */
     public static OfflinePlayer getSkullOwningPlayer(SkullMeta skullMeta){
-        OfflinePlayer op = Compatibility.getOwningPlayer(skullMeta);//skullMeta.getOwningPlayer();
+        OfflinePlayer op = Compatibility.getProvider().getOwningPlayer(skullMeta);//skullMeta.getOwningPlayer();
         if(op!=null) return op;
         return ProfileUtils.getProfilePlayer(skullMeta);
     }
@@ -83,7 +83,7 @@ public final class SkullConverter {
      * @return the username of the head's owner
      */
     public static OfflinePlayer getSkullOwningPlayer(Skull skullBlockState){
-        OfflinePlayer op = Compatibility.getOwningPlayer(skullBlockState);//skullBlockState.getOwningPlayer();
+        OfflinePlayer op = Compatibility.getProvider().getOwningPlayer(skullBlockState);//skullBlockState.getOwningPlayer();
         if(op!=null) return op;
         return ProfileUtils.getProfilePlayer(skullBlockState);
     }
@@ -95,7 +95,7 @@ public final class SkullConverter {
      */
     public static String getSkullOwner(SkullMeta skullMeta){
         String owner=null;
-        OfflinePlayer op = Compatibility.getOwningPlayer(skullMeta);//skullMeta.getOwningPlayer();
+        OfflinePlayer op = Compatibility.getProvider().getOwningPlayer(skullMeta);//skullMeta.getOwningPlayer();
         if(op==null) op = ProfileUtils.getProfilePlayer(skullMeta);//this does happen on textured heads with a profile but without an OwningPlayer
         if(op!=null) owner=op.getName();
         if(owner==null) owner=skullMeta.getOwner();
@@ -108,7 +108,7 @@ public final class SkullConverter {
      */
     public static String getSkullOwner(Skull skullBlockState){
         String owner=null;
-        OfflinePlayer op = Compatibility.getOwningPlayer(skullBlockState);//skullBlockState.getOwningPlayer();
+        OfflinePlayer op = Compatibility.getProvider().getOwningPlayer(skullBlockState);//skullBlockState.getOwningPlayer();
         if(op==null) op = ProfileUtils.getProfilePlayer(skullBlockState);
         if(op!=null) owner=op.getName();
         if(owner==null) owner=skullBlockState.getOwner();

@@ -44,7 +44,7 @@ public final class SkullManager {
      * @param owner The OfflinePlayer owning to own the head.
      */
     private static void applyOwningPlayer(SkullMeta headMeta,OfflinePlayer owner){
-        Compatibility.setOwningPlayer(headMeta, owner);//headMeta.setOwningPlayer( owner );
+        Compatibility.getProvider().setOwningPlayer(headMeta, owner);//headMeta.setOwningPlayer( owner );
     }
     /**
      * Sets a display name for the playerhead item's meta
@@ -94,12 +94,12 @@ public final class SkullManager {
         
         if(type.hasDedicatedItem()){
             if(useVanillaHeads)
-                return mat.getItemStack(quantity);//new ItemStack(mat,quantity);
+                return mat.getDetails().createItemStack(quantity);//new ItemStack(mat,quantity);
             else mat=CompatibleSkullMaterial.PLAYER;
         }
         
         //System.out.println("Player-head");
-        ItemStack stack = mat.getItemStack(quantity);//new ItemStack(mat,quantity);
+        ItemStack stack = mat.getDetails().createItemStack(quantity);//new ItemStack(mat,quantity);
         SkullMeta headMeta = (SkullMeta) stack.getItemMeta();
         //applyOwningPlayer(headMeta,Bukkit.getOfflinePlayer(type.getOwner()));
         applyTexture(headMeta,type.getOwner(),type.getTexture());
@@ -112,7 +112,7 @@ public final class SkullManager {
         return PlayerSkull(owner,Config.defaultStackSize);
     }
     private static ItemStack PlayerSkull(OfflinePlayer owner, int quantity){
-        ItemStack stack = CompatibleSkullMaterial.PLAYER.getItemStack(quantity);//new ItemStack(Material.PLAYER_HEAD,quantity);
+        ItemStack stack = CompatibleSkullMaterial.PLAYER.getDetails().createItemStack(quantity);//new ItemStack(Material.PLAYER_HEAD,quantity);
         SkullMeta headMeta = (SkullMeta) stack.getItemMeta();
         String name=null;
         if(owner!=null){

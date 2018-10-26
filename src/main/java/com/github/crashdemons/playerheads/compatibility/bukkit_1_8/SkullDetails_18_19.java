@@ -5,7 +5,7 @@
  */
 package com.github.crashdemons.playerheads.compatibility.bukkit_1_8;
 
-import com.github.crashdemons.playerheads.compatibility.CompatibilityChecker;
+import com.github.crashdemons.playerheads.compatibility.Version;
 import com.github.crashdemons.playerheads.compatibility.RuntimeReferences;
 import com.github.crashdemons.playerheads.compatibility.SkullDetails;
 import com.github.crashdemons.playerheads.compatibility.SkullType;
@@ -16,7 +16,8 @@ import org.bukkit.inventory.ItemStack;
  *
  * @author crashdemons (crashenator at gmail.com)
  */
-class SkullDetails_18_19 implements SkullDetails {
+/*
+public class SkullDetails_18_19 implements SkullDetails {
     public final Material materialItem;
     public final Material materialBlock;
     public final short datavalue;
@@ -41,3 +42,4 @@ class SkullDetails_18_19 implements SkullDetails {
     @Override public Material getFloorMaterial(){ return materialBlock; }
     @Override public Material getWallMaterial(){ return materialBlock; }
 }
+*/

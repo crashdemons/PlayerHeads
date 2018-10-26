@@ -221,7 +221,7 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
             }
             
             //input item processing (from inventory)
-            ItemStack skullInput = Compatibility.getItemInMainHand((Player) sender);//.getEquipment().getItemInMainHand();
+            ItemStack skullInput = Compatibility.getProvider().getItemInMainHand((Player) sender);//.getEquipment().getItemInMainHand();
             Material inputType = skullInput.getType();
             TexturedSkullType inputSkullType = SkullConverter.skullTypeFromItemStackLegacy(skullInput);//here PLAYER means unknown playerhead or Player Mob head - only returns null on unknown material
             if ( inputSkullType==null ) {
@@ -267,7 +267,7 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
             
             skullOutput = SkullManager.spawnSkull(spawnName,usevanillaskull);
             skullOutput.setAmount(skullInput.getAmount());
-            Compatibility.setItemInMainHand((Player) sender,skullOutput);//.getEquipment().setItemInMainHand(skullOutput);
+            Compatibility.getProvider().setItemInMainHand((Player) sender,skullOutput);//.getEquipment().setItemInMainHand(skullOutput);
             formatMsg(sender, scope, Lang.RENAMED_HEAD);
             return true;
     }

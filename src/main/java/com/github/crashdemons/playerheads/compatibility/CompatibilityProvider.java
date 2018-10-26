@@ -6,6 +6,7 @@
 package com.github.crashdemons.playerheads.compatibility;
 
 import org.bukkit.OfflinePlayer;
+import org.bukkit.World;
 import org.bukkit.block.Skull;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -28,4 +29,7 @@ public interface CompatibilityProvider {
     public ItemStack getItemInMainHand(Player p);
     public void setItemInMainHand(Player p,ItemStack s);
     public SkullDetails getSkullDetails(SkullType type);
+    public boolean getKeepInventory(World world);
+    //TODO: public SkullType getSkullType(ItemStack s); 
+    //TODO: public SkullType getSkullType(BlockState s);
 }

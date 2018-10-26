@@ -303,9 +303,9 @@ public enum TexturedSkullType {
         this.material=material;
         Mappings.skullsById.put(owner, this);
         if(hasDedicatedItem()){
-            Mappings.skullsByMaterial.put(material.getItemMaterial(),this);
-            Mappings.skullsByMaterial.put(material.getBlockFloorMaterial(),this);
-            Mappings.skullsByMaterial.put(material.getBlockWallMaterial(),this);
+            Mappings.skullsByMaterial.put(material.getDetails().getItemMaterial(),this);
+            Mappings.skullsByMaterial.put(material.getDetails().getFloorMaterial(),this);
+            Mappings.skullsByMaterial.put(material.getDetails().getWallMaterial(),this);
         }
     }
     TexturedSkullType(String ownerUUID, String texture){
@@ -333,7 +333,7 @@ public enum TexturedSkullType {
      */
     @Deprecated
     public Material getMaterial(){
-        return material.getItemMaterial();
+        return material.getDetails().getItemMaterial();
     }
     
     /**
@@ -351,7 +351,7 @@ public enum TexturedSkullType {
      */
     @Deprecated
     public Material getWallMaterial(){
-        return material.getBlockWallMaterial();
+        return material.getDetails().getWallMaterial();
     }
    
     

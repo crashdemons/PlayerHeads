@@ -10,7 +10,6 @@ import com.github.crashdemons.playerheads.SkullManager;
 import com.github.crashdemons.playerheads.TexturedSkullType;
 import com.github.crashdemons.playerheads.antispam.PlayerDeathSpamPreventer;
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
-import com.github.crashdemons.playerheads.compatibility.CompatibleGameRule;
 
 import java.util.List;
 import java.util.Random;
@@ -71,7 +70,7 @@ class PlayerHeadsListener implements Listener {
         double lootingrate = 1;
 
         if (killer != null) {
-            ItemStack weapon = Compatibility.getItemInMainHand(killer);//killer.getEquipment().getItemInMainHand();
+            ItemStack weapon = Compatibility.getProvider().getItemInMainHand(killer);//killer.getEquipment().getItemInMainHand();
             if (weapon != null) {
                 lootingrate = 1 + (plugin.configFile.getDouble("lootingrate") * weapon.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS));
             }
@@ -89,10 +88,11 @@ class PlayerHeadsListener implements Listener {
                 break;
             case WITHER_SKELETON:
                 if (droprate < 0) return;//if droprate is <0, don't modify drops
-                event.getDrops().removeIf(
+                //TODO: XXXXX FIX THIS XXXXX
+                /*event.getDrops().removeIf(
                         itemStack -> 
                                 SkullConverter.skullTypeFromItemStack(itemStack)==TexturedSkullType.WITHER_SKELETON
-                );
+                );*/
                 MobDeathHelper(event, skullType, droprate * lootingrate);
                 break;
             default:
@@ -134,7 +134,7 @@ class PlayerHeadsListener implements Listener {
         }   
         
         //drop item naturally if the drops will be modified by another plugin or gamerule.
-        if (plugin.configFile.getBoolean("antideathchest") || CompatibleGameRule.KEEP_INVENTORY.getBool(player.getWorld())) {
+        if (plugin.configFile.getBoolean("antideathchest") || Compatibility.getProvider().getKeepInventory(player.getWorld())) {
             Location location = player.getLocation();
             location.getWorld().dropItemNaturally(location, drop);
         } else {
@@ -275,7 +275,7 @@ class PlayerHeadsListener implements Listener {
                 }
 
                 plugin.getServer().getPluginManager().callEvent(new PlayerAnimationEvent(player));
-                plugin.getServer().getPluginManager().callEvent(new BlockDamageEvent(player, block, Compatibility.getItemInMainHand(player), true));//player.getEquipment().getItemInMainHand()
+                plugin.getServer().getPluginManager().callEvent(new BlockDamageEvent(player, block, Compatibility.getProvider().getItemInMainHand(player), true));//player.getEquipment().getItemInMainHand()
 
                 FakeBlockBreakEvent fakebreak = new FakeBlockBreakEvent(block, player);
                 plugin.getServer().getPluginManager().callEvent(fakebreak);
