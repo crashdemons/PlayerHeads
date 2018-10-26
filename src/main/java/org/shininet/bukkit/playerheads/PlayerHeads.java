@@ -4,7 +4,7 @@
 
 package org.shininet.bukkit.playerheads;
 
-import com.github.crashdemons.playerheads.compatibility.CompatibilityAdapter;
+import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import net.gravitydevelopment.updater.Updater;
 import java.util.logging.Logger;
 
@@ -39,7 +39,7 @@ public final class PlayerHeads extends JavaPlugin implements Listener {
     
     public PlayerHeads(){
         super();
-        CompatibilityAdapter.init();
+        Compatibility.init();
     }
 
     /**

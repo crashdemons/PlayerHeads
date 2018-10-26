@@ -9,7 +9,7 @@ import com.github.crashdemons.playerheads.SkullConverter;
 import com.github.crashdemons.playerheads.SkullManager;
 import com.github.crashdemons.playerheads.TexturedSkullType;
 import com.github.crashdemons.playerheads.antispam.PlayerDeathSpamPreventer;
-import com.github.crashdemons.playerheads.compatibility.CompatibilityAdapter;
+import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import com.github.crashdemons.playerheads.compatibility.CompatibleGameRule;
 
 import java.util.List;
@@ -71,7 +71,7 @@ class PlayerHeadsListener implements Listener {
         double lootingrate = 1;
 
         if (killer != null) {
-            ItemStack weapon = CompatibilityAdapter.getItemInMainHand(killer);//killer.getEquipment().getItemInMainHand();
+            ItemStack weapon = Compatibility.getItemInMainHand(killer);//killer.getEquipment().getItemInMainHand();
             if (weapon != null) {
                 lootingrate = 1 + (plugin.configFile.getDouble("lootingrate") * weapon.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS));
             }
@@ -275,7 +275,7 @@ class PlayerHeadsListener implements Listener {
                 }
 
                 plugin.getServer().getPluginManager().callEvent(new PlayerAnimationEvent(player));
-                plugin.getServer().getPluginManager().callEvent(new BlockDamageEvent(player, block, CompatibilityAdapter.getItemInMainHand(player), true));//player.getEquipment().getItemInMainHand()
+                plugin.getServer().getPluginManager().callEvent(new BlockDamageEvent(player, block, Compatibility.getItemInMainHand(player), true));//player.getEquipment().getItemInMainHand()
 
                 FakeBlockBreakEvent fakebreak = new FakeBlockBreakEvent(block, player);
                 plugin.getServer().getPluginManager().callEvent(fakebreak);

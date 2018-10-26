@@ -9,7 +9,7 @@ package com.github.crashdemons.playerheads.compatibility;
  *
  * @author crashdemons (crashenator at gmail.com)
  */
-class CompatibilityChecker {
+public class CompatibilityChecker {
     
     private static int versionMajor = 0;
     private static int versionMinor = 0;

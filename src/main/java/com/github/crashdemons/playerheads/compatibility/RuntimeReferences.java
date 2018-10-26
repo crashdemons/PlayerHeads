@@ -20,9 +20,9 @@ public class RuntimeReferences {
             return null;
         }
     }
-    public static SkullType_19 getSkullType19ByName(String name){
+    public static SkullType getSkullTypeByName(String name){
         try{
-            return SkullType_19.valueOf(name);
+            return SkullType.valueOf(name);
         }catch(IllegalArgumentException e){
             return null;
         }

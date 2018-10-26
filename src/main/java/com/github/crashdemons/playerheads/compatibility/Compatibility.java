@@ -20,10 +20,21 @@ import org.bukkit.inventory.meta.SkullMeta;
  *
  * @author crashdemons (crashenator at gmail.com)
  */
-public class CompatibilityAdapter {
-    private CompatibilityAdapter(){}
+public class Compatibility {
+    private Compatibility(){}
+    
+    private static CompatibilityProvider provider=null;
     
     public static synchronized void init(){ CompatibilityChecker.init(); }
+    
+    public static void registerProvider(CompatibilityProvider obj){
+        if(provider!=null) throw new IllegalStateException("This project has been misconfigured because it contains multiple compatibility-providers.");
+        provider=obj;
+    }
+    public static CompatibilityProvider getProvider(){
+        if(provider==null) throw new IllegalStateException("Requested compatibility provider before any were registered.");
+        return provider;
+    }
     
     
     public static OfflinePlayer getOwningPlayer(SkullMeta meta){ 

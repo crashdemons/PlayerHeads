@@ -9,12 +9,9 @@ package com.github.crashdemons.playerheads.compatibility;
  *
  * @author crashdemons (crashenator at gmail.com)
  */
-enum SkullType_113 {
+public enum SkullType {//just in case this gets removed with deprecation
     SKELETON(true), WITHER_SKELETON(true), ZOMBIE(false), PLAYER(false), CREEPER(false), DRAGON(false);
     
-    public final boolean isSkull;//has "_SKULL" suffix
-    
-    SkullType_113(boolean skull){
-        isSkull=skull;
-    }
+    public final boolean isSkull;
+    SkullType(boolean skull){ isSkull=skull; }
 }

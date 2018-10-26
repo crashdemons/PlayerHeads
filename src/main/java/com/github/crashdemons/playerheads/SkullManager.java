@@ -1,7 +1,7 @@
 
 package com.github.crashdemons.playerheads;
 
-import com.github.crashdemons.playerheads.compatibility.CompatibilityAdapter;
+import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import com.github.crashdemons.playerheads.compatibility.CompatibleSkullMaterial;
 import java.util.UUID;
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public final class SkullManager {
      * @param owner The OfflinePlayer owning to own the head.
      */
     private static void applyOwningPlayer(SkullMeta headMeta,OfflinePlayer owner){
-        CompatibilityAdapter.setOwningPlayer(headMeta, owner);//headMeta.setOwningPlayer( owner );
+        Compatibility.setOwningPlayer(headMeta, owner);//headMeta.setOwningPlayer( owner );
     }
     /**
      * Sets a display name for the playerhead item's meta
