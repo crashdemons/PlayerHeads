@@ -2,6 +2,7 @@
 package com.github.crashdemons.playerheads;
 
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
+import com.github.crashdemons.playerheads.compatibility.CompatibleSkullMaterial;
 import java.util.UUID;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.BlockState;
@@ -104,15 +105,11 @@ public final class SkullConverter {
      *         <li>TexturedSkullType.PLAYER (if a playerhead UUID was not associated with any mob)</li></ul>
      */
     public static TexturedSkullType skullTypeFromItemStack(ItemStack stack){
-        TexturedSkullType type = TexturedSkullType.get(stack.getType());//guess skullState by material
-        if(type==null){
-            //System.out.println("Material not found "+stack.getType().name());
-            return null;
-        }
-        if(type.hasDedicatedItem() && type!=TexturedSkullType.PLAYER) return type;//if it's not a player then it's a dedicated skullState item reserved for the mob
-        //if it's a playerhead, then we need to resolve further
+        CompatibleSkullMaterial mat = CompatibleSkullMaterial.get(stack);
+        if(mat==null) return null;
+        if(!mat.getDetails().isBackedByPlayerhead()) return TexturedSkullType.get(mat);
         SkullMeta skullState = (SkullMeta) stack.getItemMeta();
-        OfflinePlayer op =getSkullOwningPlayer(skullState);//skullState.getOwningPlayer();
+        OfflinePlayer op =getSkullOwningPlayer(skullState);
         if(op==null) return TexturedSkullType.PLAYER;
         UUID owner = op.getUniqueId();
         if(owner==null) return TexturedSkullType.PLAYER;
@@ -167,15 +164,11 @@ public final class SkullConverter {
      *         <li>TexturedSkullType.PLAYER (if a playerhead UUID was not associated with any mob)</li></ul>
      */
     public static TexturedSkullType skullTypeFromBlockState(BlockState state){
-        TexturedSkullType type = TexturedSkullType.get(state.getType());//guess skullState by material
-        if(type==null){
-            //System.out.println("Material not found "+state.getType().name());
-            return null;
-        }
-        if(type.hasDedicatedItem() && type!=TexturedSkullType.PLAYER) return type;//if it's not a player then it's a dedicated skullState item reserved for the mob
-        //if it's a playerhead, then we need to resolve further
+        CompatibleSkullMaterial mat = CompatibleSkullMaterial.get(state);
+        if(mat==null) return null;
+        if(!mat.getDetails().isBackedByPlayerhead()) return TexturedSkullType.get(mat);
         Skull skullState = (Skull) state;
-        OfflinePlayer op =getSkullOwningPlayer(skullState);//skullState.getOwningPlayer();
+        OfflinePlayer op =getSkullOwningPlayer(skullState);
         if(op==null) return TexturedSkullType.PLAYER;
         UUID owner = op.getUniqueId();
         if(owner==null) return TexturedSkullType.PLAYER;

@@ -6,6 +6,8 @@ import java.util.UUID;
 import org.shininet.bukkit.playerheads.Lang;
 import java.util.HashMap;
 import org.bukkit.Material;
+import org.bukkit.block.BlockState;
+import org.bukkit.inventory.ItemStack;
 import org.shininet.bukkit.playerheads.Formatter;
 
 /**
@@ -292,7 +294,7 @@ public enum TexturedSkullType {
          * 
          * Note: only contains skulltypes with dedicated materials (vanilla drops) and includes Playerhead materials mapping to PLAYER.
          */
-        public static final HashMap<Material,TexturedSkullType> skullsByMaterial = new HashMap<>();
+        public static final HashMap<CompatibleSkullMaterial,TexturedSkullType> skullsByMaterial = new HashMap<>();
     }
     
     
@@ -303,9 +305,7 @@ public enum TexturedSkullType {
         this.material=material;
         Mappings.skullsById.put(owner, this);
         if(hasDedicatedItem()){
-            Mappings.skullsByMaterial.put(material.getDetails().getItemMaterial(),this);
-            Mappings.skullsByMaterial.put(material.getDetails().getFloorMaterial(),this);
-            Mappings.skullsByMaterial.put(material.getDetails().getWallMaterial(),this);
+            Mappings.skullsByMaterial.put(material, this);
         }
     }
     TexturedSkullType(String ownerUUID, String texture){
@@ -363,17 +363,12 @@ public enum TexturedSkullType {
     public static TexturedSkullType get(UUID owner) {
         return Mappings.skullsById.get(owner);
     }
-    /**
-     * Finds the skulltype that has the provided Material as its dedicated item or block.
-     * 
-     * Note: playerhead materials will return TexturedSkullType.PLAYER
-     * 
-     * @param mat The material to find the skulltype for.
-     * @return if found: a TexturedSkullType, otherwise: null.
-     */
-    public static TexturedSkullType get(Material mat){
+    
+    public static TexturedSkullType get(CompatibleSkullMaterial mat){
         return Mappings.skullsByMaterial.get(mat);
     }
+    
+    
     /**
      * Finds the skulltype that has the provided Spawn-Name associated with it
      * 
@@ -437,7 +432,7 @@ public enum TexturedSkullType {
      * @return true: the skulls associated material was a playerhead. false: the skull has a different associated material.
      */
     public boolean isPlayerHead(){
-        return this.material==CompatibleSkullMaterial.PLAYER;
+        return this.material.getDetails().isBackedByPlayerhead();
     }
     /**
      * Checks whether the skulltype uses a specific material/item specific to it.
@@ -450,15 +445,4 @@ public enum TexturedSkullType {
         return (this.owner.equals(Mappings.playerUUID) || !isPlayerHead());
     }
     
-    
-    /**
-     * A method used to printing internal debugging information.
-     * @deprecated do not use - debug method, may be removed.
-     */
-    @Deprecated
-    public static void debug(){
-        for(HashMap.Entry<Material,TexturedSkullType> entry : Mappings.skullsByMaterial.entrySet()){
-            System.out.println(entry.getKey().name()+" -> "+entry.getValue().name());
-        }
-    }
 }
