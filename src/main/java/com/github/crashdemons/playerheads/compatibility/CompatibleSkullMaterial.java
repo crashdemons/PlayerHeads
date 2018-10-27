@@ -38,6 +38,7 @@ public enum CompatibleSkullMaterial {//should maintain compatibility with Entity
     }
     
     public static CompatibleSkullMaterial get(SkullType type){
+        if(type==null) return null;
         if(type==SkullType.DRAGON) return ENDER_DRAGON;//item to entity correlation here
         if(type==SkullType.WITHER_SKELETON) return WITHER_SKELETON;//item to entity correlation here
         return RuntimeReferences.getCompatibleMaterialByName(type.name());//otherwise, our SkullType has a 1:1 mapping with CompatibleSkullMaterial
