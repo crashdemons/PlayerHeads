@@ -3,7 +3,6 @@ package com.github.crashdemons.playerheads;
 
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import java.util.UUID;
-import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Skull;
