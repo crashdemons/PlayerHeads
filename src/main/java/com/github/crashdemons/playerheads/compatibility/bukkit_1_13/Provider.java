@@ -25,6 +25,7 @@ import org.bukkit.inventory.meta.SkullMeta;
  * @author crashdemons (crashenator at gmail.com)
  */
 public class Provider implements CompatibilityProvider {
+    public Provider(){}
     @Override public String getVersion(){ return "1.13"; }
     @Override public OfflinePlayer getOwningPlayer(SkullMeta skullItemMeta){ return skullItemMeta.getOwningPlayer(); }
     @Override public OfflinePlayer getOwningPlayer(Skull skullBlockState){ return skullBlockState.getOwningPlayer(); }

@@ -162,7 +162,7 @@
                             <allowSnapshots>true</allowSnapshots>
                         </configuration>
                         <goals>
-                            <!--<goal>use-latest-versions</goal>-->
+                            <goal>use-latest-versions</goal>
                         </goals>
                     </execution>
                 </executions>
