@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface SkullDetails {
     public boolean isVariant();
+    public boolean isBackedByPlayerhead();
     public boolean isSkinnable();
     public ItemStack createItemStack(int quantity);
     public Material getItemMaterial();
