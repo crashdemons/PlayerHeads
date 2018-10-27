@@ -41,17 +41,6 @@ public final class SkullConverter {
     }
     
     /**
-     * Checks if the material provided is a player-head type of any description.
-     * 
-     * Checks whether the material is a Player Head or a Player Wall-Head.
-     * @param mat The material to check.
-     * @return true: the material is a playerhead. false: the material is not a playerhead.
-     */
-    public static boolean isPlayerHead(Material mat){//TODO: XXX CANT DETERMINE IF SKULL IS PLAYER FROM Material - need DataValue! 
-        return TexturedSkullType.get(mat)==TexturedSkullType.PLAYER;//return (mat==Material.PLAYER_HEAD || mat==Material.PLAYER_WALL_HEAD);
-    }
-    
-    /**
      * Gets the owner player from a playerhead.
      * 
      * If there is no OwningPlayer result, this infers one from head's "profile" field.
@@ -153,8 +142,8 @@ public final class SkullConverter {
         TexturedSkullType type = skullTypeFromItemStack(stack);
         if(type==null || type!=TexturedSkullType.PLAYER) return type;//don't really need to check null here, but it's more explicit this way.
         //now we're checking legacy player skulls
-        Material mat = stack.getType();
-        if(!isPlayerHead(mat)) return null;
+        
+        if(!Compatibility.getProvider().isPlayerhead(stack)) return null;
         SkullMeta skullState = (SkullMeta) stack.getItemMeta();
         String owner=getSkullOwner(skullState);
         if(owner==null) return TexturedSkullType.PLAYER;//we cannot resolve an owner name for this playerhead, so it can only be considered a Player
@@ -216,8 +205,8 @@ public final class SkullConverter {
         TexturedSkullType type = skullTypeFromBlockState(state);
         if(type==null || type!=TexturedSkullType.PLAYER) return type;//don't really need to check null here, but it's more explicit this way.
         //now we're checking legacy player skulls
-        Material mat = state.getType();
-        if(!isPlayerHead(mat)) return null;
+        
+        if(!Compatibility.getProvider().isPlayerhead(state)) return null;
         Skull skullState = (Skull) state;
         String owner=getSkullOwner(skullState);
         if(owner==null) return TexturedSkullType.PLAYER;//we cannot resolve an owner name for this playerhead, so it can only be considered a Player

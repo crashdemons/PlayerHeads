@@ -74,29 +74,6 @@ public class SkullConverterTest {
     
     
     @Test
-    public void testIsPlayerHead_Player() {
-        System.out.println("isPlayerHead Player");
-        Material mat = Material.PLAYER_HEAD;
-        boolean expResult = true;
-        boolean result = SkullConverter.isPlayerHead(mat);
-    }
-    @Test
-    public void testIsPlayerHead_PlayerWall() {
-        System.out.println("isPlayerHead PlayerWall");
-        Material mat = Material.PLAYER_WALL_HEAD;
-        boolean expResult = true;
-        boolean result = SkullConverter.isPlayerHead(mat);
-    }
-    @Test
-    public void testIsPlayerHead_Mob() {
-        System.out.println("isPlayerHead Mob");
-        Material mat = Material.SKELETON_SKULL;
-        boolean expResult = false;
-        boolean result = SkullConverter.isPlayerHead(mat);
-    }
-    
-
-    @Test
     public void testUpgradeSkullTypeLegacy_Valid() {
         System.out.println("upgradeSkullTypeLegacy Valid");
         LegacySkullType oldType = LegacySkullType.IRON_GOLEM;
