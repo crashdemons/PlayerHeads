@@ -16,4 +16,5 @@ public enum SkullType {
     
     public final boolean isSkull;
     SkullType(boolean skull){ isSkull=skull; }
+    
 }

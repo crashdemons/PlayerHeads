@@ -13,6 +13,13 @@ import org.bukkit.Material;
  */
 public class RuntimeReferences {
     private RuntimeReferences(){}
+    public static CompatibleSkullMaterial getCompatibleMaterialByName(String name){
+        try{
+            return CompatibleSkullMaterial.valueOf(name);
+        }catch(IllegalArgumentException e){
+            return null;
+        }
+    }
     public static Material getMaterialByName(String name){
         try{
             return Material.valueOf(name);

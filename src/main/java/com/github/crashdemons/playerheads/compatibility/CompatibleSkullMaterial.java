@@ -5,6 +5,9 @@
  */
 package com.github.crashdemons.playerheads.compatibility;
 
+import org.bukkit.block.BlockState;
+import org.bukkit.inventory.ItemStack;
+
 
 /**
  *
@@ -30,16 +33,16 @@ public enum CompatibleSkullMaterial {//should maintain compatibility with Entity
         return cachedDetails;
     }
     
-    /*
-    public CompatibleSkullMaterial get(ItemStack stack){
-        Material mat = stack.getType();
-        if(CompatibilityChecker.checkVersionAtLeast(1, 13)){
-            //TODO: get by 113 material name
-        }else{
-            if(mat != SKELETON.getItemMaterial()) return null;//only SKULL_ITEM exists prior to 1.13
-            //TODO: check damage value
-            short dmg = stack.getDurability();//? I think this is it.
-        }
+    public CompatibleSkullMaterial get(SkullType type){
+        if(type==SkullType.DRAGON) return ENDER_DRAGON;//item to entity correlation here
+        if(type==SkullType.WITHER_SKELETON) return WITHER_SKELETON;//item to entity correlation here
+        return RuntimeReferences.getCompatibleMaterialByName(type.name());//otherwise, our SkullType has a 1:1 mapping with CompatibleSkullMaterial
     }
-    */
+    public CompatibleSkullMaterial get(ItemStack stack){
+        return get(Compatibility.getProvider().getSkullType(stack));
+    }
+    public CompatibleSkullMaterial get(BlockState state){
+        return get(Compatibility.getProvider().getSkullType(state));
+    }
+    
 }
