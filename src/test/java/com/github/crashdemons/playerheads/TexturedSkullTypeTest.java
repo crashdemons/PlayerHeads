@@ -5,10 +5,10 @@
  */
 package com.github.crashdemons.playerheads;
 
+import com.github.crashdemons.playerheads.compatibility.CompatibleSkullMaterial;
 import com.github.crashdemons.playerheads.compatibility.bukkit_1_13.Provider;
 import java.util.UUID;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -113,7 +113,7 @@ public class TexturedSkullTypeTest {
     @Test
     public void testGet_Material() {
         System.out.println("get by Material");
-        Material mat = null;
+        CompatibleSkullMaterial mat = null;
         TexturedSkullType expResult = null;
         TexturedSkullType result = TexturedSkullType.get(mat);
         assertEquals(expResult, result);
