@@ -33,6 +33,7 @@ public class SkullConverterTest {
         Mocks.setupFakeServerVersion();
     }
 
+    /*
     @Test
     public void testDropConfigFromSkullType_Player() {
         System.out.println("dropConfigFromSkullType Player");
@@ -71,7 +72,7 @@ public class SkullConverterTest {
         TexturedSkullType result = SkullConverter.skullTypeFromEntityType(EntityType.WITHER_SKELETON);
         assertEquals(expResult, result);
     }
-    
+    */
     
     @Test
     public void testUpgradeSkullTypeLegacy_Valid() {

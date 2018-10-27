@@ -9,6 +9,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Skull;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -39,4 +40,5 @@ public interface CompatibilityProvider {
     public boolean isPlayerhead(BlockState s);
     public boolean isMobhead(ItemStack s);
     public boolean isMobhead(BlockState s);
+    public String getCompatibleNameFromEntity(Entity e);
 }

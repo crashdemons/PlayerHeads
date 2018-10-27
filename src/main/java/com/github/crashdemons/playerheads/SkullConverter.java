@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Skull;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -21,7 +22,6 @@ public final class SkullConverter {
     
     private SkullConverter(){}
     
-    
     /**
      * Convert an entity type to a TexturedSkullType.  Most mobs (and the player) have a 1:1 mapping.
      * 
@@ -31,8 +31,8 @@ public final class SkullConverter {
      * @param entityType The type of entity to get a skull for
      * @return The associated TexturedSkullType, if one exists. Otherwise, null.
      */
-    public static TexturedSkullType skullTypeFromEntityType(EntityType entityType){
-        String entityName = entityType.name().toUpperCase();
+    public static TexturedSkullType skullTypeFromEntity(Entity entity){
+        String entityName = Compatibility.getProvider().getCompatibleNameFromEntity(entity);
         try{
             return TexturedSkullType.valueOf(entityName);
         }catch(IllegalArgumentException e){
