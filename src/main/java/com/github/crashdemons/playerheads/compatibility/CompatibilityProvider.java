@@ -40,5 +40,5 @@ public interface CompatibilityProvider {
     public boolean isPlayerhead(BlockState s);
     public boolean isMobhead(ItemStack s);
     public boolean isMobhead(BlockState s);
-    public String getCompatibleNameFromEntity(Entity e);
+    public String getCompatibleNameFromEntity(Entity e);//determine forward-portable name of entity even if they are variants.
 }
