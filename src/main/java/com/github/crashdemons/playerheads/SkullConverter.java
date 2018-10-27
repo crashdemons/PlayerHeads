@@ -28,7 +28,7 @@ public final class SkullConverter {
      * Note: At the time of writing in 1.13.1 all entities with isAlive() have associated TexturedSkullType's with the exception of GIANT and ARMOR_STAND.
      * Not all entities will have an associated skulltype, not all living entities will have an associated skulltype.
      * 
-     * @param entityType The type of entity to get a skull for
+     * @param entity The entity to get a skull for
      * @return The associated TexturedSkullType, if one exists. Otherwise, null.
      */
     public static TexturedSkullType skullTypeFromEntity(Entity entity){
