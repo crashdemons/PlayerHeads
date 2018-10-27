@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.shininet.bukkit</groupId>
-    <artifactId>PlayerHeads</artifactId>
+    <artifactId>PlayerHeads-backport</artifactId>
     <packaging>jar</packaging>
     <version>4.5.0-SNAPSHOT</version>
-    <name>PlayerHeads</name>
+    <name>PlayerHeads-backport</name>
 
     <organization>
         <name>ShiniNet</name>
@@ -95,12 +95,12 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.13-R0.1-SNAPSHOT</version>
+            <version>1.8-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.13-R0.1-SNAPSHOT</version>
+            <version>1.8-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>fr.neatmonster</groupId>
@@ -162,7 +162,7 @@
                             <allowSnapshots>true</allowSnapshots>
                         </configuration>
                         <goals>
-                            <goal>use-latest-versions</goal>
+                            <!--<goal>use-latest-versions</goal>-->
                         </goals>
                     </execution>
                 </executions>
@@ -188,7 +188,7 @@
                 <version>3.5.1</version>
                 <configuration>
                     <source>1.7</source>
-                    <target>1.8</target>
+                    <target>1.7</target>
                     <compilerArgs>
                         <arg>-Xlint:all</arg>
                     </compilerArgs>
