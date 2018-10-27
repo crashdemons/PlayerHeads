@@ -326,16 +326,7 @@ public enum TexturedSkullType {
     public String getTexture(){
         return texture;
     }
-    /**
-     * Get the item Material associated with the skulltype
-     * @return The material
-     * @deprecated This method is used ambiguously - you should use getCompatibleMaterial instead for version compatibility (in 1.13 the floor and item material are the same).
-     */
-    @Deprecated
-    public Material getMaterial(){
-        return material.getDetails().getItemMaterial();
-    }
-    
+
     /**
      * Gets the CompatibleSkullMaterial enum indicating the material-sets for the current server version.
      * @return the compatible material
@@ -343,17 +334,6 @@ public enum TexturedSkullType {
     public CompatibleSkullMaterial getCompatibleMaterial(){
         return material;
     }
-    
-    /**
-     * Get the item Material associated with the skulltype
-     * @deprecated you should use getCompatibleMaterial instead for version compatibility.
-     * @return The material
-     */
-    @Deprecated
-    public Material getWallMaterial(){
-        return material.getDetails().getWallMaterial();
-    }
-   
     
     /**
      * Find the skulltype associated with a provided UUID
