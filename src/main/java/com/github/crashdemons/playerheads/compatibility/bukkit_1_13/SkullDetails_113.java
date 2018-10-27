@@ -38,7 +38,8 @@ class SkullDetails_113 implements SkullDetails{
         this.skullType=type;
     }
     @Override public boolean isVariant(){ return false; }
-    @Override public boolean isSkinnable(){ return material==Material.PLAYER_HEAD; }
+    @Override public boolean isBackedByPlayerhead(){ return material==Material.PLAYER_HEAD; }
+    @Override public boolean isSkinnable(){ return isBackedByPlayerhead(); }
     @Override public ItemStack createItemStack(int quantity){ return new ItemStack(material,quantity); }
     @Override public Material getItemMaterial(){ return material; }
     @Override public Material getFloorMaterial(){ return material; }
