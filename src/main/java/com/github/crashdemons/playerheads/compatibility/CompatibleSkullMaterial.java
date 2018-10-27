@@ -33,15 +33,19 @@ public enum CompatibleSkullMaterial {//should maintain compatibility with Entity
         return cachedDetails;
     }
     
-    public CompatibleSkullMaterial get(SkullType type){
+    public boolean isSupported(){
+        return this==PLAYER || !getDetails().isBackedByPlayerhead();
+    }
+    
+    public static CompatibleSkullMaterial get(SkullType type){
         if(type==SkullType.DRAGON) return ENDER_DRAGON;//item to entity correlation here
         if(type==SkullType.WITHER_SKELETON) return WITHER_SKELETON;//item to entity correlation here
         return RuntimeReferences.getCompatibleMaterialByName(type.name());//otherwise, our SkullType has a 1:1 mapping with CompatibleSkullMaterial
     }
-    public CompatibleSkullMaterial get(ItemStack stack){
+    public static CompatibleSkullMaterial get(ItemStack stack){
         return get(Compatibility.getProvider().getSkullType(stack));
     }
-    public CompatibleSkullMaterial get(BlockState state){
+    public static CompatibleSkullMaterial get(BlockState state){
         return get(Compatibility.getProvider().getSkullType(state));
     }
     
