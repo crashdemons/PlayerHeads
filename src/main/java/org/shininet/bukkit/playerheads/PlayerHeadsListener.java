@@ -21,7 +21,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Skull;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -75,7 +75,7 @@ class PlayerHeadsListener implements Listener {
                 lootingrate = 1 + (plugin.configFile.getDouble("lootingrate") * weapon.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS));
             }
         }
-        EntityType entityType = event.getEntityType();//entity type of the thing dying.
+
         TexturedSkullType skullType = SkullConverter.skullTypeFromEntity(event.getEntity());
         if(skullType==null) return;//entity type is one we don't support - don't attempt to handle heads for it.
         String mobDropConfig = skullType.getConfigName();
