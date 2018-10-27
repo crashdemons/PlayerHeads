@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.bukkit.Bukkit;
 
-import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -222,7 +221,7 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
             
             //input item processing (from inventory)
             ItemStack skullInput = Compatibility.getProvider().getItemInMainHand((Player) sender);//.getEquipment().getItemInMainHand();
-            Material inputType = skullInput.getType();
+            
             TexturedSkullType inputSkullType = SkullConverter.skullTypeFromItemStackLegacy(skullInput);//here PLAYER means unknown playerhead or Player Mob head - only returns null on unknown material
             if ( inputSkullType==null ) {
                 formatMsg(sender, scope, Lang.ERROR_NOT_A_HEAD);
