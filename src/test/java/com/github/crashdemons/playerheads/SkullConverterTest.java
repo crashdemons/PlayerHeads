@@ -37,7 +37,7 @@ public class SkullConverterTest {
     public void testDropConfigFromSkullType_Player() {
         System.out.println("dropConfigFromSkullType Player");
         String expResult = "droprate";
-        String result = SkullConverter.dropConfigFromSkullType(TexturedSkullType.PLAYER);
+        String result = TexturedSkullType.PLAYER.getConfigName();//SkullConverter.dropConfigFromSkullType(TexturedSkullType.PLAYER);
         assertEquals(expResult, result);
     }
     
@@ -45,7 +45,7 @@ public class SkullConverterTest {
     public void testDropConfigFromSkullType_Mob() {
         System.out.println("dropConfigFromSkullType Player");
         String expResult = "witherskeletondroprate";
-        String result = SkullConverter.dropConfigFromSkullType(TexturedSkullType.WITHER_SKELETON);
+        String result = TexturedSkullType.WITHER_SKELETON.getConfigName();//SkullConverter.dropConfigFromSkullType(TexturedSkullType.WITHER_SKELETON);
         assertEquals(expResult, result);
     }
     

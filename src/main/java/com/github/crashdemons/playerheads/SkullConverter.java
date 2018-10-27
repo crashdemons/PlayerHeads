@@ -23,18 +23,6 @@ public final class SkullConverter {
     
     
     /**
-     * Get the droprate config name (key) for the given skulltype.
-     * @param skullType the TexturedSkullType
-     * @return A string containing the config entry name (key) for the skulltype
-     * @see TexturedSkullType#getConfigName() 
-     * @deprecated use TexturedSkullType.getConfigName() instead
-     */
-    @Deprecated
-    public static String dropConfigFromSkullType(TexturedSkullType skullType){
-        return skullType.getConfigName();
-    }
-    
-    /**
      * Convert an entity type to a TexturedSkullType.  Most mobs (and the player) have a 1:1 mapping.
      * 
      * Note: At the time of writing in 1.13.1 all entities with isAlive() have associated TexturedSkullType's with the exception of GIANT and ARMOR_STAND.
