@@ -51,8 +51,6 @@ public final class PlayerHeads extends JavaPlugin implements Listener {
     public void onEnable() {
         logger = getLogger();
         
-        
-        
         configFile = getConfig();
         configFile.options().copyDefaults(true);
         saveDefaultConfig();
@@ -67,7 +65,7 @@ public final class PlayerHeads extends JavaPlugin implements Listener {
         getCommand("PlayerHeads").setExecutor(commandExecutor);
         
         
-        logger.info("Compatibility: "+Compatibility.getProvider().getVersion());
+        logger.info("Compatibility-Provider: "+Compatibility.getProvider().getVersion());
     }
     
     /**

@@ -30,7 +30,6 @@ public class Compatibility {
     }
     
     public static void registerProvider(CompatibilityProvider obj){
-        System.out.println(obj);
         if(provider!=null) throw new IllegalStateException("This project has been misconfigured because it contains multiple compatibility-providers.");
         provider=obj;
     }
