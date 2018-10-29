@@ -25,14 +25,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
 /**
- *
+ * CompatibilityProvider Implementation for 1.8-1.12.2 support.
  * @author crashdemons (crashenator at gmail.com)
  */
-/**
- *
- * @author crashdemons (crashenator at gmail.com)
- */
-
 public class Provider implements CompatibilityProvider {
     public Provider(){}
     @Override public String getVersion(){ return "1.8"; }

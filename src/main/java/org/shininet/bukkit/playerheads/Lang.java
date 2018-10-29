@@ -230,6 +230,44 @@ public final class Lang {
     public static String HEAD_SPAWN_DOLPHIN;
     
     
+    /**
+     * 
+     * @deprecated Speculative entry for 1.14 mob before bukkit support - this entry may change unexpectedly!
+     */
+    @Deprecated
+    public static String HEAD_PILLAGER;
+    /**
+     * 
+     * @deprecated Speculative entry for 1.14 mob before bukkit support - this entry may change unexpectedly!
+     */
+    @Deprecated
+    public static String HEAD_PANDA;
+    /**
+     * 
+     * @deprecated Speculative entry for 1.14 mob before bukkit support - this entry may change unexpectedly!
+     */
+    @Deprecated
+    public static String HEAD_ILLAGER_BEAST;
+    /**
+     * 
+     * @deprecated Speculative entry for 1.14 mob before bukkit support - this entry may change unexpectedly!
+     */
+    @Deprecated
+    public static String HEAD_SPAWN_PILLAGER;
+    /**
+     * 
+     * @deprecated Speculative entry for 1.14 mob before bukkit support - this entry may change unexpectedly!
+     */
+    @Deprecated
+    public static String HEAD_SPAWN_PANDA;
+    /**
+     * 
+     * @deprecated Speculative entry for 1.14 mob before bukkit support - this entry may change unexpectedly!
+     */
+    @Deprecated
+    public static String HEAD_SPAWN_ILLAGER_BEAST;
+    
+    
     public static String OPT_AMOUNT_OPTIONAL;
     public static String OPT_HEADNAME_OPTIONAL;
     public static String OPT_HEADNAME_REQUIRED;
