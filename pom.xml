@@ -13,11 +13,11 @@
     </organization>
     
     <licenses>
-      <license>
-        <name>Mozilla Public License 2.0</name>
-        <url>http://mozilla.org/MPL/2.0/</url>
-        <distribution>repo</distribution>
-      </license>
+        <license>
+            <name>Mozilla Public License 2.0</name>
+            <url>http://mozilla.org/MPL/2.0/</url>
+            <distribution>repo</distribution>
+        </license>
     </licenses>
 
     <properties>
@@ -36,7 +36,7 @@
     </issueManagement>
 
     <repositories>
-	<repository>
+        <repository>
             <id>mojang</id>
             <name>Mojang's Repository</name>
             <url>https://libraries.minecraft.net/</url>
@@ -72,26 +72,26 @@
                 </exclusion>
             </exclusions>
         </dependency>
-  	<dependency>
-  		<groupId>junit</groupId>
-  		<artifactId>junit</artifactId>
-  		<version>4.12</version>
-  		<type>jar</type>
-  		<scope>test</scope>
-  	</dependency>
-  	<dependency>
-  		<groupId>org.powermock</groupId>
-  		<artifactId>powermock-module-junit4</artifactId>
-  		<version>1.7.4</version>
-  		<type>jar</type>
-  		<scope>test</scope>
-  	</dependency>
-  	<dependency>
-  		<groupId>org.powermock</groupId>
-  		<artifactId>powermock-api-mockito</artifactId>
-  		<version>1.7.4</version>
-  		<type>jar</type>
-  		<scope>test</scope>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <type>jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <version>1.7.4</version>
+            <type>jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito</artifactId>
+            <version>1.7.4</version>
+            <type>jar</type>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
@@ -222,23 +222,23 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-              <artifactSet>
-                <includes>
-                  <include>org.shininet.bukkit:PlayerHeads:jar:</include>
-                </includes>
-              </artifactSet>
-<filters>
-  <filter>
-    <artifact>org.shininet.bukkit:PlayerHeads:jar:</artifact>
-    <excludes>
-      <exclude>com/github/crashdemons/playerheads/compatibility/bukkit*/**</exclude>
-    </excludes>
-  </filter>
-</filters>
+                            <artifactSet>
+                                <includes>
+                                    <include>org.shininet.bukkit:PlayerHeads:jar:</include>
+                                </includes>
+                            </artifactSet>
+                            <filters>
+                                <filter>
+                                    <artifact>org.shininet.bukkit:PlayerHeads:jar:</artifact>
+                                    <excludes>
+                                        <exclude>com/github/crashdemons/playerheads/compatibility/bukkit*/**</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
                         </configuration>
                     </execution>
                 </executions>
-          </plugin>
+            </plugin>
             
         </plugins>
         <pluginManagement>
