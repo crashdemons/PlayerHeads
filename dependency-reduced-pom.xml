@@ -4,7 +4,7 @@
   <groupId>org.shininet.bukkit</groupId>
   <artifactId>PlayerHeads-backport</artifactId>
   <name>PlayerHeads-backport</name>
-  <version>4.5.3-SNAPSHOT</version>
+  <version>4.6.0-SNAPSHOT</version>
   <issueManagement>
     <system>GitHub</system>
     <url>https://github.com/crashdemons/PlayerHeads/issues</url>
