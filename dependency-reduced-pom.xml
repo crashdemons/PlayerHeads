@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.shininet.bukkit</groupId>
-  <artifactId>PlayerHeads-backport</artifactId>
-  <name>PlayerHeads-backport</name>
-  <version>4.6.0</version>
+  <artifactId>PlayerHeads-crosscompatible</artifactId>
+  <name>PlayerHeads-crosscompatible</name>
+  <version>4.7.0-SNAPSHOT</version>
   <issueManagement>
     <system>GitHub</system>
     <url>https://github.com/crashdemons/PlayerHeads/issues</url>
@@ -142,9 +142,7 @@
               <filters>
                 <filter>
                   <artifact>org.shininet.bukkit:PlayerHeads:jar:</artifact>
-                  <excludes>
-                    <exclude>com/github/crashdemons/playerheads/compatibility/bukkit*/**</exclude>
-                  </excludes>
+                  <excludes />
                 </filter>
               </filters>
             </configuration>

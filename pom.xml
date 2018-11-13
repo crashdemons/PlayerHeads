@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.shininet.bukkit</groupId>
-    <artifactId>PlayerHeads-backport</artifactId>
+    <artifactId>PlayerHeads-crosscompatible</artifactId>
     <packaging>jar</packaging>
     <version>4.7.0-SNAPSHOT</version>
-    <name>PlayerHeads-backport</name>
+    <name>PlayerHeads-crosscompatible</name>
 
     <organization>
         <name>ShiniNet</name>
@@ -231,7 +231,7 @@
                                 <filter>
                                     <artifact>org.shininet.bukkit:PlayerHeads:jar:</artifact>
                                     <excludes>
-                                        <exclude>com/github/crashdemons/playerheads/compatibility/bukkit*/**</exclude>
+                                        <!--<exclude>com/github/crashdemons/playerheads/compatibility/bukkit*/**</exclude>-->
                                     </excludes>
                                 </filter>
                             </filters>
