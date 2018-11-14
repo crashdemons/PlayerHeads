@@ -7,4 +7,4 @@
 /**
  * Compatibility package implementations for Bukkit 1.8-1.12.2 support - Do not use as an API.
  */
-package com.github.crashdemons.playerheads.compatibility.bukkit_1_8;
+package com.github.crashdemons.playerheads.compatibility.craftbukkit_1_8;
