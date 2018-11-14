@@ -10,6 +10,7 @@ import com.github.crashdemons.playerheads.compatibility.CompatibilityProvider;
 import com.github.crashdemons.playerheads.compatibility.SkullDetails;
 import com.github.crashdemons.playerheads.compatibility.SkullType;
 import com.github.crashdemons.playerheads.compatibility.Version;
+import java.util.UUID;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
@@ -22,6 +23,7 @@ import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Skeleton.SkeletonType;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 /**
@@ -126,6 +128,12 @@ public class Provider implements CompatibilityProvider {
         return e.getType().name().toUpperCase();
     }
     
+    @Override public boolean setProfile(ItemMeta headMeta, UUID uuid, String texture){
+        return ProfileUtils.setProfile(headMeta, uuid, texture);
+    }
+    @Override public boolean setProfile(Skull headBlockState, UUID uuid, String texture){
+        return ProfileUtils.setProfile(headBlockState, uuid, texture);
+    }
     
     private SkullType adaptSkullType(org.bukkit.SkullType bukkitType){
         try{

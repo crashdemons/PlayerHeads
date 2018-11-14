@@ -4,7 +4,7 @@
     <groupId>org.shininet.bukkit</groupId>
     <artifactId>PlayerHeads-crosscompatible</artifactId>
     <packaging>jar</packaging>
-    <version>4.7.1-SNAPSHOT</version>
+    <version>4.7.2-SNAPSHOT</version>
     <name>PlayerHeads-crosscompatible</name>
 
     <organization>
