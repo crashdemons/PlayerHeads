@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.shininet.bukkit</groupId>
-    <artifactId>PlayerHeads-crosscompatible</artifactId>
+    <artifactId>PlayerHeads-impl-craftbukkit-1.13</artifactId>
     <packaging>jar</packaging>
     <version>4.7.2-SNAPSHOT</version>
-    <name>PlayerHeads-crosscompatible</name>
+    <name>PlayerHeads-impl-craftbukkit-1.13</name>
 
     <organization>
         <name>ShiniNet</name>
@@ -110,12 +110,12 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.8-R0.1-SNAPSHOT</version>
+            <version>1.13-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.8-R0.1-SNAPSHOT</version>
+            <version>1.13-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>fr.neatmonster</groupId>
@@ -210,36 +210,6 @@
                     </execution>
                 </executions>
             </plugin>
-            
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.0</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <artifactSet>
-                                <includes>
-                                    <include>org.shininet.bukkit:PlayerHeads:jar:</include>
-                                </includes>
-                            </artifactSet>
-                            <filters>
-                                <filter>
-                                    <artifact>org.shininet.bukkit:PlayerHeads:jar:</artifact>
-                                    <excludes>
-                                        <!--<exclude>com/github/crashdemons/playerheads/compatibility/bukkit*/**</exclude>-->
-                                    </excludes>
-                                </filter>
-                            </filters>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            
         </plugins>
         <pluginManagement>
             <plugins>
