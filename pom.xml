@@ -27,7 +27,7 @@
     <scm>
         <developerConnection>scm:git:git@github.com:crashdemons/PlayerHeads.git</developerConnection>
         <connection>scm:git:git://github.com/crashdemons/PlayerHeads.git</connection>
-        <url>https://github.com/crashdemons/PlayerHeads/tree/4.x-backport-1.8/</url>
+        <url>https://github.com/crashdemons/PlayerHeads/tree/craftbukkit-1.13-support/</url>
     </scm>
 
     <issueManagement>
@@ -58,7 +58,7 @@
     <dependencies>
         <dependency>
             <groupId>org.shininet.bukkit</groupId>
-            <artifactId>PlayerHeads</artifactId>
+            <artifactId>PlayerHeads-core</artifactId>
             <version>${project.version}</version>
             <type>jar</type>
             <exclusions>
