@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.shininet.bukkit</groupId>
-  <artifactId>PlayerHeads-crosscompatible</artifactId>
-  <name>PlayerHeads-crosscompatible</name>
-  <version>4.7.1-SNAPSHOT</version>
+  <artifactId>PlayerHeads-data-generator-tool</artifactId>
+  <name>PlayerHeads-data-generator-tool</name>
+  <version>4.7.2-SNAPSHOT</version>
   <issueManagement>
     <system>GitHub</system>
     <url>https://github.com/crashdemons/PlayerHeads/issues</url>
@@ -19,7 +19,7 @@
   <scm>
     <connection>scm:git:git://github.com/crashdemons/PlayerHeads.git</connection>
     <developerConnection>scm:git:git@github.com:crashdemons/PlayerHeads.git</developerConnection>
-    <url>https://github.com/crashdemons/PlayerHeads/tree/4.x-backport-1.8/</url>
+    <url>https://github.com/crashdemons/PlayerHeads/tree/craftbukkit-1.13-support/</url>
   </scm>
   <organization>
     <name>ShiniNet</name>
@@ -92,6 +92,7 @@
               <Implementation-Version>${project.version}</Implementation-Version>
               <Implementation-Vendor-Id>${project.groupId}</Implementation-Vendor-Id>
               <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
+              <Main-Class>com.github.crashdemons.playerheads.util.Main</Main-Class>
             </manifestEntries>
           </archive>
         </configuration>
@@ -136,15 +137,10 @@
             <configuration>
               <artifactSet>
                 <includes>
-                  <include>org.shininet.bukkit:PlayerHeads:jar:</include>
+                  <include>org.shininet.bukkit:PlayerHeads-core:jar:</include>
+                  <include>org.bukkit:bukkit:jar:</include>
                 </includes>
               </artifactSet>
-              <filters>
-                <filter>
-                  <artifact>org.shininet.bukkit:PlayerHeads:jar:</artifact>
-                  <excludes />
-                </filter>
-              </filters>
             </configuration>
           </execution>
         </executions>
@@ -236,13 +232,7 @@
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
-      <version>1.8-R0.1-SNAPSHOT</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.bukkit</groupId>
-      <artifactId>bukkit</artifactId>
-      <version>1.8-R0.1-SNAPSHOT</version>
+      <version>1.13-R0.1-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
