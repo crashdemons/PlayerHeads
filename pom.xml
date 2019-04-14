@@ -59,7 +59,7 @@
         <dependency>
             <groupId>org.shininet.bukkit</groupId>
             <artifactId>PlayerHeads-core</artifactId>
-            <version>${project.version}</version>
+            <version>4.9.3-SNAPSHOT</version>
             <type>jar</type>
             <exclusions>
                 <exclusion>
@@ -115,7 +115,7 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.13-R0.1-SNAPSHOT</version>
+            <version>1.13.2-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>fr.neatmonster</groupId>
@@ -150,6 +150,7 @@
                 <configuration>
                     <includes>
                         <include>org.bukkit</include>
+                        <include>org.shininet.bukkit</include>
                     </includes>
                 </configuration>
                 <executions>
@@ -160,7 +161,7 @@
                             <allowSnapshots>true</allowSnapshots>
                         </configuration>
                         <goals>
-                            <!--<goal>use-latest-versions</goal>-->
+                            <goal>use-latest-versions</goal>
                         </goals>
                     </execution>
                 </executions>
