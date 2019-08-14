@@ -41,6 +41,7 @@ public class HeadRollEvent extends Event {
     private double effectiveDropRoll;
     private final double originalDropRate;
     private double effectiveDropRate;
+    
     private boolean dropSuccess;
     
     
@@ -196,10 +197,12 @@ public class HeadRollEvent extends Event {
         this.target = target;
     }
     
+    
     /**
      * Gets the list of modifiers to the effective droprate.
      * This map will be in order that the modifiers are applied.
-     * @return 
+     * @since 5.2.2-SNAPSHOT
+     * @return map containing the droprate modifiers by name.
      */
     @NotNull
     public Map<String,DropRateModifier> getModifiers(){
@@ -207,8 +210,18 @@ public class HeadRollEvent extends Event {
     }
     
     /**
-     * Re-apply all droprate modifiers to the original droprate and recalculate the effective droprate, then update the success value.
-     * If you want to retain the original values, you should copy them before calling this method.
+     * Re-apply the current effective droproll and effective droprate values to make a new determination of the head drop's success.
+     * Modifiers are not considered by this method, only the two effective values.
+     * @since 5.2.2-SNAPSHOT
+     */
+    public void applyDropRate(){
+        this.setDropSuccess(effectiveDropRoll <= effectiveDropRate);
+    }
+    
+    /**
+     * Re-apply all droprate modifiers to the original droprate and recalculate the effective droprate.
+     * This method will discard the current effective droprate, if you want to retain the original values, you should copy them before calling this method.
+     * Success is not updated by this method.
      * @since 5.2.2-SNAPSHOT
      */
     public void applyModifiers(){
@@ -216,7 +229,17 @@ public class HeadRollEvent extends Event {
         for(DropRateModifier modifier : modifiers.values()){
             effectiveDropRate = modifier.apply(effectiveDropRate);
         }
-        this.setDropSuccess(effectiveDropRoll <= effectiveDropRate);
+    }
+    
+    /**
+     * Re-apply all factors (droprate modifiers then effective values) to determine suuccess.
+     * This method will discard the current effective droprate, if you want to retain the original values, you should copy them before calling this method.
+     * 
+     * @since 5.2.2-SNAPSHOT
+     */
+    public void recalculateSuccess(){
+        applyModifiers();
+        applyDropRate();
     }
     
     /**
@@ -385,6 +408,27 @@ public class HeadRollEvent extends Event {
         return originalDropRoll;
     }
 
+    
+    /**
+     * Sets the effective droproll value for the event.
+     * Note: this value will not impact the success value or calculations unless applyDropRate() or recalculateSuccess() is called.
+     * @since 5.2.2-SNAPSHOT
+     * @param effectiveDropRoll the value between 0.0 and 1.0 to use as the drop roll.
+     */
+    public void setEffectiveDropRoll(double effectiveDropRoll) {
+        this.effectiveDropRoll = effectiveDropRoll;
+    }
+
+    /**
+     * Sets the effective droprate value for the event.
+     * Note: this value is only for indication purposes to other plugins, and will be overwritten by apply and recalculate methods.
+     * @since 5.2.2-SNAPSHOT
+     * @param effectiveDropRate 
+     */
+    public void setEffectiveDropRate(double effectiveDropRate) {
+        this.effectiveDropRate = effectiveDropRate;
+    }
+    
     /**
      * Gets the effective drop roll value after modification by PlayerHeads. The
      * droproll will normally be reflected by the original random droproll,
