@@ -266,6 +266,18 @@ public class HeadRollEvent extends Event {
      */
     public void setModifier(String modifierName, DropRateModifier value){
         modifiers.put(modifierName, value);
+    }    
+    /**
+     * Replaces notes about an internal modifiers of the effective droprate.
+     * Note: this value does not impact calculations or success unless applyModifiers is called
+     * Note: new modifies are generally applied AFTER other modifiers; this method will overwrite existing modifiers.<br>
+     * @deprecated using this method to modify existing modifiers should be avoided - use setCustomModifier to note new ones.
+     * @since 5.2.2-SNAPSHOT
+     * @param entries the modifiers to set
+     */
+    public void setModifiers(Map<String,DropRateModifier> entries){
+        modifiers.clear();
+        modifiers.putAll(entries);
     }
     
     /**
