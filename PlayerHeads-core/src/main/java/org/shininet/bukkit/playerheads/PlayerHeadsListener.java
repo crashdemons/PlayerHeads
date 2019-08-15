@@ -37,18 +37,12 @@ import org.shininet.bukkit.playerheads.events.MobDropHeadEvent;
 import org.shininet.bukkit.playerheads.events.PlayerDropHeadEvent;
 
 import java.util.function.Predicate;
-import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Slime;
-import org.bukkit.entity.Tameable;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.projectiles.ProjectileSource;
 import org.shininet.bukkit.playerheads.events.HeadRollEvent;
 import org.shininet.bukkit.playerheads.events.LivingEntityDropHeadEvent;
 import org.shininet.bukkit.playerheads.events.modifiers.DropRateModifier;
@@ -100,47 +94,12 @@ class PlayerHeadsListener implements Listener {
         deathSpamPreventer = new PlayerDeathSpamPreventer(cfg.getInt("deathspamcount"), cfg.getLong("deathspamthreshold"));
     }
     
-    private Entity getEntityOwningEntity(EntityDamageByEntityEvent event){
-        Entity entity = event.getDamager();
-        if(entity instanceof Projectile){
-            //System.out.println("   damager entity projectile");
-            Projectile projectile = (Projectile) entity;
-            ProjectileSource shooter = projectile.getShooter();
-            if(shooter instanceof Entity){
-                entity=(Entity) shooter;
-                //if(entity!=null) System.out.println("   arrow shooter: "+entity.getType().name()+" "+entity.getName());
-            }
-        }else if(entity instanceof Tameable && plugin.configFile.getBoolean("considertameowner")){
-            //System.out.println("   damager entity wolf");
-            Tameable animal = (Tameable) entity;
-            if(animal.isTamed()){
-                AnimalTamer tamer = animal.getOwner();
-                if(tamer instanceof Entity){
-                    entity=(Entity) tamer;
-                    //if(entity!=null) System.out.println("   wolf tamer: "+entity.getType().name()+" "+entity.getName());
-                }
-            }
-        }
-        return entity;
-    }
-    
     private LivingEntity getKillerEntity(EntityDeathEvent event){
-        LivingEntity victim = event.getEntity();
-        //if(victim!=null) System.out.println("victim: "+victim.getType().name()+" "+victim.getName());
-        LivingEntity killer = victim.getKiller();
-        //if(killer!=null) System.out.println("original killer: "+killer.getType().name()+" "+killer.getName());
-        
-        if(killer==null && plugin.configFile.getBoolean("considermobkillers")){
-            EntityDamageEvent dmgEvent = event.getEntity().getLastDamageCause();
-            if(dmgEvent instanceof EntityDamageByEntityEvent){
-                Entity killerEntity = getEntityOwningEntity((EntityDamageByEntityEvent)dmgEvent);
-                //if(killerEntity!=null) System.out.println(" parent killer: "+killerEntity.getType().name()+" "+killerEntity.getName());
-                if(killerEntity instanceof LivingEntity) killer=(LivingEntity)killerEntity;
-                //what if the entity isn't living (eg: arrow?)
-            }
-        }
-        //if(killer!=null) System.out.println(" final killer: "+killer.getType().name()+" "+killer.getName());
-        return killer;
+        return Compatibility.getProvider().getKillerEntity(
+                event, 
+                plugin.configFile.getBoolean("considermobkillers"), 
+                true, 
+                plugin.configFile.getBoolean("considertameowner"));
     }
     
 

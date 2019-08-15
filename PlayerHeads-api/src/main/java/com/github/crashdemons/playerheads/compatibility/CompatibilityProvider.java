@@ -13,6 +13,7 @@ import org.bukkit.block.Skull;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -253,5 +254,33 @@ public interface CompatibilityProvider {
     public OfflinePlayer getOfflinePlayerByName(String username);
     
     //----------- 5.0 providers -----------//
+    /**
+     * Get item in main hand from entity
+     * @param p the entity to check
+     * @return the itemstack in the main hand, or null.
+     * @since 5.0.0-SNAPSHOT
+     */
     public ItemStack getItemInMainHand(LivingEntity p);
+    
+    //5.2.2
+    /**
+     * Gets the entity that caused the killing from a death event, possibly checking the last damage event.
+     * @param event the event to check
+     * @param getMobKillers if the killer was not a player, this controls whether to allow further investigation into the last damage-cause 
+     * @param getShooter whether to allow determining the owner if the entity was a projectile (requires getMobKillers to be enabled)
+     * @param getTameOwner whether to allow determining the owner if the entity was a tamed animal (requires getMobKillers to be enabled)
+     * @return the entity that caused the death, or null.
+     * @since 5.2.2-SNAPSHOT
+     */
+    public LivingEntity getKillerEntity(EntityDeathEvent event, boolean getMobKillers, boolean getShooter, boolean getTameOwner);
+    
+    /**
+     * Gets the entity "owning" the entity in some respect, and is responsible for its damage.
+     * @param entity the entity in question
+     * @param getShooter whether to allow determining the owner if the entity was a projectile.
+     * @param getTameOwner whether to allow determining the owner if the entity was a tamed animal.
+     * @return the "owner" of the entity, or the original entity itself.
+     * @since 5.2.2-SNAPSHOT
+     */
+    public Entity getEntityOwningEntity(Entity entity, boolean getShooter, boolean getTameOwner);
 }
