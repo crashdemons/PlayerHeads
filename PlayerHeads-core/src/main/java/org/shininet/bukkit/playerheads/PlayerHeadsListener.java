@@ -3,6 +3,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 package org.shininet.bukkit.playerheads;
 
+import com.github.crashdemons.playerheads.BroadcastManager;
+import com.github.crashdemons.playerheads.DropManager;
 import com.github.crashdemons.playerheads.antispam.InteractSpamPreventer;
 import com.github.crashdemons.playerheads.SkullConverter;
 import com.github.crashdemons.playerheads.SkullManager;
@@ -11,8 +13,10 @@ import com.github.crashdemons.playerheads.antispam.PlayerDeathSpamPreventer;
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import com.github.crashdemons.playerheads.compatibility.CompatiblePlugins;
 import com.github.crashdemons.playerheads.compatibility.plugins.SimulatedBlockBreakEvent;
+import java.util.LinkedHashMap;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.bukkit.ChatColor;
@@ -51,6 +55,8 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.projectiles.ProjectileSource;
 import org.shininet.bukkit.playerheads.events.BlockDropHeadEvent;
 import org.shininet.bukkit.playerheads.events.HeadRollEvent;
+import org.shininet.bukkit.playerheads.events.modifiers.DropRateModifier;
+import org.shininet.bukkit.playerheads.events.modifiers.DropRateModifierType;
 
 /**
  * Defines a listener for playerheads events.
@@ -155,22 +161,20 @@ class PlayerHeadsListener implements Listener {
     public void onEntityDeath(EntityDeathEvent event) {
         LivingEntity victim = event.getEntity();
         LivingEntity killer = getKillerEntity(event);
+        
+        LinkedHashMap<String,DropRateModifier> modifiers = new LinkedHashMap<>();
 
-        double lootingrate = 1;
-
-        String chargedcreeperBehavior="ignore";
-        Double chargedcreeperModifier=1.0; //not implemented yet
         if (killer != null) {
-            
             if(killer instanceof Creeper && !(victim instanceof Player)){
                 if(((Creeper) killer).isPowered()){
-                    chargedcreeperBehavior = plugin.configFile.getString("chargedcreeperbehavior");
-                    chargedcreeperModifier = plugin.configFile.getDouble("chargedcreepermodifier");
+                    String chargedcreeperBehavior = plugin.configFile.getString("chargedcreeperbehavior");
+                    Double chargedcreeperModifier = plugin.configFile.getDouble("chargedcreepermodifier");
                     
                     if(chargedcreeperBehavior.equals("block") || chargedcreeperBehavior.equals("replace"))
                         event.getDrops().removeIf(isVanillaHead);
                     if(chargedcreeperBehavior.equals("block") || chargedcreeperBehavior.equals("vanilla"))
                         return;
+                    modifiers.put("chargedcreeper", new DropRateModifier(DropRateModifierType.MULTIPLY,chargedcreeperModifier));
                 }
             }
             
@@ -180,7 +184,9 @@ class PlayerHeadsListener implements Listener {
                     String weaponType = weapon.getType().name().toLowerCase();
                     if(!plugin.configFile.getStringList("requireditems").contains(weaponType)) return;
                 }
-                lootingrate = 1 + (plugin.configFile.getDouble("lootingrate") * weapon.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS));
+                double lootingRate = plugin.configFile.getDouble("lootingrate");
+                int lootingLevel = weapon.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS);
+                modifiers.put("looting", new DropRateModifier(DropRateModifierType.ADD_MULTIPLE_PER_LEVEL,lootingRate,lootingLevel));
             }
         }
 
@@ -200,7 +206,7 @@ class PlayerHeadsListener implements Listener {
                         return;
                     }
                 }
-                PlayerDeathHelper(event, skullType, droprate, lootingrate,chargedcreeperModifier);
+                PlayerDeathHelper(event, skullType, droprate, modifiers);
                 break;
             case WITHER_SKELETON:
                 String witherskeletonbehavior = plugin.getConfig().getString("witherskeletonbehavior");
@@ -209,7 +215,7 @@ class PlayerHeadsListener implements Listener {
                 if(witherskeletonbehavior.equals("block") || witherskeletonbehavior.equals("vanilla"))
                     return;
                 
-                MobDeathHelper(event, skullType, droprate, lootingrate, 1.0, chargedcreeperModifier);
+                MobDeathHelper(event, skullType, droprate, modifiers);
                 break;
             case SLIME:
             case MAGMA_CUBE:
@@ -217,23 +223,22 @@ class PlayerHeadsListener implements Listener {
                 Entity entity = event.getEntity();
                 if(entity instanceof Slime){
                     int slimeSize = ((Slime) entity).getSize();// 1, 2, 3, 4  (1,2,4 natual with 1 the smallest)
-                    slimemodifier=plugin.configFile.getDouble("slimemodifier."+slimeSize);
+                    double slimeModifier=plugin.configFile.getDouble("slimemodifier."+slimeSize);
+                    modifiers.put("chargedcreeper", new DropRateModifier(DropRateModifierType.MULTIPLY,slimeModifier));
                 }
-                MobDeathHelper(event, skullType, droprate, lootingrate, slimemodifier,chargedcreeperModifier);
+                MobDeathHelper(event, skullType, droprate, modifiers);
                 break;
             default:
-                MobDeathHelper(event, skullType, droprate, lootingrate, 1.0,chargedcreeperModifier);
+                MobDeathHelper(event, skullType, droprate, modifiers);
                 break;
         }
     }
 
-    private void PlayerDeathHelper(EntityDeathEvent event, TexturedSkullType type, Double droprateOriginal, Double lootingModifier, Double chargedcreeperModifier) {
-        Double droprate = droprateOriginal * lootingModifier * chargedcreeperModifier;
+    private void PlayerDeathHelper(EntityDeathEvent event, TexturedSkullType type, Double droprateOriginal, Map<String,DropRateModifier> modifiers) {
         Double dropchanceRand = prng.nextDouble();
-        Double dropchance = dropchanceRand;
         Player player = (Player) event.getEntity();
         Player killer = event.getEntity().getKiller();
-
+        
         boolean killerAlwaysBeheads = false;
 
         if (!player.hasPermission("playerheads.canlosehead")) {
@@ -244,18 +249,17 @@ class PlayerHeadsListener implements Listener {
                 return;//peronslly, I think canbehead should override alwaysbehead.
             }
             killerAlwaysBeheads = killer.hasPermission("playerheads.alwaysbehead");
-            if (killerAlwaysBeheads) {
-                dropchance = 0.0;//alwaysbehead just changes the chance in your favor - 0.0 is within all droprate ranges.
-            }
         }
         if (killer == player || killer == null) {//self-kills and mob-kills are both handled as non-pk by the original plugin
             if (plugin.configFile.getBoolean("pkonly")) {
                 return;
             }
         }
-        boolean headDropSuccess = dropchance < droprate;
-
-        HeadRollEvent rollEvent = new HeadRollEvent(killer, player, killerAlwaysBeheads, lootingModifier, 1.0, chargedcreeperModifier, dropchanceRand, dropchance, droprateOriginal, droprate, headDropSuccess);
+        
+        HeadRollEvent rollEvent = new HeadRollEvent(killer, player, killerAlwaysBeheads,dropchanceRand, droprateOriginal);
+        rollEvent.setModifiers(modifiers);
+        rollEvent.recalculateSuccess();
+        
         plugin.getServer().getPluginManager().callEvent(rollEvent);
         if (!rollEvent.succeeded()) {
             return;//allow plugins a chance to modify the success
@@ -269,44 +273,14 @@ class PlayerHeadsListener implements Listener {
             return;
         }
         
-        ItemManager.requestDrops(plugin, dropHeadEvent.getDrops(), false, event);
+        DropManager.requestDrops(plugin, dropHeadEvent.getDrops(), false, event);
 
         //broadcast message about the beheading.
-        if (plugin.configFile.getBoolean("broadcast")) {
-            String message;
-            if (killer == null) {
-                message = Formatter.format(Lang.BEHEAD_GENERIC, player.getDisplayName() + ChatColor.RESET);
-            } else if (killer == player) {
-                message = Formatter.format(Lang.BEHEAD_SELF, player.getDisplayName() + ChatColor.RESET);
-            } else {
-                message = Formatter.format(Lang.BEHEAD_OTHER, player.getDisplayName() + ChatColor.RESET, killer.getDisplayName() + ChatColor.RESET);
-            }
-
-            int broadcastRange = plugin.configFile.getInt("broadcastrange");
-            if (broadcastRange > 0) {
-                broadcastRange *= broadcastRange;
-                Location location = player.getLocation();
-                List<Player> players = player.getWorld().getPlayers();
-
-                for (Player loopPlayer : players) {
-                    try{
-                        if (location.distanceSquared(loopPlayer.getLocation()) <= broadcastRange) {
-                            loopPlayer.sendMessage(message);
-                        }
-                    }catch(IllegalArgumentException e){
-                        //entities are in different worlds
-                    }
-                }
-            } else {
-                plugin.getServer().broadcastMessage(message);
-            }
-        }
+        BroadcastManager.broadcastBehead(plugin, killer, player);
     }
 
-    private void MobDeathHelper(EntityDeathEvent event, TexturedSkullType type, Double droprateOriginal, Double lootingModifier, Double slimeModifier, Double chargedcreeperModifier) {
-        Double droprate = droprateOriginal * lootingModifier * slimeModifier * chargedcreeperModifier;
+    private void MobDeathHelper(EntityDeathEvent event, TexturedSkullType type, Double droprateOriginal, Map<String,DropRateModifier> modifiers) {
         Double dropchanceRand = prng.nextDouble();
-        Double dropchance = dropchanceRand;
         Entity entity = event.getEntity();
         Player killer = event.getEntity().getKiller();
         
@@ -316,17 +290,15 @@ class PlayerHeadsListener implements Listener {
                 return;//killer does not have permission to behead mobs in any case
             }
             killerAlwaysBeheads = killer.hasPermission("playerheads.alwaysbeheadmob");
-            if (killerAlwaysBeheads) {
-                dropchance = 0.0;//alwaysbehead should only modify drop chances
-            }
         } else {//mob was killed by mob
             if (plugin.configFile.getBoolean("mobpkonly")) {
                 return;//mobs must only be beheaded by players
             }
         }
-        boolean headDropSuccess = dropchance < droprate;
+        HeadRollEvent rollEvent = new HeadRollEvent(killer, entity, killerAlwaysBeheads,dropchanceRand, droprateOriginal);
+        rollEvent.setModifiers(modifiers);
+        rollEvent.recalculateSuccess();
 
-        HeadRollEvent rollEvent = new HeadRollEvent(killer, event.getEntity(), killerAlwaysBeheads, lootingModifier, slimeModifier, chargedcreeperModifier, dropchanceRand, dropchance, droprateOriginal, droprate, headDropSuccess);
         plugin.getServer().getPluginManager().callEvent(rollEvent);
         if (!rollEvent.succeeded()) {
             return;//allow plugins a chance to modify the success
@@ -341,35 +313,10 @@ class PlayerHeadsListener implements Listener {
         }
         
         boolean isWither = Compatibility.getProvider().getCompatibleNameFromEntity(entity).equals("WITHER");
-        ItemManager.requestDrops(plugin, dropHeadEvent.getDrops(), isWither, event);
+        DropManager.requestDrops(plugin, dropHeadEvent.getDrops(), isWither, event);
         
         //broadcast message about the beheading.
-        if (plugin.configFile.getBoolean("broadcastmob") && killer!=null) { //mob-on-mob broadcasts would be extremely annoying!
-            String entityName = entity.getCustomName​();
-            if (entityName==null) entityName = entity.getName(); //notnull
-            
-            
-            String message = Formatter.format(Lang.BEHEAD_OTHER, entityName + ChatColor.RESET, killer.getDisplayName() + ChatColor.RESET);
-
-            int broadcastRange = plugin.configFile.getInt("broadcastmobrange");
-            if (broadcastRange > 0) {
-                broadcastRange *= broadcastRange;
-                Location location = entity.getLocation();
-                List<Player> players = entity.getWorld().getPlayers();
-
-                for (Player loopPlayer : players) {
-                    try{
-                        if (location.distanceSquared(loopPlayer.getLocation()) <= broadcastRange) {
-                            loopPlayer.sendMessage(message);
-                        }
-                    }catch(IllegalArgumentException e){
-                        //entities are in different worlds
-                    }
-                }
-            } else {
-                plugin.getServer().broadcastMessage(message);
-            }
-        }
+        BroadcastManager.broadcastBehead(plugin, killer, entity);
     }
 
     /**
@@ -503,7 +450,7 @@ class PlayerHeadsListener implements Listener {
         if (eventDropHead.isCancelled()) {
             return BlockDropResult.FAILED_EVENT_CANCELLED;
         }
-        ItemManager.requestDrops(plugin, eventDropHead.getDrops());
+        DropManager.requestDrops(plugin, eventDropHead.getDrops());
         return BlockDropResult.SUCCESS;
     }
 

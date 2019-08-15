@@ -3,22 +3,22 @@
  *  License, v. 2.0. If a copy of the MPL was not distributed with this
  *  file, You can obtain one at http://mozilla.org/MPL/2.0/ .
  */
-package org.shininet.bukkit.playerheads;
+package com.github.crashdemons.playerheads;
 
 import java.util.List;
 import org.bukkit.Location;
-import org.bukkit.event.Event;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
+import org.shininet.bukkit.playerheads.PlayerHeads;
 
 /**
  *
  * @author crashdemons (crashenator at gmail.com)
  */
-public class ItemManager {
+public class DropManager {
     private final static long TICKS_PER_SECOND = 20;
     private final static long MS_PER_TICK = 1000/TICKS_PER_SECOND; //50
-    private ItemManager(){}
+    private DropManager(){}
     
     public static void dropItemNow(Location location, ItemStack drop, boolean naturally){
         if(naturally) location.getWorld().dropItemNaturally(location, drop);
