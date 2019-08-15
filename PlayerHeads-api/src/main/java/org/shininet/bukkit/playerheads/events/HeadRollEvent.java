@@ -47,6 +47,7 @@ public class HeadRollEvent extends Event {
     
     /**
      * Creates the Head dropchance event for PlayerHeads without precalculation, allowing for event-based recalculation.
+     * Success is disabled by default.
      * 
      * Note: this method does not add any modifier values by default.
      * 
@@ -59,20 +60,15 @@ public class HeadRollEvent extends Event {
      * permission
      * @param originalDropRoll the randomized PRNG double droproll value
      * inclusively between 0 to 1.
-     * @param effectiveDropRoll the modified droproll value after permission
      * logic was applied (alwaysbehead sets to 0)
      * @param originalDropRate the configured droprate of the target as a
      * fraction (0.01 = 1%)
-     * @param effectiveDropRate the effective droprate of the target as a
-     * fraction (0.01 = 1%), as modified by looting.
-     * @param dropSuccess whether the droproll was determined to be initially a
-     * successful roll.
      */
-    public HeadRollEvent(final Entity killer, final Entity target, final boolean killerAlwaysBeheads, final double originalDropRoll, final double originalDropRate, final boolean dropSuccess) {
+    public HeadRollEvent(final Entity killer, final Entity target, final boolean killerAlwaysBeheads, final double originalDropRoll, final double originalDropRate) {
         this.originalDropRate = originalDropRate;
-        this.effectiveDropRate = effectiveDropRate;
-        this.dropSuccess = dropSuccess;
-        this.effectiveDropRoll = effectiveDropRoll;
+        this.effectiveDropRate = originalDropRate;
+        this.dropSuccess = false;
+        this.effectiveDropRoll = originalDropRoll;
         this.originalDropRoll = originalDropRoll;
         this.killerAlwaysBeheads = killerAlwaysBeheads;
 
