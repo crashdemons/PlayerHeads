@@ -268,17 +268,8 @@ class PlayerHeadsListener implements Listener {
         if (dropHeadEvent.isCancelled()) {
             return;
         }
-        drop=dropHeadEvent.getDrop();
-
-        //drop item naturally if the drops will be modified by another plugin or gamerule.
-        if(drop!=null){
-            if (plugin.configFile.getBoolean("antideathchest") || Compatibility.getProvider().getKeepInventory(player.getWorld())) {
-                Location location = player.getLocation();
-                location.getWorld().dropItemNaturally(location, drop);
-            } else {
-                event.getDrops().add(drop);
-            }
-        }
+        
+        ItemManager.requestDrops(plugin, dropHeadEvent.getDrops(), false, event);
 
         //broadcast message about the beheading.
         if (plugin.configFile.getBoolean("broadcast")) {
@@ -310,7 +301,6 @@ class PlayerHeadsListener implements Listener {
                 plugin.getServer().broadcastMessage(message);
             }
         }
-
     }
 
     private void MobDeathHelper(EntityDeathEvent event, TexturedSkullType type, Double droprateOriginal, Double lootingModifier, Double slimeModifier, Double chargedcreeperModifier) {
@@ -349,30 +339,9 @@ class PlayerHeadsListener implements Listener {
         if (dropHeadEvent.isCancelled()) {
             return;
         }
-        drop=dropHeadEvent.getDrop();
         
-        
-        final ItemStack finalDrop = drop;//the inner-class requires a final object;
-        if(finalDrop!=null){
-            if(type==TexturedSkullType.WITHER && plugin.configFile.getBoolean("delaywitherdrop")){
-                int delay = plugin.configFile.getInt("delaywitherdropms");
-                long ticks =  delay / MS_PER_TICK;
-                final Location location = event.getEntity().getLocation();
-                plugin.scheduleSync(new Runnable(){
-                    @Override
-                    public void run(){
-                        //System.out.println(" delayed head drop running");
-                        location.getWorld().dropItemNaturally(location, finalDrop);
-                    }
-                },ticks);
-                //System.out.println("scheduled head drop for "+ticks+" ticks");
-            }else if (plugin.configFile.getBoolean("antideathchest")) {
-                Location location = event.getEntity().getLocation();
-                location.getWorld().dropItemNaturally(location, finalDrop);
-            } else {
-                event.getDrops().add(finalDrop);
-            }
-        }
+        boolean isWither = Compatibility.getProvider().getCompatibleNameFromEntity(entity).equals("WITHER");
+        ItemManager.requestDrops(plugin, dropHeadEvent.getDrops(), isWither, event);
         
         //broadcast message about the beheading.
         if (plugin.configFile.getBoolean("broadcastmob") && killer!=null) { //mob-on-mob broadcasts would be extremely annoying!
@@ -534,8 +503,7 @@ class PlayerHeadsListener implements Listener {
         if (eventDropHead.isCancelled()) {
             return BlockDropResult.FAILED_EVENT_CANCELLED;
         }
-        item=eventDropHead.getDrop();
-        if(item!=null) location.getWorld().dropItemNaturally(location, item);
+        ItemManager.requestDrops(plugin, eventDropHead.getDrops());
         return BlockDropResult.SUCCESS;
     }
 
