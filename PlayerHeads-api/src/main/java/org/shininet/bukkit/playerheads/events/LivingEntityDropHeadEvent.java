@@ -3,6 +3,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 package org.shininet.bukkit.playerheads.events;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
@@ -27,7 +29,10 @@ public class LivingEntityDropHeadEvent extends EntityEvent implements Cancellabl
 
     private static final HandlerList HANDLERS = new HandlerList();
     private boolean canceled = false;
-    private ItemStack itemDrop;
+    private final ArrayList<ItemStack> itemDrops = new ArrayList<>();
+    
+    @Override
+    public List<ItemStack> getDrops(){ return itemDrops; }
 
     /**
      * Construct the event
@@ -37,7 +42,7 @@ public class LivingEntityDropHeadEvent extends EntityEvent implements Cancellabl
      */
     LivingEntityDropHeadEvent(final LivingEntity entity, final ItemStack drop) {
         super(entity);
-        this.itemDrop = drop;
+        itemDrops.add(drop);
     }
 
     /**
@@ -45,22 +50,27 @@ public class LivingEntityDropHeadEvent extends EntityEvent implements Cancellabl
      *
      * @return mutable ItemStack that will drop into the world once this event
      * is over
+     * @deprecated This method only gets one drop item, there may be multiple
      */
     @SuppressWarnings("unused")
+    @Deprecated
     @Override
     public ItemStack getDrop() {
-        return itemDrop;
+        if(itemDrops.isEmpty()) return null;
+        return itemDrops.get(0);
     }
     
     /**
      * Sets the item to drop for the beheading.
-     * 5.2+ API
+     * Note: this method clears any existing drops.
      * @since 5.2.0-SNAPSHOT
      * @param stack  The stack to drop. If this is null, no item will be dropped, but the drop event will complete successfully as if one did. (cancel the event to stop the drop).
      */
     @Override
     public void setDrop(@Nullable final ItemStack stack){
-        itemDrop=stack;
+        itemDrops.clear();
+        if(stack==null) return;
+        itemDrops.add(stack);
     }
 
     /**

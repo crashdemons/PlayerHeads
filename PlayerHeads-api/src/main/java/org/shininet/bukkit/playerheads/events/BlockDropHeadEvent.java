@@ -5,6 +5,8 @@
  */
 package org.shininet.bukkit.playerheads.events;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.bukkit.block.Block;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
@@ -23,8 +25,11 @@ public class BlockDropHeadEvent extends BlockEvent implements Cancellable, DropH
 
     private static final HandlerList HANDLERS = new HandlerList();
     private boolean canceled = false;
-    private ItemStack itemDrop;
+    private final ArrayList<ItemStack> itemDrops = new ArrayList<>();
 
+    @Override
+    public List<ItemStack> getDrops(){ return itemDrops; }
+    
     /**
      * Construct the event
      *
@@ -33,7 +38,7 @@ public class BlockDropHeadEvent extends BlockEvent implements Cancellable, DropH
      */
     public BlockDropHeadEvent(final Block block, final ItemStack drop) {
         super(block);
-        this.itemDrop = drop;
+        itemDrops.add(drop);
     }
 
     /**
@@ -41,22 +46,27 @@ public class BlockDropHeadEvent extends BlockEvent implements Cancellable, DropH
      *
      * @return mutable ItemStack that will drop into the world once this event
      * is over
+     * @deprecated Multiple items may drop, this method only retrieves the first.
      */
+    @Deprecated
     @SuppressWarnings("unused")
     @Override
     public ItemStack getDrop() {
-        return itemDrop;
+        if(itemDrops.isEmpty()) return null;
+        return itemDrops.get(0);
     }
     
     /**
      * Sets the item that will drop from the mined block.
-     * 5.2+ API
+     * Note: this method clears any existing drops.
      * @since 5.2.0-SNAPSHOT
      * @param stack the stack to drop. If this is null, no item will be dropped, but the drop event will complete successfully as if one did. (cancel the event to stop the drop).
      */
     @Override
     public void setDrop(@Nullable final ItemStack stack){
-        itemDrop=stack;
+        itemDrops.clear();
+        if(stack==null) return;
+        itemDrops.add(stack);
     }
 
     /**

@@ -5,6 +5,7 @@
  */
 package org.shininet.bukkit.playerheads.events;
 
+import java.util.List;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,11 +16,20 @@ import org.jetbrains.annotations.Nullable;
  */
 public interface DropHeadEvent {
 
+    public List<ItemStack> getDrops();
+    
+    /**
+     * Get the item drop associated with the event
+     * @return the itemstack being dropped
+     * @deprecated multiple items may be dropped, use getDrops() instead.
+     */
+    @Deprecated
+    @Nullable
     public ItemStack getDrop();
     
     /**
      * Set the item dropped by the event.
-     * 5.2+ API
+     * Note: this will replace all existing drops with a single drop in 5.2.2+.
      * @since 5.2.0-SNAPSHOT
      * @param stack the itemstack to set as the drop for this event
      */
