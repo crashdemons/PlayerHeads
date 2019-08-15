@@ -46,7 +46,42 @@ public class HeadRollEvent extends Event {
     
     
     /**
-     * Creates the Head dropchance event for PlayerHeads.
+     * Creates the Head dropchance event for PlayerHeads without precalculation, allowing for event-based recalculation.
+     * 
+     * Note: this method does not add any modifier values by default.
+     * 
+     * 5.2.2+ API
+     * @since 5.2.2-SNAPSHOT
+     *
+     * @param killer the Entity beheading another
+     * @param target the Entity being beheaded
+     * @param killerAlwaysBeheads whether the killer has the always-behead
+     * permission
+     * @param originalDropRoll the randomized PRNG double droproll value
+     * inclusively between 0 to 1.
+     * @param effectiveDropRoll the modified droproll value after permission
+     * logic was applied (alwaysbehead sets to 0)
+     * @param originalDropRate the configured droprate of the target as a
+     * fraction (0.01 = 1%)
+     * @param effectiveDropRate the effective droprate of the target as a
+     * fraction (0.01 = 1%), as modified by looting.
+     * @param dropSuccess whether the droproll was determined to be initially a
+     * successful roll.
+     */
+    public HeadRollEvent(final Entity killer, final Entity target, final boolean killerAlwaysBeheads, final double originalDropRoll, final double originalDropRate, final boolean dropSuccess) {
+        this.originalDropRate = originalDropRate;
+        this.effectiveDropRate = effectiveDropRate;
+        this.dropSuccess = dropSuccess;
+        this.effectiveDropRoll = effectiveDropRoll;
+        this.originalDropRoll = originalDropRoll;
+        this.killerAlwaysBeheads = killerAlwaysBeheads;
+
+        this.killer = killer;
+        this.target = target;
+    }
+    
+    /**
+     * Creates the Head dropchance event for PlayerHeads with values precalaculated by the plugin.
      * 
      * Note: this method does not add any modifier values by default.
      * 
@@ -212,10 +247,12 @@ public class HeadRollEvent extends Event {
     /**
      * Re-apply the current effective droproll and effective droprate values to make a new determination of the head drop's success.
      * Modifiers are not considered by this method, only the two effective values.
+     * Note: if killerAlwaysBeheads is enabled, the effective droproll will be set to 0.
      * @since 5.2.2-SNAPSHOT
      */
     public void applyDropRate(){
-        this.setDropSuccess(effectiveDropRoll <= effectiveDropRate);
+        if(killerAlwaysBeheads) effectiveDropRoll=0;
+        this.setDropSuccess(effectiveDropRoll < effectiveDropRate);
     }
     
     /**
