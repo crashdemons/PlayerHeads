@@ -42,7 +42,7 @@ public class LivingEntityDropHeadEvent extends EntityEvent implements Cancellabl
      */
     LivingEntityDropHeadEvent(final LivingEntity entity, final ItemStack drop) {
         super(entity);
-        itemDrops.add(drop);
+        if(drop!=null) itemDrops.add(drop);
     }
 
     /**

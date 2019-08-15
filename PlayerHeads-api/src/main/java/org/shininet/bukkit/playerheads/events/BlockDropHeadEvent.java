@@ -38,7 +38,7 @@ public class BlockDropHeadEvent extends BlockEvent implements Cancellable, DropH
      */
     public BlockDropHeadEvent(final Block block, final ItemStack drop) {
         super(block);
-        itemDrops.add(drop);
+        if(drop!=null) itemDrops.add(drop);
     }
 
     /**
