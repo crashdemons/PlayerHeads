@@ -18,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
  * Event created by the PlayerHeads plugin when a block is broken by hand
  * (mined) and dropping a head. Note: does not occur when broken by water or
  * pistons.
+ *
  * @since 4.8.5-SNAPSHOT
  * @author crashdemons (crashenator at gmail.com)
  */
@@ -28,8 +29,10 @@ public class BlockDropHeadEvent extends BlockEvent implements Cancellable, DropH
     private final ArrayList<ItemStack> itemDrops = new ArrayList<>();
 
     @Override
-    public List<ItemStack> getDrops(){ return itemDrops; }
-    
+    public List<ItemStack> getDrops() {
+        return itemDrops;
+    }
+
     /**
      * Construct the event
      *
@@ -38,7 +41,9 @@ public class BlockDropHeadEvent extends BlockEvent implements Cancellable, DropH
      */
     public BlockDropHeadEvent(final Block block, final ItemStack drop) {
         super(block);
-        if(drop!=null) itemDrops.add(drop);
+        if (drop != null) {
+            itemDrops.add(drop);
+        }
     }
 
     /**
@@ -46,26 +51,34 @@ public class BlockDropHeadEvent extends BlockEvent implements Cancellable, DropH
      *
      * @return mutable ItemStack that will drop into the world once this event
      * is over
-     * @deprecated Multiple items may drop, this method only retrieves the first.
+     * @deprecated Multiple items may drop, this method only retrieves the
+     * first.
      */
     @Deprecated
     @SuppressWarnings("unused")
     @Override
     public ItemStack getDrop() {
-        if(itemDrops.isEmpty()) return null;
+        if (itemDrops.isEmpty()) {
+            return null;
+        }
         return itemDrops.get(0);
     }
-    
+
     /**
-     * Sets the item that will drop from the mined block.
-     * Note: this method clears any existing drops.
+     * Sets the item that will drop from the mined block. Note: this method
+     * clears any existing drops.
+     *
      * @since 5.2.0-SNAPSHOT
-     * @param stack the stack to drop. If this is null, no item will be dropped, but the drop event will complete successfully as if one did. (cancel the event to stop the drop).
+     * @param stack the stack to drop. If this is null, no item will be dropped,
+     * but the drop event will complete successfully as if one did. (cancel the
+     * event to stop the drop).
      */
     @Override
-    public void setDrop(@Nullable final ItemStack stack){
+    public void setDrop(@Nullable final ItemStack stack) {
         itemDrops.clear();
-        if(stack==null) return;
+        if (stack == null) {
+            return;
+        }
         itemDrops.add(stack);
     }
 

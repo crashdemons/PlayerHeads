@@ -22,6 +22,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * <i>Note:</i> Some of this documentation was inferred after the fact and may
  * be inaccurate.
+ *
  * @since 3.11
  * @author meiskam
  */
@@ -30,9 +31,11 @@ public class LivingEntityDropHeadEvent extends EntityEvent implements Cancellabl
     private static final HandlerList HANDLERS = new HandlerList();
     private boolean canceled = false;
     private final ArrayList<ItemStack> itemDrops = new ArrayList<>();
-    
+
     @Override
-    public List<ItemStack> getDrops(){ return itemDrops; }
+    public List<ItemStack> getDrops() {
+        return itemDrops;
+    }
 
     /**
      * Construct the event
@@ -42,7 +45,9 @@ public class LivingEntityDropHeadEvent extends EntityEvent implements Cancellabl
      */
     LivingEntityDropHeadEvent(final LivingEntity entity, final ItemStack drop) {
         super(entity);
-        if(drop!=null) itemDrops.add(drop);
+        if (drop != null) {
+            itemDrops.add(drop);
+        }
     }
 
     /**
@@ -56,20 +61,27 @@ public class LivingEntityDropHeadEvent extends EntityEvent implements Cancellabl
     @Deprecated
     @Override
     public ItemStack getDrop() {
-        if(itemDrops.isEmpty()) return null;
+        if (itemDrops.isEmpty()) {
+            return null;
+        }
         return itemDrops.get(0);
     }
-    
+
     /**
-     * Sets the item to drop for the beheading.
-     * Note: this method clears any existing drops.
+     * Sets the item to drop for the beheading. Note: this method clears any
+     * existing drops.
+     *
      * @since 5.2.0-SNAPSHOT
-     * @param stack  The stack to drop. If this is null, no item will be dropped, but the drop event will complete successfully as if one did. (cancel the event to stop the drop).
+     * @param stack The stack to drop. If this is null, no item will be dropped,
+     * but the drop event will complete successfully as if one did. (cancel the
+     * event to stop the drop).
      */
     @Override
-    public void setDrop(@Nullable final ItemStack stack){
+    public void setDrop(@Nullable final ItemStack stack) {
         itemDrops.clear();
-        if(stack==null) return;
+        if (stack == null) {
+            return;
+        }
         itemDrops.add(stack);
     }
 
