@@ -21,6 +21,15 @@ public final class SkullConverter {
     
     private SkullConverter(){}
     
+    //can conversion of an item occur depending on if the skull was skinned and dropvanillahead flag (if passed directly)?
+    public static boolean canConversionHappen(boolean dropVanillaHeads, boolean isSourceSkinnable) {
+        //if the head is a skinned playerhead and usevanillaskull is set, then breaking it would convert it to a vanilla head
+        //if the head is a vanilla skull/head and usevanillaskull is unset, then breaking would convert it to a skinned head
+        return (isSourceSkinnable && dropVanillaHeads) || (!isSourceSkinnable && !dropVanillaHeads);
+    }
+    
+    
+    
     /**
      * Determine the TexturedSkullType best corresponding to an entity.  Most mobs (and the player) have a 1:1 mapping by their name.
      * 

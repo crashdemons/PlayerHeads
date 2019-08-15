@@ -5,6 +5,7 @@ package org.shininet.bukkit.playerheads;
 
 import com.github.crashdemons.playerheads.BroadcastManager;
 import com.github.crashdemons.playerheads.DropManager;
+import com.github.crashdemons.playerheads.BlockDropResult;
 import com.github.crashdemons.playerheads.antispam.InteractSpamPreventer;
 import com.github.crashdemons.playerheads.SkullConverter;
 import com.github.crashdemons.playerheads.SkullManager;
@@ -15,14 +16,10 @@ import com.github.crashdemons.playerheads.compatibility.CompatiblePlugins;
 import com.github.crashdemons.playerheads.compatibility.plugins.SimulatedBlockBreakEvent;
 import java.util.LinkedHashMap;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Skull;
 import org.bukkit.block.BlockState;
@@ -47,14 +44,13 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.Tameable;
-import org.bukkit.event.block.BlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.projectiles.ProjectileSource;
-import org.shininet.bukkit.playerheads.events.BlockDropHeadEvent;
 import org.shininet.bukkit.playerheads.events.HeadRollEvent;
+import org.shininet.bukkit.playerheads.events.LivingEntityDropHeadEvent;
 import org.shininet.bukkit.playerheads.events.modifiers.DropRateModifier;
 import org.shininet.bukkit.playerheads.events.modifiers.DropRateModifierType;
 
@@ -73,8 +69,6 @@ class PlayerHeadsListener implements Listener {
     private volatile InteractSpamPreventer clickSpamPreventer;
     private volatile PlayerDeathSpamPreventer deathSpamPreventer;
     
-    private final static long TICKS_PER_SECOND = 20;
-    private final static long MS_PER_TICK = 1000/TICKS_PER_SECOND; //50
     
 
     public void registerAll() {
@@ -206,7 +200,6 @@ class PlayerHeadsListener implements Listener {
                         return;
                     }
                 }
-                PlayerDeathHelper(event, skullType, droprate, modifiers);
                 break;
             case WITHER_SKELETON:
                 String witherskeletonbehavior = plugin.getConfig().getString("witherskeletonbehavior");
@@ -215,7 +208,6 @@ class PlayerHeadsListener implements Listener {
                 if(witherskeletonbehavior.equals("block") || witherskeletonbehavior.equals("vanilla"))
                     return;
                 
-                MobDeathHelper(event, skullType, droprate, modifiers);
                 break;
             case SLIME:
             case MAGMA_CUBE:
@@ -226,75 +218,37 @@ class PlayerHeadsListener implements Listener {
                     double slimeModifier=plugin.configFile.getDouble("slimemodifier."+slimeSize);
                     modifiers.put("chargedcreeper", new DropRateModifier(DropRateModifierType.MULTIPLY,slimeModifier));
                 }
-                MobDeathHelper(event, skullType, droprate, modifiers);
-                break;
-            default:
-                MobDeathHelper(event, skullType, droprate, modifiers);
                 break;
         }
+        doHeadRoll(event, skullType, droprate, modifiers);
     }
-
-    private void PlayerDeathHelper(EntityDeathEvent event, TexturedSkullType type, Double droprateOriginal, Map<String,DropRateModifier> modifiers) {
+    
+    private void doHeadRoll(EntityDeathEvent event, TexturedSkullType type, Double droprateOriginal, Map<String,DropRateModifier> modifiers){
         Double dropchanceRand = prng.nextDouble();
-        Player player = (Player) event.getEntity();
         Player killer = event.getEntity().getKiller();
+        LivingEntity entity = event.getEntity();
+        boolean isPlayerDeath = (entity instanceof Player);
         
+        String permBehead = "canbehead";
+        String permAlwaysBehead = "alwaysbehead";
+        String configPkOnly = "pkonly";
+        if(isPlayerDeath){
+            if(!((Player) entity).hasPermission("playerheads.canlosehead")) return;//target can't lose head.
+        }else{
+            permBehead+="mob";
+            permAlwaysBehead+="mob";
+            configPkOnly="mob"+configPkOnly;
+        }
+
         boolean killerAlwaysBeheads = false;
-
-        if (!player.hasPermission("playerheads.canlosehead")) {
-            return;
+        if (killer != null) {//target was killed by a player
+            if (!killer.hasPermission(permBehead)) return;//killer does not have permission to behead this target in any case
+            killerAlwaysBeheads = killer.hasPermission(permAlwaysBehead);
         }
-        if (killer != null) {//player was PK'd, so killer permissions apply.
-            if (!killer.hasPermission("playerheads.canbehead")) {
-                return;//peronslly, I think canbehead should override alwaysbehead.
-            }
-            killerAlwaysBeheads = killer.hasPermission("playerheads.alwaysbehead");
-        }
-        if (killer == player || killer == null) {//self-kills and mob-kills are both handled as non-pk by the original plugin
-            if (plugin.configFile.getBoolean("pkonly")) {
-                return;
-            }
+        if(killer == null || killer.getUniqueId()==entity.getUniqueId()){//target was killed by non-player, or player killed themself.
+            if (plugin.configFile.getBoolean(configPkOnly)) return;//mobs must only be beheaded by players
         }
         
-        HeadRollEvent rollEvent = new HeadRollEvent(killer, player, killerAlwaysBeheads,dropchanceRand, droprateOriginal);
-        rollEvent.setModifiers(modifiers);
-        rollEvent.recalculateSuccess();
-        
-        plugin.getServer().getPluginManager().callEvent(rollEvent);
-        if (!rollEvent.succeeded()) {
-            return;//allow plugins a chance to modify the success
-        }
-
-        ItemStack drop = plugin.api.getHeadDrop(player);
-
-        PlayerDropHeadEvent dropHeadEvent = new PlayerDropHeadEvent(player, drop);
-        plugin.getServer().getPluginManager().callEvent(dropHeadEvent);
-        if (dropHeadEvent.isCancelled()) {
-            return;
-        }
-        
-        DropManager.requestDrops(plugin, dropHeadEvent.getDrops(), false, event);
-
-        //broadcast message about the beheading.
-        BroadcastManager.broadcastBehead(plugin, killer, player);
-    }
-
-    private void MobDeathHelper(EntityDeathEvent event, TexturedSkullType type, Double droprateOriginal, Map<String,DropRateModifier> modifiers) {
-        Double dropchanceRand = prng.nextDouble();
-        Entity entity = event.getEntity();
-        Player killer = event.getEntity().getKiller();
-        
-        boolean killerAlwaysBeheads = false;
-        if (killer != null) {//mob was PK'd
-            if (!killer.hasPermission("playerheads.canbeheadmob")) {
-                return;//killer does not have permission to behead mobs in any case
-            }
-            killerAlwaysBeheads = killer.hasPermission("playerheads.alwaysbeheadmob");
-        } else {//mob was killed by mob
-            if (plugin.configFile.getBoolean("mobpkonly")) {
-                return;//mobs must only be beheaded by players
-            }
-        }
         HeadRollEvent rollEvent = new HeadRollEvent(killer, entity, killerAlwaysBeheads,dropchanceRand, droprateOriginal);
         rollEvent.setModifiers(modifiers);
         rollEvent.recalculateSuccess();
@@ -306,13 +260,18 @@ class PlayerHeadsListener implements Listener {
 
         ItemStack drop = plugin.api.getHeadDrop(entity);
 
-        MobDropHeadEvent dropHeadEvent = new MobDropHeadEvent(event.getEntity(), drop);
+        LivingEntityDropHeadEvent dropHeadEvent;
+        if(isPlayerDeath){
+            dropHeadEvent = new PlayerDropHeadEvent((Player) entity, drop);
+        }else{
+            dropHeadEvent = new MobDropHeadEvent(entity, drop);
+        }
         plugin.getServer().getPluginManager().callEvent(dropHeadEvent);
         if (dropHeadEvent.isCancelled()) {
             return;
         }
         
-        boolean isWither = Compatibility.getProvider().getCompatibleNameFromEntity(entity).equals("WITHER");
+        boolean isWither = (!isPlayerDeath) && Compatibility.getProvider().getCompatibleNameFromEntity(entity).equals("WITHER");
         DropManager.requestDrops(plugin, dropHeadEvent.getDrops(), isWither, event);
         
         //broadcast message about the beheading.
@@ -394,7 +353,7 @@ class PlayerHeadsListener implements Listener {
                 break;
             default:
                 boolean blockIsSkinnable = Compatibility.getProvider().isPlayerhead(stack);
-                newstack = createConvertedMobhead(skullType, blockIsSkinnable, addLore, stack.getAmount());
+                newstack = DropManager.createConvertedMobhead(plugin,skullType, blockIsSkinnable, addLore, stack.getAmount());
                 break;
         }
         if (newstack == null) {
@@ -403,56 +362,9 @@ class PlayerHeadsListener implements Listener {
         event.getEntity().setItemStack(newstack);
     }
 
-    //can conversion of an item occur depending on if the skull was skinned and dropvanillahead flag (if passed directly)?
-    private static boolean canConversionHappen(boolean dropVanillaHeads, boolean isSourceSkinnable) {
-        //if the head is a skinned playerhead and usevanillaskull is set, then breaking it would convert it to a vanilla head
-        //if the head is a vanilla skull/head and usevanillaskull is unset, then breaking would convert it to a skinned head
-        return (isSourceSkinnable && dropVanillaHeads) || (!isSourceSkinnable && !dropVanillaHeads);
-    }
 
-    private ItemStack createConvertedMobhead(TexturedSkullType skullType, boolean isSourceSkinnable, boolean addLore, int quantity) {
-        boolean usevanillaskull = plugin.configFile.getBoolean("dropvanillaheads");
-        boolean convertvanillahead = plugin.configFile.getBoolean("convertvanillaheads");
 
-        //if the head is a skinned playerhead and usevanillaskull is set, then breaking it would convert it to a vanilla head
-        //if the head is a vanilla skull/head and usevanillaskull is unset, then breaking would convert it to a skinned head
-        boolean conversionCanHappen = canConversionHappen(usevanillaskull, isSourceSkinnable);
-        if (conversionCanHappen && !convertvanillahead) {
-            usevanillaskull = !usevanillaskull;//change the drop to the state that avoids converting it.
-        }
-        return SkullManager.MobSkull(skullType, quantity, usevanillaskull, addLore);
-    }
 
-    //drop a head based on a block being broken in some fashion
-    //NOTE: the blockbreak handler expects this to unconditionally drop the item unless the new event is cancelled.
-    private BlockDropResult blockDrop(BlockEvent event, Block block, BlockState state) {
-        TexturedSkullType skullType = SkullConverter.skullTypeFromBlockState(state);
-        Location location = block.getLocation();
-        ItemStack item = null;
-        boolean addLore = plugin.configFile.getBoolean("addlore");
-        switch (skullType) {
-            case PLAYER:
-                Skull skull = (Skull) block.getState();
-                String owner = Compatibility.getProvider().getOwner(skull);//SkullConverter.getSkullOwner(skull);
-                if (owner == null) {
-                    return BlockDropResult.FAILED_CUSTOM_HEAD;//you broke an unsupported custom-textured head.
-                }
-                item = SkullManager.PlayerSkull(owner, addLore);
-                break;
-            default:
-                boolean blockIsSkinnable = Compatibility.getProvider().isPlayerhead(block.getState());
-                item = createConvertedMobhead(skullType, blockIsSkinnable, addLore, Config.defaultStackSize);
-                break;
-        }
-        block.setType(Material.AIR);
-        BlockDropHeadEvent eventDropHead = new BlockDropHeadEvent(block, item);
-        plugin.getServer().getPluginManager().callEvent(eventDropHead);
-        if (eventDropHead.isCancelled()) {
-            return BlockDropResult.FAILED_EVENT_CANCELLED;
-        }
-        DropManager.requestDrops(plugin, eventDropHead.getDrops());
-        return BlockDropResult.SUCCESS;
-    }
 
     /**
      * Event handler for player block-break events.
@@ -483,7 +395,7 @@ class PlayerHeadsListener implements Listener {
                     event.setCancelled(true);
                 } else {
                     event.setCancelled(true);
-                    BlockDropResult result = blockDrop(event, block, state);
+                    BlockDropResult result = DropManager.blockDrop(plugin,event, block, state);
                     if (result == BlockDropResult.FAILED_CUSTOM_HEAD) {
                         event.setCancelled(false);//uncancel the event if we can't drop it accurately - attempted fix for issue crashdemons/PlayerHeads#12
                     }

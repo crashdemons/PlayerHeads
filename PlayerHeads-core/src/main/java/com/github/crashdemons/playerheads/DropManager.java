@@ -5,11 +5,19 @@
  */
 package com.github.crashdemons.playerheads;
 
+import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import java.util.List;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.Skull;
+import org.bukkit.event.block.BlockEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
+import org.shininet.bukkit.playerheads.Config;
 import org.shininet.bukkit.playerheads.PlayerHeads;
+import org.shininet.bukkit.playerheads.events.BlockDropHeadEvent;
 
 /**
  *
@@ -56,5 +64,50 @@ public class DropManager {
     }
     public static void requestDrops(PlayerHeads plugin, List<ItemStack> drops){
         requestDrops(plugin,drops,false,null);
+    }
+    
+    
+    public static ItemStack createConvertedMobhead(PlayerHeads plugin, TexturedSkullType skullType, boolean isSourceSkinnable, boolean addLore, int quantity) {
+        boolean usevanillaskull = plugin.configFile.getBoolean("dropvanillaheads");
+        boolean convertvanillahead = plugin.configFile.getBoolean("convertvanillaheads");
+
+        //if the head is a skinned playerhead and usevanillaskull is set, then breaking it would convert it to a vanilla head
+        //if the head is a vanilla skull/head and usevanillaskull is unset, then breaking would convert it to a skinned head
+        boolean conversionCanHappen = SkullConverter.canConversionHappen(usevanillaskull, isSourceSkinnable);
+        if (conversionCanHappen && !convertvanillahead) {
+            usevanillaskull = !usevanillaskull;//change the drop to the state that avoids converting it.
+        }
+        return SkullManager.MobSkull(skullType, quantity, usevanillaskull, addLore);
+    }
+    
+    //drop a head based on a block being broken in some fashion
+    //NOTE: the blockbreak handler expects this to unconditionally drop the item unless the new event is cancelled.
+    public static BlockDropResult blockDrop(PlayerHeads plugin, BlockEvent event, Block block, BlockState state) {
+        TexturedSkullType skullType = SkullConverter.skullTypeFromBlockState(state);
+        Location location = block.getLocation();
+        ItemStack item = null;
+        boolean addLore = plugin.configFile.getBoolean("addlore");
+        switch (skullType) {
+            case PLAYER:
+                Skull skull = (Skull) block.getState();
+                String owner = Compatibility.getProvider().getOwner(skull);//SkullConverter.getSkullOwner(skull);
+                if (owner == null) {
+                    return BlockDropResult.FAILED_CUSTOM_HEAD;//you broke an unsupported custom-textured head.
+                }
+                item = SkullManager.PlayerSkull(owner, addLore);
+                break;
+            default:
+                boolean blockIsSkinnable = Compatibility.getProvider().isPlayerhead(block.getState());
+                item = DropManager.createConvertedMobhead(plugin,skullType, blockIsSkinnable, addLore, Config.defaultStackSize);
+                break;
+        }
+        block.setType(Material.AIR);
+        BlockDropHeadEvent eventDropHead = new BlockDropHeadEvent(block, item);
+        plugin.getServer().getPluginManager().callEvent(eventDropHead);
+        if (eventDropHead.isCancelled()) {
+            return BlockDropResult.FAILED_EVENT_CANCELLED;
+        }
+        DropManager.requestDrops(plugin, eventDropHead.getDrops());
+        return BlockDropResult.SUCCESS;
     }
 }

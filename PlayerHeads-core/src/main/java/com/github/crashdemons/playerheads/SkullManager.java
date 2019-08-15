@@ -235,6 +235,7 @@ public final class SkullManager {
         */
         skullState.update();
     }
+
     /*
     //reinvestigate these approaches as they're preferred to the deprecated username method.
     //these do not properly update head skin in server testing.
