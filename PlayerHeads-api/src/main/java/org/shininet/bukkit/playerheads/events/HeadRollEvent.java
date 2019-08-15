@@ -410,7 +410,7 @@ public class HeadRollEvent extends Event {
      *
      * @since 5.2.0-SNAPSHOT
      * @deprecated use getModifier("chargedcreeper") instead
-     * @see #getModifier(java.lang.String, java.lang.Double)
+     * @see #getModifier(java.lang.String) 
      * @return the multiplier
      */
     @NotNull
@@ -428,7 +428,7 @@ public class HeadRollEvent extends Event {
      *
      * @since 5.1.0-SNAPSHOT
      * @deprecated use getModifier("slime") instead
-     * @see #getModifier(java.lang.String, java.lang.Double)
+     * @see #getModifier(java.lang.String)
      * @return the looting modifier
      */
     @NotNull
@@ -448,7 +448,7 @@ public class HeadRollEvent extends Event {
      * Entity_Looting_Enchantment_Level)
      *
      * @deprecated use getModifier("looting") instead
-     * @see #getModifier(java.lang.String, java.lang.Double)
+     * @see #getModifier(java.lang.String)
      * @return the looting modifier
      */
     public double getLootingModifier() {
@@ -519,7 +519,7 @@ public class HeadRollEvent extends Event {
      * apply and recalculate methods.
      *
      * @since 5.2.2-SNAPSHOT
-     * @param effectiveRate
+     * @param effectiveRate the effective droprate/fractional-chance value to set (0.0-1.0 inclusive)
      */
     public void setEffectiveDropRate(final double effectiveRate) {
         this.effectiveDropRate = effectiveRate;
