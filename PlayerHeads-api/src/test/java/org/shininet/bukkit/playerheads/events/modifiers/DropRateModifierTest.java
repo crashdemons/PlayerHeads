@@ -80,6 +80,8 @@ public class DropRateModifierTest {
         assertEquals((Double) 0.0102, (Double) new DropRateModifier(DropRateModifierType.ADD_MULTIPLE,0.02).apply(droprate),TOLERANCE);
         assertEquals((Double) 0.01013, (Double) new DropRateModifier(DropRateModifierType.ADD_MULTIPLE_PER_LEVEL,0.013).apply(droprate),TOLERANCE);
         assertEquals((Double) ((1+(0.014*3))*0.01),(Double) new DropRateModifier(DropRateModifierType.ADD_MULTIPLE_PER_LEVEL,0.014,3).apply(droprate),TOLERANCE);
+    
+        assertEquals(0.12974400000000003, new DropRateModifier(DropRateModifierType.MULTIPLY,1.5).apply(0.08649600000000002),TOLERANCE);
     }
     
 }
