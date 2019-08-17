@@ -15,10 +15,10 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.Skull;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.shininet.bukkit.playerheads.Config;
 import org.shininet.bukkit.playerheads.PlayerHeadsPlugin;
 import org.shininet.bukkit.playerheads.PlayerHeads;
 
@@ -31,6 +31,13 @@ public class ApiProvider implements PlayerHeadsAPI {
 
     private final PlayerHeads plugin;
 
+    private TexturedSkullType headFromApiHead(HeadType h) {
+        if(!(h instanceof TexturedSkullType)){
+            throw new IllegalArgumentException("The head type supplied was not created or supported by the plugin.");
+        }
+        return TexturedSkullType.get(h.getOwner());
+    }
+    
     public ApiProvider(PlayerHeadsPlugin plugin) {
         this.plugin = (PlayerHeads) plugin;
     }
@@ -71,75 +78,31 @@ public class ApiProvider implements PlayerHeadsAPI {
 
     @Override
     public ItemStack getHeadItem(HeadType h, int num) {
-        TexturedSkullType type = headFromApiHead(h);
-        if (type == null) {
-            return null;
-        }
-
-        boolean addLore = plugin.configFile.getBoolean("addlore");
-        boolean usevanillaskull = plugin.configFile.getBoolean("dropvanillaheads");
-        if (type == TexturedSkullType.PLAYER) {
-            return SkullManager.PlayerSkull(num, true);
-        }
-        return SkullManager.MobSkull(type, num, usevanillaskull, addLore);
+        return getHeadItem(new InternalHeadRepresentation(headFromApiHead(h),""),num);
     }
 
     @Override
     public ItemStack getHeadDrop(Entity e) {
-        TexturedSkullType type = SkullConverter.skullTypeFromEntity(e);
-        if (type == null) {
-            return null;
-        }
-        boolean addLore = plugin.configFile.getBoolean("addlore");
-        ItemStack drop;
-        if (e instanceof Player) {
-            Player player = (Player) e;
-            String skullOwner;
-            if (plugin.configFile.getBoolean("dropboringplayerheads")) {
-                skullOwner = "";
-            } else {
-                skullOwner = player.getName();
-            }
-            if (skullOwner == null || skullOwner.isEmpty()) {
-                drop = SkullManager.PlayerSkull(addLore);
-            } else {
-                drop = SkullManager.PlayerSkull(skullOwner, addLore);
-            }
-        } else {
-            boolean usevanillaskull = plugin.configFile.getBoolean("dropvanillaheads");
-            drop = SkullManager.MobSkull(type, usevanillaskull, addLore);
-        }
-        return drop;
+        return getHeadItem(getHeadRepresentation(e), Config.defaultStackSize);
     }
 
-    private TexturedSkullType headFromApiHead(HeadType h) {
-        return TexturedSkullType.get(h.getOwner());
-    }
     
     
     //5.1.1 API
     
     @Override
     public ItemStack getBoringPlayerheadItem(int num){
-        boolean addLore = plugin.configFile.getBoolean("addlore");
-        return SkullManager.PlayerSkull(num,addLore);
+        return getHeadItem(getHeadRepresentationFromBoringPlayerhead(),num);
     }
     
     @Override
     public ItemStack getHeadItem(String username, int num, boolean forceOwner){
-        if(!forceOwner && plugin.configFile.getBoolean("dropboringplayerheads")){
-            return getBoringPlayerheadItem(num);
-        }else{
-            boolean addLore = plugin.configFile.getBoolean("addlore");
-            return SkullManager.PlayerSkull(username, num, addLore);
-        }
+        return getHeadItem(getHeadRepresentation(username,forceOwner),num);
     }
     
     @Override
     public ItemStack getHeadItem(OfflinePlayer player, int num, boolean forceOwner){
-        String name = player.getName();
-        if(name==null) return null;
-        return getHeadItem(name,num,forceOwner);
+        return getHeadItem(getHeadRepresentation(player,forceOwner),num);
     }
     
     @Override
@@ -149,6 +112,18 @@ public class ApiProvider implements PlayerHeadsAPI {
     }
     
     //5.2.2 API;
+    
+    @Override
+    public HeadRepresentation getHeadRepresentation(Entity e){
+        TexturedSkullType type = SkullConverter.skullTypeFromEntity(e);
+        if(type==null) return null;
+        if(type==TexturedSkullType.PLAYER){
+            return getHeadRepresentation(e.getName(),false);
+        }else{
+            return new InternalHeadRepresentation(type,"",type.getOwner());
+        }
+    }
+    
     @Override
     public HeadRepresentation getHeadRepresentation(String username, boolean forceOwner){
         if((!forceOwner) && plugin.configFile.getBoolean("dropboringplayerheads")) return getHeadRepresentationFromBoringPlayerhead();
@@ -161,7 +136,7 @@ public class ApiProvider implements PlayerHeadsAPI {
     }
     @Override
     public HeadRepresentation getHeadRepresentationFromBoringPlayerhead(){
-        return new InternalHeadRepresentation(TexturedSkullType.PLAYER,null,null);
+        return new InternalHeadRepresentation(TexturedSkullType.PLAYER,"",null);
     }
     @Override
     public HeadRepresentation getHeadRepresentation(ItemStack stack){
@@ -192,7 +167,7 @@ public class ApiProvider implements PlayerHeadsAPI {
         boolean addLore = plugin.configFile.getBoolean("addlore");
         if(type==TexturedSkullType.PLAYER){
             String username = head.getOwnerName();
-            if(username==null) return SkullManager.PlayerSkull(num, addLore);
+            if(username==null || username.isEmpty()) return SkullManager.PlayerSkull(num, addLore);
             return SkullManager.PlayerSkull(username, num, addLore);
         }else{
             boolean usevanillaskull = plugin.configFile.getBoolean("dropvanillaheads");
