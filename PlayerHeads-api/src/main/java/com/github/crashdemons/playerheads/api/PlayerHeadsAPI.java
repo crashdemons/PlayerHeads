@@ -155,4 +155,14 @@ public interface PlayerHeadsAPI {
      */
     @Nullable
     public CompatibilityProvider getCompatibilityProvider();
+    
+    //5.2.2 API
+    /**
+     * Compares the representation information (type and owner) of two heads.
+     * @param headA
+     * @param headB
+     * @return 
+     */
+    public boolean compareHeads(HeadRepresentation headA, HeadRepresentation headB);
+    public boolean checkSameHead(HeadRepresentation headA, HeadRepresentation headB);
 }
