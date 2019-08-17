@@ -15,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
  * you can use equals()
  * 
  * This categorizes the head generally by entity type and does not retain user details (username/uuid/texture).
+ * If you want to tell if a head is the "same", you need to compare both type and owner (of the head itself), it is recommended to use HeadRepresentation for this purpose.
  *
  * @author crashdemons (crashenator at gmail.com)
  */
@@ -47,6 +48,7 @@ public interface HeadType {
      *
      * @return A string containing the skulltype's displayname
      */
+    @NotNull
     public String getDisplayName();
 
     /**
@@ -86,6 +88,7 @@ public interface HeadType {
      * @param h the headtype to check
      * @return whether the types were equal
      */
+    @Override
     public boolean equals(Object h);
     
     // 5.0.0 API

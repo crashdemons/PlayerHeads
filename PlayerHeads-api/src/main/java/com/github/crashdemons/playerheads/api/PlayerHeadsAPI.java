@@ -46,7 +46,7 @@ public interface PlayerHeadsAPI {
      * @return the type of head, or null if there is none
      */
     @Nullable
-    public HeadType getHeadFrom(ItemStack s);
+    public HeadType getHeadFrom(@NotNull ItemStack s);
 
     /**
      * Gets the type of head associated with the Block
@@ -55,7 +55,7 @@ public interface PlayerHeadsAPI {
      * @return the type of head, or null if the block wasn't a head.
      */
     @Nullable
-    public HeadType getHeadFrom(BlockState s);
+    public HeadType getHeadFrom(@NotNull BlockState s);
 
     /**
      * Gets the type of head associated with an entity
@@ -64,7 +64,7 @@ public interface PlayerHeadsAPI {
      * @return the type of head, or null if there is no viable head.
      */
     @Nullable
-    public HeadType getHeadOf(Entity e);
+    public HeadType getHeadOf(@NotNull Entity e);
 
     /**
      * Gets the type of head associated with an entity-type. See deprecation
@@ -81,7 +81,7 @@ public interface PlayerHeadsAPI {
      * @return the type of head, or null if there is no viable head (unsupported mob)
      */
     @Nullable
-    public HeadType getHeadOf(EntityType t);
+    public HeadType getHeadOf(@NotNull EntityType t);
 
     /**
      * Gets a stack of head items for the given type and amount. Note:
@@ -95,7 +95,7 @@ public interface PlayerHeadsAPI {
      * @return The item stack, or null if the head type was null
      */
     @Nullable
-    public ItemStack getHeadItem(HeadType h, int num);
+    public ItemStack getHeadItem(@NotNull HeadType h, int num);
 
     /**
      * Gets a stack of head items as they would normally be dropped from the
@@ -106,7 +106,7 @@ public interface PlayerHeadsAPI {
      * @return The item stack, or null if the entity head type was null (unsupported mob).
      */
     @Nullable
-    public ItemStack getHeadDrop(Entity e);
+    public ItemStack getHeadDrop(@NotNull Entity e);
     
     //5.1.1 API
     
@@ -130,7 +130,7 @@ public interface PlayerHeadsAPI {
      * @return the itemstack requested
      */
     @NotNull
-    public ItemStack getHeadItem(String username, int num, boolean forceOwner);
+    public ItemStack getHeadItem(@NotNull String username, int num, boolean forceOwner);
     
     /**
      * Gets the playerhead for the user provided.
@@ -152,17 +152,57 @@ public interface PlayerHeadsAPI {
      * These may be more subject to change than other API methods, so you should avoid them except when necessary.
      * @since 5.1.1-SNAPSHOT
      * @return the CompatibilityProvider instance or null if PlayerHeads plugin was not initialized yet.
+     * @deprecated although this is provided and maintained, it is subject to change with plugin requirements, so you should avoid using it normally.
      */
+    @Deprecated
     @Nullable
     public CompatibilityProvider getCompatibilityProvider();
     
-    //5.2.2 API
+    //5.2.2 API;
     /**
-     * Compares the representation information (type and owner) of two heads.
-     * @param headA
-     * @param headB
-     * @return 
+     * Gets the details (type and owner) of a head for comparison and re-creation purposes for a user's head.
+     * This is NOT subject to configuration settings except for 'dropboringplayerheads'
+     * @param username the username to get the head for.
+     * @param forceOwner if true, ignore the state of 'dropboringplayerheads' and provide head information for the owner anyway
+     * @return the representation details for the head
+     * @since 5.2.2-SNAPSHOT
      */
-    public boolean compareHeads(HeadRepresentation headA, HeadRepresentation headB);
-    public boolean checkSameHead(HeadRepresentation headA, HeadRepresentation headB);
+    @NotNull public HeadRepresentation getHeadRepresentation(@NotNull String username, boolean forceOwner);
+    /**
+     * Gets the details (type and owner) of a head for comparison and re-creation purposes for a user's head.
+     * This is NOT subject to configuration settings except for 'dropboringplayerheads'
+     * @param player the player to get the head for.
+     * @param forceOwner if true, ignore the state of 'dropboringplayerheads' and provide head information for the owner anyway
+     * @return the representation details for the head
+     */
+    @NotNull public HeadRepresentation getHeadRepresentation(@NotNull OfflinePlayer player, boolean forceOwner);
+    /**
+     * Gets the details (type and owner) of a head for comparison and re-creation purposes for a "boring playerhead" as if 'dropboringplayerheads' was enabled.
+     * @return the representation details for the head
+     * @since 5.2.2-SNAPSHOT
+     */
+    @NotNull public HeadRepresentation getHeadRepresentationFromBoringPlayerhead();
+    /**
+     * Gets the details (type and owner) of a head for comparison and re-creation purposes.
+     * @param stack the item stack to determine head information
+     * @return the head representation.
+     * @since 5.2.2-SNAPSHOT
+     */
+    @Nullable public HeadRepresentation getHeadRepresentation(@NotNull ItemStack stack);
+    /**
+     * Gets the details (type and owner) of a head for comparison and re-creation purposes.
+     * @param state the block-state to determine head information
+     * @return the head representation.
+     * @since 5.2.2-SNAPSHOT
+     */
+    @Nullable public HeadRepresentation getHeadRepresentation(@NotNull BlockState state);
+    /**
+     * Create head items from the head representation details (type and owner).
+     * This is subject to configuration options like 'addlore', however ownership information will override 'dropboringplayerheads'
+     * @param head the details defining the head
+     * @param num the number of heads to create in the stack.
+     * @return the item based on the head representation.
+     * @since 5.2.2-SNAPSHOT
+     */
+    @NotNull public ItemStack getHeadItem(HeadRepresentation head, int num);
 }

@@ -5,8 +5,11 @@
  */
 package com.github.crashdemons.playerheads.api;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Results of comparing two heads
+ *
  * @author crashdemons (crashenator at gmail.com)
  */
 public enum HeadComparisonResult {
@@ -15,26 +18,34 @@ public enum HeadComparisonResult {
     SAME_OWNER,
     NO_SIMILARITY;
 
-    public boolean isSameOwner(){
-        return (this==HeadComparisonResult.SAME_TYPE_AND_OWNER || this==HeadComparisonResult.SAME_OWNER);
+    public boolean isSameOwner() {
+        return (this == HeadComparisonResult.SAME_TYPE_AND_OWNER || this == HeadComparisonResult.SAME_OWNER);
     }
-    public boolean isSameType(){
-        return (this==HeadComparisonResult.SAME_TYPE_AND_OWNER || this==HeadComparisonResult.SAME_TYPE);
+
+    public boolean isSameType() {
+        return (this == HeadComparisonResult.SAME_TYPE_AND_OWNER || this == HeadComparisonResult.SAME_TYPE);
     }
-    public boolean isSame(){
-        return this==HeadComparisonResult.SAME_TYPE_AND_OWNER;
+
+    public boolean isSame() {
+        return this == HeadComparisonResult.SAME_TYPE_AND_OWNER;
     }
-    
-    public HeadComparisonResult add(HeadComparisonResult result){
+
+    @NotNull public HeadComparisonResult add(@NotNull final HeadComparisonResult result) {
         boolean typeEquality = this.isSameType() || result.isSameType();
         boolean ownerEquality = this.isSameOwner() || result.isSameOwner();
-        return fromEquality(typeEquality,ownerEquality);
+        return fromEquality(typeEquality, ownerEquality);
     }
-    
-    public HeadComparisonResult fromEquality(boolean typeEquality, boolean ownerEquality){
-        if(typeEquality && ownerEquality) return HeadComparisonResult.SAME_TYPE_AND_OWNER;
-        if(typeEquality) return HeadComparisonResult.SAME_TYPE;
-        if(ownerEquality) return HeadComparisonResult.SAME_OWNER;
+
+    public static HeadComparisonResult fromEquality(final boolean typeEquality, final boolean ownerEquality) {
+        if (typeEquality && ownerEquality) {
+            return HeadComparisonResult.SAME_TYPE_AND_OWNER;
+        }
+        if (typeEquality) {
+            return HeadComparisonResult.SAME_TYPE;
+        }
+        if (ownerEquality) {
+            return HeadComparisonResult.SAME_OWNER;
+        }
         return NO_SIMILARITY;
     }
 }

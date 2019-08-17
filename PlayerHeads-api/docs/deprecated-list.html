@@ -116,22 +116,27 @@
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colOne"><a href="com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getCompatibilityProvider--">com.github.crashdemons.playerheads.api.PlayerHeadsAPI.getCompatibilityProvider()</a>
+<div class="block"><span class="deprecationComment">although this is provided and maintained, it is subject to change with plugin requirements, so you should avoid using it normally.</span></div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colOne"><a href="org/shininet/bukkit/playerheads/events/LivingEntityDropHeadEvent.html#getDrop--">org.shininet.bukkit.playerheads.events.LivingEntityDropHeadEvent.getDrop()</a>
 <div class="block"><span class="deprecationComment">This method only gets one drop item, there may be multiple</span></div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colOne"><a href="org/shininet/bukkit/playerheads/events/DropHeadEvent.html#getDrop--">org.shininet.bukkit.playerheads.events.DropHeadEvent.getDrop()</a>
 <div class="block"><span class="deprecationComment">multiple items may be dropped, use getDrops() instead.</span></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colOne"><a href="org/shininet/bukkit/playerheads/events/BlockDropHeadEvent.html#getDrop--">org.shininet.bukkit.playerheads.events.BlockDropHeadEvent.getDrop()</a>
 <div class="block"><span class="deprecationComment">Multiple items may drop, this method only retrieves the
  first.</span></div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colOne"><a href="com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadOf-org.bukkit.entity.EntityType-">com.github.crashdemons.playerheads.api.PlayerHeadsAPI.getHeadOf(EntityType)</a>
 <div class="block"><span class="deprecationComment">this may not do exactly what you want because between MC
  1.10-1.13 many entities were separated from variants to their own
@@ -141,48 +146,48 @@
  getHeadFrom(Entity) instead.</span></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colOne"><a href="org/shininet/bukkit/playerheads/events/HeadRollEvent.html#getLootingModifier--">org.shininet.bukkit.playerheads.events.HeadRollEvent.getLootingModifier()</a>
 <div class="block"><span class="deprecationComment">use getModifier("looting") instead</span></div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colOne"><a href="com/github/crashdemons/playerheads/compatibility/CompatibilityProvider.html#getOwnerDirect-org.bukkit.block.Skull-">com.github.crashdemons.playerheads.compatibility.CompatibilityProvider.getOwnerDirect(Skull)</a>
 <div class="block"><span class="deprecationComment">This method does not include extended checking, you probably dont want the direct method.</span></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colOne"><a href="com/github/crashdemons/playerheads/compatibility/CompatibilityProvider.html#getOwnerDirect-org.bukkit.inventory.meta.SkullMeta-">com.github.crashdemons.playerheads.compatibility.CompatibilityProvider.getOwnerDirect(SkullMeta)</a>
 <div class="block"><span class="deprecationComment">This method does not include extended checking, you probably dont want the direct method.</span></div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colOne"><a href="com/github/crashdemons/playerheads/compatibility/CompatibilityProvider.html#getOwningPlayerDirect-org.bukkit.block.Skull-">com.github.crashdemons.playerheads.compatibility.CompatibilityProvider.getOwningPlayerDirect(Skull)</a>
 <div class="block"><span class="deprecationComment">This method does not include extended checking, you probably dont want the direct method.</span></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colOne"><a href="com/github/crashdemons/playerheads/compatibility/CompatibilityProvider.html#getOwningPlayerDirect-org.bukkit.inventory.meta.SkullMeta-">com.github.crashdemons.playerheads.compatibility.CompatibilityProvider.getOwningPlayerDirect(SkullMeta)</a>
 <div class="block"><span class="deprecationComment">This method does not include extended checking, you probably dont want the direct method.</span></div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colOne"><a href="org/shininet/bukkit/playerheads/events/HeadRollEvent.html#getSlimeModifier--">org.shininet.bukkit.playerheads.events.HeadRollEvent.getSlimeModifier()</a>
 <div class="block"><span class="deprecationComment">use getModifier("slime") instead</span></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colOne"><a href="com/github/crashdemons/playerheads/api/PlayerHeads.html#setApiInstance-com.github.crashdemons.playerheads.api.PlayerHeadsAPI-">com.github.crashdemons.playerheads.api.PlayerHeads.setApiInstance(PlayerHeadsAPI)</a>
 <div class="block"><span class="deprecationComment">This method is intended only for internal PlayerHeads use.</span></div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colOne"><a href="org/shininet/bukkit/playerheads/events/HeadRollEvent.html#setModifier-java.lang.String-org.shininet.bukkit.playerheads.events.modifiers.DropRateModifier-">org.shininet.bukkit.playerheads.events.HeadRollEvent.setModifier(String, DropRateModifier)</a>
 <div class="block"><span class="deprecationComment">using this method to modify existing modifiers should be
  avoided - use setCustomModifier to note new ones.</span></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colOne"><a href="org/shininet/bukkit/playerheads/events/HeadRollEvent.html#setModifiers-java.util.Map-">org.shininet.bukkit.playerheads.events.HeadRollEvent.setModifiers(Map&lt;String, DropRateModifier&gt;)</a>
 <div class="block"><span class="deprecationComment">using this method to modify existing modifiers should be
  avoided - use setCustomModifier to note new ones.</span></div>
