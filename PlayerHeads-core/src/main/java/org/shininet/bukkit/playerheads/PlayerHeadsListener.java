@@ -187,6 +187,8 @@ class PlayerHeadsListener implements Listener {
         LivingEntity entity = event.getEntity();
         boolean isPlayerDeath = (entity instanceof Player);
         
+        if(entity==null) return;//this won't happen, but just to stop the warnings...
+        
         String permBehead = "canbehead";
         String permAlwaysBehead = "alwaysbehead";
         String configPkOnly = "pkonly";
