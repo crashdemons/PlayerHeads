@@ -17,6 +17,7 @@ public enum DropRateModifierType {
     
     /**
      * adds a VALUE*droprate to the droprate. This is equivalent to a multiplier of 1+VALUE. Positive values increase droprate by a fraction, negative values will reduuce the droprate by a fraction.
+     * In this way, additive multipliers can be thought of as a delta value.
      */
     ADD_MULTIPLE,
     
