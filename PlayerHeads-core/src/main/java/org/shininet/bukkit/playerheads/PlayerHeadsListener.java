@@ -170,7 +170,6 @@ class PlayerHeadsListener implements Listener {
                 break;
             case SLIME:
             case MAGMA_CUBE:
-                Double slimemodifier=1.0;
                 Entity entity = event.getEntity();
                 if(entity instanceof Slime){
                     int slimeSize = ((Slime) entity).getSize();// 1, 2, 3, 4  (1,2,4 natual with 1 the smallest)
