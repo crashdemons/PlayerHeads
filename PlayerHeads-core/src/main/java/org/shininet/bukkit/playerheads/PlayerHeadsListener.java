@@ -116,6 +116,7 @@ class PlayerHeadsListener implements Listener {
         LivingEntity killer = getKillerEntity(event);
         
         LinkedHashMap<String,DropRateModifier> modifiers = new LinkedHashMap<>();
+        debug("entity death");
 
         if (killer != null) {
             if(killer instanceof Creeper && !(victim instanceof Player)){
@@ -125,8 +126,10 @@ class PlayerHeadsListener implements Listener {
                     
                     if(chargedcreeperBehavior.equals("block") || chargedcreeperBehavior.equals("replace"))
                         event.getDrops().removeIf(isVanillaHead);
-                    if(chargedcreeperBehavior.equals("block") || chargedcreeperBehavior.equals("vanilla"))
+                    if(chargedcreeperBehavior.equals("block") || chargedcreeperBehavior.equals("vanilla")){
+                        debug(" restricted by chargedcreeperbehavior");
                         return;
+                    }
                     modifiers.put("chargedcreeper", new DropRateModifier(DropRateModifierType.MULTIPLY,chargedcreeperModifier));
                 }
             }
@@ -135,7 +138,7 @@ class PlayerHeadsListener implements Listener {
             if(weapon!=null){
                 if(plugin.configFile.getBoolean("requireitem")){
                     String weaponType = weapon.getType().name().toLowerCase();
-                    if(!plugin.configFile.getStringList("requireditems").contains(weaponType)) return;
+                    if(!plugin.configFile.getStringList("requireditems").contains(weaponType)){ debug(" restricted by requireitem"); return;}
                 }
                 double lootingRate = plugin.configFile.getDouble("lootingrate");
                 int lootingLevel = weapon.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS);
@@ -145,17 +148,20 @@ class PlayerHeadsListener implements Listener {
 
         TexturedSkullType skullType = SkullConverter.skullTypeFromEntity(victim);
         if (skullType == null) {
+            debug(" skull type could not be determined"); 
             return;//entity type is one we don't support - don't attempt to handle heads for it.
         }
         String mobDropConfig = skullType.getConfigName();
         Double droprate = plugin.configFile.getDouble(mobDropConfig);
         if (droprate < 0) {
+            debug(" negative droprate configured"); 
             return;//if droprate is <0, don't modify drops
         }
         switch (skullType) {
             case PLAYER:
                 if (plugin.configFile.getBoolean("nerfdeathspam")) {
                     if (deathSpamPreventer.recordEvent(event).isSpam()) {
+                        debug(" restricted as player spam"); 
                         return;
                     }
                 }
@@ -164,8 +170,10 @@ class PlayerHeadsListener implements Listener {
                 String witherskeletonbehavior = plugin.getConfig().getString("witherskeletonbehavior");
                 if(witherskeletonbehavior.equals("block") || witherskeletonbehavior.equals("replace")) 
                     event.getDrops().removeIf(isVanillaHead);
-                if(witherskeletonbehavior.equals("block") || witherskeletonbehavior.equals("vanilla"))
+                if(witherskeletonbehavior.equals("block") || witherskeletonbehavior.equals("vanilla")){
+                    debug(" restricted by witherskeletonbehavior");
                     return;
+                }
                 
                 break;
             case SLIME:
@@ -181,19 +189,30 @@ class PlayerHeadsListener implements Listener {
         doHeadRoll(event, skullType, droprate, modifiers);
     }
     
+    private void debug(String log){
+        //plugin.logger.info(log);
+    }
+    
     private void doHeadRoll(EntityDeathEvent event, TexturedSkullType type, Double droprateOriginal, Map<String,DropRateModifier> modifiers){
         Double dropchanceRand = prng.nextDouble();
         Player killer = event.getEntity().getKiller();
         LivingEntity entity = event.getEntity();
         boolean isPlayerDeath = (entity instanceof Player);
         
-        if(entity==null) return;//this won't happen, but just to stop the warnings...
+        debug("doHeadRoll");
+        if(entity==null){
+            debug(" entity death null");
+            return;
+        }//this won't happen, but just to stop the warnings...
         
-        String permBehead = "canbehead";
-        String permAlwaysBehead = "alwaysbehead";
+        String permBehead = "playerheads.canbehead";
+        String permAlwaysBehead = "playerheads.alwaysbehead";
         String configPkOnly = "pkonly";
         if(isPlayerDeath){
-            if(!((Player) entity).hasPermission("playerheads.canlosehead")) return;//target can't lose head.
+            if(!((Player) entity).hasPermission("playerheads.canlosehead")){
+                debug(" missing perm: canlosehead");
+                return;
+            }//target can't lose head.
         }else{
             permBehead+="mob";
             permAlwaysBehead+="mob";
@@ -202,16 +221,28 @@ class PlayerHeadsListener implements Listener {
 
         boolean killerAlwaysBeheads = false;
         if (killer != null) {//target was killed by a player
-            if (!killer.hasPermission(permBehead)) return;//killer does not have permission to behead this target in any case
+            if (!killer.hasPermission(permBehead)){
+                debug(" missing perm2: "+permBehead);
+                return;
+            }//killer does not have permission to behead this target in any case
             killerAlwaysBeheads = killer.hasPermission(permAlwaysBehead);
         }
         if(killer == null || killer.getUniqueId()==entity.getUniqueId()){//target was killed by non-player, or player killed themself.
-            if (plugin.configFile.getBoolean(configPkOnly)) return;//mobs must only be beheaded by players
+            if (plugin.configFile.getBoolean(configPkOnly)){
+                debug(" restricted by config: "+configPkOnly);
+                return;
+            }//mobs must only be beheaded by players
         }
         
         HeadRollEvent rollEvent = new HeadRollEvent(killer, entity, killerAlwaysBeheads,dropchanceRand, droprateOriginal);
         rollEvent.setModifiers(modifiers);
         rollEvent.recalculateSuccess();
+        
+        debug(" head roll success: "+rollEvent.getDropSuccess());
+        debug("   droprate: "+rollEvent.getOriginalDropRate());
+        debug("   droproll: "+rollEvent.getOriginalDropRoll());
+        debug("   eff droprate: "+rollEvent.getEffectiveDropRate());
+        debug("   eff droproll: "+rollEvent.getEffectiveDropRoll());
 
         plugin.getServer().getPluginManager().callEvent(rollEvent);
         if (!rollEvent.succeeded()) {
