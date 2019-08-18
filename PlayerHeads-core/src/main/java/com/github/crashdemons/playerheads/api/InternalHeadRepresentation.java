@@ -12,47 +12,18 @@ import java.util.UUID;
  *
  * @author crashdemons (crashenator at gmail.com)
  */
-public class InternalHeadRepresentation implements HeadRepresentation{
+public class InternalHeadRepresentation extends HeadRepresentation{
     private final TexturedSkullType internalType;
-    private final String ownerName;
-    private final UUID ownerId;
     public InternalHeadRepresentation(TexturedSkullType type, String ownerName){
-        this.internalType=type;
-        this.ownerName=ownerName;
-        this.ownerId=null;
+        super(type,ownerName);
+        internalType=type;
     }
     public InternalHeadRepresentation(TexturedSkullType type, String ownerName, UUID ownerId){
-        this.internalType=type;
-        this.ownerName=ownerName;
-        this.ownerId=ownerId;
+        super(type,ownerName,ownerId);
+        internalType=type;
     }
 
     public TexturedSkullType getInternalType() {
         return internalType;
-    }
-    
-    @Override
-    public HeadType getType() {
-        return internalType;
-    }
-
-    @Override
-    public String getOwnerName() {
-        return ownerName;
-    }
-
-    @Override
-    public UUID getOwnerId() {
-        return ownerId;
-    }
-    
-    @Override
-    public HeadComparisonResult compare(HeadRepresentation head){
-        boolean typeEquality = this.getType().equals(head.getType());
-        boolean ownerEquality = this.getOwnerId().equals(head.getOwnerId());
-        if(this.getOwnerId()==null || head.getOwnerId()==null){
-            ownerEquality = this.getOwnerName().equals(head.getOwnerName());
-        }
-        return HeadComparisonResult.fromEquality(typeEquality, ownerEquality);
     }
 }
