@@ -182,38 +182,6 @@ public final class SkullManager {
     }
     
     /**
-     * Spawns a skull itemstack using an input spawn string or username.
-     * 
-     * The quantity of heads will be defined by Config.defaultStackSize (usually 1)
-     * @param spawnString the spawn string indicating the type of skull or username indicating the owner of the skull.
-     * @param usevanillaheads Whether to permit vanilla head-items to be used in place of custom playerheads for supported mobs. (if the spawn string is recognized)
-     * @param addLore controls whether any lore text should be added to the head. (currently only applied to custom mobheads and player heads)
-     * @return The skull itemstack desired. If the spawn string is recognized, this will be the corresponding entity's head, otherwise it will be a playerhead for the name supplied.
-     */
-    public static ItemStack spawnSkull(String spawnString, boolean usevanillaheads, boolean addLore){
-        return spawnSkull(spawnString,Config.defaultStackSize,usevanillaheads,addLore);
-    }
-    
-    /**
-     * Spawns a skull itemstack using an input spawn string or username.
-     * @param spawnString the spawn string indicating the type of skull or username indicating the owner of the skull.
-     * @param quantity the number of items to spawn in this stack.
-     * @param usevanillaheads Whether to permit vanilla head-items to be used in place of custom playerheads for supported mobs. (if the spawn string is recognized)
-     * @param addLore controls whether any lore text should be added to the head. (currently only applied to custom mobheads and player heads)
-     * @return The skull itemstack desired. If the spawn string is recognized, this will be the corresponding entity's head, otherwise it will be a playerhead for the name supplied.
-     */
-    public static ItemStack spawnSkull(String spawnString, int quantity, boolean usevanillaheads,boolean addLore){
-        TexturedSkullType type;
-        if(spawnString.isEmpty()) type=TexturedSkullType.PLAYER;
-        else type = TexturedSkullType.getBySpawnName(spawnString);
-        if(type==null){
-            return PlayerSkull(spawnString,quantity,addLore);
-        }else{
-            return MobSkull(type,quantity,usevanillaheads,addLore);
-        }
-    }
-    
-    /**
      * Updates the blockstate of a head.
      * 
      * Originally this method also updated legacy username-based skulls to the correct owner - currently it only updates the blockstate.
@@ -235,18 +203,4 @@ public final class SkullManager {
         */
         skullState.update();
     }
-
-    /*
-    //reinvestigate these approaches as they're preferred to the deprecated username method.
-    //these do not properly update head skin in server testing.
-    public static ItemStack PlayerSkull(UUID owner){
-        return PlayerSkull(owner,Config.defaultStackSize);
-    }
-    
-    public static ItemStack PlayerSkull(UUID owner, int quantity){
-        OfflinePlayer op = Bukkit.getOfflinePlayer(owner);
-        //this is great but it doesn't update the texture
-        return PlayerSkull(op,quantity);
-    }
-    */
 }
