@@ -125,6 +125,15 @@ public class ApiProvider implements PlayerHeadsAPI {
     }
     
     @Override
+    public HeadRepresentation getHeadRepresentationFromSpawnString(String spawnName, boolean forceOwner){
+        TexturedSkullType type = TexturedSkullType.getBySpawnName(spawnName);
+        if(spawnName.startsWith("#")) spawnName="";
+        if(type==null) type=TexturedSkullType.PLAYER;
+        if(type==TexturedSkullType.PLAYER) return getHeadRepresentation(spawnName,forceOwner);
+        return new InternalHeadRepresentation(type,"",type.getOwner());
+    }
+    
+    @Override
     public HeadRepresentation getHeadRepresentation(String username, boolean forceOwner){
         if((!forceOwner) && plugin.configFile.getBoolean("dropboringplayerheads")) return getHeadRepresentationFromBoringPlayerhead();
         return new InternalHeadRepresentation(TexturedSkullType.PLAYER,username);

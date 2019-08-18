@@ -160,6 +160,23 @@ public interface PlayerHeadsAPI {
     
     //5.2.2 API;
     /**
+     * Gets the details (type and owner) of a head for comparison and re-creation purposes the head represented by a 'spawn' string (like #zombie or playername).
+     * This is NOT subject to configuration settings except for 'dropboringplayerheads'
+     * @param spawnName the spawn string (#mobname or username)
+     * @param forceOwner if true, ignore the state of 'dropboringplayerheads' and provide head information for the owner anyway
+     * @return the representation details for the head
+     * @since 5.2.2-SNAPSHOT
+     */
+    public HeadRepresentation getHeadRepresentationFromSpawnString(String spawnName, boolean forceOwner);
+    /**
+     * Gets the details (type and owner) of a head for comparison and re-creation purposes for an entity's head.
+     * This is NOT subject to configuration settings except for 'dropboringplayerheads'
+     * @param e the entity to get the head for
+     * @return the representation details for the head
+     * @since 5.2.2-SNAPSHOT
+     */
+    @Nullable public HeadRepresentation getHeadRepresentation(@NotNull Entity e);
+    /**
      * Gets the details (type and owner) of a head for comparison and re-creation purposes for a user's head.
      * This is NOT subject to configuration settings except for 'dropboringplayerheads'
      * @param username the username to get the head for.
