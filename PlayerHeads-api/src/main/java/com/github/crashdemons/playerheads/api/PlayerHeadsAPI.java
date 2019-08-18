@@ -147,6 +147,18 @@ public interface PlayerHeadsAPI {
     
     
     /**
+     * Gets a head item based on the 'spawn' string used in PlayerHeads (like #zombie or playername).
+     * This head is provided subject to configuration settings like 'dropboringplayerheads' and 'addlore'
+     * @param spawnName the spawn string (#mobname or username)
+     * @param num the number of heads to provide in the stack
+     * @param forceOwner if true, ignore the state of 'dropboringplayerheads' and provide head information for the owner anyway
+     * @return the stack of heads, or null
+     */
+    @Nullable
+    public ItemStack getHeadItemFromSpawnString(String spawnName, int num, boolean forceOwner);
+    
+    
+    /**
      * Gets an instance of a class that provides many useful crossversion PlayerHeads capabilities that would normally be version-specific.
      * For example: viewing and editing ownership information for skinned playerheads.
      * These may be more subject to change than other API methods, so you should avoid them except when necessary.

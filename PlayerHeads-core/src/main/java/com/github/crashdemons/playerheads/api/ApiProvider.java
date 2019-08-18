@@ -125,6 +125,15 @@ public class ApiProvider implements PlayerHeadsAPI {
     }
     
     @Override
+    public ItemStack getHeadItemFromSpawnString(String spawnName, int num, boolean forceOwner){
+       HeadRepresentation hr = getHeadRepresentationFromSpawnString(spawnName, forceOwner);
+        if(hr==null) throw new IllegalArgumentException("Unable to retrieve head-representation from spawn string");
+        ItemStack stack = getHeadItem(hr, num);
+        if(stack==null) throw new IllegalArgumentException("unable to get item from head representation");
+        return stack;
+    }
+    
+    @Override
     public HeadRepresentation getHeadRepresentationFromSpawnString(String spawnName, boolean forceOwner){
         TexturedSkullType type = TexturedSkullType.getBySpawnName(spawnName);
         if(spawnName.startsWith("#")) spawnName="";
