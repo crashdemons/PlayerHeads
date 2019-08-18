@@ -34,6 +34,7 @@ public class DropManager {
     }
     public static void dropItems(PlayerHeads plugin,  List<ItemStack> drops, final Location location, final boolean naturally,  final boolean delayDrop, final long tickDelay){
         for(final ItemStack drop : drops){
+            if(drop==null) continue;
             if(delayDrop){
                 plugin.scheduleSync(new Runnable(){
                     @Override
