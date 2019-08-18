@@ -131,8 +131,6 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
         int quantity = Config.defaultStackSize;
         boolean isConsoleSender = !(sender instanceof Player);
 
-        boolean usevanillaskull = plugin.configFile.getBoolean("dropvanillaheads");
-
         if (isConsoleSender) {
             if ((args.length != 3) && (args.length != 4)) {
                 formatMsg(sender, scope, Lang.SYNTAX + Lang.COLON_SPACE + scope + Lang.SPACE + Lang.OPT_HEADNAME_REQUIRED + Lang.SPACE + Lang.OPT_RECEIVER_REQUIRED + Lang.SPACE + Lang.OPT_AMOUNT_OPTIONAL);
@@ -152,6 +150,7 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
                 try {
                     quantity = Integer.parseInt(args[3]);
                 } catch (NumberFormatException ignored) {
+                    //quantity not accepted format - don't do anything by default - use default amount.
                 }
             }
             reciever = plugin.getServer().getPlayer(args[2]);
@@ -176,8 +175,7 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
         if (plugin.configFile.getBoolean("fixcase")) {
             skullOwner = fixcase(skullOwner);
         }
-        boolean addLore = plugin.configFile.getBoolean("addlore");
-        if (InventoryManager.addHead(reciever, skullOwner, quantity, usevanillaskull, addLore)) {
+        if (InventoryManager.addHead(reciever, skullOwner, quantity)) {
             formatMsg(sender, scope, Lang.SPAWNED_HEAD, skullOwner);
         } else {
             formatMsg(sender, scope, Lang.ERROR_INV_FULL);
@@ -186,9 +184,6 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
     }
 
     private boolean onCommandRename(CommandSender sender, Command cmd, String label, String[] args, String scope) {
-
-        boolean usevanillaskull = plugin.configFile.getBoolean("dropvanillaheads");
-
         if (!(sender instanceof Player)) {
             formatMsg(sender, scope, Lang.ERROR_CONSOLE_SPAWN);
             return true;
@@ -251,10 +246,12 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
             formatMsg(sender, scope, Lang.ERROR_PERMISSION);
             return true;
         }
+        
+        skullOutput = PlayerHeads.instance.api.getHeadItemFromSpawnString(spawnName, skullInput.getAmount(), false);
+        if(skullOutput==null){
+            return false;//no message available - head not spawned.
+        }
 
-        boolean addLore = plugin.configFile.getBoolean("addlore");
-        skullOutput = SkullManager.spawnSkull(spawnName, usevanillaskull, addLore);
-        skullOutput.setAmount(skullInput.getAmount());
         Compatibility.getProvider().setItemInMainHand((Player) sender, skullOutput);//.getEquipment().setItemInMainHand(skullOutput);
         formatMsg(sender, scope, Lang.RENAMED_HEAD);
         return true;

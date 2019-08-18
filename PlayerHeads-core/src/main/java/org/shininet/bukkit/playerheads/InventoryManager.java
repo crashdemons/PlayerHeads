@@ -6,7 +6,10 @@
 package org.shininet.bukkit.playerheads;
 
 import com.github.crashdemons.playerheads.SkullManager;
+import com.github.crashdemons.playerheads.TexturedSkullType;
+import com.github.crashdemons.playerheads.api.HeadRepresentation;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 /**
@@ -15,6 +18,31 @@ import org.bukkit.inventory.PlayerInventory;
  */
 public final class InventoryManager {
     private InventoryManager(){}
+    
+    private static boolean addItem(Player player, ItemStack stack){
+        PlayerInventory inv = player.getInventory();
+        int firstEmpty = inv.firstEmpty();
+        if (firstEmpty == -1) {
+            return false;
+        } else {
+            inv.setItem(firstEmpty, stack);
+            return true;
+        }
+    }
+    
+    private static ItemStack getHead(Player player, String spawnName, int quantity){
+        ItemStack stack = PlayerHeads.instance.api.getHeadItemFromSpawnString(spawnName, quantity, false);
+        if(stack==null) throw new IllegalArgumentException("unable to get item from head representation");
+        return stack;
+    }
+    
+    public static boolean addHead(Player player, String spawnName, int quantity){
+        HeadRepresentation hr = PlayerHeads.instance.api.getHeadRepresentationFromSpawnString(spawnName, false);
+        if(hr==null) throw new IllegalArgumentException("Unable to retrieve head-representation from spawn string");
+        ItemStack stack = PlayerHeads.instance.api.getHeadItem(hr, quantity);
+        if(stack==null) throw new IllegalArgumentException("unable to get item from head representation");
+        return addItem(player, stack);
+    }
     
     /**
      * Adds a head-item to a player's inventory.
@@ -42,13 +70,6 @@ public final class InventoryManager {
      * @return true: the head was added successfully. false: there was no empty inventory slot to add the item.
      */
     public static boolean addHead(Player player, String skullOwner, int quantity, boolean usevanillaskulls,boolean addLore) {
-        PlayerInventory inv = player.getInventory();
-        int firstEmpty = inv.firstEmpty();
-        if (firstEmpty == -1) {
-            return false;
-        } else {
-            inv.setItem(firstEmpty, SkullManager.spawnSkull(skullOwner, quantity, usevanillaskulls, addLore));
-            return true;
-        }
+        return addItem(player, SkullManager.spawnSkull(skullOwner, quantity, usevanillaskulls, addLore));
     }
 }
