@@ -23,6 +23,16 @@ import com.github.crashdemons.playerheads.compatibility.SkullDetails;
 public enum TexturedSkullType implements HeadType {
 
     //Entity skull settings - big thanks to MagmaVoid_ for finding all of these textures.
+    
+    /**
+     * Reserved Skull Type used for indicating custom plugin-added heads for support in PH.
+     * This does not include custom heads that are not registered with PlayerHeads.
+     */
+    CUSTOM(
+            "6c096114-827e-493c-8657-49cf8934f7e0",
+            "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWNjNThjYjU1YjFhMTFlNmQ4OGMyZDRkMWE2MzY2YzIzODg3ZGVlMjYzMDRiZGE0MTJjNGE1MTgyNWYxOTkifX19"
+    ),
+    
     /**
      * Skull Type used for indicating unknown playerheads.
      */

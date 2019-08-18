@@ -233,6 +233,8 @@ public final class Lang {
     public static String HEAD_SPAWN_DROWNED;
     public static String HEAD_DOLPHIN;
     public static String HEAD_SPAWN_DOLPHIN;
+    public static String HEAD_CUSTOM;
+    public static String HEAD_SPAWN_CUSTOM;
     
     @Deprecated
     /**
