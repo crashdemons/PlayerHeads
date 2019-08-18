@@ -78,7 +78,7 @@ public class ApiProvider implements PlayerHeadsAPI {
 
     @Override
     public ItemStack getHeadItem(HeadType h, int num) {
-        return getHeadItem(new InternalHeadRepresentation(headFromApiHead(h),""),num);
+        return getHeadItem(new HeadRepresentation(headFromApiHead(h),""),num);
     }
 
     @Override
@@ -120,7 +120,7 @@ public class ApiProvider implements PlayerHeadsAPI {
         if(type==TexturedSkullType.PLAYER){
             return getHeadRepresentation(e.getName(),false);
         }else{
-            return new InternalHeadRepresentation(type,"",type.getOwner());
+            return new HeadRepresentation(type,"",type.getOwner());
         }
     }
     
@@ -139,22 +139,22 @@ public class ApiProvider implements PlayerHeadsAPI {
         if(spawnName.startsWith("#")) spawnName="";
         if(type==null) type=TexturedSkullType.PLAYER;
         if(type==TexturedSkullType.PLAYER) return getHeadRepresentation(spawnName,forceOwner);
-        return new InternalHeadRepresentation(type,"",type.getOwner());
+        return new HeadRepresentation(type,"",type.getOwner());
     }
     
     @Override
     public HeadRepresentation getHeadRepresentation(String username, boolean forceOwner){
         if((!forceOwner) && plugin.configFile.getBoolean("dropboringplayerheads")) return getHeadRepresentationFromBoringPlayerhead();
-        return new InternalHeadRepresentation(TexturedSkullType.PLAYER,username);
+        return new HeadRepresentation(TexturedSkullType.PLAYER,username);
     }
     @Override
     public HeadRepresentation getHeadRepresentation(OfflinePlayer player, boolean forceOwner){
         if((!forceOwner) && plugin.configFile.getBoolean("dropboringplayerheads")) return getHeadRepresentationFromBoringPlayerhead();
-        return new InternalHeadRepresentation(TexturedSkullType.PLAYER,player.getName(),player.getUniqueId());
+        return new HeadRepresentation(TexturedSkullType.PLAYER,player.getName(),player.getUniqueId());
     }
     @Override
     public HeadRepresentation getHeadRepresentationFromBoringPlayerhead(){
-        return new InternalHeadRepresentation(TexturedSkullType.PLAYER,"",null);
+        return new HeadRepresentation(TexturedSkullType.PLAYER,"",null);
     }
     @Override
     public HeadRepresentation getHeadRepresentation(ItemStack stack){
@@ -165,7 +165,7 @@ public class ApiProvider implements PlayerHeadsAPI {
         if(!(meta instanceof SkullMeta)) return null;
         OfflinePlayer owner = Compatibility.getProvider().getOwningPlayer((SkullMeta) meta);
         String username = Compatibility.getProvider().getOwner((SkullMeta) meta);
-        return new InternalHeadRepresentation(type,username,owner.getUniqueId());
+        return new HeadRepresentation(type,username,owner.getUniqueId());
         
     }
     @Override
@@ -177,7 +177,7 @@ public class ApiProvider implements PlayerHeadsAPI {
         if(!(state instanceof Skull)) return null;
         OfflinePlayer owner = Compatibility.getProvider().getOwningPlayer((Skull) state);
         String username = Compatibility.getProvider().getOwner((Skull) state);
-        return new InternalHeadRepresentation(type,username,owner.getUniqueId());
+        return new HeadRepresentation(type,username,owner.getUniqueId());
     }
     @Override
     public ItemStack getHeadItem(HeadRepresentation head, int num){

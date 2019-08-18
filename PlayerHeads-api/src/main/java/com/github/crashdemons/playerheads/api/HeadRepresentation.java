@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
  * @author crashdemons (crashenator at gmail.com)
  * @since 5.2.2-SNAPSHOT
  */
-public abstract class HeadRepresentation {
+public class HeadRepresentation {
 
     //@Nullable public abstract UUID getOwnerId();
     //@Nullable public abstract String getOwnerName();
