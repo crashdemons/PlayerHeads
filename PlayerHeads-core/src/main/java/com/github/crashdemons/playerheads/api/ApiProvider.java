@@ -193,4 +193,9 @@ public class ApiProvider implements PlayerHeadsAPI {
         }
     }
     
+    @Override
+    public HeadType getCustomHeadType(){
+        return TexturedSkullType.CUSTOM;
+    }
+    
 }

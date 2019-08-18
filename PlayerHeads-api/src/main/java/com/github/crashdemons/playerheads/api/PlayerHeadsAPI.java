@@ -234,4 +234,5 @@ public interface PlayerHeadsAPI {
      * @since 5.2.2-SNAPSHOT
      */
     @NotNull public ItemStack getHeadItem(HeadRepresentation head, int num);
+    @NotNull public HeadType getCustomHeadType();
 }
