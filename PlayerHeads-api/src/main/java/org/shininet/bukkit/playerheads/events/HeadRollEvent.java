@@ -144,6 +144,7 @@ public class HeadRollEvent extends Event {
      * @param dropSuccess whether the droproll was determined to be initially a
      * successful roll.
      */
+    @Deprecated
     public HeadRollEvent(final Entity killer, final Entity target, final boolean killerAlwaysBeheads, final double lootingModifier, final double slimeModifier, final double chargedCreeperModifier, final double originalDropRoll, final double effectiveDropRoll, final double originalDropRate, final double effectiveDropRate, final boolean dropSuccess) {
 
         this.originalDropRate = originalDropRate;
