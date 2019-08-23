@@ -5,6 +5,7 @@
  */
 package com.github.crashdemons.playerheads.api;
 
+import com.github.crashdemons.playerheads.api.extensions.ExtensionManager;
 import com.github.crashdemons.playerheads.SkullConverter;
 import com.github.crashdemons.playerheads.SkullManager;
 import com.github.crashdemons.playerheads.TexturedSkullType;
@@ -126,7 +127,7 @@ public class ApiProvider implements PlayerHeadsAPI {
     
     @Override
     public ItemStack getHeadItemFromSpawnString(String spawnName, int num, boolean forceOwner){
-       HeadRepresentation hr = getHeadRepresentationFromSpawnString(spawnName, forceOwner);
+        HeadRepresentation hr = getHeadRepresentationFromSpawnString(spawnName, forceOwner);
         if(hr==null) throw new IllegalArgumentException("Unable to retrieve head-representation from spawn string");
         ItemStack stack = getHeadItem(hr, num);
         if(stack==null) throw new IllegalArgumentException("unable to get item from head representation");
@@ -135,6 +136,8 @@ public class ApiProvider implements PlayerHeadsAPI {
     
     @Override
     public HeadRepresentation getHeadRepresentationFromSpawnString(String spawnName, boolean forceOwner){
+        HeadRepresentation hr = ExtensionManager.getHeadBySpawnString(spawnName);
+        if(hr!=null) return hr;
         TexturedSkullType type = TexturedSkullType.getBySpawnName(spawnName);
         if(spawnName.startsWith("#")) spawnName="";
         if(type==null) type=TexturedSkullType.PLAYER;
@@ -150,6 +153,8 @@ public class ApiProvider implements PlayerHeadsAPI {
     @Override
     public HeadRepresentation getHeadRepresentation(OfflinePlayer player, boolean forceOwner){
         if((!forceOwner) && plugin.configFile.getBoolean("dropboringplayerheads")) return getHeadRepresentationFromBoringPlayerhead();
+        HeadRepresentation hr = ExtensionManager.getHeadByOwner(player.getUniqueId());
+        if(hr!=null) return hr;
         return new HeadRepresentation(TexturedSkullType.PLAYER,player.getName(),player.getUniqueId());
     }
     @Override
@@ -165,6 +170,8 @@ public class ApiProvider implements PlayerHeadsAPI {
         if(!(meta instanceof SkullMeta)) return null;
         OfflinePlayer owner = Compatibility.getProvider().getOwningPlayer((SkullMeta) meta);
         String username = Compatibility.getProvider().getOwner((SkullMeta) meta);
+        HeadRepresentation hr = ExtensionManager.getHeadByOwner(owner.getUniqueId());
+        if(hr!=null) return hr;
         return new HeadRepresentation(type,username,owner.getUniqueId());
         
     }
@@ -177,6 +184,8 @@ public class ApiProvider implements PlayerHeadsAPI {
         if(!(state instanceof Skull)) return null;
         OfflinePlayer owner = Compatibility.getProvider().getOwningPlayer((Skull) state);
         String username = Compatibility.getProvider().getOwner((Skull) state);
+        HeadRepresentation hr = ExtensionManager.getHeadByOwner(owner.getUniqueId());
+        if(hr!=null) return hr;
         return new HeadRepresentation(type,username,owner.getUniqueId());
     }
     @Override

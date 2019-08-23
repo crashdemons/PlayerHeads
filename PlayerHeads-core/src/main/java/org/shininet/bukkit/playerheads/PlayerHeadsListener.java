@@ -158,6 +158,8 @@ class PlayerHeadsListener implements Listener {
             return;//if droprate is <0, don't modify drops
         }
         switch (skullType) {
+            case CUSTOM:
+                
             case PLAYER:
                 if (plugin.configFile.getBoolean("nerfdeathspam")) {
                     if (deathSpamPreventer.recordEvent(event).isSpam()) {

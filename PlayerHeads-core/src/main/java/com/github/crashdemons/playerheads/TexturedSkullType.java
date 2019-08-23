@@ -1,5 +1,7 @@
 package com.github.crashdemons.playerheads;
 
+import com.github.crashdemons.playerheads.api.extensions.ExtensionManager;
+import com.github.crashdemons.playerheads.api.HeadRepresentation;
 import com.github.crashdemons.playerheads.compatibility.CompatibleSkullMaterial;
 import java.util.UUID;
 import org.shininet.bukkit.playerheads.Lang;
@@ -411,6 +413,8 @@ public enum TexturedSkullType implements HeadType {
      * @return if found: a TexturedSkullType, otherwise: null.
      */
     public static TexturedSkullType get(UUID owner) {
+        HeadRepresentation hr = ExtensionManager.getHeadByOwner(owner);
+        if(hr!=null) return TexturedSkullType.CUSTOM;
         return Mappings.skullsById.get(owner);
     }
 
@@ -428,6 +432,8 @@ public enum TexturedSkullType implements HeadType {
         if (spawnname.isEmpty()) {
             return null;
         }
+        HeadRepresentation hr = ExtensionManager.getHeadBySpawnString(spawnname);
+        if(hr!=null) return TexturedSkullType.CUSTOM;
         for (TexturedSkullType type : TexturedSkullType.values()) {
             if (type.getSpawnName().equalsIgnoreCase(spawnname)) {
                 return type;
