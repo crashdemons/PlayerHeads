@@ -159,6 +159,7 @@ delaywitherdrop: false
 #sets the time to delay plugin-added drops in miliseconds (NOTE: the minimum resolution is multiples of 50ms ~ 1tick)
 delaywitherdropms: 250
 
+customdroprate: 1.0
 #------mob rates------#
 
 creeperdroprate: 0.005
