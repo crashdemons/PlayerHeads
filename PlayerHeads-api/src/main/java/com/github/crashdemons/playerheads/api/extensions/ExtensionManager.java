@@ -19,7 +19,7 @@ import org.bukkit.plugin.Plugin;
 @Deprecated
 public final class ExtensionManager {
 
-    private static final ConcurrentHashMap<CustomHeadExtension, Plugin> HEAD_EXTENSIONS=  new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<CustomHeadExtension, Plugin> HEAD_EXTENSIONS = new ConcurrentHashMap<>();
 
     private static final class HeadMappings {
 
@@ -60,10 +60,16 @@ public final class ExtensionManager {
     }
 
     public static CustomHeadRepresentation getHeadByOwner(final UUID owner) {
+        if (owner == null) {
+            return null;
+        }
         return HeadMappings.FROM_UUID.get(owner);
     }
 
     public static CustomHeadRepresentation getHeadBySpawnString(final String spawnName) {
+        if (spawnName == null) {
+            return null;
+        }
         return HeadMappings.FROM_SPAWN_STRING.get(spawnName);
     }
 }

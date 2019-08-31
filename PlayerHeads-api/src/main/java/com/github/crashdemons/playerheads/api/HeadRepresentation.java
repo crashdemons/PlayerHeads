@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
  * equivalence.
  *
  * @author crashdemons (crashenator at gmail.com)
- * @since 5.2.2-SNAPSHOT
+ * @since 5.3.0-SNAPSHOT
  */
 public class HeadRepresentation {
 

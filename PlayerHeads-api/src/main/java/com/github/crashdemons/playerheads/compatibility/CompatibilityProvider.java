@@ -270,7 +270,7 @@ public interface CompatibilityProvider {
      * @param getShooter whether to allow determining the owner if the entity was a projectile (requires getMobKillers to be enabled)
      * @param getTameOwner whether to allow determining the owner if the entity was a tamed animal (requires getMobKillers to be enabled)
      * @return the entity that caused the death, or null.
-     * @since 5.2.2-SNAPSHOT
+     * @since 5.3.0-SNAPSHOT
      */
     public LivingEntity getKillerEntity(EntityDeathEvent event, boolean getMobKillers, boolean getShooter, boolean getTameOwner);
     
@@ -280,7 +280,7 @@ public interface CompatibilityProvider {
      * @param getShooter whether to allow determining the owner if the entity was a projectile.
      * @param getTameOwner whether to allow determining the owner if the entity was a tamed animal.
      * @return the "owner" of the entity, or the original entity itself.
-     * @since 5.2.2-SNAPSHOT
+     * @since 5.3.0-SNAPSHOT
      */
     public Entity getEntityOwningEntity(Entity entity, boolean getShooter, boolean getTameOwner);
 }

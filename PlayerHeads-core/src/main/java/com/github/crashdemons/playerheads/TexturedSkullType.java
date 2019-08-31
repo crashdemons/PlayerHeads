@@ -413,12 +413,14 @@ public enum TexturedSkullType implements HeadType {
      * @return if found: a TexturedSkullType, otherwise: null.
      */
     public static TexturedSkullType get(UUID owner) {
+        if(owner==null) return null;
         HeadRepresentation hr = ExtensionManager.getHeadByOwner(owner);
         if(hr!=null) return TexturedSkullType.CUSTOM;
         return Mappings.skullsById.get(owner);
     }
 
     public static TexturedSkullType get(CompatibleSkullMaterial mat) {
+        if(mat==null) return null;
         return Mappings.skullsByMaterial.get(mat);
     }
 
@@ -429,6 +431,7 @@ public enum TexturedSkullType implements HeadType {
      * @return if found: a TexturedSkullType, otherwise: null.
      */
     public static TexturedSkullType getBySpawnName(String spawnname) {
+        if(spawnname==null) return null;
         if (spawnname.isEmpty()) {
             return null;
         }

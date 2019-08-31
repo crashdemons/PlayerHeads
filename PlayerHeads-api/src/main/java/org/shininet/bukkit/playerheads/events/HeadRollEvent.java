@@ -53,7 +53,7 @@ public class HeadRollEvent extends Event {
      *
      * 5.2.2+ API
      *
-     * @since 5.2.2-SNAPSHOT
+     * @since 5.3.0-SNAPSHOT
      *
      * @param killer the Entity beheading another
      * @param target the Entity being beheaded
@@ -84,7 +84,7 @@ public class HeadRollEvent extends Event {
      *
      * 5.2.2+ API
      *
-     * @since 5.2.2-SNAPSHOT
+     * @since 5.3.0-SNAPSHOT
      *
      * @param killer the Entity beheading another
      * @param target the Entity being beheaded
@@ -242,7 +242,7 @@ public class HeadRollEvent extends Event {
      * Gets the list of modifiers to the effective droprate. This map will be in
      * order that the modifiers are applied.
      *
-     * @since 5.2.2-SNAPSHOT
+     * @since 5.3.0-SNAPSHOT
      * @return map containing the droprate modifiers by name.
      */
     @NotNull
@@ -256,7 +256,7 @@ public class HeadRollEvent extends Event {
      * considered by this method, only the two effective values. Note: if
      * killerAlwaysBeheads is enabled, the effective droproll will be set to 0.
      *
-     * @since 5.2.2-SNAPSHOT
+     * @since 5.3.0-SNAPSHOT
      */
     public void applyDropRate() {
         if (killerAlwaysBeheads) {
@@ -271,7 +271,7 @@ public class HeadRollEvent extends Event {
      * droprate, if you want to retain the original values, you should copy them
      * before calling this method. Success is not updated by this method.
      *
-     * @since 5.2.2-SNAPSHOT
+     * @since 5.3.0-SNAPSHOT
      */
     public void applyModifiers() {
         effectiveDropRate = originalDropRate;
@@ -286,7 +286,7 @@ public class HeadRollEvent extends Event {
      * droprate, if you want to retain the original values, you should copy them
      * before calling this method.
      *
-     * @since 5.2.2-SNAPSHOT
+     * @since 5.3.0-SNAPSHOT
      */
     public void recalculateSuccess() {
         applyModifiers();
@@ -299,7 +299,7 @@ public class HeadRollEvent extends Event {
      * courtesy to other plugins at this point. This method can retrieve both
      * internal and custom plugin modifiers (if the prefix is included).
      *
-     * @since 5.2.2-SNAPSHOT
+     * @since 5.3.0-SNAPSHOT
      * @param modifierName the name of the modifier
      * @return the value of the modifier, or null if it is not present.
      */
@@ -316,7 +316,7 @@ public class HeadRollEvent extends Event {
      *
      * @deprecated using this method to modify existing modifiers should be
      * avoided - use setCustomModifier to note new ones.
-     * @since 5.2.2-SNAPSHOT
+     * @since 5.3.0-SNAPSHOT
      * @param modifierName the name of the modifier to set.
      * @param value the value of the modifier to set
      */
@@ -332,7 +332,7 @@ public class HeadRollEvent extends Event {
      *
      * @deprecated using this method to modify existing modifiers should be
      * avoided - use setCustomModifier to note new ones.
-     * @since 5.2.2-SNAPSHOT
+     * @since 5.3.0-SNAPSHOT
      * @param entries the modifiers to set
      */
     public void setModifiers(final Map<String, DropRateModifier> entries) {
@@ -344,7 +344,7 @@ public class HeadRollEvent extends Event {
      * Constructs the internal name of a custom droprate modifier, provided the
      * name of the plugin and modifier.
      *
-     * @since 5.2.2-SNAPSHOT
+     * @since 5.3.0-SNAPSHOT
      * @param pluginName The name of the plugin that added the modifier
      * @param modifierName The name of the modifier
      * @return the internal name of the modifier;
@@ -361,7 +361,7 @@ public class HeadRollEvent extends Event {
      * depending on your plugin's name.<br>
      * Note: new modifies are generally applied AFTER other modifiers<br>
      *
-     * @since 5.2.2-SNAPSHOT
+     * @since 5.3.0-SNAPSHOT
      * @param yourPlugin the plugin adding the modifier
      * @param modifierName the name of the modifier, excluding any prefix
      * @param modifierValue the value of the modifier
@@ -377,7 +377,7 @@ public class HeadRollEvent extends Event {
      * courtesy to other plugins at this point. Note: the name of the modifier
      * will be prepended with "PluginName:" depending on your plugin's name.
      *
-     * @since 5.2.2-SNAPSHOT
+     * @since 5.3.0-SNAPSHOT
      * @param yourPlugin the plugin which added the modifier
      * @param modifierName the name of the modifier, excluding any prefix
      * @return the value of the modifier, or the null if it is not found.
@@ -392,7 +392,7 @@ public class HeadRollEvent extends Event {
      * courtesy to other plugins at this point. Note: the name of the modifier
      * will be prepended with "PluginName:" depending on your plugin's name.
      *
-     * @since 5.2.2-SNAPSHOT
+     * @since 5.3.0-SNAPSHOT
      * @param yourPluginName the plugin name which added the modifier
      * @param modifierName the name of the modifier, excluding any prefix
      * @return the value of the modifier, or the null if it is not found.
@@ -506,7 +506,7 @@ public class HeadRollEvent extends Event {
      * not impact the success value or calculations unless applyDropRate() or
      * recalculateSuccess() is called.
      *
-     * @since 5.2.2-SNAPSHOT
+     * @since 5.3.0-SNAPSHOT
      * @param effectiveRoll the value between 0.0 and 1.0 to use as the drop
      * roll.
      */
@@ -519,7 +519,7 @@ public class HeadRollEvent extends Event {
      * for indication purposes to other plugins, and will be overwritten by
      * apply and recalculate methods.
      *
-     * @since 5.2.2-SNAPSHOT
+     * @since 5.3.0-SNAPSHOT
      * @param effectiveRate the effective droprate/fractional-chance value to set (0.0-1.0 inclusive)
      */
     public void setEffectiveDropRate(final double effectiveRate) {
