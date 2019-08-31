@@ -28,13 +28,13 @@ public class HeadRepresentation {
     private final String ownerName;
     private final UUID ownerId;
 
-    public HeadRepresentation(HeadType type, String ownerName) {
+    public HeadRepresentation(final HeadType type, final String ownerName) {
         this.type = type;
         this.ownerName = ownerName;
         this.ownerId = null;
     }
 
-    public HeadRepresentation(HeadType type, String ownerName, UUID ownerId) {
+    public HeadRepresentation(final HeadType type, final String ownerName, final UUID ownerId) {
         this.type = type;
         this.ownerName = ownerName;
         this.ownerId = ownerId;
@@ -56,7 +56,7 @@ public class HeadRepresentation {
     }
 
     @NotNull
-    public HeadComparisonResult compare(HeadRepresentation head) {
+    public HeadComparisonResult compare(final HeadRepresentation head) {
         boolean typeEquality = this.getType().equals(head.getType());
         boolean ownerEquality = this.getOwnerId().equals(head.getOwnerId());
         if (this.getOwnerId() == null || head.getOwnerId() == null) {

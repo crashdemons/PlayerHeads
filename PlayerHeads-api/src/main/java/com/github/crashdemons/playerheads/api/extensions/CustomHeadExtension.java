@@ -15,11 +15,13 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Interface defining methods for identifying and configuring custom heads you are registering.
  * @author crashdemons (crashenator at gmail.com)
+ * @deprecated Draft API - not implemented yet.
  */
+@Deprecated
 public interface CustomHeadExtension {
-    public boolean isHandledHead(HeadRepresentation hr);
-    @Nullable public HeadRepresentation identifyHead(Entity e);
-    @Nullable public HeadRepresentation identifyHead(ItemStack s);
-    @Nullable public HeadRepresentation identifyHead(BlockState s);
-    @NotNull public double getDropRate(CustomHeadRepresentation hr);
+    public boolean isHandledHead(final HeadRepresentation hr);
+    @Nullable public HeadRepresentation identifyHead(final Entity e);
+    @Nullable public HeadRepresentation identifyHead(final ItemStack s);
+    @Nullable public HeadRepresentation identifyHead(final BlockState s);
+    @NotNull public double getDropRate(final CustomHeadRepresentation hr);
 }
