@@ -7,7 +7,6 @@ package com.github.crashdemons.playerheads;
 
 import com.github.crashdemons.playerheads.testutils.Mocks;
 import com.github.crashdemons.playerheads.testutils.TestOutput;
-import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import com.github.crashdemons.playerheads.compatibility.CompatibleSkullMaterial;
 //import com.github.crashdemons.playerheads.compatibility.craftbukkit_1_13.Provider;
 import java.util.UUID;
@@ -19,7 +18,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -232,6 +230,26 @@ public class TexturedSkullTypeTest {
         result = instance.hasDedicatedItem();
         assertEquals(expResult, result);
         
+    }
+
+    @Test
+    public void test_1_15_preparations() {
+        out.println("test 1.15 mob support preparations");
+        
+        String mobs[]={
+            "BEE",
+        };
+        for(String mob : mobs){
+            out.println("   testing for "+mob);
+            TexturedSkullType type;
+            try{
+                type = TexturedSkullType.valueOf(mob);
+            }catch(Exception e){
+                type = null;
+            }
+            out.println("      "+type);
+            assertNotNull(type);
+        }        
     }
     
     @Test
