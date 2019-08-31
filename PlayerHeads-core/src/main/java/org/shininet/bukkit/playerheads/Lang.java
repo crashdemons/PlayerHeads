@@ -251,8 +251,14 @@ public final class Lang {
     public static String HEAD_SPAWN_RAVAGER;
     public static String HEAD_SPAWN_WANDERING_TRADER;
     public static String HEAD_SPAWN_TRADER_LLAMA;
-
     
+    //provisional 1.15 entry - subject to change
+    @Deprecated
+    public static String HEAD_BEE;
+    //provisional 1.15 entry - subject to change
+    @Deprecated
+    public static String HEAD_SPAWN_BEE;
+
     public static String HEAD_ARMOR_STAND;
     public static String HEAD_GIANT;
     public static String HEAD_SPAWN_ARMOR_STAND;
