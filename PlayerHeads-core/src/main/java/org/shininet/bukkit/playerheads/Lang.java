@@ -236,69 +236,22 @@ public final class Lang {
     public static String HEAD_CUSTOM;
     public static String HEAD_SPAWN_CUSTOM;
     
-    @Deprecated
-    /**
-     * 
-     * @deprecated Speculative entry for 1.14 mob before bukkit support - this entry may change unexpectedly!
-     */
+
     public static String HEAD_FOX;
-    
-    /**
-     * 
-     * @deprecated Speculative entry for 1.14 mob before bukkit support - this entry may change unexpectedly!
-     */
-    @Deprecated
     public static String HEAD_CAT;
-    /**
-     * 
-     * @deprecated Speculative entry for 1.14 mob before bukkit support - this entry may change unexpectedly!
-     */
-    @Deprecated
     public static String HEAD_PILLAGER;
-    /**
-     * 
-     * @deprecated Speculative entry for 1.14 mob before bukkit support - this entry may change unexpectedly!
-     */
-    @Deprecated
     public static String HEAD_PANDA;
-    /**
-     * 
-     * @deprecated Speculative entry for 1.14 mob before bukkit support - this entry may change unexpectedly!
-     */
-    @Deprecated
-    public static String HEAD_ILLAGER_BEAST;
-    /**
-     * 
-     * @deprecated Speculative entry for 1.14 mob before bukkit support - this entry may change unexpectedly!
-     */
-    
-    @Deprecated
-    /**
-     * 
-     * @deprecated Speculative entry for 1.14 mob before bukkit support - this entry may change unexpectedly!
-     */
+    public static String HEAD_RAVAGER;
+    public static String HEAD_WANDERING_TRADER;
+    public static String HEAD_TRADER_LLAMA;
     public static String HEAD_SPAWN_FOX;
-    
-    @Deprecated
     public static String HEAD_SPAWN_CAT;
-    /**
-     * 
-     * @deprecated Speculative entry for 1.14 mob before bukkit support - this entry may change unexpectedly!
-     */
-    @Deprecated
     public static String HEAD_SPAWN_PILLAGER;
-    /**
-     * 
-     * @deprecated Speculative entry for 1.14 mob before bukkit support - this entry may change unexpectedly!
-     */
-    @Deprecated
     public static String HEAD_SPAWN_PANDA;
-    /**
-     * 
-     * @deprecated Speculative entry for 1.14 mob before bukkit support - this entry may change unexpectedly!
-     */
-    @Deprecated
-    public static String HEAD_SPAWN_ILLAGER_BEAST;
+    public static String HEAD_SPAWN_RAVAGER;
+    public static String HEAD_SPAWN_WANDERING_TRADER;
+    public static String HEAD_SPAWN_TRADER_LLAMA;
+
     
     public static String HEAD_ARMOR_STAND;
     public static String HEAD_GIANT;
