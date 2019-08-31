@@ -4,7 +4,7 @@
     <groupId>org.shininet.bukkit</groupId>
     <artifactId>PlayerHeads</artifactId>
     <packaging>pom</packaging>
-    <version>5.2.2-SNAPSHOT</version>
+    <version>5.3.0-SNAPSHOT</version>
     <name>PlayerHeads</name>
     
     <!-- sub modules -->
