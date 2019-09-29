@@ -80,6 +80,7 @@ public interface PlayerHeadsAPI {
      * @see #getHeadDrop(org.bukkit.entity.Entity)
      * @return the type of head, or null if there is no viable head (unsupported mob)
      */
+    @Deprecated
     @Nullable
     public HeadType getHeadOf(@NotNull EntityType t);
 
@@ -235,4 +236,27 @@ public interface PlayerHeadsAPI {
      */
     @NotNull public ItemStack getHeadItem(HeadRepresentation head, int num);
     @NotNull public HeadType getCustomHeadType();
+    
+    //5.3 API
+    /**
+     * Gets the details (type and owner) of a head for comparison and re-creation purposes for an entitytype's head.
+     * This is NOT subject to configuration settings except for 'dropboringplayerheads'
+     * @param et the entity-type to get the head for
+     * @return the representation details for the head
+     * @since 5.3.0-SNAPSHOT
+     * @deprecated this may not do exactly what you want because between MC
+     * 1.10-1.13 many entities were separated from variants to their own. Also,
+     * this foregoes any head ownership information beyond the that defined by the type of mob/head.
+     */
+    @Deprecated
+    @Nullable public HeadRepresentation getHeadRepresentation(@NotNull EntityType et);
+    /**
+     * Gets the details (type and owner) of a head for comparison and re-creation purposes for an inbuilt HeadType.
+     * This is NOT subject to configuration settings except for 'dropboringplayerheads'.
+     * Note: this method only converts the information associated with the preset head-type and does not represent any extended mob ownership information.
+     * @param ht the head-type to get the head for
+     * @return the representation details for the head
+     * @since 5.3.0-SNAPSHOT
+     */
+    @Nullable public HeadRepresentation getHeadRepresentation(@NotNull HeadType ht);
 }

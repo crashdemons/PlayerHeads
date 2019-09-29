@@ -5,6 +5,7 @@
  */
 package com.github.crashdemons.playerheads.api.extensions;
 
+import com.github.crashdemons.playerheads.api.HeadDisplayInformation;
 import com.github.crashdemons.playerheads.api.HeadRepresentation;
 import com.github.crashdemons.playerheads.api.HeadType;
 import com.github.crashdemons.playerheads.api.PlayerHeads;
@@ -19,7 +20,7 @@ import java.util.UUID;
  * @since 5.3.0-SNAPSHOT
  */
 @Deprecated
-public class CustomHeadRepresentation extends HeadRepresentation {
+public class CustomHead extends HeadRepresentation implements HeadDisplayInformation {
 
     private final String spawnName;
     private final String displayName;
@@ -40,31 +41,54 @@ public class CustomHeadRepresentation extends HeadRepresentation {
      * as the item name and when clicking heads for information.
      * @param textureUrlB64 the base64-encoded texture json + URL
      */
-    public CustomHeadRepresentation(final UUID uuid, final String spawnName, final String displayName, final String textureUrlB64) {
+    public CustomHead(final UUID uuid, final String spawnName, final String displayName, final String textureUrlB64) {
         super(null, "", uuid);
+        this.spawnName = spawnName;
+        this.displayName = displayName;
+        this.textureUrlB64 = textureUrlB64;
+    }
+    
+    /**
+     * Constructs a custom head type with information required to create,
+     * display, spawn, and detect the head. This class does not invoke any
+     * Bukkit methods and only stores information, but it does require the API
+     * to be available.
+     *
+     * @param uuid the internal ID used in the custom head's owner field, for
+     * detection. This value should be unique to your head (randomly created),
+     * but never change. It must not match other head UUIDs.
+     * @param ownerName the owner name to set (optionally) for the head.
+     * @param spawnName the string players can use to spawn your head with the
+     * command /ph spawn #spawnnamehere
+     * @param displayName the custom display-name (title) of the head displayed
+     * as the item name and when clicking heads for information.
+     * @param textureUrlB64 the base64-encoded texture json + URL
+     * @deprecated custom heads should avoid using owner usernames whenever possible.
+     */
+    @Deprecated
+    public CustomHead(final UUID uuid, final String ownerName, final String spawnName, final String displayName, final String textureUrlB64) {
+        super(null, ownerName, uuid);
         this.spawnName = spawnName;
         this.displayName = displayName;
         this.textureUrlB64 = textureUrlB64;
     }
 
     @Override
-    public String getOwnerName() {//custom heads don't have owner usernames, only id's
-        return "";
-    }
-
-    @Override
     public HeadType getType() {
         return PlayerHeads.getApiInstance().getCustomHeadType();
     }
-
+    
+    @Override
     public String getSpawnName() {
         return spawnName;
     }
 
+    @Override
     public String getDisplayName() {
         return displayName;
     }
 
+    @Override
     public String getTexture() {
         return textureUrlB64;
     }

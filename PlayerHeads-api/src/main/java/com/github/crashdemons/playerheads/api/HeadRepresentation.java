@@ -10,8 +10,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Interface for an object containing the information that is used to compare
- * and construct a head based on type and owner. This information explicitly
+ * Class defining the "identity" of a head, used for for comparing and constructing a
+ * head based on type and owner. This information explicitly
  * excludes details like the texture which are not considered part of head
  * equivalence.
  *
