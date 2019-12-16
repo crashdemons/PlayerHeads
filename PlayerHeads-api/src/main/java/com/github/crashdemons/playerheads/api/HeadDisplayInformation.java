@@ -5,7 +5,9 @@
  */
 package com.github.crashdemons.playerheads.api;
 
+import java.util.List;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Interface defining display details (names and appearance) of heads which are
@@ -42,4 +44,12 @@ public interface HeadDisplayInformation {
      */
     @NotNull
     public String getTexture();
+    
+    /**
+     * gets the head's special loretext (item description) to display for the item.
+     * If this is null, the default PlayerHeads loretext will be used (if applicable) instead.
+     * @return list of loretext lines to override the loretext, or null for default.
+     */
+    @Nullable
+    public List<String> getLore();
 }
