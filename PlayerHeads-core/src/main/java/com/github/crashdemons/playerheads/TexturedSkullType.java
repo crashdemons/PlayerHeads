@@ -10,6 +10,7 @@ import org.shininet.bukkit.playerheads.Formatter;
 import com.github.crashdemons.playerheads.api.HeadType;
 import com.github.crashdemons.playerheads.api.HeadDisplayInformation;
 import com.github.crashdemons.playerheads.compatibility.SkullDetails;
+import java.util.List;
 
 /**
  * Enumeration of skulls with associated UUID (randomly assigned) and texture
@@ -349,7 +350,6 @@ public enum TexturedSkullType implements HeadType,HeadDisplayInformation {
      * the skulltypes,materials, and UUIDs.
      */
     private static class Mappings {
-
         /**
          * Contains the UUID associated with the Player, must available here
          * prior to construction of enums.
@@ -425,7 +425,7 @@ public enum TexturedSkullType implements HeadType,HeadDisplayInformation {
      */
     public static TexturedSkullType get(UUID owner) {
         if(owner==null) return null;
-        HeadRepresentation hr = HeadExtensionManager.getHeadRepresentationByOwner(owner);
+        HeadRepresentation hr = HeadExtensionManager.getHeadByOwner(owner);
         if(hr!=null) return TexturedSkullType.CUSTOM;
         return Mappings.skullsById.get(owner);
     }
@@ -446,7 +446,7 @@ public enum TexturedSkullType implements HeadType,HeadDisplayInformation {
         if (spawnname.isEmpty()) {
             return null;
         }
-        HeadRepresentation hr = HeadExtensionManager.getHeadRepresentationBySpawnString(spawnname);
+        HeadRepresentation hr = HeadExtensionManager.getHeadBySpawnString(spawnname);
         if(hr!=null) return TexturedSkullType.CUSTOM;
         for (TexturedSkullType type : TexturedSkullType.values()) {
             if (type.getSpawnName().equalsIgnoreCase(spawnname)) {
@@ -553,6 +553,19 @@ public enum TexturedSkullType implements HeadType,HeadDisplayInformation {
     @Override
     public Enum toEnum() {
         return this;
+    }
+    
+    
+    @Override
+    public List<String> getLore(){
+        return null;//use default.
+    }
+    
+    public HeadDisplayInformation getDisplay(){
+        return this;
+    }
+    public HeadRepresentation getRepresentation(){
+        return new HeadRepresentation(this,"",owner);
     }
     
     /*
