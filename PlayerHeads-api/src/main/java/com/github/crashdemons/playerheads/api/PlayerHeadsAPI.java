@@ -46,7 +46,7 @@ public interface PlayerHeadsAPI {
      * @return the type of head, or null if there is none
      */
     @Nullable
-    public HeadType getHeadFrom(@NotNull ItemStack s);
+    public HeadType getHeadTypeFrom(@NotNull ItemStack s);
 
     /**
      * Gets the type of head associated with the Block
@@ -55,7 +55,7 @@ public interface PlayerHeadsAPI {
      * @return the type of head, or null if the block wasn't a head.
      */
     @Nullable
-    public HeadType getHeadFrom(@NotNull BlockState s);
+    public HeadType getHeadTypeFrom(@NotNull BlockState s);
 
     /**
      * Gets the type of head associated with an entity
@@ -64,7 +64,7 @@ public interface PlayerHeadsAPI {
      * @return the type of head, or null if there is no viable head.
      */
     @Nullable
-    public HeadType getHeadOf(@NotNull Entity e);
+    public HeadType getHeadTypeOf(@NotNull Entity e);
 
     /**
      * Gets the type of head associated with an entity-type. See deprecation
@@ -82,7 +82,7 @@ public interface PlayerHeadsAPI {
      */
     @Deprecated
     @Nullable
-    public HeadType getHeadOf(@NotNull EntityType t);
+    public HeadType getHeadTypeOf(@NotNull EntityType t);
 
     /**
      * Gets a stack of head items for the given type and amount. Note:
@@ -90,12 +90,13 @@ public interface PlayerHeadsAPI {
      * method.
      * 
      * This is affected by configuration settings like "dropvanillaheads" and "addlore".
-
+     * @deprecated consider using getHeadItem(HeadRepresentation hr) instead
      * @param h the head type to create items of
      * @param num the number of items to create
      * @return The item stack, or null if the head type was null
      */
     @Nullable
+    @Deprecated
     public ItemStack getHeadItem(@NotNull HeadType h, int num);
 
     /**
