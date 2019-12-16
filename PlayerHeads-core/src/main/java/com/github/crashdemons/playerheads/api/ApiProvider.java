@@ -147,7 +147,7 @@ public class ApiProvider implements PlayerHeadsAPI {
     
     @Override
     public HeadRepresentation getHeadRepresentationFromSpawnString(String spawnName, boolean forceOwner){
-        HeadRepresentation hr = HeadExtensionManager.getHeadRepresentationBySpawnString(spawnName);
+        HeadRepresentation hr = HeadExtensionManager.getHeadBySpawnString(spawnName);
         if(hr!=null) return hr;
         TexturedSkullType type = TexturedSkullType.getBySpawnName(spawnName);
         if(spawnName.startsWith("#")) spawnName="";
@@ -164,7 +164,7 @@ public class ApiProvider implements PlayerHeadsAPI {
     @Override
     public HeadRepresentation getHeadRepresentation(OfflinePlayer player, boolean forceOwner){
         if((!forceOwner) && plugin.configFile.getBoolean("dropboringplayerheads")) return getHeadRepresentationFromBoringPlayerhead();
-        HeadRepresentation hr = HeadExtensionManager.getHeadRepresentationByOwner(player.getUniqueId());
+        HeadRepresentation hr = HeadExtensionManager.getHeadByOwner(player.getUniqueId());
         if(hr!=null) return hr;
         return createExtendedHeadRepresentation(TexturedSkullType.PLAYER,player.getName(),player.getUniqueId());
     }
@@ -183,7 +183,7 @@ public class ApiProvider implements PlayerHeadsAPI {
         if(!(meta instanceof SkullMeta)) return null;
         OfflinePlayer owner = Compatibility.getProvider().getOwningPlayer((SkullMeta) meta);
         String username = Compatibility.getProvider().getOwner((SkullMeta) meta);
-        hr = HeadExtensionManager.getHeadRepresentationByOwner(owner.getUniqueId());
+        hr = HeadExtensionManager.getHeadByOwner(owner.getUniqueId());
         if(hr!=null) return hr;
         return createExtendedHeadRepresentation(type,username,owner.getUniqueId());
         
@@ -199,22 +199,32 @@ public class ApiProvider implements PlayerHeadsAPI {
         if(!(state instanceof Skull)) return null;
         OfflinePlayer owner = Compatibility.getProvider().getOwningPlayer((Skull) state);
         String username = Compatibility.getProvider().getOwner((Skull) state);
-        hr = HeadExtensionManager.getHeadRepresentationByOwner(owner.getUniqueId());
+        hr = HeadExtensionManager.getHeadByOwner(owner.getUniqueId());
         if(hr!=null) return hr;
         return createExtendedHeadRepresentation(type,username,owner.getUniqueId());
     }
     @Override
     public ItemStack getHeadItem(HeadRepresentation head, int num){ // TODO: heads don't receive lore from their custom-head representation.
+
         TexturedSkullType type = headFromApiHead(head.getType());
         boolean addLore = plugin.configFile.getBoolean("addlore");
+        ItemStack item;
         if(type==TexturedSkullType.PLAYER){
             String username = head.getOwnerName();
             if(username==null || username.isEmpty()) return SkullManager.PlayerSkull(num, addLore);
-            return SkullManager.PlayerSkull(username, num, addLore);
+            item = SkullManager.PlayerSkull(username, num, addLore);
         }else{
             boolean usevanillaskull = plugin.configFile.getBoolean("dropvanillaheads");
-            return SkullManager.MobSkull(type, num, usevanillaskull, addLore);
+            item = SkullManager.MobSkull(type, num, usevanillaskull, addLore);
         }
+        if(head instanceof HeadDisplayInformation){
+            HeadDisplayInformation display = (HeadDisplayInformation) head;
+            ItemMeta headMeta = item.getItemMeta();
+            if(headMeta instanceof SkullMeta){
+                SkullManager.applyHeadDetails((SkullMeta)headMeta, head, display);
+            }
+        }
+        return item;
     }
     
     @Override
