@@ -1,0 +1,37 @@
+
+    @Override
+    public HeadType getHeadTypeFrom(ItemStack s) {
+        HeadIdentity hr = HeadExtensionManager.identifyHead(s);
+        if(hr!=null) return hr.getType();
+        return SkullConverter.skullTypeFromItemStack(s);
+    }
+
+    @Override
+    public HeadType getHeadTypeFrom(BlockState s) {
+        HeadIdentity hr = HeadExtensionManager.identifyHead(s);
+        if(hr!=null) return hr.getType();
+        return SkullConverter.skullTypeFromBlockState(s);
+    }
+
+    @Override
+    public HeadType getHeadTypeOf(Entity e) {
+        HeadIdentity hr = HeadExtensionManager.identifyHead(e);
+        if(hr!=null) return hr.getType();
+        return SkullConverter.skullTypeFromEntity(e);
+    }
+
+    @Override
+    public HeadType getHeadTypeOf(EntityType t) {
+        HeadIdentity hr = HeadExtensionManager.identifyHead(t);
+        if(hr!=null) return hr.getType();
+        try {
+            return TexturedSkullType.valueOf(t.name());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public ItemStack getHeadItem(HeadType h, int num) {
+        return getHeadItem(getHeadRepresentation(h),num);
+    }

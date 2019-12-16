@@ -5,7 +5,7 @@
  */
 package com.github.crashdemons.playerheads.api.extensions;
 
-import com.github.crashdemons.playerheads.api.HeadRepresentation;
+import com.github.crashdemons.playerheads.api.HeadIdentity;
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -42,32 +42,32 @@ public final class HeadExtensionManager {
     }
     //--------------------------------------------------
     
-    public static HeadRepresentation identifyHead(final EntityType type){
-        HeadRepresentation hr = null;
+    public static HeadIdentity identifyHead(final EntityType type){
+        HeadIdentity hr = null;
         for(HeadIdentifier identifier : getIdentifiers()){
             hr = identifier.identifyHead(type);
             if(hr!=null) return hr;
         }
         return hr;
     }
-    public static HeadRepresentation identifyHead(final Entity entity){
-        HeadRepresentation hr = null;
+    public static HeadIdentity identifyHead(final Entity entity){
+        HeadIdentity hr = null;
         for(HeadIdentifier identifier : getIdentifiers()){
             hr = identifier.identifyHead(entity);
             if(hr!=null) return hr;
         }
         return hr;
     }
-    public static HeadRepresentation identifyHead(final ItemStack item){
-        HeadRepresentation hr = null;
+    public static HeadIdentity identifyHead(final ItemStack item){
+        HeadIdentity hr = null;
         for(HeadIdentifier identifier : getIdentifiers()){
             hr = identifier.identifyHead(item);
             if(hr!=null) return hr;
         }
         return hr;
     }
-    public static HeadRepresentation identifyHead(final BlockState block){
-        HeadRepresentation hr = null;
+    public static HeadIdentity identifyHead(final BlockState block){
+        HeadIdentity hr = null;
         for(HeadIdentifier identifier : getIdentifiers()){
             hr = identifier.identifyHead(block);
             if(hr!=null) return hr;
@@ -76,8 +76,8 @@ public final class HeadExtensionManager {
     }
     
     
-    public static HeadRepresentation updateHead(final HeadRepresentation head){
-        HeadRepresentation newHead = head;
+    public static HeadIdentity updateHead(final HeadIdentity head){
+        HeadIdentity newHead = head;
         for(HeadUpdater up : getUpdaters()){
             newHead = up.updateHead(newHead);
         }

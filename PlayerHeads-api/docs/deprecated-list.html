@@ -112,8 +112,18 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colOne"><a href="com/github/crashdemons/playerheads/api/extensions/CustomHeadExtension.html" title="interface in com.github.crashdemons.playerheads.api.extensions">com.github.crashdemons.playerheads.api.extensions.CustomHeadExtension</a>
+<td class="colOne"><a href="com/github/crashdemons/playerheads/api/extensions/HeadExtension.html" title="interface in com.github.crashdemons.playerheads.api.extensions">com.github.crashdemons.playerheads.api.extensions.HeadExtension</a>
 <div class="block"><span class="deprecationComment">Draft API - not implemented yet.</span></div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colOne"><a href="com/github/crashdemons/playerheads/api/extensions/HeadIdentifier.html" title="interface in com.github.crashdemons.playerheads.api.extensions">com.github.crashdemons.playerheads.api.extensions.HeadIdentifier</a>
+<div class="block"><span class="deprecationComment">draft api - not fully implemented</span></div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colOne"><a href="com/github/crashdemons/playerheads/api/extensions/HeadUpdater.html" title="interface in com.github.crashdemons.playerheads.api.extensions">com.github.crashdemons.playerheads.api.extensions.HeadUpdater</a>
+<div class="block"><span class="deprecationComment">draft api - not fully implemented</span></div>
 </td>
 </tr>
 </tbody>
@@ -132,19 +142,29 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colOne"><a href="com/github/crashdemons/playerheads/api/extensions/CustomHeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api.extensions">com.github.crashdemons.playerheads.api.extensions.CustomHeadRepresentation</a>
+<td class="colOne"><a href="com/github/crashdemons/playerheads/api/extensions/CustomHead.html" title="class in com.github.crashdemons.playerheads.api.extensions">com.github.crashdemons.playerheads.api.extensions.CustomHead</a>
 <div class="block"><span class="deprecationComment">Draft API - partial implementation available only.</span></div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colOne"><a href="com/github/crashdemons/playerheads/api/extensions/ExtensionManager.html" title="class in com.github.crashdemons.playerheads.api.extensions">com.github.crashdemons.playerheads.api.extensions.ExtensionManager</a>
+<td class="colOne"><a href="org/shininet/bukkit/playerheads/events/FakeBlockBreakEvent.html" title="class in org.shininet.bukkit.playerheads.events">org.shininet.bukkit.playerheads.events.FakeBlockBreakEvent</a>
+<div class="block"><span class="deprecationComment">you should use SimulatedBlockBreakEvent instead, this class may
+ be removed in the future</span></div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colOne"><a href="com/github/crashdemons/playerheads/api/extensions/HeadExtensionManager.html" title="class in com.github.crashdemons.playerheads.api.extensions">com.github.crashdemons.playerheads.api.extensions.HeadExtensionManager</a>
+<div class="block"><span class="deprecationComment">Draft API - not implemented yet.</span></div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colOne"><a href="com/github/crashdemons/playerheads/api/extensions/SimpleHeadModule.html" title="class in com.github.crashdemons.playerheads.api.extensions">com.github.crashdemons.playerheads.api.extensions.SimpleHeadModule</a>
 <div class="block"><span class="deprecationComment">Draft API - not implemented yet.</span></div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colOne"><a href="org/shininet/bukkit/playerheads/events/FakeBlockBreakEvent.html" title="class in org.shininet.bukkit.playerheads.events">org.shininet.bukkit.playerheads.events.FakeBlockBreakEvent</a>
-<div class="block"><span class="deprecationComment">you should use SimulatedBlockBreakEvent instead, this class may
- be removed in the future</span></div>
+<td class="colOne"><a href="com/github/crashdemons/playerheads/api/extensions/SimpleHeadPlugin.html" title="class in com.github.crashdemons.playerheads.api.extensions">com.github.crashdemons.playerheads.api.extensions.SimpleHeadPlugin</a>
+<div class="block"><span class="deprecationComment">Draft API - not implemented yet.</span></div>
 </td>
 </tr>
 </tbody>
@@ -189,7 +209,19 @@
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colOne"><a href="com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadOf-org.bukkit.entity.EntityType-">com.github.crashdemons.playerheads.api.PlayerHeadsAPI.getHeadOf(EntityType)</a>
+<td class="colOne"><a href="com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadItem-com.github.crashdemons.playerheads.api.HeadType-int-">com.github.crashdemons.playerheads.api.PlayerHeadsAPI.getHeadItem(HeadType, int)</a>
+<div class="block"><span class="deprecationComment">consider using getHeadItem(HeadRepresentation hr) instead</span></div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colOne"><a href="com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadRepresentation-org.bukkit.entity.EntityType-">com.github.crashdemons.playerheads.api.PlayerHeadsAPI.getHeadRepresentation(EntityType)</a>
+<div class="block"><span class="deprecationComment">this may not do exactly what you want because between MC
+ 1.10-1.13 many entities were separated from variants to their own. Also,
+ this foregoes any head ownership information beyond the that defined by the type of mob/head.</span></div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colOne"><a href="com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadTypeOf-org.bukkit.entity.EntityType-">com.github.crashdemons.playerheads.api.PlayerHeadsAPI.getHeadTypeOf(EntityType)</a>
 <div class="block"><span class="deprecationComment">this may not do exactly what you want because between MC
  1.10-1.13 many entities were separated from variants to their own
  entity-type. Using this method will introduce version-dependent behavior
@@ -261,12 +293,17 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colOne"><a href="org/shininet/bukkit/playerheads/events/HeadRollEvent.html#HeadRollEvent-org.bukkit.entity.Entity-org.bukkit.entity.Entity-boolean-double-double-double-double-double-boolean-">org.shininet.bukkit.playerheads.events.HeadRollEvent(Entity, Entity, boolean, double, double, double, double, double, boolean)</a></td>
+<td class="colOne"><a href="com/github/crashdemons/playerheads/api/extensions/CustomHead.html#CustomHead-java.util.UUID-java.lang.String-java.lang.String-java.lang.String-java.lang.String-java.util.List-">com.github.crashdemons.playerheads.api.extensions.CustomHead(UUID, String, String, String, String, List&lt;String&gt;)</a>
+<div class="block"><span class="deprecationComment">custom heads should avoid using owner usernames whenever possible.</span></div>
+</td>
 </tr>
 <tr class="rowColor">
-<td class="colOne"><a href="org/shininet/bukkit/playerheads/events/HeadRollEvent.html#HeadRollEvent-org.bukkit.entity.Entity-org.bukkit.entity.Entity-boolean-double-double-double-double-double-double-boolean-">org.shininet.bukkit.playerheads.events.HeadRollEvent(Entity, Entity, boolean, double, double, double, double, double, double, boolean)</a></td>
+<td class="colOne"><a href="org/shininet/bukkit/playerheads/events/HeadRollEvent.html#HeadRollEvent-org.bukkit.entity.Entity-org.bukkit.entity.Entity-boolean-double-double-double-double-double-boolean-">org.shininet.bukkit.playerheads.events.HeadRollEvent(Entity, Entity, boolean, double, double, double, double, double, boolean)</a></td>
 </tr>
 <tr class="altColor">
+<td class="colOne"><a href="org/shininet/bukkit/playerheads/events/HeadRollEvent.html#HeadRollEvent-org.bukkit.entity.Entity-org.bukkit.entity.Entity-boolean-double-double-double-double-double-double-boolean-">org.shininet.bukkit.playerheads.events.HeadRollEvent(Entity, Entity, boolean, double, double, double, double, double, double, boolean)</a></td>
+</tr>
+<tr class="rowColor">
 <td class="colOne"><a href="org/shininet/bukkit/playerheads/events/HeadRollEvent.html#HeadRollEvent-org.bukkit.entity.Entity-org.bukkit.entity.Entity-boolean-double-double-double-double-double-double-double-boolean-">org.shininet.bukkit.playerheads.events.HeadRollEvent(Entity, Entity, boolean, double, double, double, double, double, double, double, boolean)</a></td>
 </tr>
 </tbody>

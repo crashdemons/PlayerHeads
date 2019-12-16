@@ -1,16 +1,16 @@
 package com.github.crashdemons.playerheads;
 
 import com.github.crashdemons.playerheads.api.extensions.HeadExtensionManager;
-import com.github.crashdemons.playerheads.api.HeadRepresentation;
+import com.github.crashdemons.playerheads.api.HeadIdentity;
 import com.github.crashdemons.playerheads.compatibility.CompatibleSkullMaterial;
 import java.util.UUID;
 import org.shininet.bukkit.playerheads.Lang;
 import java.util.HashMap;
 import org.shininet.bukkit.playerheads.Formatter;
 import com.github.crashdemons.playerheads.api.HeadType;
-import com.github.crashdemons.playerheads.api.HeadDisplayInformation;
 import com.github.crashdemons.playerheads.compatibility.SkullDetails;
 import java.util.List;
+import com.github.crashdemons.playerheads.api.HeadDisplay;
 
 /**
  * Enumeration of skulls with associated UUID (randomly assigned) and texture
@@ -24,7 +24,7 @@ import java.util.List;
  * @author crashdemons
  * @author MagmaVoid_
  */
-public enum TexturedSkullType implements HeadType,HeadDisplayInformation {
+public enum TexturedSkullType implements HeadType,HeadDisplay {
 
     //Entity skull settings - big thanks to MagmaVoid_ for finding all of these textures.
     
@@ -425,7 +425,7 @@ public enum TexturedSkullType implements HeadType,HeadDisplayInformation {
      */
     public static TexturedSkullType get(UUID owner) {
         if(owner==null) return null;
-        HeadRepresentation hr = HeadExtensionManager.getHeadByOwner(owner);
+        HeadIdentity hr = HeadExtensionManager.getHeadByOwner(owner);
         if(hr!=null) return TexturedSkullType.CUSTOM;
         return Mappings.skullsById.get(owner);
     }
@@ -446,7 +446,7 @@ public enum TexturedSkullType implements HeadType,HeadDisplayInformation {
         if (spawnname.isEmpty()) {
             return null;
         }
-        HeadRepresentation hr = HeadExtensionManager.getHeadBySpawnString(spawnname);
+        HeadIdentity hr = HeadExtensionManager.getHeadBySpawnString(spawnname);
         if(hr!=null) return TexturedSkullType.CUSTOM;
         for (TexturedSkullType type : TexturedSkullType.values()) {
             if (type.getSpawnName().equalsIgnoreCase(spawnname)) {
@@ -561,11 +561,11 @@ public enum TexturedSkullType implements HeadType,HeadDisplayInformation {
         return null;//use default.
     }
     
-    public HeadDisplayInformation getDisplay(){
+    public HeadDisplay getDisplay(){
         return this;
     }
-    public HeadRepresentation getRepresentation(){
-        return new HeadRepresentation(this,"",owner);
+    public HeadIdentity getRepresentation(){
+        return new HeadIdentity(this,"",owner);
     }
     
     /*

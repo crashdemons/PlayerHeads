@@ -5,7 +5,7 @@
  */
 package org.shininet.bukkit.playerheads;
 
-import com.github.crashdemons.playerheads.api.HeadRepresentation;
+import com.github.crashdemons.playerheads.api.HeadIdentity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -29,7 +29,7 @@ public final class InventoryManager {
     }
 
     public static boolean addHead(Player player, String spawnName, int quantity){
-        HeadRepresentation hr = PlayerHeads.instance.api.getHeadRepresentationFromSpawnString(spawnName, false);
+        HeadIdentity hr = PlayerHeads.instance.api.getHeadIdentityFromSpawnString(spawnName, false);
         if(hr==null) throw new IllegalArgumentException("Unable to retrieve head-representation from spawn string");
         ItemStack stack = PlayerHeads.instance.api.getHeadItem(hr, quantity);
         if(stack==null) throw new IllegalArgumentException("unable to get item from head representation");

@@ -5,7 +5,7 @@
  */
 package com.github.crashdemons.playerheads.api.extensions;
 
-import com.github.crashdemons.playerheads.api.HeadRepresentation;
+import com.github.crashdemons.playerheads.api.HeadIdentity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,6 +16,6 @@ import org.jetbrains.annotations.Nullable;
  */
 @Deprecated
 public interface HeadExtension {
-    public  boolean isHandledHead(final HeadRepresentation hr);
+    public  boolean isHandledHead(final HeadIdentity hr);
     @NotNull public  double getDropRate(final CustomHead hr);
 }

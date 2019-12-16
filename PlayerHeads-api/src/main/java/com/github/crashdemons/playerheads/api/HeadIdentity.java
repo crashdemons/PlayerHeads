@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
  * @author crashdemons (crashenator at gmail.com)
  * @since 5.3.0-SNAPSHOT
  */
-public class HeadRepresentation {
+public class HeadIdentity {
 
     //@Nullable public abstract UUID getOwnerId();
     //@Nullable public abstract String getOwnerName();
@@ -28,13 +28,13 @@ public class HeadRepresentation {
     private final String ownerName;
     private final UUID ownerId;
 
-    public HeadRepresentation(final HeadType type, final String ownerName) {
+    public HeadIdentity(final HeadType type, final String ownerName) {
         this.type = type;
         this.ownerName = ownerName;
         this.ownerId = null;
     }
 
-    public HeadRepresentation(final HeadType type, final String ownerName, final UUID ownerId) {
+    public HeadIdentity(final HeadType type, final String ownerName, final UUID ownerId) {
         this.type = type;
         this.ownerName = ownerName;
         this.ownerId = ownerId;
@@ -56,7 +56,7 @@ public class HeadRepresentation {
     }
 
     @NotNull
-    public HeadComparisonResult compare(final HeadRepresentation head) {
+    public HeadComparisonResult compare(final HeadIdentity head) {
         boolean typeEquality = this.getType().equals(head.getType());
         boolean ownerEquality = this.getOwnerId().equals(head.getOwnerId());
         if (this.getOwnerId() == null || head.getOwnerId() == null) {

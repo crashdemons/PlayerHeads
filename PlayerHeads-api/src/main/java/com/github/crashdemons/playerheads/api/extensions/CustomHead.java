@@ -5,13 +5,13 @@
  */
 package com.github.crashdemons.playerheads.api.extensions;
 
-import com.github.crashdemons.playerheads.api.HeadDisplayInformation;
-import com.github.crashdemons.playerheads.api.HeadRepresentation;
+import com.github.crashdemons.playerheads.api.HeadIdentity;
 import com.github.crashdemons.playerheads.api.HeadType;
 import com.github.crashdemons.playerheads.api.PlayerHeads;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import com.github.crashdemons.playerheads.api.HeadDisplay;
 
 /**
  * Custom head type with information required to create, display, spawn, and
@@ -22,7 +22,7 @@ import java.util.UUID;
  * @since 5.3.0-SNAPSHOT
  */
 @Deprecated
-public class CustomHead extends HeadRepresentation implements HeadDisplayInformation {
+public class CustomHead extends HeadIdentity implements HeadDisplay {
 
     private final String spawnName;
     private final String displayName;

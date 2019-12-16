@@ -124,6 +124,22 @@
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
+<td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadRepresentation-org.bukkit.entity.EntityType-">getHeadRepresentation</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/EntityType.html?is-external=true" title="class or interface in org.bukkit.entity">EntityType</a>&nbsp;et)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">this may not do exactly what you want because between MC
+ 1.10-1.13 many entities were separated from variants to their own. Also,
+ this foregoes any head ownership information beyond the that defined by the type of mob/head.</span></div>
+</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
+<td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadRepresentation-com.github.crashdemons.playerheads.api.HeadType-">getHeadRepresentation</a></span>(@NotNull <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;ht)</code>
+<div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes for an inbuilt HeadType.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
 <td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadRepresentation-org.bukkit.inventory.ItemStack-">getHeadRepresentation</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a>&nbsp;stack)</code>
 <div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes.</div>
 </td>
@@ -191,7 +207,7 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><code>class&nbsp;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/CustomHeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api.extensions">CustomHeadRepresentation</a></span></code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/CustomHead.html" title="class in com.github.crashdemons.playerheads.api.extensions">CustomHead</a></span></code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
 <div class="block"><span class="deprecationComment">Draft API - partial implementation available only.</span></div>
 </div>
@@ -207,20 +223,62 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
-<td class="colLast"><span class="typeNameLabel">CustomHeadExtension.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/CustomHeadExtension.html#identifyHead-org.bukkit.block.BlockState-">identifyHead</a></span>(<a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/block/BlockState.html?is-external=true" title="class or interface in org.bukkit.block">BlockState</a>&nbsp;s)</code>
+<td class="colFirst"><code>static <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
+<td class="colLast"><span class="typeNameLabel">HeadExtensionManager.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/HeadExtensionManager.html#identifyHead-org.bukkit.block.BlockState-">identifyHead</a></span>(<a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/block/BlockState.html?is-external=true" title="class or interface in org.bukkit.block">BlockState</a>&nbsp;block)</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 &nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
-<td class="colLast"><span class="typeNameLabel">CustomHeadExtension.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/CustomHeadExtension.html#identifyHead-org.bukkit.entity.Entity-">identifyHead</a></span>(<a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/Entity.html?is-external=true" title="class or interface in org.bukkit.entity">Entity</a>&nbsp;e)</code>
+<td class="colLast"><span class="typeNameLabel">HeadIdentifier.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/HeadIdentifier.html#identifyHead-org.bukkit.block.BlockState-">identifyHead</a></span>(<a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/block/BlockState.html?is-external=true" title="class or interface in org.bukkit.block">BlockState</a>&nbsp;s)</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 &nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>static <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
+<td class="colLast"><span class="typeNameLabel">HeadExtensionManager.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/HeadExtensionManager.html#identifyHead-org.bukkit.entity.Entity-">identifyHead</a></span>(<a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/Entity.html?is-external=true" title="class or interface in org.bukkit.entity">Entity</a>&nbsp;entity)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
-<td class="colLast"><span class="typeNameLabel">CustomHeadExtension.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/CustomHeadExtension.html#identifyHead-org.bukkit.inventory.ItemStack-">identifyHead</a></span>(<a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a>&nbsp;s)</code>
+<td class="colLast"><span class="typeNameLabel">HeadIdentifier.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/HeadIdentifier.html#identifyHead-org.bukkit.entity.Entity-">identifyHead</a></span>(<a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/Entity.html?is-external=true" title="class or interface in org.bukkit.entity">Entity</a>&nbsp;e)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
+<td class="colLast"><span class="typeNameLabel">HeadExtensionManager.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/HeadExtensionManager.html#identifyHead-org.bukkit.entity.EntityType-">identifyHead</a></span>(<a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/EntityType.html?is-external=true" title="class or interface in org.bukkit.entity">EntityType</a>&nbsp;type)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
+<td class="colLast"><span class="typeNameLabel">HeadIdentifier.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/HeadIdentifier.html#identifyHead-org.bukkit.entity.EntityType-">identifyHead</a></span>(<a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/EntityType.html?is-external=true" title="class or interface in org.bukkit.entity">EntityType</a>&nbsp;t)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
+<td class="colLast"><span class="typeNameLabel">HeadExtensionManager.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/HeadExtensionManager.html#identifyHead-org.bukkit.inventory.ItemStack-">identifyHead</a></span>(<a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a>&nbsp;item)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
+<td class="colLast"><span class="typeNameLabel">HeadIdentifier.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/HeadIdentifier.html#identifyHead-org.bukkit.inventory.ItemStack-">identifyHead</a></span>(<a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a>&nbsp;s)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
+<td class="colLast"><span class="typeNameLabel">HeadExtensionManager.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/HeadExtensionManager.html#updateHead-com.github.crashdemons.playerheads.api.HeadRepresentation-">updateHead</a></span>(<a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a>&nbsp;head)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
+<td class="colLast"><span class="typeNameLabel">HeadUpdater.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/HeadUpdater.html#updateHead-com.github.crashdemons.playerheads.api.HeadRepresentation-">updateHead</a></span>(<a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a>&nbsp;hr)</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 &nbsp;</td>
 </tr>
@@ -235,7 +293,19 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><span class="typeNameLabel">CustomHeadExtension.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/CustomHeadExtension.html#isHandledHead-com.github.crashdemons.playerheads.api.HeadRepresentation-">isHandledHead</a></span>(<a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a>&nbsp;hr)</code>
+<td class="colLast"><span class="typeNameLabel">HeadExtension.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/HeadExtension.html#isHandledHead-com.github.crashdemons.playerheads.api.HeadRepresentation-">isHandledHead</a></span>(<a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a>&nbsp;hr)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
+<td class="colLast"><span class="typeNameLabel">HeadExtensionManager.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/HeadExtensionManager.html#updateHead-com.github.crashdemons.playerheads.api.HeadRepresentation-">updateHead</a></span>(<a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a>&nbsp;head)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
+<td class="colLast"><span class="typeNameLabel">HeadUpdater.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/HeadUpdater.html#updateHead-com.github.crashdemons.playerheads.api.HeadRepresentation-">updateHead</a></span>(<a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a>&nbsp;hr)</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 &nbsp;</td>
 </tr>

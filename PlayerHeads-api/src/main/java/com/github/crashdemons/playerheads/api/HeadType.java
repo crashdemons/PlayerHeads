@@ -10,7 +10,7 @@ import java.util.UUID;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Object representing the type of Head supported by PlayerHeads. You can obtain
+ * Object representing the inbuilt PH type of Head supported by PlayerHeads. You can obtain
  * the headtype for various things through API methods - to compare head types,
  * you can use equals()
  * 
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author crashdemons (crashenator at gmail.com)
  */
-public interface HeadType extends HeadDisplayInformation {
+public interface HeadType extends HeadDisplay {
 
     // 4.10.0 API
     //------------------------------------------------------------------

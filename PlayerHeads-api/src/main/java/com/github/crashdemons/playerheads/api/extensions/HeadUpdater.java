@@ -5,7 +5,7 @@
  */
 package com.github.crashdemons.playerheads.api.extensions;
 
-import com.github.crashdemons.playerheads.api.HeadRepresentation;
+import com.github.crashdemons.playerheads.api.HeadIdentity;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -16,5 +16,5 @@ import org.jetbrains.annotations.Nullable;
  */
 @Deprecated
 public interface HeadUpdater {
-    @Nullable public  HeadRepresentation updateHead(final HeadRepresentation hr);
+    @Nullable public  HeadIdentity updateHead(final HeadIdentity hr);
 }

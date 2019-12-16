@@ -5,7 +5,7 @@
  */
 package com.github.crashdemons.playerheads.api.extensions;
 
-import com.github.crashdemons.playerheads.api.HeadRepresentation;
+import com.github.crashdemons.playerheads.api.HeadIdentity;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -20,8 +20,8 @@ import org.jetbrains.annotations.Nullable;
  */
 @Deprecated
 public interface HeadIdentifier {
-    @Nullable public  HeadRepresentation identifyHead(final EntityType t);
-    @Nullable public  HeadRepresentation identifyHead(final Entity e);
-    @Nullable public  HeadRepresentation identifyHead(final ItemStack s);
-    @Nullable public  HeadRepresentation identifyHead(final BlockState s);
+    @Nullable public  HeadIdentity identifyHead(final EntityType t);
+    @Nullable public  HeadIdentity identifyHead(final Entity e);
+    @Nullable public  HeadIdentity identifyHead(final ItemStack s);
+    @Nullable public  HeadIdentity identifyHead(final BlockState s);
 }

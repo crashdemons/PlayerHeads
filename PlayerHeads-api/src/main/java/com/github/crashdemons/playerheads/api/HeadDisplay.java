@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
  * @author crashdemons (crashenator at gmail.com)
  * @since 5.3.0-SNAPSHOT
  */
-public interface HeadDisplayInformation {
+public interface HeadDisplay {
     /**
      * Get the "spawn" name for the associated skulltype, as defined in the
      * "lang" file.

@@ -116,25 +116,25 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a></code></td>
-<td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadFrom-org.bukkit.block.BlockState-">getHeadFrom</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/block/BlockState.html?is-external=true" title="class or interface in org.bukkit.block">BlockState</a>&nbsp;s)</code>
+<td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadTypeFrom-org.bukkit.block.BlockState-">getHeadTypeFrom</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/block/BlockState.html?is-external=true" title="class or interface in org.bukkit.block">BlockState</a>&nbsp;s)</code>
 <div class="block">Gets the type of head associated with the Block</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a></code></td>
-<td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadFrom-org.bukkit.inventory.ItemStack-">getHeadFrom</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a>&nbsp;s)</code>
+<td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadTypeFrom-org.bukkit.inventory.ItemStack-">getHeadTypeFrom</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a>&nbsp;s)</code>
 <div class="block">Gets the type of head associated with an itemstack.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a></code></td>
-<td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadOf-org.bukkit.entity.Entity-">getHeadOf</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/Entity.html?is-external=true" title="class or interface in org.bukkit.entity">Entity</a>&nbsp;e)</code>
+<td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadTypeOf-org.bukkit.entity.Entity-">getHeadTypeOf</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/Entity.html?is-external=true" title="class or interface in org.bukkit.entity">Entity</a>&nbsp;e)</code>
 <div class="block">Gets the type of head associated with an entity</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a></code></td>
-<td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadOf-org.bukkit.entity.EntityType-">getHeadOf</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/EntityType.html?is-external=true" title="class or interface in org.bukkit.entity">EntityType</a>&nbsp;t)</code>
+<td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadTypeOf-org.bukkit.entity.EntityType-">getHeadTypeOf</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/EntityType.html?is-external=true" title="class or interface in org.bukkit.entity">EntityType</a>&nbsp;t)</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
 <div class="block"><span class="deprecationComment">this may not do exactly what you want because between MC
  1.10-1.13 many entities were separated from variants to their own
@@ -162,7 +162,15 @@
 <td class="colFirst"><code>@Nullable <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a></code></td>
 <td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadItem-com.github.crashdemons.playerheads.api.HeadType-int-">getHeadItem</a></span>(@NotNull <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;h,
            int&nbsp;num)</code>
-<div class="block">Gets a stack of head items for the given type and amount.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">consider using getHeadItem(HeadRepresentation hr) instead</span></div>
+</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
+<td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadRepresentation-com.github.crashdemons.playerheads.api.HeadType-">getHeadRepresentation</a></span>(@NotNull <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;ht)</code>
+<div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes for an inbuilt HeadType.</div>
 </td>
 </tr>
 </tbody>
@@ -198,7 +206,7 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a></code></td>
-<td class="colLast"><span class="typeNameLabel">CustomHeadRepresentation.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/CustomHeadRepresentation.html#getType--">getType</a></span>()</code>
+<td class="colLast"><span class="typeNameLabel">CustomHead.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/CustomHead.html#getType--">getType</a></span>()</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 &nbsp;</td>
 </tr>

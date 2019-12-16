@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -99,14 +99,19 @@ var activeTableTab = "activeTableTab";
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt>All Superinterfaces:</dt>
+<dd><a href="../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html" title="interface in com.github.crashdemons.playerheads.api">HeadDisplayInformation</a></dd>
+</dl>
 <hr>
 <br>
-<pre>public interface <span class="typeNameLabel">HeadType</span></pre>
+<pre>public interface <span class="typeNameLabel">HeadType</span>
+extends <a href="../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html" title="interface in com.github.crashdemons.playerheads.api">HeadDisplayInformation</a></pre>
 <div class="block">Object representing the type of Head supported by PlayerHeads. You can obtain
  the headtype for various things through API methods - to compare head types,
  you can use equals()
  
- This categorizes the head generally by entity type and does not retain user details (username/uuid/texture).
+ This categorizes the head generally by entity type and does not retain user details (username/uuid/texture) - these valueus are defined instead by the specific type.
  If you want to tell if a head is the "same", you need to compare both type and owner (of the head itself), it is recommended to use HeadRepresentation for this purpose.</div>
 <dl>
 <dt><span class="simpleTagLabel">Author:</span></dt>
@@ -137,56 +142,50 @@ var activeTableTab = "activeTableTab";
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>@NotNull <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html#getDisplayName--">getDisplayName</a></span>()</code>
-<div class="block">Gets the item displayname for the associated skulltype, as defined in the
- "lang" file.</div>
-</td>
-</tr>
-<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../../com/github/crashdemons/playerheads/compatibility/SkullDetails.html" title="interface in com.github.crashdemons.playerheads.compatibility">SkullDetails</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html#getImplementationDetails--">getImplementationDetails</a></span>()</code>
 <div class="block">Get the underlying bukkit implementation details for the head on this
  server version.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>@NotNull <a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html?is-external=true" title="class or interface in java.util">UUID</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html#getOwner--">getOwner</a></span>()</code>
 <div class="block">Get the UUID associated with the skulltype (randomly assigned to it
  specifically).</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code>@NotNull <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html#getTexture--">getTexture</a></span>()</code>
-<div class="block">Get the Base64-encoded texture string associated with the skulltype</div>
-</td>
-</tr>
-<tr id="i5" class="rowColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html#hashCode--">hashCode</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html#isPlayerHead--">isPlayerHead</a></span>()</code>
 <div class="block">Checks whether the skulltype uses a playerhead material internally.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html#isVanilla--">isVanilla</a></span>()</code>
 <div class="block">Determines if a head of this type is implemented with a vanilla mob head
  or not [for the current server version].</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Enum.html?is-external=true" title="class or interface in java.lang">Enum</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html#toEnum--">toEnum</a></span>()</code>
 <div class="block">Return the associated Enum value for the HeadType</div>
 </td>
 </tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.com.github.crashdemons.playerheads.api.HeadDisplayInformation">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;com.github.crashdemons.playerheads.api.<a href="../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html" title="interface in com.github.crashdemons.playerheads.api">HeadDisplayInformation</a></h3>
+<code><a href="../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html#getDisplayName--">getDisplayName</a>, <a href="../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html#getLore--">getLore</a>, <a href="../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html#getSpawnName--">getSpawnName</a>, <a href="../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html#getTexture--">getTexture</a></code></li>
+</ul>
 </li>
 </ul>
 </li>
@@ -215,37 +214,6 @@ var activeTableTab = "activeTableTab";
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The UUID</dd>
-</dl>
-</li>
-</ul>
-<a name="getTexture--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getTexture</h4>
-<pre>@NotNull
-@NotNull <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getTexture()</pre>
-<div class="block">Get the Base64-encoded texture string associated with the skulltype</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>A base64 string</dd>
-</dl>
-</li>
-</ul>
-<a name="getDisplayName--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getDisplayName</h4>
-<pre>@NotNull
-@NotNull <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getDisplayName()</pre>
-<div class="block">Gets the item displayname for the associated skulltype, as defined in the
- "lang" file.</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>A string containing the skulltype's displayname</dd>
 </dl>
 </li>
 </ul>

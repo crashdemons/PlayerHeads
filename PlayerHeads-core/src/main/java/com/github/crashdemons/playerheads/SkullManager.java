@@ -1,8 +1,7 @@
 
 package com.github.crashdemons.playerheads;
 
-import com.github.crashdemons.playerheads.api.HeadDisplayInformation;
-import com.github.crashdemons.playerheads.api.HeadRepresentation;
+import com.github.crashdemons.playerheads.api.HeadIdentity;
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import com.github.crashdemons.playerheads.compatibility.CompatibleSkullMaterial;
 import java.util.UUID;
@@ -18,6 +17,7 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 import org.shininet.bukkit.playerheads.Config;
 import org.shininet.bukkit.playerheads.Lang;
+import com.github.crashdemons.playerheads.api.HeadDisplay;
 
 /**
  * Defines an abstract class of methods for creating, updating, and applying information to heads managed by the plugin.
@@ -28,10 +28,10 @@ public final class SkullManager {
     private SkullManager(){}
     
     
-    public static void Skull(HeadRepresentation representation, HeadDisplayInformation display){
+    public static void Skull(HeadIdentity representation, HeadDisplay display){
         
     }
-    public static void applyHeadDetails(ItemMeta headMeta, HeadRepresentation representation, HeadDisplayInformation display){
+    public static void applyHeadDetails(ItemMeta headMeta, HeadIdentity representation, HeadDisplay display){
         applyDisplayName(headMeta,display.getDisplayName());
         List<String> lore = display.getLore();
         if(lore!=null) applyLore(headMeta,display.getLore());
