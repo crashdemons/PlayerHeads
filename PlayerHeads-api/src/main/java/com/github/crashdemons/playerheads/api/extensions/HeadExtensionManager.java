@@ -137,7 +137,7 @@ public final class HeadExtensionManager {
      */
     public static synchronized boolean registerHeadRepresentation(final HeadExtension ext, final CustomHead head) {
         UUID id = head.getOwnerId();
-        String spawn = head.getSpawnName();
+        String spawn = head.getSpawnString();
         if (HeadMappings.HEAD_FROM_UUID.get(id) != null) {
             return false;
         }

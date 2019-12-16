@@ -46,8 +46,8 @@ public class CustomHead extends HeadIdentity implements HeadDisplay {
      * @param textureUrlB64 the base64-encoded texture json + URL
      * @param lore the loretext to display, or null for the default PlayerHeads loretext.
      */
-    public CustomHead(final UUID uuid, final String spawnName, final String displayName, final String textureUrlB64, final List<String> lore) {
-        super(null, "", uuid);
+    public CustomHead(final UUID uuid, final String spawnName, final String displayName, final String textureUrlB64, final List<String> lore,final String spawnString) {
+        super(null, "", uuid,spawnString);
         this.spawnName = spawnName;
         this.displayName = displayName;
         this.textureUrlB64 = textureUrlB64;
@@ -73,8 +73,8 @@ public class CustomHead extends HeadIdentity implements HeadDisplay {
      * @deprecated custom heads should avoid using owner usernames whenever possible.
      */
     @Deprecated
-    public CustomHead(final UUID uuid, final String ownerName, final String spawnName, final String displayName, final String textureUrlB64,final List<String> lore) {
-        super(null, ownerName, uuid);
+    public CustomHead(final UUID uuid, final String ownerName, final String spawnName, final String displayName, final String textureUrlB64,final List<String> lore,final String spawnString) {
+        super(null, ownerName, uuid, spawnString);
         this.spawnName = spawnName;
         this.displayName = displayName;
         this.textureUrlB64 = textureUrlB64;
@@ -86,10 +86,6 @@ public class CustomHead extends HeadIdentity implements HeadDisplay {
         return PlayerHeads.getApiInstance().getCustomHeadType();
     }
     
-    @Override
-    public String getSpawnName() {
-        return spawnName;
-    }
 
     @Override
     public String getDisplayName() {
