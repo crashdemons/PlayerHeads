@@ -27,18 +27,49 @@ public class HeadIdentity {
     private final HeadType type;
     private final String ownerName;
     private final UUID ownerId;
+    private final String spawnString; //optional
 
     public HeadIdentity(final HeadType type, final String ownerName) {
         this.type = type;
         this.ownerName = ownerName;
         this.ownerId = null;
+        this.spawnString="";
     }
 
     public HeadIdentity(final HeadType type, final String ownerName, final UUID ownerId) {
         this.type = type;
         this.ownerName = ownerName;
         this.ownerId = ownerId;
+        this.spawnString="";
     }
+    
+    public HeadIdentity(final HeadType type, final String ownerName,final String spawnString) {
+        this.type = type;
+        this.ownerName = ownerName;
+        this.ownerId = null;
+        this.spawnString=spawnString;
+    }
+
+    public HeadIdentity(final HeadType type, final String ownerName, final UUID ownerId,final String spawnString) {
+        this.type = type;
+        this.ownerName = ownerName;
+        this.ownerId = ownerId;
+        this.spawnString=spawnString;
+    }
+    
+    
+    /**
+     * Get the "spawn" name for the associated skulltype, as defined in the
+     * "lang" file.
+     * <p>
+     * This string is used to spawn-in the skull in external commands.
+     *
+     * @return A string containing the spawnname.
+     */
+    public String getSpawnString() {
+        return spawnString;
+    }
+    
 
     @Nullable
     public HeadType getType() {

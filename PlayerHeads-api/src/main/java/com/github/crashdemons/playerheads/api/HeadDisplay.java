@@ -17,16 +17,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public interface HeadDisplay {
     /**
-     * Get the "spawn" name for the associated skulltype, as defined in the
-     * "lang" file.
-     * <p>
-     * This string is used to spawn-in the skull in external commands.
-     *
-     * @return A string containing the spawnname.
-     */
-    public String getSpawnName();
-
-    /**
      * Gets the item displayname for the associated skulltype, as defined in the
      * "lang" file.
      * 
