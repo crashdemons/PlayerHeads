@@ -16,5 +16,5 @@ import org.jetbrains.annotations.Nullable;
  */
 @Deprecated
 public interface HeadUpdater {
-    @Nullable public abstract HeadRepresentation updateHead(final HeadRepresentation hr);
+    @Nullable public  HeadRepresentation updateHead(final HeadRepresentation hr);
 }

@@ -75,6 +75,7 @@ public final class HeadExtensionManager {
         return hr;
     }
     
+    
     public static HeadRepresentation updateHead(final HeadRepresentation head){
         HeadRepresentation newHead = head;
         for(HeadUpdater up : getUpdaters()){
@@ -152,14 +153,14 @@ public final class HeadExtensionManager {
         return true;
     }
 
-    public static CustomHead getHeadRepresentationByOwner(final UUID owner) {
+    public static CustomHead getHeadByOwner(final UUID owner) {
         if (owner == null) {
             return null;
         }
         return HeadMappings.HEAD_FROM_UUID.get(owner);
     }
 
-    public static CustomHead getHeadRepresentationBySpawnString(final String spawnName) {
+    public static CustomHead getHeadBySpawnString(final String spawnName) {
         if (spawnName == null) {
             return null;
         }

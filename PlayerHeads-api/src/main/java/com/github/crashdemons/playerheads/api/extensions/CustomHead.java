@@ -9,6 +9,8 @@ import com.github.crashdemons.playerheads.api.HeadDisplayInformation;
 import com.github.crashdemons.playerheads.api.HeadRepresentation;
 import com.github.crashdemons.playerheads.api.HeadType;
 import com.github.crashdemons.playerheads.api.PlayerHeads;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -25,6 +27,8 @@ public class CustomHead extends HeadRepresentation implements HeadDisplayInforma
     private final String spawnName;
     private final String displayName;
     private final String textureUrlB64;
+    private final ArrayList<String> lore = null;
+
 
     /**
      * Constructs a custom head type with information required to create,
@@ -40,12 +44,14 @@ public class CustomHead extends HeadRepresentation implements HeadDisplayInforma
      * @param displayName the custom display-name (title) of the head displayed
      * as the item name and when clicking heads for information.
      * @param textureUrlB64 the base64-encoded texture json + URL
+     * @param lore the loretext to display, or null for the default PlayerHeads loretext.
      */
-    public CustomHead(final UUID uuid, final String spawnName, final String displayName, final String textureUrlB64) {
+    public CustomHead(final UUID uuid, final String spawnName, final String displayName, final String textureUrlB64, final List<String> lore) {
         super(null, "", uuid);
         this.spawnName = spawnName;
         this.displayName = displayName;
         this.textureUrlB64 = textureUrlB64;
+        this.lore.addAll(lore);
     }
     
     /**
@@ -63,14 +69,16 @@ public class CustomHead extends HeadRepresentation implements HeadDisplayInforma
      * @param displayName the custom display-name (title) of the head displayed
      * as the item name and when clicking heads for information.
      * @param textureUrlB64 the base64-encoded texture json + URL
+     * @param lore the loretext to display, or null for the default PlayerHeads loretext.
      * @deprecated custom heads should avoid using owner usernames whenever possible.
      */
     @Deprecated
-    public CustomHead(final UUID uuid, final String ownerName, final String spawnName, final String displayName, final String textureUrlB64) {
+    public CustomHead(final UUID uuid, final String ownerName, final String spawnName, final String displayName, final String textureUrlB64,final List<String> lore) {
         super(null, ownerName, uuid);
         this.spawnName = spawnName;
         this.displayName = displayName;
         this.textureUrlB64 = textureUrlB64;
+        this.lore.addAll(lore);
     }
 
     @Override
@@ -92,5 +100,9 @@ public class CustomHead extends HeadRepresentation implements HeadDisplayInforma
     public String getTexture() {
         return textureUrlB64;
     }
-
+    
+    @Override
+    public ArrayList<String> getLore() {
+        return lore;
+    }
 }

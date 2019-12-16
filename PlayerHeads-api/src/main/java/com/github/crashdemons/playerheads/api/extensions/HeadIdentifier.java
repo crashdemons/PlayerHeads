@@ -20,8 +20,8 @@ import org.jetbrains.annotations.Nullable;
  */
 @Deprecated
 public interface HeadIdentifier {
-    @Nullable public abstract HeadRepresentation identifyHead(final EntityType t);
-    @Nullable public abstract HeadRepresentation identifyHead(final Entity e);
-    @Nullable public abstract HeadRepresentation identifyHead(final ItemStack s);
-    @Nullable public abstract HeadRepresentation identifyHead(final BlockState s);
+    @Nullable public  HeadRepresentation identifyHead(final EntityType t);
+    @Nullable public  HeadRepresentation identifyHead(final Entity e);
+    @Nullable public  HeadRepresentation identifyHead(final ItemStack s);
+    @Nullable public  HeadRepresentation identifyHead(final BlockState s);
 }

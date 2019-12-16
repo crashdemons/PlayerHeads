@@ -16,6 +16,6 @@ import org.jetbrains.annotations.Nullable;
  */
 @Deprecated
 public interface HeadExtension {
-    public abstract boolean isHandledHead(final HeadRepresentation hr);
-    @NotNull public abstract double getDropRate(final CustomHead hr);
+    public  boolean isHandledHead(final HeadRepresentation hr);
+    @NotNull public  double getDropRate(final CustomHead hr);
 }
