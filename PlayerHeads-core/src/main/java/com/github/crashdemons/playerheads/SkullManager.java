@@ -1,14 +1,19 @@
 
 package com.github.crashdemons.playerheads;
 
+import com.github.crashdemons.playerheads.api.HeadDisplayInformation;
+import com.github.crashdemons.playerheads.api.HeadRepresentation;
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import com.github.crashdemons.playerheads.compatibility.CompatibleSkullMaterial;
 import java.util.UUID;
 import java.util.ArrayList;
+import java.util.List;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.BlockState;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import org.shininet.bukkit.playerheads.Config;
@@ -22,12 +27,34 @@ public final class SkullManager {
     
     private SkullManager(){}
     
+    
+    public static void Skull(HeadRepresentation representation, HeadDisplayInformation display){
+        
+    }
+    public static void applyHeadDetails(ItemMeta headMeta, HeadRepresentation representation, HeadDisplayInformation display){
+        applyDisplayName(headMeta,display.getDisplayName());
+        List<String> lore = display.getLore();
+        if(lore!=null) applyLore(headMeta,display.getLore());
+        UUID id = representation.getOwnerId();
+        OfflinePlayer op = Bukkit.getOfflinePlayer(id);
+        if(headMeta instanceof SkullMeta){
+            applyOwningPlayer((SkullMeta)headMeta,op);
+            applyTexture((SkullMeta)headMeta, id, display.getTexture());
+        }
+    }
+    
+    private static void applyLore(ItemMeta headMeta,List<String> lore){
+        headMeta.setLore(new ArrayList<>(lore));
+    }
+    
+    
+    
     /**
      * Applies Lore text (including the PlayerHeads plugin name) to a playerhead's meta.
      * @param headMeta The SkullMeta associated with the playerhead to modify
      * @param extra Extra lore text to display under the "PlayerHeads" line.
      */
-    private static void applyLore(SkullMeta headMeta,String extra){
+    private static void applyLore(ItemMeta headMeta,String extra){
         ArrayList<String> lore = new ArrayList<>();
         lore.add(" ");
         if(!Lang.LORE_PLUGIN_NAME.isEmpty()) lore.add(ChatColor.BLUE+""+ChatColor.ITALIC+Lang.LORE_PLUGIN_NAME);
@@ -48,7 +75,7 @@ public final class SkullManager {
      * @param headMeta The SkullMeta associated with the playerhead to modify
      * @param display The string containing the display name to set
      */
-    private static void applyDisplayName(SkullMeta headMeta,String display){
+    private static void applyDisplayName(ItemMeta headMeta,String display){
         headMeta.setDisplayName(display);
     }
     
