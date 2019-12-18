@@ -138,7 +138,7 @@ public abstract class Provider_common implements CompatibilityProvider {
         //if(killer!=null) System.out.println("original killer: "+killer.getType().name()+" "+killer.getName());
         
         if(killer==null && getMobKillers){
-            EntityDamageEvent dmgEvent = event.getEntity().getLastDamageCause();
+            EntityDamageEvent dmgEvent = event.getEntity().getLastDamageCause();//TODO: null?
             if(dmgEvent instanceof EntityDamageByEntityEvent){
                 EntityDamageByEntityEvent entityDmgEvent = (EntityDamageByEntityEvent) dmgEvent;
                 Entity killerEntity = getEntityOwningEntity(entityDmgEvent.getDamager(),  getShooter,  getTameOwner);
