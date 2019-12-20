@@ -6,6 +6,8 @@
 package com.github.crashdemons.playerheads;
 
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
+import com.github.crashdemons.playerheads.compatibility.CompatiblePlugins;
+import com.github.crashdemons.playerheads.compatibility.plugins.heads.ExternalHeadHandling;
 import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -87,6 +89,7 @@ public class DropManager {
         TexturedSkullType skullType = SkullConverter.skullTypeFromBlockState(state);
         Location location = block.getLocation();
         ItemStack item = null;
+        if(CompatiblePlugins.heads.getExternalHeadHandling(state)==ExternalHeadHandling.NO_INTERACTION) return BlockDropResult.FAILED_CUSTOM_HEAD;
         boolean addLore = plugin.configFile.getBoolean("addlore");
         switch (skullType) {
             case PLAYER:

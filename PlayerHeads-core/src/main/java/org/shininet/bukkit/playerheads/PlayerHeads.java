@@ -114,11 +114,11 @@ public final class PlayerHeads extends JavaPlugin implements Listener,PlayerHead
             this.getServer().getPluginManager().disablePlugin(this);
             return;
         }
-        CompatiblePlugins.init(this);
         
         configFile = getConfig();
         configFile.options().copyDefaults(true);
         saveDefaultConfig();
+        CompatiblePlugins.init(this);
 
         initUpdater();
 
