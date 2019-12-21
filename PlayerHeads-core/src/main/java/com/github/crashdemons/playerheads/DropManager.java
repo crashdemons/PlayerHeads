@@ -29,65 +29,79 @@ import org.shininet.bukkit.playerheads.events.BlockDropHeadEvent;
  * @author crashdemons (crashenator at gmail.com)
  */
 public class DropManager {
+
     private final static long TICKS_PER_SECOND = 20;
-    private final static long MS_PER_TICK = 1000/TICKS_PER_SECOND; //50
-    private DropManager(){}
-    
-    public static void dropItemNow(Location location, ItemStack drop, boolean naturally){
-        if(naturally) location.getWorld().dropItemNaturally(location, drop);
-        else location.getWorld().dropItem(location, drop);
+    private final static long MS_PER_TICK = 1000 / TICKS_PER_SECOND; //50
+
+    private DropManager() {
     }
-    public static void scheduleItemDrops(PlayerHeads plugin,  List<ItemStack> drops, final Location location, final boolean naturally,  final boolean delayDrop, final long tickDelay){
-        for(final ItemStack drop : drops){
-            if(drop==null) continue;
-            if(delayDrop){
-                plugin.scheduleSync(new Runnable(){
+
+    public static void dropItemNow(Location location, ItemStack drop, boolean naturally) {
+        if (naturally) {
+            location.getWorld().dropItemNaturally(location, drop);
+        } else {
+            location.getWorld().dropItem(location, drop);
+        }
+    }
+
+    public static void scheduleItemDrops(PlayerHeads plugin, List<ItemStack> drops, final Location location, final boolean naturally, final boolean delayDrop, final long tickDelay) {
+        for (final ItemStack drop : drops) {
+            if (drop == null) {
+                continue;
+            }
+            if (delayDrop) {
+                plugin.scheduleSync(new Runnable() {
                     @Override
-                    public void run(){
+                    public void run() {
                         //System.out.println(" delayed head drop running");
-                        dropItemNow(location,drop,naturally);
+                        dropItemNow(location, drop, naturally);
                     }
-                },tickDelay);
+                }, tickDelay);
                 //System.out.println("scheduled head drop for "+ticks+" ticks");
-            }else{
-                dropItemNow(location,drop,naturally);
+            } else {
+                dropItemNow(location, drop, naturally);
             }
         }
     }
-    public static void requestNewDrops(PlayerHeads plugin, List<ItemStack> drops, boolean isWitherDrop, @NotNull Location location){
-        if(drops.isEmpty()) return;
-        if(isWitherDrop && plugin.configFile.getBoolean("delaywitherdrop")){
+
+    public static void requestNewDrops(PlayerHeads plugin, List<ItemStack> drops, boolean isWitherDrop, @NotNull Location location) {
+        if (drops.isEmpty()) {
+            return;
+        }
+        if (isWitherDrop && plugin.configFile.getBoolean("delaywitherdrop")) {
             int delay = plugin.configFile.getInt("delaywitherdropms");
-            long ticks =  delay / MS_PER_TICK;
+            long ticks = delay / MS_PER_TICK;
             scheduleItemDrops(plugin, drops, location, true, true, ticks);
-        }else { // this function forces  antideathchest = true behavior.  use wisely.
+        } else { // this function forces  antideathchest = true behavior.  use wisely.
             scheduleItemDrops(plugin, drops, location, true, false, 0);
         }
     }
-    public static void requestDrops(PlayerHeads plugin, List<ItemStack> drops, boolean isWitherDrop, @NotNull Event event){
-        if(drops.isEmpty()) return;
-        if(event==null){
+
+    public static void requestDrops(PlayerHeads plugin, List<ItemStack> drops, boolean isWitherDrop, @NotNull Event event) {
+        if (drops.isEmpty()) {
+            return;
+        }
+        if (event == null) {
             throw new IllegalArgumentException("EntityDeathEvent must not be null to be able to add drops and determine location.");
         }
         Location location = null;
-        if(event instanceof EntityEvent){
-            Entity entity = ((EntityEvent)event).getEntity();
-            if(entity==null){//shouuld not happen
+        if (event instanceof EntityEvent) {
+            Entity entity = ((EntityEvent) event).getEntity();
+            if (entity == null) {//shouuld not happen
                 throw new IllegalStateException("EntityDeathEvent contained null entity!");
             }
             location = entity.getLocation();
-        }else if(event instanceof BlockEvent){
+        } else if (event instanceof BlockEvent) {
             Block block = ((BlockEvent) event).getBlock();
-            if(block==null){//shouuld not happen
+            if (block == null) {//shouuld not happen
                 throw new IllegalStateException("BlockEvent contained null block!");
             }
             location = block.getLocation();
-        }else{
+        } else {
             throw new IllegalArgumentException("Drop event must be either EntityEvent or BlockEvent.");
         }
     }
-    
-    
+
     public static ItemStack createConvertedMobhead(PlayerHeads plugin, TexturedSkullType skullType, boolean isSourceSkinnable, boolean addLore, int quantity) {
         boolean usevanillaskull = plugin.configFile.getBoolean("dropvanillaheads");
         boolean convertvanillahead = plugin.configFile.getBoolean("convertvanillaheads");
@@ -100,14 +114,16 @@ public class DropManager {
         }
         return SkullManager.MobSkull(skullType, quantity, usevanillaskull, addLore);
     }
-    
+
     //drop a head based on a block being broken in some fashion
     //NOTE: the blockbreak handler expects this to unconditionally drop the item unless the new event is cancelled.
     public static BlockDropResult blockDrop(PlayerHeads plugin, BlockEvent event, Block block, BlockState state) {
         TexturedSkullType skullType = SkullConverter.skullTypeFromBlockState(state);
         Location location = block.getLocation();
         ItemStack item = null;
-        if(CompatiblePlugins.heads.getExternalHeadHandling(state)==ExternalHeadHandling.NO_INTERACTION) return BlockDropResult.FAILED_CUSTOM_HEAD;
+        if (CompatiblePlugins.heads.getExternalHeadHandling(state) == ExternalHeadHandling.NO_INTERACTION) {
+            return BlockDropResult.FAILED_CUSTOM_HEAD;
+        }
         boolean addLore = plugin.configFile.getBoolean("addlore");
         switch (skullType) {
             case PLAYER:
@@ -120,7 +136,7 @@ public class DropManager {
                 break;
             default:
                 boolean blockIsSkinnable = Compatibility.getProvider().isPlayerhead(block.getState());
-                item = DropManager.createConvertedMobhead(plugin,skullType, blockIsSkinnable, addLore, Config.defaultStackSize);
+                item = DropManager.createConvertedMobhead(plugin, skullType, blockIsSkinnable, addLore, Config.defaultStackSize);
                 break;
         }
         block.setType(Material.AIR);
@@ -129,7 +145,7 @@ public class DropManager {
         if (eventDropHead.isCancelled()) {
             return BlockDropResult.FAILED_EVENT_CANCELLED;
         }
-        DropManager.requestDrops(plugin, eventDropHead.getDrops(),false,event);
+        DropManager.requestDrops(plugin, eventDropHead.getDrops(), false, event);
         return BlockDropResult.SUCCESS;
     }
 }
