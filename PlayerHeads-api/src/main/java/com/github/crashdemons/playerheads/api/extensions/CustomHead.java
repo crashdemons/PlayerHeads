@@ -24,7 +24,6 @@ import com.github.crashdemons.playerheads.api.HeadDisplay;
 @Deprecated
 public class CustomHead extends HeadIdentity implements HeadDisplay {
 
-    private final String spawnName;
     private final String displayName;
     private final String textureUrlB64;
     private final ArrayList<String> lore = null;
@@ -46,9 +45,8 @@ public class CustomHead extends HeadIdentity implements HeadDisplay {
      * @param textureUrlB64 the base64-encoded texture json + URL
      * @param lore the loretext to display, or null for the default PlayerHeads loretext.
      */
-    public CustomHead(final UUID uuid, final String spawnName, final String displayName, final String textureUrlB64, final List<String> lore,final String spawnString) {
-        super(null, "", uuid,spawnString);
-        this.spawnName = spawnName;
+    public CustomHead(final UUID uuid, final String spawnName, final String displayName, final String textureUrlB64, final List<String> lore) {
+        super(null, "", uuid,spawnName);
         this.displayName = displayName;
         this.textureUrlB64 = textureUrlB64;
         this.lore.addAll(lore);
@@ -73,9 +71,8 @@ public class CustomHead extends HeadIdentity implements HeadDisplay {
      * @deprecated custom heads should avoid using owner usernames whenever possible.
      */
     @Deprecated
-    public CustomHead(final UUID uuid, final String ownerName, final String spawnName, final String displayName, final String textureUrlB64,final List<String> lore,final String spawnString) {
-        super(null, ownerName, uuid, spawnString);
-        this.spawnName = spawnName;
+    public CustomHead(final UUID uuid, final String ownerName, final String spawnName, final String displayName, final String textureUrlB64,final List<String> lore) {
+        super(null, ownerName, uuid, spawnName);
         this.displayName = displayName;
         this.textureUrlB64 = textureUrlB64;
         this.lore.addAll(lore);
