@@ -14,9 +14,12 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Skull;
+import org.bukkit.entity.Entity;
+import org.bukkit.event.Event;
 import org.bukkit.event.block.BlockEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import org.shininet.bukkit.playerheads.Config;
 import org.shininet.bukkit.playerheads.PlayerHeads;
 import org.shininet.bukkit.playerheads.events.BlockDropHeadEvent;
@@ -34,7 +37,7 @@ public class DropManager {
         if(naturally) location.getWorld().dropItemNaturally(location, drop);
         else location.getWorld().dropItem(location, drop);
     }
-    public static void dropItems(PlayerHeads plugin,  List<ItemStack> drops, final Location location, final boolean naturally,  final boolean delayDrop, final long tickDelay){
+    public static void scheduleItemDrops(PlayerHeads plugin,  List<ItemStack> drops, final Location location, final boolean naturally,  final boolean delayDrop, final long tickDelay){
         for(final ItemStack drop : drops){
             if(drop==null) continue;
             if(delayDrop){
@@ -51,22 +54,37 @@ public class DropManager {
             }
         }
     }
-    public static void requestDrops(PlayerHeads plugin, List<ItemStack> drops, boolean isWitherDrop, EntityDeathEvent event){
+    public static void requestNewDrops(PlayerHeads plugin, List<ItemStack> drops, boolean isWitherDrop, @NotNull Location location){
         if(drops.isEmpty()) return;
         if(isWitherDrop && plugin.configFile.getBoolean("delaywitherdrop")){
             int delay = plugin.configFile.getInt("delaywitherdropms");
             long ticks =  delay / MS_PER_TICK;
-            final Location location = event.getEntity().getLocation();
-            dropItems(plugin, drops, location, true, true, ticks);
-        }else if (plugin.configFile.getBoolean("antideathchest") || event==null) {
-            Location location = event.getEntity().getLocation();
-            dropItems(plugin, drops, location, true, false, 0);
-        } else {
-            event.getDrops().addAll(drops);
+            scheduleItemDrops(plugin, drops, location, true, true, ticks);
+        }else { // this function forces  antideathchest = true behavior.  use wisely.
+            scheduleItemDrops(plugin, drops, location, true, false, 0);
         }
     }
-    public static void requestDrops(PlayerHeads plugin, List<ItemStack> drops){
-        requestDrops(plugin,drops,false,null);
+    public static void requestDrops(PlayerHeads plugin, List<ItemStack> drops, boolean isWitherDrop, @NotNull Event event){
+        if(drops.isEmpty()) return;
+        if(event==null){
+            throw new IllegalArgumentException("EntityDeathEvent must not be null to be able to add drops and determine location.");
+        }
+        Location location = null;
+        if(event instanceof EntityEvent){
+            Entity entity = ((EntityEvent)event).getEntity();
+            if(entity==null){//shouuld not happen
+                throw new IllegalStateException("EntityDeathEvent contained null entity!");
+            }
+            location = entity.getLocation();
+        }else if(event instanceof BlockEvent){
+            Block block = ((BlockEvent) event).getBlock();
+            if(block==null){//shouuld not happen
+                throw new IllegalStateException("BlockEvent contained null block!");
+            }
+            location = block.getLocation();
+        }else{
+            throw new IllegalArgumentException("Drop event must be either EntityEvent or BlockEvent.");
+        }
     }
     
     
@@ -111,7 +129,7 @@ public class DropManager {
         if (eventDropHead.isCancelled()) {
             return BlockDropResult.FAILED_EVENT_CANCELLED;
         }
-        DropManager.requestDrops(plugin, eventDropHead.getDrops());
+        DropManager.requestDrops(plugin, eventDropHead.getDrops(),false,event);
         return BlockDropResult.SUCCESS;
     }
 }
