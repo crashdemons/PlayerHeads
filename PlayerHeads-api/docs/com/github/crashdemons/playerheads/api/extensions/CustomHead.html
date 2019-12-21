@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":42,"i1":42,"i2":42,"i3":42,"i4":42};
+var methods = {"i0":42,"i1":42,"i2":42,"i3":42};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -100,7 +100,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</a></li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">com.github.crashdemons.playerheads.api.HeadRepresentation</a></li>
+<li><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">com.github.crashdemons.playerheads.api.HeadIdentity</a></li>
 <li>
 <ul class="inheritance">
 <li>com.github.crashdemons.playerheads.api.extensions.CustomHead</li>
@@ -114,7 +114,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html" title="interface in com.github.crashdemons.playerheads.api">HeadDisplayInformation</a></dd>
+<dd><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplay.html" title="interface in com.github.crashdemons.playerheads.api">HeadDisplay</a></dd>
 </dl>
 <hr>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
@@ -123,8 +123,8 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang">@Deprecated</a>
 public class <span class="typeNameLabel">CustomHead</span>
-extends <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a>
-implements <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html" title="interface in com.github.crashdemons.playerheads.api">HeadDisplayInformation</a></pre>
+extends <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a>
+implements <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplay.html" title="interface in com.github.crashdemons.playerheads.api">HeadDisplay</a></pre>
 <div class="block">Custom head type with information required to create, display, spawn, and
  detect the head.</div>
 <dl>
@@ -151,23 +151,25 @@ implements <a href="../../../../../../com/github/crashdemons/playerheads/api/Hea
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/CustomHead.html#CustomHead-java.util.UUID-java.lang.String-java.lang.String-java.lang.String-java.util.List-">CustomHead</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html?is-external=true" title="class or interface in java.util">UUID</a>&nbsp;uuid,
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/CustomHead.html#CustomHead-java.util.UUID-java.lang.String-java.lang.String-java.lang.String-java.util.List-java.lang.String-">CustomHead</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html?is-external=true" title="class or interface in java.util">UUID</a>&nbsp;uuid,
           <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;spawnName,
           <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;displayName,
           <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;textureUrlB64,
-          <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;lore)</code>
+          <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;lore,
+          <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;spawnString)</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 <div class="block">Constructs a custom head type with information required to create,
  display, spawn, and detect the head.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/CustomHead.html#CustomHead-java.util.UUID-java.lang.String-java.lang.String-java.lang.String-java.lang.String-java.util.List-">CustomHead</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html?is-external=true" title="class or interface in java.util">UUID</a>&nbsp;uuid,
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/CustomHead.html#CustomHead-java.util.UUID-java.lang.String-java.lang.String-java.lang.String-java.lang.String-java.util.List-java.lang.String-">CustomHead</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html?is-external=true" title="class or interface in java.util">UUID</a>&nbsp;uuid,
           <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;ownerName,
           <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;spawnName,
           <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;displayName,
           <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;textureUrlB64,
-          <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;lore)</code>
+          <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;lore,
+          <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;spawnString)</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
 <div class="block"><span class="deprecationComment">custom heads should avoid using owner usernames whenever possible.</span></div>
 </div>
@@ -205,14 +207,6 @@ implements <a href="../../../../../../com/github/crashdemons/playerheads/api/Hea
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/CustomHead.html#getSpawnName--">getSpawnName</a></span>()</code>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
-<div class="block">Get the "spawn" name for the associated skulltype, as defined in the
- "lang" file.</div>
-</td>
-</tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/CustomHead.html#getTexture--">getTexture</a></span>()</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 <div class="block">Get the Base64-encoded texture string associated with the skulltype
@@ -220,7 +214,7 @@ implements <a href="../../../../../../com/github/crashdemons/playerheads/api/Hea
  Originally directly part of HeadType until 5.3</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/CustomHead.html#getType--">getType</a></span>()</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
@@ -228,11 +222,11 @@ implements <a href="../../../../../../com/github/crashdemons/playerheads/api/Hea
 </tr>
 </table>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.com.github.crashdemons.playerheads.api.HeadRepresentation">
+<li class="blockList"><a name="methods.inherited.from.class.com.github.crashdemons.playerheads.api.HeadIdentity">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;com.github.crashdemons.playerheads.api.<a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></h3>
-<code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html#compare-com.github.crashdemons.playerheads.api.HeadRepresentation-">compare</a>, <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html#getOwnerId--">getOwnerId</a>, <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html#getOwnerName--">getOwnerName</a></code></li>
+<h3>Methods inherited from class&nbsp;com.github.crashdemons.playerheads.api.<a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a></h3>
+<code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html#compare-com.github.crashdemons.playerheads.api.HeadIdentity-">compare</a>, <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html#getOwnerId--">getOwnerId</a>, <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html#getOwnerName--">getOwnerName</a>, <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html#getSpawnString--">getSpawnString</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -255,7 +249,7 @@ implements <a href="../../../../../../com/github/crashdemons/playerheads/api/Hea
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="CustomHead-java.util.UUID-java.lang.String-java.lang.String-java.lang.String-java.util.List-">
+<a name="CustomHead-java.util.UUID-java.lang.String-java.lang.String-java.lang.String-java.util.List-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -265,7 +259,8 @@ implements <a href="../../../../../../com/github/crashdemons/playerheads/api/Hea
                   <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;spawnName,
                   <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;displayName,
                   <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;textureUrlB64,
-                  <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;lore)</pre>
+                  <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;lore,
+                  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;spawnString)</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 <div class="block">Constructs a custom head type with information required to create,
  display, spawn, and detect the head. This class does not invoke any
@@ -285,7 +280,7 @@ implements <a href="../../../../../../com/github/crashdemons/playerheads/api/Hea
 </dl>
 </li>
 </ul>
-<a name="CustomHead-java.util.UUID-java.lang.String-java.lang.String-java.lang.String-java.lang.String-java.util.List-">
+<a name="CustomHead-java.util.UUID-java.lang.String-java.lang.String-java.lang.String-java.lang.String-java.util.List-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockListLast">
@@ -297,7 +292,8 @@ public&nbsp;CustomHead(<a href="https://docs.oracle.com/javase/8/docs/api/java/u
                                <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;spawnName,
                                <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;displayName,
                                <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;textureUrlB64,
-                               <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;lore)</pre>
+                               <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;lore,
+                               <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;spawnString)</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">custom heads should avoid using owner usernames whenever possible.</span></div>
 <div class="block">Constructs a custom head type with information required to create,
  display, spawn, and detect the head. This class does not invoke any
@@ -336,28 +332,7 @@ public&nbsp;CustomHead(<a href="https://docs.oracle.com/javase/8/docs/api/java/u
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html#getType--">getType</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></dd>
-</dl>
-</li>
-</ul>
-<a name="getSpawnName--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getSpawnName</h4>
-<pre>public&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getSpawnName()</pre>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html#getSpawnName--">HeadDisplayInformation</a></code></span></div>
-<div class="block">Get the "spawn" name for the associated skulltype, as defined in the
- "lang" file.
- <p>
- This string is used to spawn-in the skull in external commands.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html#getSpawnName--">getSpawnName</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html" title="interface in com.github.crashdemons.playerheads.api">HeadDisplayInformation</a></code></dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>A string containing the spawnname.</dd>
+<dd><code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html#getType--">getType</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a></code></dd>
 </dl>
 </li>
 </ul>
@@ -369,14 +344,14 @@ public&nbsp;CustomHead(<a href="https://docs.oracle.com/javase/8/docs/api/java/u
 <h4>getDisplayName</h4>
 <pre>public&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getDisplayName()</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html#getDisplayName--">HeadDisplayInformation</a></code></span></div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplay.html#getDisplayName--">HeadDisplay</a></code></span></div>
 <div class="block">Gets the item displayname for the associated skulltype, as defined in the
  "lang" file.
  
  Originally directly part of HeadType until 5.3</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html#getDisplayName--">getDisplayName</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html" title="interface in com.github.crashdemons.playerheads.api">HeadDisplayInformation</a></code></dd>
+<dd><code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplay.html#getDisplayName--">getDisplayName</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplay.html" title="interface in com.github.crashdemons.playerheads.api">HeadDisplay</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>A string containing the skulltype's displayname</dd>
 </dl>
@@ -390,13 +365,13 @@ public&nbsp;CustomHead(<a href="https://docs.oracle.com/javase/8/docs/api/java/u
 <h4>getTexture</h4>
 <pre>public&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getTexture()</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html#getTexture--">HeadDisplayInformation</a></code></span></div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplay.html#getTexture--">HeadDisplay</a></code></span></div>
 <div class="block">Get the Base64-encoded texture string associated with the skulltype
 
  Originally directly part of HeadType until 5.3</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html#getTexture--">getTexture</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html" title="interface in com.github.crashdemons.playerheads.api">HeadDisplayInformation</a></code></dd>
+<dd><code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplay.html#getTexture--">getTexture</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplay.html" title="interface in com.github.crashdemons.playerheads.api">HeadDisplay</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>A base64 string</dd>
 </dl>
@@ -410,12 +385,12 @@ public&nbsp;CustomHead(<a href="https://docs.oracle.com/javase/8/docs/api/java/u
 <h4>getLore</h4>
 <pre>public&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html?is-external=true" title="class or interface in java.util">ArrayList</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;getLore()</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html#getLore--">HeadDisplayInformation</a></code></span></div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplay.html#getLore--">HeadDisplay</a></code></span></div>
 <div class="block">gets the head's special loretext (item description) to display for the item.
  If this is null, the default PlayerHeads loretext will be used (if applicable) instead.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html#getLore--">getLore</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplayInformation.html" title="interface in com.github.crashdemons.playerheads.api">HeadDisplayInformation</a></code></dd>
+<dd><code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplay.html#getLore--">getLore</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadDisplay.html" title="interface in com.github.crashdemons.playerheads.api">HeadDisplay</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>list of loretext lines to override the loretext, or null for default.</dd>
 </dl>

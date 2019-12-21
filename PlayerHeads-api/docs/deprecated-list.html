@@ -209,25 +209,10 @@
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colOne"><a href="com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadItem-com.github.crashdemons.playerheads.api.HeadType-int-">com.github.crashdemons.playerheads.api.PlayerHeadsAPI.getHeadItem(HeadType, int)</a>
-<div class="block"><span class="deprecationComment">consider using getHeadItem(HeadRepresentation hr) instead</span></div>
-</td>
-</tr>
-<tr class="altColor">
-<td class="colOne"><a href="com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadRepresentation-org.bukkit.entity.EntityType-">com.github.crashdemons.playerheads.api.PlayerHeadsAPI.getHeadRepresentation(EntityType)</a>
+<td class="colOne"><a href="com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadIdentity-org.bukkit.entity.EntityType-">com.github.crashdemons.playerheads.api.PlayerHeadsAPI.getHeadIdentity(EntityType)</a>
 <div class="block"><span class="deprecationComment">this may not do exactly what you want because between MC
  1.10-1.13 many entities were separated from variants to their own. Also,
  this foregoes any head ownership information beyond the that defined by the type of mob/head.</span></div>
-</td>
-</tr>
-<tr class="rowColor">
-<td class="colOne"><a href="com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadTypeOf-org.bukkit.entity.EntityType-">com.github.crashdemons.playerheads.api.PlayerHeadsAPI.getHeadTypeOf(EntityType)</a>
-<div class="block"><span class="deprecationComment">this may not do exactly what you want because between MC
- 1.10-1.13 many entities were separated from variants to their own
- entity-type. Using this method will introduce version-dependent behavior
- (For example: this may not be able to tell a stray from a skeleton in
- certain server versions) and should be avoided by using
- getHeadFrom(Entity) instead.</span></div>
 </td>
 </tr>
 <tr class="altColor">
@@ -293,7 +278,7 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colOne"><a href="com/github/crashdemons/playerheads/api/extensions/CustomHead.html#CustomHead-java.util.UUID-java.lang.String-java.lang.String-java.lang.String-java.lang.String-java.util.List-">com.github.crashdemons.playerheads.api.extensions.CustomHead(UUID, String, String, String, String, List&lt;String&gt;)</a>
+<td class="colOne"><a href="com/github/crashdemons/playerheads/api/extensions/CustomHead.html#CustomHead-java.util.UUID-java.lang.String-java.lang.String-java.lang.String-java.lang.String-java.util.List-java.lang.String-">com.github.crashdemons.playerheads.api.extensions.CustomHead(UUID, String, String, String, String, List&lt;String&gt;, String)</a>
 <div class="block"><span class="deprecationComment">custom heads should avoid using owner usernames whenever possible.</span></div>
 </td>
 </tr>

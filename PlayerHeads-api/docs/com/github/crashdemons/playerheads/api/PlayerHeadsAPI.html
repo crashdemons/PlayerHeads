@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":38,"i2":6,"i3":6,"i4":6,"i5":38,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":38,"i12":6,"i13":6,"i14":6,"i15":6,"i16":6,"i17":6,"i18":6,"i19":6,"i20":6,"i21":38,"i22":6,"i23":6};
+var methods = {"i0":6,"i1":6,"i2":38,"i3":6,"i4":6,"i5":6,"i6":6,"i7":38,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":6,"i16":6,"i17":6,"i18":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -127,12 +127,18 @@ var activeTableTab = "activeTableTab";
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getBoringHeadIdentity--">getBoringHeadIdentity</a></span>()</code>
+<div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes for a "boring playerhead" as if 'dropboringplayerheads' was enabled.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getBoringPlayerheadItem-int-">getBoringPlayerheadItem</a></span>(int&nbsp;num)</code>
 <div class="block">Gets a "boring" playerhead without an owner as if "dropboringplayerheads" was enabled.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>@Nullable <a href="../../../../../com/github/crashdemons/playerheads/compatibility/CompatibilityProvider.html" title="interface in com.github.crashdemons.playerheads.compatibility">CompatibilityProvider</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getCompatibilityProvider--">getCompatibilityProvider</a></span>()</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
@@ -140,72 +146,32 @@ var activeTableTab = "activeTableTab";
 </div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getCustomHeadType--">getCustomHeadType</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>@Nullable <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadDrop-org.bukkit.entity.Entity-">getHeadDrop</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/Entity.html?is-external=true" title="class or interface in org.bukkit.entity">Entity</a>&nbsp;e)</code>
 <div class="block">Gets a stack of head items as they would normally be dropped from the
  given entity.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code>@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadItem-com.github.crashdemons.playerheads.api.HeadRepresentation-int-">getHeadItem</a></span>(<a href="../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a>&nbsp;head,
-           int&nbsp;num)</code>
-<div class="block">Create head items from the head representation details (type and owner).</div>
-</td>
-</tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code>@Nullable <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadItem-com.github.crashdemons.playerheads.api.HeadType-int-">getHeadItem</a></span>(@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;h,
-           int&nbsp;num)</code>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
-<div class="block"><span class="deprecationComment">consider using getHeadItem(HeadRepresentation hr) instead</span></div>
-</div>
-</td>
-</tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code>@Nullable <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadItem-org.bukkit.OfflinePlayer-int-boolean-">getHeadItem</a></span>(<a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/OfflinePlayer.html?is-external=true" title="class or interface in org.bukkit">OfflinePlayer</a>&nbsp;player,
-           int&nbsp;num,
-           boolean&nbsp;forceOwner)</code>
-<div class="block">Gets the playerhead for the user provided.</div>
-</td>
-</tr>
-<tr id="i7" class="rowColor">
-<td class="colFirst"><code>@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadItem-java.lang.String-int-boolean-">getHeadItem</a></span>(@NotNull <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;username,
-           int&nbsp;num,
-           boolean&nbsp;forceOwner)</code>
-<div class="block">Gets the playerhead for the user provided.</div>
-</td>
-</tr>
-<tr id="i8" class="altColor">
-<td class="colFirst"><code>@Nullable <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadItemFromSpawnString-java.lang.String-int-boolean-">getHeadItemFromSpawnString</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;spawnName,
-                          int&nbsp;num,
-                          boolean&nbsp;forceOwner)</code>
-<div class="block">Gets a head item based on the 'spawn' string used in PlayerHeads (like #zombie or playername).</div>
-</td>
-</tr>
-<tr id="i9" class="rowColor">
-<td class="colFirst"><code>@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadRepresentation-org.bukkit.block.BlockState-">getHeadRepresentation</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/block/BlockState.html?is-external=true" title="class or interface in org.bukkit.block">BlockState</a>&nbsp;state)</code>
+<td class="colFirst"><code>@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadIdentity-org.bukkit.block.BlockState-">getHeadIdentity</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/block/BlockState.html?is-external=true" title="class or interface in org.bukkit.block">BlockState</a>&nbsp;state)</code>
 <div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
-<td class="colFirst"><code>@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadRepresentation-org.bukkit.entity.Entity-">getHeadRepresentation</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/Entity.html?is-external=true" title="class or interface in org.bukkit.entity">Entity</a>&nbsp;e)</code>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadIdentity-org.bukkit.entity.Entity-">getHeadIdentity</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/Entity.html?is-external=true" title="class or interface in org.bukkit.entity">Entity</a>&nbsp;e)</code>
 <div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes for an entity's head.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
-<td class="colFirst"><code>@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadRepresentation-org.bukkit.entity.EntityType-">getHeadRepresentation</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/EntityType.html?is-external=true" title="class or interface in org.bukkit.entity">EntityType</a>&nbsp;et)</code>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadIdentity-org.bukkit.entity.EntityType-">getHeadIdentity</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/EntityType.html?is-external=true" title="class or interface in org.bukkit.entity">EntityType</a>&nbsp;et)</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
 <div class="block"><span class="deprecationComment">this may not do exactly what you want because between MC
  1.10-1.13 many entities were separated from variants to their own. Also,
@@ -213,83 +179,77 @@ var activeTableTab = "activeTableTab";
 </div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
-<td class="colFirst"><code>@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadRepresentation-com.github.crashdemons.playerheads.api.HeadType-">getHeadRepresentation</a></span>(@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;ht)</code>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadIdentity-com.github.crashdemons.playerheads.api.HeadType-">getHeadIdentity</a></span>(@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;ht)</code>
 <div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes for an inbuilt HeadType.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
-<td class="colFirst"><code>@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadRepresentation-org.bukkit.inventory.ItemStack-">getHeadRepresentation</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a>&nbsp;stack)</code>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code>@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadIdentity-org.bukkit.inventory.ItemStack-">getHeadIdentity</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a>&nbsp;stack)</code>
 <div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes.</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
-<td class="colFirst"><code>@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadRepresentation-org.bukkit.OfflinePlayer-boolean-">getHeadRepresentation</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/OfflinePlayer.html?is-external=true" title="class or interface in org.bukkit">OfflinePlayer</a>&nbsp;player,
-                     boolean&nbsp;forceOwner)</code>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code>@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadIdentity-org.bukkit.OfflinePlayer-boolean-">getHeadIdentity</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/OfflinePlayer.html?is-external=true" title="class or interface in org.bukkit">OfflinePlayer</a>&nbsp;player,
+               boolean&nbsp;forceOwner)</code>
 <div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes for a user's head.</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
-<td class="colFirst"><code>@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadRepresentation-java.lang.String-boolean-">getHeadRepresentation</a></span>(@NotNull <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;username,
-                     boolean&nbsp;forceOwner)</code>
+<tr id="i11" class="rowColor">
+<td class="colFirst"><code>@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadIdentity-java.lang.String-boolean-">getHeadIdentity</a></span>(@NotNull <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;username,
+               boolean&nbsp;forceOwner)</code>
 <div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes for a user's head.</div>
 </td>
 </tr>
-<tr id="i16" class="altColor">
-<td class="colFirst"><code>@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadRepresentationFromBoringPlayerhead--">getHeadRepresentationFromBoringPlayerhead</a></span>()</code>
-<div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes for a "boring playerhead" as if 'dropboringplayerheads' was enabled.</div>
-</td>
-</tr>
-<tr id="i17" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadRepresentationFromSpawnString-java.lang.String-boolean-">getHeadRepresentationFromSpawnString</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;spawnName,
-                                    boolean&nbsp;forceOwner)</code>
+<tr id="i12" class="altColor">
+<td class="colFirst"><code><a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadIdentityFromSpawnString-java.lang.String-boolean-">getHeadIdentityFromSpawnString</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;spawnName,
+                              boolean&nbsp;forceOwner)</code>
 <div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes the head represented by a 'spawn' string (like #zombie or playername).</div>
 </td>
 </tr>
-<tr id="i18" class="altColor">
-<td class="colFirst"><code>@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadTypeFrom-org.bukkit.block.BlockState-">getHeadTypeFrom</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/block/BlockState.html?is-external=true" title="class or interface in org.bukkit.block">BlockState</a>&nbsp;s)</code>
-<div class="block">Gets the type of head associated with the Block</div>
+<tr id="i13" class="rowColor">
+<td class="colFirst"><code>@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadItem-com.github.crashdemons.playerheads.api.HeadIdentity-int-">getHeadItem</a></span>(<a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a>&nbsp;head,
+           int&nbsp;num)</code>
+<div class="block">Create head items from the head representation details (type and owner).</div>
 </td>
 </tr>
-<tr id="i19" class="rowColor">
-<td class="colFirst"><code>@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadTypeFrom-org.bukkit.inventory.ItemStack-">getHeadTypeFrom</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a>&nbsp;s)</code>
-<div class="block">Gets the type of head associated with an itemstack.</div>
+<tr id="i14" class="altColor">
+<td class="colFirst"><code>@Nullable <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadItem-org.bukkit.OfflinePlayer-int-boolean-">getHeadItem</a></span>(<a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/OfflinePlayer.html?is-external=true" title="class or interface in org.bukkit">OfflinePlayer</a>&nbsp;player,
+           int&nbsp;num,
+           boolean&nbsp;forceOwner)</code>
+<div class="block">Gets the playerhead for the user provided.</div>
 </td>
 </tr>
-<tr id="i20" class="altColor">
-<td class="colFirst"><code>@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadTypeOf-org.bukkit.entity.Entity-">getHeadTypeOf</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/Entity.html?is-external=true" title="class or interface in org.bukkit.entity">Entity</a>&nbsp;e)</code>
-<div class="block">Gets the type of head associated with an entity</div>
+<tr id="i15" class="rowColor">
+<td class="colFirst"><code>@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadItem-java.lang.String-int-boolean-">getHeadItem</a></span>(@NotNull <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;username,
+           int&nbsp;num,
+           boolean&nbsp;forceOwner)</code>
+<div class="block">Gets the playerhead for the user provided.</div>
 </td>
 </tr>
-<tr id="i21" class="rowColor">
-<td class="colFirst"><code>@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadTypeOf-org.bukkit.entity.EntityType-">getHeadTypeOf</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/EntityType.html?is-external=true" title="class or interface in org.bukkit.entity">EntityType</a>&nbsp;t)</code>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
-<div class="block"><span class="deprecationComment">this may not do exactly what you want because between MC
- 1.10-1.13 many entities were separated from variants to their own
- entity-type. Using this method will introduce version-dependent behavior
- (For example: this may not be able to tell a stray from a skeleton in
- certain server versions) and should be avoided by using
- getHeadFrom(Entity) instead.</span></div>
-</div>
+<tr id="i16" class="altColor">
+<td class="colFirst"><code>@Nullable <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadItemFromSpawnString-java.lang.String-int-boolean-">getHeadItemFromSpawnString</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;spawnName,
+                          int&nbsp;num,
+                          boolean&nbsp;forceOwner)</code>
+<div class="block">Gets a head item based on the 'spawn' string used in PlayerHeads (like #zombie or playername).</div>
 </td>
 </tr>
-<tr id="i22" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>@Nullable <a href="../../../../../org/shininet/bukkit/playerheads/PlayerHeadsPlugin.html" title="interface in org.shininet.bukkit.playerheads">PlayerHeadsPlugin</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getPlugin--">getPlugin</a></span>()</code>
 <div class="block">Get the main PlayerHeads Plugin instance</div>
 </td>
 </tr>
-<tr id="i23" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>@Nullable <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getVersion--">getVersion</a></span>()</code>
 <div class="block">Get the version of the PlayerHeads plugin in use</div>
@@ -337,114 +297,6 @@ var activeTableTab = "activeTableTab";
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the version of the PlayerHeads plugin in use</dd>
-</dl>
-</li>
-</ul>
-<a name="getHeadTypeFrom-org.bukkit.inventory.ItemStack-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getHeadTypeFrom</h4>
-<pre>@Nullable
-@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;getHeadTypeFrom(@NotNull
-                                              @NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a>&nbsp;s)</pre>
-<div class="block">Gets the type of head associated with an itemstack.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>s</code> - the itemstack to check</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>the type of head, or null if there is none</dd>
-</dl>
-</li>
-</ul>
-<a name="getHeadTypeFrom-org.bukkit.block.BlockState-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getHeadTypeFrom</h4>
-<pre>@Nullable
-@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;getHeadTypeFrom(@NotNull
-                                              @NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/block/BlockState.html?is-external=true" title="class or interface in org.bukkit.block">BlockState</a>&nbsp;s)</pre>
-<div class="block">Gets the type of head associated with the Block</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>s</code> - the blockstate to check</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>the type of head, or null if the block wasn't a head.</dd>
-</dl>
-</li>
-</ul>
-<a name="getHeadTypeOf-org.bukkit.entity.Entity-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getHeadTypeOf</h4>
-<pre>@Nullable
-@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;getHeadTypeOf(@NotNull
-                                            @NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/Entity.html?is-external=true" title="class or interface in org.bukkit.entity">Entity</a>&nbsp;e)</pre>
-<div class="block">Gets the type of head associated with an entity</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>e</code> - the entity to check</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>the type of head, or null if there is no viable head.</dd>
-</dl>
-</li>
-</ul>
-<a name="getHeadTypeOf-org.bukkit.entity.EntityType-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getHeadTypeOf</h4>
-<pre><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang">@Deprecated</a>
- @Nullable
-@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;getHeadTypeOf(@NotNull
-                                                          @NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/EntityType.html?is-external=true" title="class or interface in org.bukkit.entity">EntityType</a>&nbsp;t)</pre>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">this may not do exactly what you want because between MC
- 1.10-1.13 many entities were separated from variants to their own
- entity-type. Using this method will introduce version-dependent behavior
- (For example: this may not be able to tell a stray from a skeleton in
- certain server versions) and should be avoided by using
- getHeadFrom(Entity) instead.</span></div>
-<div class="block">Gets the type of head associated with an entity-type. See deprecation
- note for limitations.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>t</code> - the entity type to check</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>the type of head, or null if there is no viable head (unsupported mob)</dd>
-<dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadDrop-org.bukkit.entity.Entity-"><code>getHeadDrop(org.bukkit.entity.Entity)</code></a></dd>
-</dl>
-</li>
-</ul>
-<a name="getHeadItem-com.github.crashdemons.playerheads.api.HeadType-int-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getHeadItem</h4>
-<pre>@Nullable
- <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang">@Deprecated</a>
-@Nullable <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a>&nbsp;getHeadItem(@NotNull
-                                                         @NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;h,
-                                                         int&nbsp;num)</pre>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">consider using getHeadItem(HeadRepresentation hr) instead</span></div>
-<div class="block">Gets a stack of head items for the given type and amount. Note:
- player-type heads will be untextured and have no set owner with this
- method.
- 
- This is affected by configuration settings like "dropvanillaheads" and "addlore".</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>h</code> - the head type to create items of</dd>
-<dd><code>num</code> - the number of items to create</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>The item stack, or null if the head type was null</dd>
 </dl>
 </li>
 </ul>
@@ -581,14 +433,14 @@ var activeTableTab = "activeTableTab";
 </dl>
 </li>
 </ul>
-<a name="getHeadRepresentationFromSpawnString-java.lang.String-boolean-">
+<a name="getHeadIdentityFromSpawnString-java.lang.String-boolean-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getHeadRepresentationFromSpawnString</h4>
-<pre><a href="../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a>&nbsp;getHeadRepresentationFromSpawnString(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;spawnName,
-                                                        boolean&nbsp;forceOwner)</pre>
+<h4>getHeadIdentityFromSpawnString</h4>
+<pre><a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a>&nbsp;getHeadIdentityFromSpawnString(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;spawnName,
+                                            boolean&nbsp;forceOwner)</pre>
 <div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes the head represented by a 'spawn' string (like #zombie or playername).
  This is NOT subject to configuration settings except for 'dropboringplayerheads'</div>
 <dl>
@@ -602,15 +454,15 @@ var activeTableTab = "activeTableTab";
 </dl>
 </li>
 </ul>
-<a name="getHeadRepresentation-org.bukkit.entity.Entity-">
+<a name="getHeadIdentity-org.bukkit.entity.Entity-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getHeadRepresentation</h4>
+<h4>getHeadIdentity</h4>
 <pre>@Nullable
-@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a>&nbsp;getHeadRepresentation(@NotNull
-                                                              @NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/Entity.html?is-external=true" title="class or interface in org.bukkit.entity">Entity</a>&nbsp;e)</pre>
+@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a>&nbsp;getHeadIdentity(@NotNull
+                                                  @NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/Entity.html?is-external=true" title="class or interface in org.bukkit.entity">Entity</a>&nbsp;e)</pre>
 <div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes for an entity's head.
  This is NOT subject to configuration settings except for 'dropboringplayerheads'</div>
 <dl>
@@ -623,16 +475,16 @@ var activeTableTab = "activeTableTab";
 </dl>
 </li>
 </ul>
-<a name="getHeadRepresentation-java.lang.String-boolean-">
+<a name="getHeadIdentity-java.lang.String-boolean-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getHeadRepresentation</h4>
+<h4>getHeadIdentity</h4>
 <pre>@NotNull
-@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a>&nbsp;getHeadRepresentation(@NotNull
-                                                            @NotNull <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;username,
-                                                            boolean&nbsp;forceOwner)</pre>
+@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a>&nbsp;getHeadIdentity(@NotNull
+                                                @NotNull <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;username,
+                                                boolean&nbsp;forceOwner)</pre>
 <div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes for a user's head.
  This is NOT subject to configuration settings except for 'dropboringplayerheads'</div>
 <dl>
@@ -646,16 +498,16 @@ var activeTableTab = "activeTableTab";
 </dl>
 </li>
 </ul>
-<a name="getHeadRepresentation-org.bukkit.OfflinePlayer-boolean-">
+<a name="getHeadIdentity-org.bukkit.OfflinePlayer-boolean-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getHeadRepresentation</h4>
+<h4>getHeadIdentity</h4>
 <pre>@NotNull
-@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a>&nbsp;getHeadRepresentation(@NotNull
-                                                            @NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/OfflinePlayer.html?is-external=true" title="class or interface in org.bukkit">OfflinePlayer</a>&nbsp;player,
-                                                            boolean&nbsp;forceOwner)</pre>
+@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a>&nbsp;getHeadIdentity(@NotNull
+                                                @NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/OfflinePlayer.html?is-external=true" title="class or interface in org.bukkit">OfflinePlayer</a>&nbsp;player,
+                                                boolean&nbsp;forceOwner)</pre>
 <div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes for a user's head.
  This is NOT subject to configuration settings except for 'dropboringplayerheads'</div>
 <dl>
@@ -667,14 +519,14 @@ var activeTableTab = "activeTableTab";
 </dl>
 </li>
 </ul>
-<a name="getHeadRepresentationFromBoringPlayerhead--">
+<a name="getBoringHeadIdentity--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getHeadRepresentationFromBoringPlayerhead</h4>
+<h4>getBoringHeadIdentity</h4>
 <pre>@NotNull
-@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a>&nbsp;getHeadRepresentationFromBoringPlayerhead()</pre>
+@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a>&nbsp;getBoringHeadIdentity()</pre>
 <div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes for a "boring playerhead" as if 'dropboringplayerheads' was enabled.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -684,15 +536,15 @@ var activeTableTab = "activeTableTab";
 </dl>
 </li>
 </ul>
-<a name="getHeadRepresentation-org.bukkit.inventory.ItemStack-">
+<a name="getHeadIdentity-org.bukkit.inventory.ItemStack-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getHeadRepresentation</h4>
+<h4>getHeadIdentity</h4>
 <pre>@Nullable
-@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a>&nbsp;getHeadRepresentation(@NotNull
-                                                              @NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a>&nbsp;stack)</pre>
+@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a>&nbsp;getHeadIdentity(@NotNull
+                                                  @NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a>&nbsp;stack)</pre>
 <div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -704,15 +556,15 @@ var activeTableTab = "activeTableTab";
 </dl>
 </li>
 </ul>
-<a name="getHeadRepresentation-org.bukkit.block.BlockState-">
+<a name="getHeadIdentity-org.bukkit.block.BlockState-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getHeadRepresentation</h4>
+<h4>getHeadIdentity</h4>
 <pre>@Nullable
-@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a>&nbsp;getHeadRepresentation(@NotNull
-                                                              @NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/block/BlockState.html?is-external=true" title="class or interface in org.bukkit.block">BlockState</a>&nbsp;state)</pre>
+@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a>&nbsp;getHeadIdentity(@NotNull
+                                                  @NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/block/BlockState.html?is-external=true" title="class or interface in org.bukkit.block">BlockState</a>&nbsp;state)</pre>
 <div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -724,14 +576,14 @@ var activeTableTab = "activeTableTab";
 </dl>
 </li>
 </ul>
-<a name="getHeadItem-com.github.crashdemons.playerheads.api.HeadRepresentation-int-">
+<a name="getHeadItem-com.github.crashdemons.playerheads.api.HeadIdentity-int-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getHeadItem</h4>
 <pre>@NotNull
-@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a>&nbsp;getHeadItem(<a href="../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a>&nbsp;head,
+@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a>&nbsp;getHeadItem(<a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a>&nbsp;head,
                                          int&nbsp;num)</pre>
 <div class="block">Create head items from the head representation details (type and owner).
  This is subject to configuration options like 'addlore', however ownership information will override 'dropboringplayerheads'</div>
@@ -756,16 +608,16 @@ var activeTableTab = "activeTableTab";
 @NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;getCustomHeadType()</pre>
 </li>
 </ul>
-<a name="getHeadRepresentation-org.bukkit.entity.EntityType-">
+<a name="getHeadIdentity-org.bukkit.entity.EntityType-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getHeadRepresentation</h4>
+<h4>getHeadIdentity</h4>
 <pre><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang">@Deprecated</a>
  @Nullable
-@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a>&nbsp;getHeadRepresentation(@NotNull
-                                                                            @NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/EntityType.html?is-external=true" title="class or interface in org.bukkit.entity">EntityType</a>&nbsp;et)</pre>
+@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a>&nbsp;getHeadIdentity(@NotNull
+                                                                @NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/EntityType.html?is-external=true" title="class or interface in org.bukkit.entity">EntityType</a>&nbsp;et)</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">this may not do exactly what you want because between MC
  1.10-1.13 many entities were separated from variants to their own. Also,
  this foregoes any head ownership information beyond the that defined by the type of mob/head.</span></div>
@@ -781,15 +633,15 @@ var activeTableTab = "activeTableTab";
 </dl>
 </li>
 </ul>
-<a name="getHeadRepresentation-com.github.crashdemons.playerheads.api.HeadType-">
+<a name="getHeadIdentity-com.github.crashdemons.playerheads.api.HeadType-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>getHeadRepresentation</h4>
+<h4>getHeadIdentity</h4>
 <pre>@Nullable
-@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a>&nbsp;getHeadRepresentation(@NotNull
-                                                              @NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;ht)</pre>
+@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a>&nbsp;getHeadIdentity(@NotNull
+                                                  @NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;ht)</pre>
 <div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes for an inbuilt HeadType.
  This is NOT subject to configuration settings except for 'dropboringplayerheads'.
  Note: this method only converts the information associated with the preset head-type and does not represent any extended mob ownership information.</div>

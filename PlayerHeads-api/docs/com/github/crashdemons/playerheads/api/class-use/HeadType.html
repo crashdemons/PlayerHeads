@@ -116,38 +116,7 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a></code></td>
-<td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadTypeFrom-org.bukkit.block.BlockState-">getHeadTypeFrom</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/block/BlockState.html?is-external=true" title="class or interface in org.bukkit.block">BlockState</a>&nbsp;s)</code>
-<div class="block">Gets the type of head associated with the Block</div>
-</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a></code></td>
-<td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadTypeFrom-org.bukkit.inventory.ItemStack-">getHeadTypeFrom</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a>&nbsp;s)</code>
-<div class="block">Gets the type of head associated with an itemstack.</div>
-</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a></code></td>
-<td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadTypeOf-org.bukkit.entity.Entity-">getHeadTypeOf</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/Entity.html?is-external=true" title="class or interface in org.bukkit.entity">Entity</a>&nbsp;e)</code>
-<div class="block">Gets the type of head associated with an entity</div>
-</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a></code></td>
-<td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadTypeOf-org.bukkit.entity.EntityType-">getHeadTypeOf</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/EntityType.html?is-external=true" title="class or interface in org.bukkit.entity">EntityType</a>&nbsp;t)</code>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
-<div class="block"><span class="deprecationComment">this may not do exactly what you want because between MC
- 1.10-1.13 many entities were separated from variants to their own
- entity-type. Using this method will introduce version-dependent behavior
- (For example: this may not be able to tell a stray from a skeleton in
- certain server versions) and should be avoided by using
- getHeadFrom(Entity) instead.</span></div>
-</div>
-</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a></code></td>
-<td class="colLast"><span class="typeNameLabel">HeadRepresentation.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html#getType--">getType</a></span>()</code>&nbsp;</td>
+<td class="colLast"><span class="typeNameLabel">HeadIdentity.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html#getType--">getType</a></span>()</code>&nbsp;</td>
 </tr>
 </tbody>
 </table>
@@ -159,17 +128,8 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><code>@Nullable <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a></code></td>
-<td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadItem-com.github.crashdemons.playerheads.api.HeadType-int-">getHeadItem</a></span>(@NotNull <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;h,
-           int&nbsp;num)</code>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
-<div class="block"><span class="deprecationComment">consider using getHeadItem(HeadRepresentation hr) instead</span></div>
-</div>
-</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html" title="class in com.github.crashdemons.playerheads.api">HeadRepresentation</a></code></td>
-<td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadRepresentation-com.github.crashdemons.playerheads.api.HeadType-">getHeadRepresentation</a></span>(@NotNull <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;ht)</code>
+<td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a></code></td>
+<td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadIdentity-com.github.crashdemons.playerheads.api.HeadType-">getHeadIdentity</a></span>(@NotNull <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;ht)</code>
 <div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes for an inbuilt HeadType.</div>
 </td>
 </tr>
@@ -182,13 +142,24 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html#HeadRepresentation-com.github.crashdemons.playerheads.api.HeadType-java.lang.String-">HeadRepresentation</a></span>(<a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;type,
-                  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;ownerName)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html#HeadIdentity-com.github.crashdemons.playerheads.api.HeadType-java.lang.String-">HeadIdentity</a></span>(<a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;type,
+            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;ownerName)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadRepresentation.html#HeadRepresentation-com.github.crashdemons.playerheads.api.HeadType-java.lang.String-java.util.UUID-">HeadRepresentation</a></span>(<a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;type,
-                  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;ownerName,
-                  <a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html?is-external=true" title="class or interface in java.util">UUID</a>&nbsp;ownerId)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html#HeadIdentity-com.github.crashdemons.playerheads.api.HeadType-java.lang.String-java.lang.String-">HeadIdentity</a></span>(<a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;type,
+            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;ownerName,
+            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;spawnString)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html#HeadIdentity-com.github.crashdemons.playerheads.api.HeadType-java.lang.String-java.util.UUID-">HeadIdentity</a></span>(<a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;type,
+            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;ownerName,
+            <a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html?is-external=true" title="class or interface in java.util">UUID</a>&nbsp;ownerId)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html#HeadIdentity-com.github.crashdemons.playerheads.api.HeadType-java.lang.String-java.util.UUID-java.lang.String-">HeadIdentity</a></span>(<a href="../../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;type,
+            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;ownerName,
+            <a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html?is-external=true" title="class or interface in java.util">UUID</a>&nbsp;ownerId,
+            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;spawnString)</code>&nbsp;</td>
 </tr>
 </tbody>
 </table>
