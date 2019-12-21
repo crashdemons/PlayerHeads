@@ -18,6 +18,9 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.shininet.bukkit.playerheads.Config;
 import org.shininet.bukkit.playerheads.Lang;
 import com.github.crashdemons.playerheads.api.HeadDisplay;
+import com.github.crashdemons.playerheads.api.extensions.CustomHead;
+import com.github.crashdemons.playerheads.compatibility.adapters.BukkitOwnable;
+import java.util.Arrays;
 
 /**
  * Defines an abstract class of methods for creating, updating, and applying information to heads managed by the plugin.
@@ -31,64 +34,33 @@ public final class SkullManager {
     public static void Skull(HeadIdentity representation, HeadDisplay display){
         
     }
-    public static void applyHeadDetails(ItemMeta headMeta, HeadIdentity representation, HeadDisplay display){
-        applyDisplayName(headMeta,display.getDisplayName());
-        List<String> lore = display.getLore();
-        if(lore!=null) applyLore(headMeta,display.getLore());
-        UUID id = representation.getOwnerId();
-        OfflinePlayer op = Bukkit.getOfflinePlayer(id);
-        if(headMeta instanceof SkullMeta){
-            applyOwningPlayer((SkullMeta)headMeta,op);
-            applyTexture((SkullMeta)headMeta, id, display.getTexture());
+    public static void applyCustomHeadDetails(BukkitOwnable bukkitHead, CustomHead customHead){
+        if(bukkitHead.getBaseObject() instanceof ItemMeta){
+            ItemMeta meta = (ItemMeta) bukkitHead.getBaseObject();
+            meta.setDisplayName(customHead.getDisplayName());
+            List<String> lore = customHead.getLore();
+            if(lore!=null){
+                meta.setLore(new ArrayList<>(lore));
+            }
         }
+        UUID id = customHead.getOwnerId();
+        OfflinePlayer op = Bukkit.getOfflinePlayer(id);
+        
+        bukkitHead.setOwningPlayer(op);
+        bukkitHead.setProfile(id, customHead.getTexture());
     }
-    
-    private static void applyLore(ItemMeta headMeta,List<String> lore){
-        headMeta.setLore(new ArrayList<>(lore));
-    }
-    
-    
-    
+
     /**
      * Applies Lore text (including the PlayerHeads plugin name) to a playerhead's meta.
      * @param headMeta The SkullMeta associated with the playerhead to modify
      * @param extra Extra lore text to display under the "PlayerHeads" line.
      */
-    private static void applyLore(ItemMeta headMeta,String extra){
+    private static void applyLoreX(ItemMeta headMeta,String extra){
         ArrayList<String> lore = new ArrayList<>();
         lore.add(" ");
         if(!Lang.LORE_PLUGIN_NAME.isEmpty()) lore.add(ChatColor.BLUE+""+ChatColor.ITALIC+Lang.LORE_PLUGIN_NAME);
         if(!extra.isEmpty()) lore.add(extra);
         headMeta.setLore(lore);
-    }
-    
-    /**
-     * Sets an owning player to a playerhead
-     * @param headMeta  The SkullMeta associated with the playerhead to modify
-     * @param owner The OfflinePlayer owning to own the head.
-     */
-    private static void applyOwningPlayer(SkullMeta headMeta,OfflinePlayer owner){
-        Compatibility.getProvider().setOwningPlayer(headMeta, owner);//headMeta.setOwningPlayer( owner );
-    }
-    /**
-     * Sets a display name for the playerhead item's meta
-     * @param headMeta The SkullMeta associated with the playerhead to modify
-     * @param display The string containing the display name to set
-     */
-    private static void applyDisplayName(ItemMeta headMeta,String display){
-        headMeta.setDisplayName(display);
-    }
-    
-    /**
-     * Applies a texture-url to a playerhead's meta.
-     * @param headMeta The SkullMeta associated with the playerhead to modify
-     * @param uuid A UUID to associate with the head and texture
-     * @param texture The Base64-encoded Texture-URL tags.
-     * @return true: the information was properly set on the playerhead; false: there was an error setting the profile field.
-     * @author x7aSv
-     */
-    private static boolean applyTexture(SkullMeta headMeta, UUID uuid, String texture){
-        return Compatibility.getProvider().setProfile(headMeta, uuid, texture);
     }
     
     /**
@@ -117,21 +89,25 @@ public final class SkullManager {
     public static ItemStack MobSkull(TexturedSkullType type,int quantity,boolean useVanillaHeads, boolean addLore){
         CompatibleSkullMaterial mat = type.getCompatibleMaterial();
         
-        
         if(type.hasDedicatedItem()){
             if(useVanillaHeads)
                 return mat.getDetails().createItemStack(quantity);//new ItemStack(mat,quantity);
             else mat=CompatibleSkullMaterial.PLAYER;
         }
         
-        //System.out.println("Player-head");
         ItemStack stack = mat.getDetails().createItemStack(quantity);//new ItemStack(mat,quantity);
         SkullMeta headMeta = (SkullMeta) stack.getItemMeta();
-        //applyOwningPlayer(headMeta,Bukkit.getOfflinePlayer(type.getOwner()));
-        applyTexture(headMeta,type.getOwner(),type.getTexture());
-        applyDisplayName(headMeta,ChatColor.RESET + "" + ChatColor.YELLOW + type.getDisplayName());
-        //System.out.println("DEBUG: addlore "+addLore);
-        if(addLore) applyLore(headMeta,ChatColor.GREEN+Lang.LORE_HEAD_MOB);
+        
+        String displayName = ChatColor.RESET + "" + ChatColor.YELLOW + type.getDisplayName();
+        String spawnString = type.getSpawnName();
+        String texture = type.getTexture();
+        UUID owner = type.getOwner();
+        List<String> lore = Arrays.asList(ChatColor.GREEN+Lang.LORE_HEAD_MOB);//TODO: FIX LORE TO include "extra"
+        
+        
+        CustomHead customHead = new CustomHead(owner, null, spawnString, displayName, texture, lore);
+        applyCustomHeadDetails(new BukkitOwnable(headMeta), customHead);
+
         stack.setItemMeta(headMeta);
         return stack;
     }
@@ -141,15 +117,21 @@ public final class SkullManager {
     private static ItemStack PlayerSkull(OfflinePlayer owner, int quantity, boolean addLore){
         ItemStack stack = CompatibleSkullMaterial.PLAYER.getDetails().createItemStack(quantity);//new ItemStack(Material.PLAYER_HEAD,quantity);
         SkullMeta headMeta = (SkullMeta) stack.getItemMeta();
+        
         String name=null;
         if(owner!=null){
-            applyOwningPlayer(headMeta,owner);
             name = owner.getName();
         }
         if(name==null) name="Player";//only used for display purposes.
-        applyDisplayName(headMeta,ChatColor.RESET + "" + ChatColor.YELLOW + TexturedSkullType.getDisplayName(name));
-        //System.out.println("DEBUG: addlore "+addLore);
-        if(addLore) applyLore(headMeta,ChatColor.RED+Lang.LORE_HEAD_PLAYER);
+        String displayName = ChatColor.RESET + "" + ChatColor.YELLOW + TexturedSkullType.getDisplayName(name);
+        String spawnString = name.toLowerCase();
+        String texture = null;
+        List<String> lore = Arrays.asList(ChatColor.RED+Lang.LORE_HEAD_PLAYER);//TODO: FIX LORE TO include "extra"
+        
+        CustomHead customHead = new CustomHead(owner.getUniqueId(), owner.getName(), spawnString, displayName, texture, lore);
+        
+        applyCustomHeadDetails(new BukkitOwnable(headMeta), customHead);
+        
         stack.setItemMeta(headMeta);
         return stack;
     }
