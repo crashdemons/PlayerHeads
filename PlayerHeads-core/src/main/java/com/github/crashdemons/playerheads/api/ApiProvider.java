@@ -11,6 +11,7 @@ import com.github.crashdemons.playerheads.SkullManager;
 import com.github.crashdemons.playerheads.TexturedSkullType;
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import com.github.crashdemons.playerheads.compatibility.CompatibilityProvider;
+import com.github.crashdemons.playerheads.compatibility.adapters.BukkitOwnable;
 import java.util.UUID;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.BlockState;
@@ -185,7 +186,7 @@ public class ApiProvider implements PlayerHeadsAPI {
             HeadDisplay display = (HeadDisplay) head;
             ItemMeta headMeta = item.getItemMeta();
             if(headMeta instanceof SkullMeta){
-                SkullManager.applyHeadDetails((SkullMeta)headMeta, head, display);
+                SkullManager.applyCustomHeadDetails(new BukkitOwnable((SkullMeta)headMeta), head, display);
             }
         }
         return item;
