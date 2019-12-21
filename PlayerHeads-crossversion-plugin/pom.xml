@@ -76,7 +76,7 @@
         <dependency>
             <!-- This shouldn't be a dep which is packaging: pom -->
             <groupId>${project.groupId}</groupId>
-            <artifactId>PlayerHeads-core</artifactId>
+            <artifactId>PlayerHeads-corelib</artifactId>
             <version>5.3.0-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
@@ -153,7 +153,20 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
+        <dependency>
+            <!-- This shouldn't be a dep which is packaging: pom -->
+            <groupId>${project.groupId}</groupId>
+            <artifactId>PlayerHeads-coreext</artifactId>
+            <version>5.3.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.bukkit</groupId>
+                    <artifactId>bukkit</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
+        
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -286,13 +299,14 @@
                             <artifactSet>
                                 <includes>
                                     <include>org.shininet.bukkit:PlayerHeads-api:jar:</include>
-                                    <include>org.shininet.bukkit:PlayerHeads-core:jar:</include>
+                                    <include>org.shininet.bukkit:PlayerHeads-corelib:jar:</include>
                                     <include>org.shininet.bukkit:PlayerHeads-craftbukkit-support:jar:</include>
                                     <include>org.shininet.bukkit:PlayerHeads-legacy-support:jar:</include>
                                     <include>org.shininet.bukkit:PlayerHeads-craftbukkit-1.14-support:jar:</include>
                                     <include>org.shininet.bukkit:PlayerHeads-craftbukkit-1.13-support:jar:</include>
                                     <include>org.shininet.bukkit:PlayerHeads-craftbukkit-1.8-support:jar:</include>
                                     <include>org.shininet.bukkit:PlayerHeads-glowstone-1.12-support:jar:</include>
+                                    <include>org.shininet.bukkit:PlayerHeads-coreext:jar:</include>
                                 </includes>
                             </artifactSet>
                             <filters>
