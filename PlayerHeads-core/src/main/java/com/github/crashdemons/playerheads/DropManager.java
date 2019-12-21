@@ -90,8 +90,8 @@ public class DropManager {
         if (event == null) {
             throw new IllegalArgumentException("event must not be null to be able to add drops and determine location.");
         }
-        boolean doDelayedDrop = isWitherDrop && plugin.configFile.getBoolean("delaywitherdrop");
-        boolean needDelayedDrop = doDelayedDrop || plugin.configFile.getBoolean("antideathchest");
+        boolean needDelayedWitherDrop = isWitherDrop && plugin.configFile.getBoolean("delaywitherdrop");
+        boolean needDelayedDrop = needDelayedWitherDrop || plugin.configFile.getBoolean("antideathchest");
         if(needDelayedDrop){
             requestNewDrops(plugin, drops, isWitherDrop, new BukkitLocatableEvent(event));
         }else{
