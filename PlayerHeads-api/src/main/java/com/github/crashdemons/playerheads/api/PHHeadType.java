@@ -9,7 +9,6 @@ import java.util.HashMap;
 import com.github.crashdemons.playerheads.compatibility.SkullDetails;
 import java.util.List;
 import com.github.crashdemons.playerheads.compatibility.BackwardsCompatibleSkullType;
-import java.util.Formatter;
 
 /**
  * Enumeration of skulls with associated UUID (randomly assigned) and texture
