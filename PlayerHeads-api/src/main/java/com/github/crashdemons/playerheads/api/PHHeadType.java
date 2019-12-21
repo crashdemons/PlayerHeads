@@ -375,15 +375,17 @@ public enum PHHeadType implements HeadType,HeadDisplay {
         //this(material,wallMaterial,UUID.fromString(ownerUUID),texture);
         this.owner = UUID.fromString(ownerUUID);
         this.texture = texture;
-        this.material = material;
         Mappings.skullsById.put(owner, this);
-        if (hasDedicatedItem()) {
+        if(material==null){
+            material = BackwardsCompatibleSkullType.PLAYER;
+        }else {//hasDedicatedItem()
             Mappings.skullsByMaterial.put(material, this);
         }
+        this.material = material;
     }
 
     PHHeadType(String ownerUUID, String texture) {
-        this(BackwardsCompatibleSkullType.PLAYER, ownerUUID, texture);
+        this(null, ownerUUID, texture);
     }
 
     /**
