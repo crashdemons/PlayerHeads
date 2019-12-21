@@ -8,6 +8,7 @@ package org.shininet.bukkit.playerheads;
 import com.github.crashdemons.playerheads.testutils.Mocks;
 import com.github.crashdemons.playerheads.testutils.TestOutput;
 import com.github.crashdemons.playerheads.api.PHHeadType;
+import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -26,7 +27,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
  * @author crash
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({Bukkit.class})
+@PrepareForTest({Bukkit.class,Compatibility.class})
 public class ConfigTest {
     
     private final TestOutput out=new TestOutput(this);

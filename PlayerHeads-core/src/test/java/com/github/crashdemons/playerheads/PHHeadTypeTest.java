@@ -130,6 +130,7 @@ public class PHHeadTypeTest {
     @Test
     public void testIsPlayerHead_Player() {
         out.println("isPlayerHead with Player skull");
+        Mocks.setupApiSupport();
         boolean expResult;
         PHHeadType instance;
         boolean result;
@@ -148,6 +149,7 @@ public class PHHeadTypeTest {
     @Test
     public void testIsPlayerHead_Nonvanilla() {
         out.println("isPlayerHead with nonvanilla skull");
+        Mocks.setupApiSupport();
         boolean expResult;
         PHHeadType instance;
         boolean result;
@@ -168,6 +170,7 @@ public class PHHeadTypeTest {
     @Test
     public void testIsPlayerHead_Vanilla() {
         out.println("isPlayerHead with vanilla skull");
+        Mocks.setupApiSupport();
         boolean expResult;
         PHHeadType instance;
         boolean result;
@@ -186,6 +189,7 @@ public class PHHeadTypeTest {
     public void testHasDedicatedItem_Player() {
         out.println("hasDedicatedItem with Player skull");
         
+        Mocks.setupApiSupport();
         boolean expResult;
         PHHeadType instance;
         boolean result;
@@ -204,6 +208,7 @@ public class PHHeadTypeTest {
     public void testHasDedicatedItem_Nonvanilla() {
         out.println("hasDedicatedItem with nonvanilla skull");
         
+        Mocks.setupApiSupport();
         boolean expResult;
         PHHeadType instance;
         boolean result;
@@ -222,6 +227,7 @@ public class PHHeadTypeTest {
     public void testHasDedicatedItem_Vanilla() {
         out.println("hasDedicatedItem with vanilla skull");
         
+        Mocks.setupApiSupport();
         boolean expResult;
         PHHeadType instance;
         boolean result;

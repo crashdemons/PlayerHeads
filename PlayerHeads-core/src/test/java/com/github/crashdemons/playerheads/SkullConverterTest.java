@@ -32,6 +32,7 @@ public class SkullConverterTest {
     public SkullConverterTest() {
         //Provider x;
         Mocks.setupFakeServerSupport();
+        Mocks.setupApiSupport();
     }
 
     @Test

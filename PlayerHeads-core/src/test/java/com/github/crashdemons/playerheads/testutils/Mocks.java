@@ -45,10 +45,13 @@ abstract public class Mocks {
             PowerMockito.mockStatic(Bukkit.class);
             when(Bukkit.getVersion()).thenReturn("git-SomeWackyServerFork-4454-4ad3bc (MC: 1.13.1 Pre-Release 5)");
             if(!Compatibility.isProviderAvailable()) Compatibility.init();
-            PlayerHeads.setApiInstance(new ApiProvider(null));
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+    
+    public static void setupApiSupport(){
+        PlayerHeads.setApiInstance(new ApiProvider(null));
     }
     
     
