@@ -5,8 +5,10 @@
  */
 package com.github.crashdemons.playerheads;
 
+import com.github.crashdemons.playerheads.compatibility.adapters.BukkitLocatable;
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import com.github.crashdemons.playerheads.compatibility.CompatiblePlugins;
+import com.github.crashdemons.playerheads.compatibility.adapters.BukkitLocatableEvent;
 import com.github.crashdemons.playerheads.compatibility.plugins.heads.ExternalHeadHandling;
 import java.util.List;
 import org.bukkit.Location;
@@ -14,10 +16,8 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Skull;
-import org.bukkit.entity.Entity;
-import org.bukkit.event.Event;
 import org.bukkit.event.block.BlockEvent;
-import org.bukkit.event.entity.EntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.shininet.bukkit.playerheads.Config;
@@ -76,29 +76,26 @@ public class DropManager {
             scheduleItemDrops(plugin, drops, location, true, false, 0);
         }
     }
+    public static void requestNewDrops(PlayerHeads plugin, List<ItemStack> drops, boolean isWitherDrop, @NotNull BukkitLocatable locatable) {
+        requestNewDrops(plugin,drops,isWitherDrop,locatable.getLocation());
+    }
+    public static void requestNewDrops(PlayerHeads plugin, List<ItemStack> drops, boolean isWitherDrop, @NotNull BukkitLocatableEvent event) {
+        requestNewDrops(plugin,drops,isWitherDrop,event.getLocation());
+    }
 
-    public static void requestDrops(PlayerHeads plugin, List<ItemStack> drops, boolean isWitherDrop, @NotNull Event event) {
+    public static void requestDrops(PlayerHeads plugin, List<ItemStack> drops, boolean isWitherDrop, @NotNull EntityDeathEvent event) {
         if (drops.isEmpty()) {
             return;
         }
         if (event == null) {
-            throw new IllegalArgumentException("EntityDeathEvent must not be null to be able to add drops and determine location.");
+            throw new IllegalArgumentException("event must not be null to be able to add drops and determine location.");
         }
-        Location location = null;
-        if (event instanceof EntityEvent) {
-            Entity entity = ((EntityEvent) event).getEntity();
-            if (entity == null) {//shouuld not happen
-                throw new IllegalStateException("EntityDeathEvent contained null entity!");
-            }
-            location = entity.getLocation();
-        } else if (event instanceof BlockEvent) {
-            Block block = ((BlockEvent) event).getBlock();
-            if (block == null) {//shouuld not happen
-                throw new IllegalStateException("BlockEvent contained null block!");
-            }
-            location = block.getLocation();
-        } else {
-            throw new IllegalArgumentException("Drop event must be either EntityEvent or BlockEvent.");
+        boolean doDelayedDrop = isWitherDrop && plugin.configFile.getBoolean("delaywitherdrop");
+        boolean needDelayedDrop = doDelayedDrop || plugin.configFile.getBoolean("antideathchest");
+        if(needDelayedDrop){
+            requestNewDrops(plugin, drops, isWitherDrop, new BukkitLocatableEvent(event));
+        }else{
+            event.getDrops().addAll(drops);
         }
     }
 
@@ -145,7 +142,7 @@ public class DropManager {
         if (eventDropHead.isCancelled()) {
             return BlockDropResult.FAILED_EVENT_CANCELLED;
         }
-        DropManager.requestDrops(plugin, eventDropHead.getDrops(), false, event);
+        DropManager.requestNewDrops(plugin, eventDropHead.getDrops(), false, new BukkitLocatableEvent(event));
         return BlockDropResult.SUCCESS;
     }
 }
