@@ -5,6 +5,8 @@
  */
 package com.github.crashdemons.playerheads.compatibility;
 
+import com.github.crashdemons.playerheads.api.PlayerHeads;
+import com.github.crashdemons.playerheads.api.PlayerHeadsAPI;
 import org.bukkit.block.BlockState;
 import org.bukkit.inventory.ItemStack;
 
@@ -51,7 +53,7 @@ public enum BackwardsCompatibleSkullType {//should maintain compatibility with E
      */
     public SkullDetails getDetails() {
         if (cachedDetails == null) {
-            cachedDetails = Compatibility.getProvider().getSkullDetails(skullType);
+            cachedDetails = PlayerHeads.getApiInstance().getCompatibilityProvider().getSkullDetails(skullType);
         }
         return cachedDetails;
     }
@@ -69,6 +71,16 @@ public enum BackwardsCompatibleSkullType {//should maintain compatibility with E
         return this == PLAYER || !getDetails().isBackedByPlayerhead();
     }
 
+    
+    public static BackwardsCompatibleSkullType getByName(String name){
+        try{
+            return BackwardsCompatibleSkullType.valueOf(name);
+        }catch(IllegalArgumentException e){
+            return null;
+        }
+    }
+    
+    
     /**
      * Finds a skull material enum entry associated with the vanilla skull-type.
      *
@@ -85,9 +97,13 @@ public enum BackwardsCompatibleSkullType {//should maintain compatibility with E
         if (type == SkullType.WITHER_SKELETON) {
             return WITHER_SKELETON;//item to entity correlation here
         }
-        return RuntimeReferences.getCompatibleMaterialByName(type.name());//otherwise, our SkullType has a 1:1 mapping with CompatibleSkullMaterial
+        return getByName(type.name());//otherwise, our SkullType has a 1:1 mapping with CompatibleSkullMaterial
     }
 
+    
+    
+    
+    
     /**
      * Finds a skull material enum entry that best fits with the provided
      * ItemStack.
@@ -100,7 +116,7 @@ public enum BackwardsCompatibleSkullType {//should maintain compatibility with E
      * @see CompatibilityProvider#getSkullType(org.bukkit.inventory.ItemStack)
      */
     public static BackwardsCompatibleSkullType get(ItemStack stack) {
-        return get(Compatibility.getProvider().getSkullType(stack));
+        return get(PlayerHeads.getApiInstance().getCompatibilityProvider().getSkullType(stack));
     }
 
     /**
@@ -115,7 +131,7 @@ public enum BackwardsCompatibleSkullType {//should maintain compatibility with E
      * @see CompatibilityProvider#getSkullType(org.bukkit.block.BlockState)
      */
     public static BackwardsCompatibleSkullType get(BlockState state) {
-        return get(Compatibility.getProvider().getSkullType(state));
+        return get(PlayerHeads.getApiInstance().getCompatibilityProvider().getSkullType(state));
     }
 
 }

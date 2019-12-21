@@ -7,7 +7,7 @@ package org.shininet.bukkit.playerheads;
 
 import com.github.crashdemons.playerheads.testutils.Mocks;
 import com.github.crashdemons.playerheads.testutils.TestOutput;
-import com.github.crashdemons.playerheads.TexturedSkullType;
+import com.github.crashdemons.playerheads.api.PHHeadType;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -37,8 +37,8 @@ public class ConfigTest {
     @Test
     public void testSkullConfigChanges() {
         out.println("testSkullConfigChanges");
-        for (TexturedSkullType skullType : TexturedSkullType.values()) {
-                if(skullType==TexturedSkullType.PLAYER) continue;
+        for (PHHeadType skullType : PHHeadType.values()) {
+                if(skullType==PHHeadType.PLAYER) continue;
                 String oldconfig = skullType.name().replace("_", "").toLowerCase() + "droprate";
                 if(Config.configKeys.get(oldconfig)==null){
                     fail("skull drop config entry mismatch: "+oldconfig+" -> "+skullType.getConfigName());
@@ -56,7 +56,7 @@ public class ConfigTest {
         File resource = new File(path+"/config.yml");
 
         config.load(resource);
-        for (TexturedSkullType skullType : TexturedSkullType.values()) {
+        for (PHHeadType skullType : PHHeadType.values()) {
             String conf_entry = skullType.getConfigName();
             Object value = config.get(conf_entry);
             if(value==null){

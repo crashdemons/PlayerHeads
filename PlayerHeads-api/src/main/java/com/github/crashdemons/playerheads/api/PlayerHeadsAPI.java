@@ -201,4 +201,21 @@ public interface PlayerHeadsAPI {
      * @since 5.3.0-SNAPSHOT
      */
     @Nullable public HeadIdentity getHeadIdentity(@NotNull HeadType ht);
+    
+    /**
+     * Retrieves a plugin display-string from the currently loaded PlayerHeads lang file.
+     * This may need to be formatted.
+     * @param name the name of display-string defined by the lang file entry
+     * @return the string from the lang file, or the requested name surrounded by exclamation-points.
+     */
+    @NotNull public String getLangString(@NotNull String name);
+    
+    /**
+     * Retrieves and formats plugin display-string from the currently loaded PlayerHeads lang file.
+     * This may need to be formatted with Formatter.format(...)
+     * @param name the name of display-string defined by the lang file entry
+     * @param replacement the string replacement or replacements used when formatting the string.
+     * @return the string from the lang file, or the requested name surrounded by exclamation-points.
+     */
+    @NotNull public String formatLangString(@NotNull String name, String... replacement);
 }

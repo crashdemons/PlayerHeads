@@ -5,6 +5,7 @@
  */
 package com.github.crashdemons.playerheads;
 
+import com.github.crashdemons.playerheads.api.PHHeadType;
 import com.github.crashdemons.playerheads.testutils.Mocks;
 import com.github.crashdemons.playerheads.testutils.TestOutput;
 import com.github.crashdemons.playerheads.compatibility.BackwardsCompatibleSkullType;
@@ -28,10 +29,10 @@ import org.powermock.modules.junit4.PowerMockRunner;
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({Bukkit.class})
-public class TexturedSkullTypeTest {
+public class PHHeadTypeTest {
     
     private final TestOutput out=new TestOutput(this);
-    public TexturedSkullTypeTest() {
+    public PHHeadTypeTest() {
         //Provider x;
         Mocks.setupFakeServerSupport();
     }
@@ -54,11 +55,11 @@ public class TexturedSkullTypeTest {
 
     @Test
     public void testSkullConfigName_Player(){
-        assertEquals(TexturedSkullType.PLAYER.getConfigName(),"droprate");
+        assertEquals(PHHeadType.PLAYER.getConfigName(),"droprate");
     }
     @Test
     public void testSkullConfigName_Mob(){
-        assertEquals(TexturedSkullType.WITHER_SKELETON.getConfigName(),"witherskeletondroprate");
+        assertEquals(PHHeadType.WITHER_SKELETON.getConfigName(),"witherskeletondroprate");
     }
     
     
@@ -68,7 +69,7 @@ public class TexturedSkullTypeTest {
     @Test
     public void testEntityCompatibility(){
         out.println("testEntityCompatibility (skull maps to entity correctly)");
-        for(TexturedSkullType skull : TexturedSkullType.values()){
+        for(PHHeadType skull : PHHeadType.values()){
             try{
                 EntityType type2 = EntityType.valueOf( skull.name().toUpperCase() );//throws IllegalArgumentException if conversion fails
             }catch(Exception e){
@@ -88,7 +89,7 @@ public class TexturedSkullTypeTest {
         for(EntityType type : EntityType.values()){
             if(!type.isAlive()) continue;
             try{
-                TexturedSkullType type2 = TexturedSkullType.valueOf( type.name().toUpperCase() );
+                PHHeadType type2 = PHHeadType.valueOf( type.name().toUpperCase() );
                 //out.println("Mob skull: "+type.name()+" <-> "+type2 +" vanillaitem?"+type2.hasDedicatedItem());
             }catch(Exception e){
                 out.println("   Mob skull missing for entity: "+type.name()+"  (nonfatal)");
@@ -104,8 +105,8 @@ public class TexturedSkullTypeTest {
     public void testGet_UUID() {
         out.println("get by UUID");
         UUID owner = null;
-        TexturedSkullType expResult = null;
-        TexturedSkullType result = TexturedSkullType.get(owner);
+        PHHeadType expResult = null;
+        PHHeadType result = PHHeadType.get(owner);
         assertEquals(expResult, result);
     }
 
@@ -116,8 +117,8 @@ public class TexturedSkullTypeTest {
     public void testGet_Material() {
         out.println("get by Material");
         BackwardsCompatibleSkullType mat = null;
-        TexturedSkullType expResult = null;
-        TexturedSkullType result = TexturedSkullType.get(mat);
+        PHHeadType expResult = null;
+        PHHeadType result = PHHeadType.get(mat);
         assertEquals(expResult, result);
     }
 
@@ -130,11 +131,11 @@ public class TexturedSkullTypeTest {
     public void testIsPlayerHead_Player() {
         out.println("isPlayerHead with Player skull");
         boolean expResult;
-        TexturedSkullType instance;
+        PHHeadType instance;
         boolean result;
         
         
-        instance = TexturedSkullType.PLAYER;
+        instance = PHHeadType.PLAYER;
         expResult = true;
         result = instance.isPlayerHead();
         assertEquals(expResult, result);
@@ -148,14 +149,14 @@ public class TexturedSkullTypeTest {
     public void testIsPlayerHead_Nonvanilla() {
         out.println("isPlayerHead with nonvanilla skull");
         boolean expResult;
-        TexturedSkullType instance;
+        PHHeadType instance;
         boolean result;
-        instance = TexturedSkullType.GHAST;
+        instance = PHHeadType.GHAST;
         expResult = true;
         result = instance.isPlayerHead();
         assertEquals(expResult, result);
         
-        instance = TexturedSkullType.SKELETON;
+        instance = PHHeadType.SKELETON;
         expResult = false;
         result = instance.isPlayerHead();
         assertEquals(expResult, result);
@@ -168,10 +169,10 @@ public class TexturedSkullTypeTest {
     public void testIsPlayerHead_Vanilla() {
         out.println("isPlayerHead with vanilla skull");
         boolean expResult;
-        TexturedSkullType instance;
+        PHHeadType instance;
         boolean result;
         
-        instance = TexturedSkullType.SKELETON;
+        instance = PHHeadType.SKELETON;
         expResult = false;
         result = instance.isPlayerHead();
         assertEquals(expResult, result);
@@ -186,11 +187,11 @@ public class TexturedSkullTypeTest {
         out.println("hasDedicatedItem with Player skull");
         
         boolean expResult;
-        TexturedSkullType instance;
+        PHHeadType instance;
         boolean result;
         
         
-        instance = TexturedSkullType.PLAYER;
+        instance = PHHeadType.PLAYER;
         expResult = true;
         result = instance.hasDedicatedItem();
         assertEquals(expResult, result);
@@ -204,10 +205,10 @@ public class TexturedSkullTypeTest {
         out.println("hasDedicatedItem with nonvanilla skull");
         
         boolean expResult;
-        TexturedSkullType instance;
+        PHHeadType instance;
         boolean result;
         
-        instance = TexturedSkullType.GHAST;
+        instance = PHHeadType.GHAST;
         expResult = false;
         result = instance.hasDedicatedItem();
         assertEquals(expResult, result);
@@ -222,10 +223,10 @@ public class TexturedSkullTypeTest {
         out.println("hasDedicatedItem with vanilla skull");
         
         boolean expResult;
-        TexturedSkullType instance;
+        PHHeadType instance;
         boolean result;
         
-        instance = TexturedSkullType.SKELETON;
+        instance = PHHeadType.SKELETON;
         expResult = true;
         result = instance.hasDedicatedItem();
         assertEquals(expResult, result);
@@ -241,9 +242,9 @@ public class TexturedSkullTypeTest {
         };
         for(String mob : mobs){
             out.println("   testing for "+mob);
-            TexturedSkullType type;
+            PHHeadType type;
             try{
-                type = TexturedSkullType.valueOf(mob);
+                type = PHHeadType.valueOf(mob);
             }catch(Exception e){
                 type = null;
             }
@@ -267,9 +268,9 @@ public class TexturedSkullTypeTest {
         };
         for(String mob : mobs){
             out.println("   testing for "+mob);
-            TexturedSkullType type;
+            PHHeadType type;
             try{
-                type = TexturedSkullType.valueOf(mob);
+                type = PHHeadType.valueOf(mob);
             }catch(Exception e){
                 type = null;
             }

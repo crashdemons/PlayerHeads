@@ -1,6 +1,7 @@
 
 package com.github.crashdemons.playerheads;
 
+import com.github.crashdemons.playerheads.api.PHHeadType;
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import com.github.crashdemons.playerheads.compatibility.BackwardsCompatibleSkullType;
 import java.util.UUID;
@@ -39,10 +40,10 @@ public final class SkullConverter {
      * @param entity The entity to get a skull for
      * @return The associated TexturedSkullType, if one exists. Otherwise, null.
      */
-    public static TexturedSkullType skullTypeFromEntity(Entity entity){
+    public static PHHeadType skullTypeFromEntity(Entity entity){
         String entityName = Compatibility.getProvider().getCompatibleNameFromEntity(entity);
         try{
-            return TexturedSkullType.valueOf(entityName);
+            return PHHeadType.valueOf(entityName);
         }catch(IllegalArgumentException e){
             return null;
         }
@@ -60,17 +61,17 @@ public final class SkullConverter {
      *         <li>null (if the material is unsupported)</li>
      *         <li>TexturedSkullType.PLAYER (if a playerhead UUID was not associated with any mob)</li></ul>
      */
-    public static TexturedSkullType skullTypeFromItemStack(ItemStack stack){
+    public static PHHeadType skullTypeFromItemStack(ItemStack stack){
         BackwardsCompatibleSkullType mat = BackwardsCompatibleSkullType.get(stack);
         if(mat==null) return null;
-        if(!mat.getDetails().isBackedByPlayerhead()) return TexturedSkullType.get(mat);
+        if(!mat.getDetails().isBackedByPlayerhead()) return PHHeadType.get(mat);
         SkullMeta skullState = (SkullMeta) stack.getItemMeta();
         OfflinePlayer op =Compatibility.getProvider().getOwningPlayer(skullState);//getSkullOwningPlayer(skullState);
-        if(op==null) return TexturedSkullType.PLAYER;
+        if(op==null) return PHHeadType.PLAYER;
         UUID owner = op.getUniqueId();
-        if(owner==null) return TexturedSkullType.PLAYER;
-        TexturedSkullType match = TexturedSkullType.get(owner);//check if the UUID matches any in our textured skullState list
-        if(match==null) return TexturedSkullType.PLAYER;
+        if(owner==null) return PHHeadType.PLAYER;
+        PHHeadType match = PHHeadType.get(owner);//check if the UUID matches any in our textured skullState list
+        if(match==null) return PHHeadType.PLAYER;
         return match;//if match was not null
     }
     
@@ -88,17 +89,17 @@ public final class SkullConverter {
      *         <li>null (if the material is unsupported)</li>
      *         <li>TexturedSkullType.PLAYER (if a playerhead UUID was not associated with any mob)</li></ul>
      */
-    public static TexturedSkullType skullTypeFromBlockState(BlockState state){
+    public static PHHeadType skullTypeFromBlockState(BlockState state){
         BackwardsCompatibleSkullType mat = BackwardsCompatibleSkullType.get(state);
         if(mat==null) return null;
-        if(!mat.getDetails().isBackedByPlayerhead()) return TexturedSkullType.get(mat);
+        if(!mat.getDetails().isBackedByPlayerhead()) return PHHeadType.get(mat);
         Skull skullState = (Skull) state;
         OfflinePlayer op =Compatibility.getProvider().getOwningPlayer(skullState);//getSkullOwningPlayer(skullState);
-        if(op==null) return TexturedSkullType.PLAYER;
+        if(op==null) return PHHeadType.PLAYER;
         UUID owner = op.getUniqueId();
-        if(owner==null) return TexturedSkullType.PLAYER;
-        TexturedSkullType match = TexturedSkullType.get(owner);//check if the UUID matches any in our textured skullState list
-        if(match==null) return TexturedSkullType.PLAYER;
+        if(owner==null) return PHHeadType.PLAYER;
+        PHHeadType match = PHHeadType.get(owner);//check if the UUID matches any in our textured skullState list
+        if(match==null) return PHHeadType.PLAYER;
         return match;//if match was not null
     }
     
@@ -114,7 +115,7 @@ public final class SkullConverter {
      * @param skullType The TexturedSkullType to find the associated entity-type for.
      * @return The EntityType associated with the skulltype if one is found. Otherwise, in case of breaking API changes, returns null.
      */
-    public static EntityType entityTypeFromSkullType(TexturedSkullType skullType){
+    public static EntityType entityTypeFromSkullType(PHHeadType skullType){
         String skullName = skullType.name().toUpperCase();
         try{
             return EntityType.valueOf(skullName);

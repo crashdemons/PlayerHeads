@@ -22,12 +22,12 @@ public class RuntimeReferencesTest {
     @Test
     public void testGetCompatibleMaterialByName_invalid() {
         out.println("getCompatibleMaterialByName invalid");
-        assertEquals(null, RuntimeReferences.getCompatibleMaterialByName("EGG"));
+        assertEquals(null, BackwardsCompatibleSkullType.getByName("EGG"));
     }
     @Test
     public void testGetCompatibleMaterialByName_valid() {
         out.println("getCompatibleMaterialByName valid");
-        assertEquals("CREEPER", RuntimeReferences.getCompatibleMaterialByName("CREEPER").name());
+        assertEquals("CREEPER", BackwardsCompatibleSkullType.getByName("CREEPER").name());
     }
 
     @Test

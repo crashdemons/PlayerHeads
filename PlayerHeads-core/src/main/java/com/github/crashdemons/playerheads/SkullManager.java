@@ -1,6 +1,7 @@
 
 package com.github.crashdemons.playerheads;
 
+import com.github.crashdemons.playerheads.api.PHHeadType;
 import com.github.crashdemons.playerheads.api.HeadIdentity;
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import com.github.crashdemons.playerheads.compatibility.BackwardsCompatibleSkullType;
@@ -36,7 +37,7 @@ public final class SkullManager {
     }
     //untested / unused
     public static ItemStack CustomSkull(HeadIdentity identity, HeadDisplay display, int quantity, boolean useVanillaHeads){
-        TexturedSkullType type = ((TexturedSkullType) identity.getType());
+        PHHeadType type = ((PHHeadType) identity.getType());
         if(type==null) return null;
         BackwardsCompatibleSkullType mat = type.getCompatibleMaterial();
         
@@ -100,7 +101,7 @@ public final class SkullManager {
      * @return The ItemStack of heads desired.
      * @see org.shininet.bukkit.playerheads.Config#defaultStackSize
      */
-    public static ItemStack MobSkull(TexturedSkullType type, boolean useVanillaHeads, boolean addLore){
+    public static ItemStack MobSkull(PHHeadType type, boolean useVanillaHeads, boolean addLore){
         return MobSkull(type,Config.defaultStackSize, useVanillaHeads, addLore);
     }
     
@@ -112,7 +113,7 @@ public final class SkullManager {
      * @param addLore controls whether any lore text should be added to the head (is currently applied only to custom heads).
      * @return The ItemStack of heads desired.
      */
-    public static ItemStack MobSkull(TexturedSkullType type,int quantity,boolean useVanillaHeads, boolean addLore){
+    public static ItemStack MobSkull(PHHeadType type,int quantity,boolean useVanillaHeads, boolean addLore){
         BackwardsCompatibleSkullType mat = type.getCompatibleMaterial();
         
         if(type.hasDedicatedItem()){
@@ -149,7 +150,7 @@ public final class SkullManager {
             name = owner.getName();
         }
         if(name==null) name="Player";//only used for display purposes.
-        String displayName = ChatColor.RESET + "" + ChatColor.YELLOW + TexturedSkullType.getDisplayName(name);
+        String displayName = ChatColor.RESET + "" + ChatColor.YELLOW + PHHeadType.getDisplayName(name);
         String spawnString = name.toLowerCase();
         String texture = null;
         List<String> lore = getExtendedLore(ChatColor.RED+Lang.LORE_HEAD_PLAYER);

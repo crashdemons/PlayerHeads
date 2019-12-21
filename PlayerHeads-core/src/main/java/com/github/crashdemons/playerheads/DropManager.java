@@ -5,6 +5,7 @@
  */
 package com.github.crashdemons.playerheads;
 
+import com.github.crashdemons.playerheads.api.PHHeadType;
 import com.github.crashdemons.playerheads.compatibility.adapters.BukkitLocatable;
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import com.github.crashdemons.playerheads.compatibility.CompatiblePlugins;
@@ -99,7 +100,7 @@ public class DropManager {
         }
     }
 
-    public static ItemStack createConvertedMobhead(PlayerHeads plugin, TexturedSkullType skullType, boolean isSourceSkinnable, boolean addLore, int quantity) {
+    public static ItemStack createConvertedMobhead(PlayerHeads plugin, PHHeadType skullType, boolean isSourceSkinnable, boolean addLore, int quantity) {
         boolean usevanillaskull = plugin.configFile.getBoolean("dropvanillaheads");
         boolean convertvanillahead = plugin.configFile.getBoolean("convertvanillaheads");
 
@@ -115,7 +116,7 @@ public class DropManager {
     //drop a head based on a block being broken in some fashion
     //NOTE: the blockbreak handler expects this to unconditionally drop the item unless the new event is cancelled.
     public static BlockDropResult blockDrop(PlayerHeads plugin, BlockEvent event, Block block, BlockState state) {
-        TexturedSkullType skullType = SkullConverter.skullTypeFromBlockState(state);
+        PHHeadType skullType = SkullConverter.skullTypeFromBlockState(state);
         Location location = block.getLocation();
         ItemStack item = null;
         if (CompatiblePlugins.heads.getExternalHeadHandling(state) == ExternalHeadHandling.NO_INTERACTION) {

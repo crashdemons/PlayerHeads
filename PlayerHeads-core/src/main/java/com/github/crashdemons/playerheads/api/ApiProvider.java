@@ -8,7 +8,6 @@ package com.github.crashdemons.playerheads.api;
 import com.github.crashdemons.playerheads.api.extensions.HeadExtensionManager;
 import com.github.crashdemons.playerheads.SkullConverter;
 import com.github.crashdemons.playerheads.SkullManager;
-import com.github.crashdemons.playerheads.TexturedSkullType;
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import com.github.crashdemons.playerheads.compatibility.CompatibilityProvider;
 import com.github.crashdemons.playerheads.compatibility.adapters.BukkitOwnable;
@@ -22,6 +21,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.shininet.bukkit.playerheads.Config;
+import org.shininet.bukkit.playerheads.Formatter;
+import org.shininet.bukkit.playerheads.Lang;
 import org.shininet.bukkit.playerheads.PlayerHeadsPlugin;
 import org.shininet.bukkit.playerheads.PlayerHeads;
 
@@ -34,11 +35,11 @@ public class ApiProvider implements PlayerHeadsAPI {
 
     private final PlayerHeads plugin;
 
-    private TexturedSkullType headFromApiHead(HeadType h) {
-        if(!(h instanceof TexturedSkullType)){
+    private PHHeadType headFromApiHead(HeadType h) {
+        if(!(h instanceof PHHeadType)){
             throw new IllegalArgumentException("The head type supplied was not created or supported by the plugin.");
         }
-        return TexturedSkullType.get(h.getOwner());
+        return PHHeadType.get(h.getOwner());
     }
     
     public ApiProvider(PlayerHeadsPlugin plugin) {
@@ -92,9 +93,9 @@ public class ApiProvider implements PlayerHeadsAPI {
     public HeadIdentity getHeadIdentity(Entity e){
         HeadIdentity hr = HeadExtensionManager.identifyHead(e);
         if(hr!=null) return hr;
-        TexturedSkullType type = SkullConverter.skullTypeFromEntity(e);
+        PHHeadType type = SkullConverter.skullTypeFromEntity(e);
         if(type==null) return null;
-        if(type==TexturedSkullType.PLAYER){
+        if(type==PHHeadType.PLAYER){
             return getHeadIdentity(e.getName(),false);
         }else{
             return createExtendedHeadIdentity(type,"",type.getOwner());
@@ -114,34 +115,34 @@ public class ApiProvider implements PlayerHeadsAPI {
     public HeadIdentity getHeadIdentityFromSpawnString(String spawnName, boolean forceOwner){
         HeadIdentity hr = HeadExtensionManager.getHeadBySpawnString(spawnName);
         if(hr!=null) return hr;
-        TexturedSkullType type = TexturedSkullType.getBySpawnName(spawnName);
+        PHHeadType type = PHHeadType.getBySpawnName(spawnName);
         if(spawnName.startsWith("#")) spawnName="";
-        if(type==null) type=TexturedSkullType.PLAYER;
-        if(type==TexturedSkullType.PLAYER) return getHeadIdentity(spawnName,forceOwner);
+        if(type==null) type=PHHeadType.PLAYER;
+        if(type==PHHeadType.PLAYER) return getHeadIdentity(spawnName,forceOwner);
         return createExtendedHeadIdentity(type,"",type.getOwner());
     }
     
     @Override
     public HeadIdentity getHeadIdentity(String username, boolean forceOwner){
         if((!forceOwner) && plugin.configFile.getBoolean("dropboringplayerheads")) return getBoringHeadIdentity();
-        return createExtendedHeadIdentity(TexturedSkullType.PLAYER,username,null);
+        return createExtendedHeadIdentity(PHHeadType.PLAYER,username,null);
     }
     @Override
     public HeadIdentity getHeadIdentity(OfflinePlayer player, boolean forceOwner){
         if((!forceOwner) && plugin.configFile.getBoolean("dropboringplayerheads")) return getBoringHeadIdentity();
         HeadIdentity hr = HeadExtensionManager.getHeadByOwner(player.getUniqueId());
         if(hr!=null) return hr;
-        return createExtendedHeadIdentity(TexturedSkullType.PLAYER,player.getName(),player.getUniqueId());
+        return createExtendedHeadIdentity(PHHeadType.PLAYER,player.getName(),player.getUniqueId());
     }
     @Override
     public HeadIdentity getBoringHeadIdentity(){
-        return createExtendedHeadIdentity(TexturedSkullType.PLAYER,"",null);
+        return createExtendedHeadIdentity(PHHeadType.PLAYER,"",null);
     }
     @Override
     public HeadIdentity getHeadIdentity(ItemStack stack){
         HeadIdentity hr = HeadExtensionManager.identifyHead(stack);
         if(hr!=null) return hr;
-        TexturedSkullType type = SkullConverter.skullTypeFromItemStack(stack);
+        PHHeadType type = SkullConverter.skullTypeFromItemStack(stack);
         if(type==null) return null;
         if(!stack.hasItemMeta()) return null;
         ItemMeta meta = stack.getItemMeta();
@@ -157,7 +158,7 @@ public class ApiProvider implements PlayerHeadsAPI {
     public HeadIdentity getHeadIdentity(BlockState state){
         HeadIdentity hr = HeadExtensionManager.identifyHead(state);
         if(hr!=null) return hr;
-        TexturedSkullType type = SkullConverter.skullTypeFromBlockState(state);
+        PHHeadType type = SkullConverter.skullTypeFromBlockState(state);
         if(type==null) return null;
         //if(!stack.hasItemMeta()) return null;
         //ItemMeta meta = stack.getItemMeta();
@@ -171,10 +172,10 @@ public class ApiProvider implements PlayerHeadsAPI {
     @Override
     public ItemStack getHeadItem(HeadIdentity head, int num){ // TODO: heads don't receive lore from their custom-head representation.
 
-        TexturedSkullType type = headFromApiHead(head.getType());
+        PHHeadType type = headFromApiHead(head.getType());
         boolean addLore = plugin.configFile.getBoolean("addlore");
         ItemStack item;
-        if(type==TexturedSkullType.PLAYER){
+        if(type==PHHeadType.PLAYER){
             String username = head.getOwnerName();
             if(username==null || username.isEmpty()) return SkullManager.PlayerSkull(num, addLore);
             item = SkullManager.PlayerSkull(username, num, addLore);
@@ -194,7 +195,7 @@ public class ApiProvider implements PlayerHeadsAPI {
     
     @Override
     public HeadType getCustomHeadType(){
-        return TexturedSkullType.CUSTOM;
+        return PHHeadType.CUSTOM;
     }
     
     //5.3 API:
@@ -202,7 +203,7 @@ public class ApiProvider implements PlayerHeadsAPI {
     public HeadIdentity getHeadIdentity(EntityType et){
         HeadType type;
         try {
-            type = TexturedSkullType.valueOf(et.name());
+            type = PHHeadType.valueOf(et.name());
         } catch (Exception e) {
             type = null;
         }
@@ -213,6 +214,15 @@ public class ApiProvider implements PlayerHeadsAPI {
     @Override
     public HeadIdentity getHeadIdentity(HeadType ht){
         return createExtendedHeadIdentity(ht,"",ht.getOwner());
+    }
+    
+    @Override
+    public String getLangString(String name){
+        return Lang.getString(name);
+    }
+    @Override
+    public String formatLangString(String name, String... replacement){
+        return Formatter.format(Lang.getString(name), replacement);
     }
     
     //----------------------------------------------------------------------------

@@ -1,16 +1,15 @@
-package com.github.crashdemons.playerheads;
+package com.github.crashdemons.playerheads.api;
 
 import com.github.crashdemons.playerheads.api.extensions.HeadExtensionManager;
-import com.github.crashdemons.playerheads.api.HeadIdentity;
-import com.github.crashdemons.playerheads.compatibility.BackwardsCompatibleSkullType;
+//import com.github.crashdemons.playerheads.compatibility.BackwardsCompatibleSkullType;
 import java.util.UUID;
-import org.shininet.bukkit.playerheads.Lang;
+//import org.shininet.bukkit.playerheads.Lang;
 import java.util.HashMap;
-import org.shininet.bukkit.playerheads.Formatter;
-import com.github.crashdemons.playerheads.api.HeadType;
+//import org.shininet.bukkit.playerheads.Formatter;
 import com.github.crashdemons.playerheads.compatibility.SkullDetails;
 import java.util.List;
-import com.github.crashdemons.playerheads.api.HeadDisplay;
+import com.github.crashdemons.playerheads.compatibility.BackwardsCompatibleSkullType;
+import java.util.Formatter;
 
 /**
  * Enumeration of skulls with associated UUID (randomly assigned) and texture
@@ -24,7 +23,7 @@ import com.github.crashdemons.playerheads.api.HeadDisplay;
  * @author crashdemons
  * @author MagmaVoid_
  */
-public enum TexturedSkullType implements HeadType,HeadDisplay {
+public enum PHHeadType implements HeadType,HeadDisplay {
 
     //Entity skull settings - big thanks to MagmaVoid_ for finding all of these textures.
     
@@ -339,7 +338,7 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
     private final String texture;
     /**
      * The material associated with the entity if one exists. Otherwise, this
-     * will be CompatibleSkullMaterial.PLAYER
+     * will be BackwardsCompatibleSkullType.PLAYER
      *
      * @see org.bukkit.Material#PLAYER_HEAD
      */
@@ -362,17 +361,17 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
         /**
          * A map of UUIDs to their associated skulltype for easier lookup.
          */
-        public static final HashMap<UUID, TexturedSkullType> skullsById = new HashMap<>();
+        public static final HashMap<UUID, PHHeadType> skullsById = new HashMap<>();
         /**
          * A map of Materials to their associated skulltype for easier lookup.
          * <p>
          * Note: only contains skulltypes with dedicated materials (vanilla
          * drops) and includes Playerhead materials mapping to PLAYER.
          */
-        public static final HashMap<BackwardsCompatibleSkullType, TexturedSkullType> skullsByMaterial = new HashMap<>();
+        public static final HashMap<BackwardsCompatibleSkullType, PHHeadType> skullsByMaterial = new HashMap<>();
     }
 
-    TexturedSkullType(BackwardsCompatibleSkullType material, String ownerUUID, String texture) {
+    PHHeadType(BackwardsCompatibleSkullType material, String ownerUUID, String texture) {
         //this(material,wallMaterial,UUID.fromString(ownerUUID),texture);
         this.owner = UUID.fromString(ownerUUID);
         this.texture = texture;
@@ -383,7 +382,7 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
         }
     }
 
-    TexturedSkullType(String ownerUUID, String texture) {
+    PHHeadType(String ownerUUID, String texture) {
         this(BackwardsCompatibleSkullType.PLAYER, ownerUUID, texture);
     }
 
@@ -408,7 +407,7 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
     }
 
     /**
-     * Gets the CompatibleSkullMaterial enum indicating the material-sets for
+     * Gets the BackwardsCompatibleSkullType enum indicating the material-sets for
      * the current server version.
      *
      * @return the compatible material
@@ -423,14 +422,14 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
      * @param owner The UUID to find the skulltype for
      * @return if found: a TexturedSkullType, otherwise: null.
      */
-    public static TexturedSkullType get(UUID owner) {
+    public static PHHeadType get(UUID owner) {
         if(owner==null) return null;
         HeadIdentity hr = HeadExtensionManager.getHeadByOwner(owner);
-        if(hr!=null) return TexturedSkullType.CUSTOM;
+        if(hr!=null) return PHHeadType.CUSTOM;
         return Mappings.skullsById.get(owner);
     }
 
-    public static TexturedSkullType get(BackwardsCompatibleSkullType mat) {
+    public static PHHeadType get(BackwardsCompatibleSkullType mat) {
         if(mat==null) return null;
         return Mappings.skullsByMaterial.get(mat);
     }
@@ -441,14 +440,14 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
      * @param spawnname The spawn-name to find the skulltype for.
      * @return if found: a TexturedSkullType, otherwise: null.
      */
-    public static TexturedSkullType getBySpawnName(String spawnname) {
+    public static PHHeadType getBySpawnName(String spawnname) {
         if(spawnname==null) return null;
         if (spawnname.isEmpty()) {
             return null;
         }
         HeadIdentity hr = HeadExtensionManager.getHeadBySpawnString(spawnname);
-        if(hr!=null) return TexturedSkullType.CUSTOM;
-        for (TexturedSkullType type : TexturedSkullType.values()) {
+        if(hr!=null) return PHHeadType.CUSTOM;
+        for (PHHeadType type : PHHeadType.values()) {
             if (type.getSpawnName().equalsIgnoreCase(spawnname)) {
                 return type;
             }
@@ -462,7 +461,7 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
      * @return A string containing the config entry name (key) for the skulltype
      */
     public String getConfigName() {
-        if (this == TexturedSkullType.PLAYER) {
+        if (this == PHHeadType.PLAYER) {
             return "droprate";
         }
         return name().replace("_", "").toLowerCase() + "droprate";
@@ -476,7 +475,7 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
      */
     @Override
     public String getDisplayName() {
-        return Formatter.format(Lang.getString("HEAD_" + name()));
+        return PlayerHeads.getApiInstance().formatLangString("HEAD_" + name());
     }
 
     /**
@@ -489,7 +488,7 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
      * @return A string containing the user's head displayname
      */
     public static String getDisplayName(String owner) {
-        return Formatter.format(Lang.getString("HEAD_PLAYER"), owner);
+        return PlayerHeads.getApiInstance().formatLangString("HEAD_PLAYER", owner);
     }
 
     /**
@@ -501,7 +500,7 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
      * @return A string containing the spawnname.
      */
     public String getSpawnName() {
-        return Lang.getString("HEAD_SPAWN_" + name());
+        return PlayerHeads.getApiInstance().getLangString("HEAD_SPAWN_" + name());
     }
 
     /**
@@ -564,7 +563,7 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
     public HeadDisplay getDisplay(){
         return this;
     }
-    public HeadIdentity getRepresentation(){
+    public HeadIdentity getIdentity(){
         return new HeadIdentity(this,"",owner);
     }
     

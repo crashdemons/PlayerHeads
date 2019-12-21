@@ -5,7 +5,7 @@ package org.shininet.bukkit.playerheads;
 
 import com.github.crashdemons.playerheads.SkullConverter;
 import com.github.crashdemons.playerheads.SkullManager;
-import com.github.crashdemons.playerheads.TexturedSkullType;
+import com.github.crashdemons.playerheads.api.PHHeadType;
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import java.util.ArrayList;
 import java.util.List;
@@ -200,7 +200,7 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
         //input item processing (from inventory)
         ItemStack skullInput = Compatibility.getProvider().getItemInMainHand((Player) sender);//.getEquipment().getItemInMainHand();
 
-        TexturedSkullType inputSkullType = SkullConverter.skullTypeFromItemStack(skullInput);//here PLAYER means unknown playerhead or Player Mob head - only returns null on unknown material
+        PHHeadType inputSkullType = SkullConverter.skullTypeFromItemStack(skullInput);//here PLAYER means unknown playerhead or Player Mob head - only returns null on unknown material
         if (inputSkullType == null) {
             formatMsg(sender, scope, Lang.ERROR_NOT_A_HEAD);
             return true;
@@ -215,10 +215,10 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
                 spawnName = fixcase(spawnName);
             }
         }
-        TexturedSkullType outputSkullType = TexturedSkullType.getBySpawnName(spawnName);//here null means it's not a mob head. #player->PLAYER can be a "mob head"
+        PHHeadType outputSkullType = PHHeadType.getBySpawnName(spawnName);//here null means it's not a mob head. #player->PLAYER can be a "mob head"
 
-        boolean fromPlayerhead = inputSkullType == TexturedSkullType.PLAYER;//PLAYER here means steve "Player" Heads or XXXXX's Head
-        boolean toPlayerhead = outputSkullType == TexturedSkullType.PLAYER || outputSkullType == null;//PLAYER here means steve "Player" Heads, null==XXXXX's head
+        boolean fromPlayerhead = inputSkullType == PHHeadType.PLAYER;//PLAYER here means steve "Player" Heads or XXXXX's Head
+        boolean toPlayerhead = outputSkullType == PHHeadType.PLAYER || outputSkullType == null;//PLAYER here means steve "Player" Heads, null==XXXXX's head
 
         boolean mobRename = !fromPlayerhead && !toPlayerhead;
         boolean playerRename = fromPlayerhead && toPlayerhead;

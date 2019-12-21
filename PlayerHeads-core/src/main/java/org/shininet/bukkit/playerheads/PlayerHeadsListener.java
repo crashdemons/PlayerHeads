@@ -9,7 +9,7 @@ import com.github.crashdemons.playerheads.BlockDropResult;
 import com.github.crashdemons.playerheads.antispam.InteractSpamPreventer;
 import com.github.crashdemons.playerheads.SkullConverter;
 import com.github.crashdemons.playerheads.SkullManager;
-import com.github.crashdemons.playerheads.TexturedSkullType;
+import com.github.crashdemons.playerheads.api.PHHeadType;
 import com.github.crashdemons.playerheads.antispam.PlayerDeathSpamPreventer;
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import com.github.crashdemons.playerheads.compatibility.CompatiblePlugins;
@@ -147,7 +147,7 @@ class PlayerHeadsListener implements Listener {
             }
         }
 
-        TexturedSkullType skullType = SkullConverter.skullTypeFromEntity(victim);
+        PHHeadType skullType = SkullConverter.skullTypeFromEntity(victim);
         if (skullType == null) {
             debug(" skull type could not be determined"); 
             return;//entity type is one we don't support - don't attempt to handle heads for it.
@@ -196,7 +196,7 @@ class PlayerHeadsListener implements Listener {
         //plugin.logger.info(log);
     }
     
-    private void doHeadRoll(EntityDeathEvent event, TexturedSkullType type, Double droprateOriginal, Map<String,DropRateModifier> modifiers){
+    private void doHeadRoll(EntityDeathEvent event, PHHeadType type, Double droprateOriginal, Map<String,DropRateModifier> modifiers){
         Double dropchanceRand = prng.nextDouble();
         Player killer = event.getEntity().getKiller();
         LivingEntity entity = event.getEntity();
@@ -287,7 +287,7 @@ class PlayerHeadsListener implements Listener {
         if (block != null) {
             BlockState state = block.getState();
             if(CompatiblePlugins.heads.getExternalHeadHandling(state)==ExternalHeadHandling.NO_INTERACTION) return;
-            TexturedSkullType skullType = SkullConverter.skullTypeFromBlockState(state);
+            PHHeadType skullType = SkullConverter.skullTypeFromBlockState(state);
             if (skullType == null) {
                 return;
             }
@@ -332,7 +332,7 @@ class PlayerHeadsListener implements Listener {
         if (!fixDroppedHeads) {
             return;
         }
-        TexturedSkullType skullType = SkullConverter.skullTypeFromItemStack(stack);
+        PHHeadType skullType = SkullConverter.skullTypeFromItemStack(stack);
         if (skullType == null) {
             return;
         }
@@ -380,7 +380,7 @@ class PlayerHeadsListener implements Listener {
         if (player.getGameMode() != GameMode.CREATIVE) {
             BlockState state = block.getState();
             if(CompatiblePlugins.heads.getExternalHeadHandling(state)==ExternalHeadHandling.NO_INTERACTION) return;
-            TexturedSkullType skullType = SkullConverter.skullTypeFromBlockState(state);
+            PHHeadType skullType = SkullConverter.skullTypeFromBlockState(state);
             if (skullType != null) {
 
                 boolean canBreak = true;

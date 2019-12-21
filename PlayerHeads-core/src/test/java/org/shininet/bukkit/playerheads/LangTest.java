@@ -5,7 +5,7 @@
  */
 package org.shininet.bukkit.playerheads;
 
-import com.github.crashdemons.playerheads.TexturedSkullType;
+import com.github.crashdemons.playerheads.api.PHHeadType;
 import com.github.crashdemons.playerheads.testutils.Mocks;
 import com.github.crashdemons.playerheads.testutils.TestOutput;
 import java.io.File;
@@ -45,7 +45,7 @@ public class LangTest {
         FileInputStream resource = new FileInputStream(path+"/lang.properties");
         props.load(resource);
         
-        for (TexturedSkullType skullType : TexturedSkullType.values()) {
+        for (PHHeadType skullType : PHHeadType.values()) {
             String value;
             value = props.getProperty("HEAD_"+skullType.name());
             if(value==null)
