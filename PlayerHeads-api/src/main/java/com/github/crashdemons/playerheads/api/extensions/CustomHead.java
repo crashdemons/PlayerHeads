@@ -6,12 +6,12 @@
 package com.github.crashdemons.playerheads.api.extensions;
 
 import com.github.crashdemons.playerheads.api.HeadIdentity;
-import com.github.crashdemons.playerheads.api.HeadType;
 import com.github.crashdemons.playerheads.api.PlayerHeads;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import com.github.crashdemons.playerheads.api.HeadDisplay;
+import com.github.crashdemons.playerheads.api.PHHeadType;
 
 /**
  * Custom head type with information required to create, display, spawn, and
@@ -79,8 +79,8 @@ public class CustomHead extends HeadIdentity implements HeadDisplay {
     }
 
     @Override
-    public HeadType getType() {
-        return PlayerHeads.getApiInstance().getCustomHeadType();
+    public PHHeadType getType() {
+        return PHHeadType.CUSTOM;
     }
     
 

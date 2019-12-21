@@ -177,7 +177,7 @@ public interface PlayerHeadsAPI {
      * @since 5.3.0-SNAPSHOT
      */
     @NotNull public ItemStack getHeadItem(HeadIdentity head, int num);
-    @NotNull public HeadType getCustomHeadType();
+    @NotNull public PHHeadType getCustomHeadType();
     
     //5.3 API
     /**
@@ -200,7 +200,7 @@ public interface PlayerHeadsAPI {
      * @return the representation details for the head
      * @since 5.3.0-SNAPSHOT
      */
-    @Nullable public HeadIdentity getHeadIdentity(@NotNull HeadType ht);
+    @Nullable public HeadIdentity getHeadIdentity(@NotNull PHHeadType ht);
     
     /**
      * Retrieves a plugin display-string from the currently loaded PlayerHeads lang file.

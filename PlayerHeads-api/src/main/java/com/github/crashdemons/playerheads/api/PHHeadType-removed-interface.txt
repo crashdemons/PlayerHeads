@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author crashdemons (crashenator at gmail.com)
  */
-public interface HeadType extends HeadDisplay {
+public interface PHHeadType extends HeadDisplay {
 
     // 4.10.0 API
     //------------------------------------------------------------------

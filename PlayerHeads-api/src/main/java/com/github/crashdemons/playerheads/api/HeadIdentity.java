@@ -24,33 +24,33 @@ public class HeadIdentity {
     //@Nullable public abstract String getOwnerName();
     //@Nullable public abstract HeadType getType();
     //@Nullable public abstract HeadComparisonResult compare(HeadRepresentation head); 
-    private final HeadType type;
+    private final PHHeadType type;
     private final String ownerName;
     private final UUID ownerId;
     private final String spawnString; //optional
 
-    public HeadIdentity(final HeadType type, final String ownerName) {
+    public HeadIdentity(final PHHeadType type, final String ownerName) {
         this.type = type;
         this.ownerName = ownerName;
         this.ownerId = null;
         this.spawnString="";
     }
 
-    public HeadIdentity(final HeadType type, final String ownerName, final UUID ownerId) {
+    public HeadIdentity(final PHHeadType type, final String ownerName, final UUID ownerId) {
         this.type = type;
         this.ownerName = ownerName;
         this.ownerId = ownerId;
         this.spawnString="";
     }
     
-    public HeadIdentity(final HeadType type, final String ownerName,final String spawnString) {
+    public HeadIdentity(final PHHeadType type, final String ownerName,final String spawnString) {
         this.type = type;
         this.ownerName = ownerName;
         this.ownerId = null;
         this.spawnString=spawnString;
     }
 
-    public HeadIdentity(final HeadType type, final String ownerName, final UUID ownerId,final String spawnString) {
+    public HeadIdentity(final PHHeadType type, final String ownerName, final UUID ownerId,final String spawnString) {
         this.type = type;
         this.ownerName = ownerName;
         this.ownerId = ownerId;
@@ -72,7 +72,7 @@ public class HeadIdentity {
     
 
     @Nullable
-    public HeadType getType() {
+    public PHHeadType getType() {
         return type;
     }
 

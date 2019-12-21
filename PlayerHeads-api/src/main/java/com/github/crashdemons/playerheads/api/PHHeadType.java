@@ -11,7 +11,7 @@ import java.util.List;
 import com.github.crashdemons.playerheads.compatibility.BackwardsCompatibleSkullType;
 
 /**
- * Enumeration of skulls with associated UUID (randomly assigned) and texture
+ * Enumeration of inbuilt Heads supported by PlayerHeads plugin with associated UUID (randomly assigned) and texture
  * string.
  * <p>
  * This enum should match correspondingly named entries in bukkit EntityType
@@ -21,8 +21,9 @@ import com.github.crashdemons.playerheads.compatibility.BackwardsCompatibleSkull
  *
  * @author crashdemons
  * @author MagmaVoid_
+ * @since 5.3.0-SNAPSHOT
  */
-public enum PHHeadType implements HeadType,HeadDisplay {
+public enum PHHeadType implements HeadDisplay {
 
     //Entity skull settings - big thanks to MagmaVoid_ for finding all of these textures.
     
@@ -44,8 +45,6 @@ public enum PHHeadType implements HeadType,HeadDisplay {
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWI3YWY5ZTQ0MTEyMTdjN2RlOWM2MGFjYmQzYzNmZDY1MTk3ODMzMzJhMWIzYmM1NmZiZmNlOTA3MjFlZjM1In19fQ=="
     ),
 
-    //Provisional 1.15 entry - subject to change
-    @Deprecated
     BEE(
             "e6016d4c-351c-49da-9da9-38da66a668f7",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTlhYzE2ZjI5NmI0NjFkMDVlYTA3ODVkNDc3MDMzZTUyNzM1OGI0ZjMwYzI2NmFhMDJmMDIwMTU3ZmZjYTczNiJ9fX0="
@@ -392,7 +391,7 @@ public enum PHHeadType implements HeadType,HeadDisplay {
      *
      * @return The UUID
      */
-    @Override
+    //@Override
     public UUID getOwner() {
         return owner;
     }
@@ -430,6 +429,11 @@ public enum PHHeadType implements HeadType,HeadDisplay {
         return Mappings.skullsById.get(owner);
     }
 
+    /**
+     * Finds the head type by the supportable skull-type value.
+     * @param mat skull type/compatible-material to search for.
+     * @return the head type, or null
+     */
     public static PHHeadType get(BackwardsCompatibleSkullType mat) {
         if(mat==null) return null;
         return Mappings.skullsByMaterial.get(mat);
@@ -513,7 +517,7 @@ public enum PHHeadType implements HeadType,HeadDisplay {
      * @return true: the skulls associated material was a playerhead. false: the
      * skull has a different associated material.
      */
-    @Override
+    //@Override
     public boolean isPlayerHead() {
         return this.material.getDetails().isBackedByPlayerhead();
     }
@@ -533,7 +537,7 @@ public enum PHHeadType implements HeadType,HeadDisplay {
         return (this.owner.equals(Mappings.playerUUID) || !isPlayerHead());
     }
 
-    @Override
+    //@Override
     public boolean isVanilla() {
         //Note: heads that never had items are set to Player materials
         // this.material.isSupported() gives us whether other types of vanilla head are 'supported' but this checks the same conditions as hasDedicatedItem:
@@ -541,7 +545,7 @@ public enum PHHeadType implements HeadType,HeadDisplay {
         return hasDedicatedItem();
     }
 
-    @Override
+    //@Override
     public SkullDetails getImplementationDetails() {
         return this.material.getDetails();
     }
@@ -550,7 +554,7 @@ public enum PHHeadType implements HeadType,HeadDisplay {
      * Implement API requirement that can't see this enum's type.
      * @return 
      */
-    @Override
+    //@Override
     public Enum toEnum() {
         return this;
     }
