@@ -35,11 +35,12 @@ public class ApiProvider implements PlayerHeadsAPI {
 
     private final PHPlugin plugin;
 
-    private PHHeadType headFromApiHead(HeadType h) {
-        if(!(h instanceof PHHeadType)){
+    private PHHeadType headFromApiHead(PHHeadType h) { //TODO: remove calls to this method - now unused
+        return h;
+        /*if(!(h instanceof PHHeadType)){
             throw new IllegalArgumentException("The head type supplied was not created or supported by the plugin.");
         }
-        return PHHeadType.get(h.getOwner());
+        return PHHeadType.get(h.getOwner());*/
     }
     
     public ApiProvider(PlayerHeadsPlugin plugin) {
@@ -194,14 +195,14 @@ public class ApiProvider implements PlayerHeadsAPI {
     }
     
     @Override
-    public HeadType getCustomHeadType(){
+    public PHHeadType getCustomHeadType(){
         return PHHeadType.CUSTOM;
     }
     
     //5.3 API:
     @Override
     public HeadIdentity getHeadIdentity(EntityType et){
-        HeadType type;
+        PHHeadType type;
         try {
             type = PHHeadType.valueOf(et.name());
         } catch (Exception e) {
@@ -212,7 +213,7 @@ public class ApiProvider implements PlayerHeadsAPI {
     }
     
     @Override
-    public HeadIdentity getHeadIdentity(HeadType ht){
+    public HeadIdentity getHeadIdentity(PHHeadType ht){
         return createExtendedHeadIdentity(ht,"",ht.getOwner());
     }
     
@@ -227,7 +228,7 @@ public class ApiProvider implements PlayerHeadsAPI {
     
     //----------------------------------------------------------------------------
     //Constructs a new headrepresenation, but allows for extensions to update it
-    private HeadIdentity createExtendedHeadIdentity(final HeadType type, final String ownerName, final UUID ownerId){
+    private HeadIdentity createExtendedHeadIdentity(final PHHeadType type, final String ownerName, final UUID ownerId){
         HeadIdentity hr = new HeadIdentity(type,ownerName,ownerId);
         return HeadExtensionManager.updateHead(hr); 
     }
