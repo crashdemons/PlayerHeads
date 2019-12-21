@@ -154,7 +154,7 @@ var activeTableTab = "activeTableTab";
 </td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a></code></td>
+<td class="colFirst"><code>@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html" title="enum in com.github.crashdemons.playerheads.api">PHHeadType</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getCustomHeadType--">getCustomHeadType</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
@@ -188,21 +188,21 @@ var activeTableTab = "activeTableTab";
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadIdentity-com.github.crashdemons.playerheads.api.HeadType-">getHeadIdentity</a></span>(@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;ht)</code>
-<div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes for an inbuilt HeadType.</div>
-</td>
-</tr>
-<tr id="i10" class="altColor">
-<td class="colFirst"><code>@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadIdentity-org.bukkit.inventory.ItemStack-">getHeadIdentity</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/inventory/ItemStack.html?is-external=true" title="class or interface in org.bukkit.inventory">ItemStack</a>&nbsp;stack)</code>
 <div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadIdentity-org.bukkit.OfflinePlayer-boolean-">getHeadIdentity</a></span>(@NotNull <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/OfflinePlayer.html?is-external=true" title="class or interface in org.bukkit">OfflinePlayer</a>&nbsp;player,
                boolean&nbsp;forceOwner)</code>
 <div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes for a user's head.</div>
+</td>
+</tr>
+<tr id="i11" class="rowColor">
+<td class="colFirst"><code>@Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadIdentity-com.github.crashdemons.playerheads.api.PHHeadType-">getHeadIdentity</a></span>(@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html" title="enum in com.github.crashdemons.playerheads.api">PHHeadType</a>&nbsp;ht)</code>
+<div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes for an inbuilt HeadType.</div>
 </td>
 </tr>
 <tr id="i12" class="altColor">
@@ -618,7 +618,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <h4>getCustomHeadType</h4>
 <pre>@NotNull
-@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;getCustomHeadType()</pre>
+@NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html" title="enum in com.github.crashdemons.playerheads.api">PHHeadType</a>&nbsp;getCustomHeadType()</pre>
 </li>
 </ul>
 <a name="getHeadIdentity-org.bukkit.entity.EntityType-">
@@ -646,7 +646,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 </li>
 </ul>
-<a name="getHeadIdentity-com.github.crashdemons.playerheads.api.HeadType-">
+<a name="getHeadIdentity-com.github.crashdemons.playerheads.api.PHHeadType-">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -654,7 +654,7 @@ var activeTableTab = "activeTableTab";
 <h4>getHeadIdentity</h4>
 <pre>@Nullable
 @Nullable <a href="../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a>&nbsp;getHeadIdentity(@NotNull
-                                                  @NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/HeadType.html" title="interface in com.github.crashdemons.playerheads.api">HeadType</a>&nbsp;ht)</pre>
+                                                  @NotNull <a href="../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html" title="enum in com.github.crashdemons.playerheads.api">PHHeadType</a>&nbsp;ht)</pre>
 <div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes for an inbuilt HeadType.
  This is NOT subject to configuration settings except for 'dropboringplayerheads'.
  Note: this method only converts the information associated with the preset head-type and does not represent any extended mob ownership information.</div>

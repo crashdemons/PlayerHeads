@@ -88,6 +88,12 @@
 <div class="block">Package containing the PlayerHeads API specification</div>
 </td>
 </tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="#com.github.crashdemons.playerheads.api.extensions">com.github.crashdemons.playerheads.api.extensions</a></td>
+<td class="colLast">
+<div class="block">Package defining future support for PlayerHeads extensions</div>
+</td>
+</tr>
 </tbody>
 </table>
 </li>
@@ -106,7 +112,9 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html" title="enum in com.github.crashdemons.playerheads.api">PHHeadType</a></code></td>
-<td class="colLast"><span class="typeNameLabel">PHHeadType.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html#get-com.github.crashdemons.playerheads.compatibility.BackwardsCompatibleSkullType-">get</a></span>(<a href="../../../../../../com/github/crashdemons/playerheads/compatibility/BackwardsCompatibleSkullType.html" title="enum in com.github.crashdemons.playerheads.compatibility">BackwardsCompatibleSkullType</a>&nbsp;mat)</code>&nbsp;</td>
+<td class="colLast"><span class="typeNameLabel">PHHeadType.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html#get-com.github.crashdemons.playerheads.compatibility.BackwardsCompatibleSkullType-">get</a></span>(<a href="../../../../../../com/github/crashdemons/playerheads/compatibility/BackwardsCompatibleSkullType.html" title="enum in com.github.crashdemons.playerheads.compatibility">BackwardsCompatibleSkullType</a>&nbsp;mat)</code>
+<div class="block">Finds the head type by the supportable skull-type value.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html" title="enum in com.github.crashdemons.playerheads.api">PHHeadType</a></code></td>
@@ -121,6 +129,14 @@
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>@NotNull <a href="../../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html" title="enum in com.github.crashdemons.playerheads.api">PHHeadType</a></code></td>
+<td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getCustomHeadType--">getCustomHeadType</a></span>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html" title="enum in com.github.crashdemons.playerheads.api">PHHeadType</a></code></td>
+<td class="colLast"><span class="typeNameLabel">HeadIdentity.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html#getType--">getType</a></span>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html" title="enum in com.github.crashdemons.playerheads.api">PHHeadType</a></code></td>
 <td class="colLast"><span class="typeNameLabel">PHHeadType.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html#valueOf-java.lang.String-">valueOf</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;name)</code>
 <div class="block">Returns the enum constant of this type with the specified name.</div>
@@ -132,6 +148,69 @@
 <div class="block">Returns an array containing the constants of this enum type, in
 the order they are declared.</div>
 </td>
+</tr>
+</tbody>
+</table>
+<table class="useSummary" border="0" cellpadding="3" cellspacing="0" summary="Use table, listing methods, and an explanation">
+<caption><span>Methods in <a href="../../../../../../com/github/crashdemons/playerheads/api/package-summary.html">com.github.crashdemons.playerheads.api</a> with parameters of type <a href="../../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html" title="enum in com.github.crashdemons.playerheads.api">PHHeadType</a></span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><code>@Nullable <a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html" title="class in com.github.crashdemons.playerheads.api">HeadIdentity</a></code></td>
+<td class="colLast"><span class="typeNameLabel">PlayerHeadsAPI.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/PlayerHeadsAPI.html#getHeadIdentity-com.github.crashdemons.playerheads.api.PHHeadType-">getHeadIdentity</a></span>(@NotNull <a href="../../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html" title="enum in com.github.crashdemons.playerheads.api">PHHeadType</a>&nbsp;ht)</code>
+<div class="block">Gets the details (type and owner) of a head for comparison and re-creation purposes for an inbuilt HeadType.</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="useSummary" border="0" cellpadding="3" cellspacing="0" summary="Use table, listing constructors, and an explanation">
+<caption><span>Constructors in <a href="../../../../../../com/github/crashdemons/playerheads/api/package-summary.html">com.github.crashdemons.playerheads.api</a> with parameters of type <a href="../../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html" title="enum in com.github.crashdemons.playerheads.api">PHHeadType</a></span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html#HeadIdentity-com.github.crashdemons.playerheads.api.PHHeadType-java.lang.String-">HeadIdentity</a></span>(<a href="../../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html" title="enum in com.github.crashdemons.playerheads.api">PHHeadType</a>&nbsp;type,
+            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;ownerName)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html#HeadIdentity-com.github.crashdemons.playerheads.api.PHHeadType-java.lang.String-java.lang.String-">HeadIdentity</a></span>(<a href="../../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html" title="enum in com.github.crashdemons.playerheads.api">PHHeadType</a>&nbsp;type,
+            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;ownerName,
+            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;spawnString)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html#HeadIdentity-com.github.crashdemons.playerheads.api.PHHeadType-java.lang.String-java.util.UUID-">HeadIdentity</a></span>(<a href="../../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html" title="enum in com.github.crashdemons.playerheads.api">PHHeadType</a>&nbsp;type,
+            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;ownerName,
+            <a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html?is-external=true" title="class or interface in java.util">UUID</a>&nbsp;ownerId)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/HeadIdentity.html#HeadIdentity-com.github.crashdemons.playerheads.api.PHHeadType-java.lang.String-java.util.UUID-java.lang.String-">HeadIdentity</a></span>(<a href="../../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html" title="enum in com.github.crashdemons.playerheads.api">PHHeadType</a>&nbsp;type,
+            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;ownerName,
+            <a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html?is-external=true" title="class or interface in java.util">UUID</a>&nbsp;ownerId,
+            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;spawnString)</code>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li class="blockList"><a name="com.github.crashdemons.playerheads.api.extensions">
+<!--   -->
+</a>
+<h3>Uses of <a href="../../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html" title="enum in com.github.crashdemons.playerheads.api">PHHeadType</a> in <a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/package-summary.html">com.github.crashdemons.playerheads.api.extensions</a></h3>
+<table class="useSummary" border="0" cellpadding="3" cellspacing="0" summary="Use table, listing methods, and an explanation">
+<caption><span>Methods in <a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/package-summary.html">com.github.crashdemons.playerheads.api.extensions</a> that return <a href="../../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html" title="enum in com.github.crashdemons.playerheads.api">PHHeadType</a></span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../../../../com/github/crashdemons/playerheads/api/PHHeadType.html" title="enum in com.github.crashdemons.playerheads.api">PHHeadType</a></code></td>
+<td class="colLast"><span class="typeNameLabel">CustomHead.</span><code><span class="memberNameLink"><a href="../../../../../../com/github/crashdemons/playerheads/api/extensions/CustomHead.html#getType--">getType</a></span>()</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+&nbsp;</td>
 </tr>
 </tbody>
 </table>
