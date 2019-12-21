@@ -5,6 +5,8 @@
  */
 package com.github.crashdemons.playerheads.testutils;
 
+import com.github.crashdemons.playerheads.api.ApiProvider;
+import com.github.crashdemons.playerheads.api.PlayerHeads;
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import java.util.UUID;
 import org.bukkit.Bukkit;
@@ -43,6 +45,7 @@ abstract public class Mocks {
             PowerMockito.mockStatic(Bukkit.class);
             when(Bukkit.getVersion()).thenReturn("git-SomeWackyServerFork-4454-4ad3bc (MC: 1.13.1 Pre-Release 5)");
             if(!Compatibility.isProviderAvailable()) Compatibility.init();
+            PlayerHeads.setApiInstance(new ApiProvider(null));
         }catch(Exception e){
             e.printStackTrace();
         }
