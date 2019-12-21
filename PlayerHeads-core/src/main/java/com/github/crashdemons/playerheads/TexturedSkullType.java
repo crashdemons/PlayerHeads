@@ -2,7 +2,7 @@ package com.github.crashdemons.playerheads;
 
 import com.github.crashdemons.playerheads.api.extensions.HeadExtensionManager;
 import com.github.crashdemons.playerheads.api.HeadIdentity;
-import com.github.crashdemons.playerheads.compatibility.CompatibleSkullMaterial;
+import com.github.crashdemons.playerheads.compatibility.BackwardsCompatibleSkullType;
 import java.util.UUID;
 import org.shininet.bukkit.playerheads.Lang;
 import java.util.HashMap;
@@ -41,7 +41,7 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
      * Skull Type used for indicating unknown playerheads.
      */
     PLAYER(//used for unknown player heads
-            CompatibleSkullMaterial.PLAYER,
+            BackwardsCompatibleSkullType.PLAYER,
             "a1ae4481-f3f0-4af9-a83e-75d3a7f87853",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWI3YWY5ZTQ0MTEyMTdjN2RlOWM2MGFjYmQzYzNmZDY1MTk3ODMzMzJhMWIzYmM1NmZiZmNlOTA3MjFlZjM1In19fQ=="
     ),
@@ -94,7 +94,7 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWM3OTc0ODJhMTRiZmNiODc3MjU3Y2IyY2ZmMWI2ZTZhOGI4NDEzMzM2ZmZiNGMyOWE2MTM5Mjc4YjQzNmIifX19"
     ),
     WITHER_SKELETON(
-            CompatibleSkullMaterial.WITHER_SKELETON,
+            BackwardsCompatibleSkullType.WITHER_SKELETON,
             "c5b5a5a5-8a1d-4c0b-8e9f-5dd4ac8ab9d6",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzk1M2I2YzY4NDQ4ZTdlNmI2YmY4ZmIyNzNkNzIwM2FjZDhlMWJlMTllODE0ODFlYWQ1MWY0NWRlNTlhOCJ9fX0="
     ),
@@ -143,12 +143,12 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTEyNTEyZTdkMDE2YTIzNDNhN2JmZjFhNGNkMTUzNTdhYjg1MTU3OWYxMzg5YmQ0ZTNhMjRjYmViODhiIn19fQ=="
     ),
     CREEPER(
-            CompatibleSkullMaterial.CREEPER,
+            BackwardsCompatibleSkullType.CREEPER,
             "c66c91fd-6fb5-414f-b70e-39c19edf3d28",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjQyNTQ4MzhjMzNlYTIyN2ZmY2EyMjNkZGRhYWJmZTBiMDIxNWY3MGRhNjQ5ZTk0NDQ3N2Y0NDM3MGNhNjk1MiJ9fX0="
     ),
     SKELETON(
-            CompatibleSkullMaterial.SKELETON,
+            BackwardsCompatibleSkullType.SKELETON,
             "69708f16-9c00-4aa4-9089-247ec1c8d013",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzAxMjY4ZTljNDkyZGExZjBkODgyNzFjYjQ5MmE0YjMwMjM5NWY1MTVhN2JiZjc3ZjRhMjBiOTVmYzAyZWIyIn19fQ=="
     ),
@@ -157,7 +157,7 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2Q1NDE1NDFkYWFmZjUwODk2Y2QyNThiZGJkZDRjZjgwYzNiYTgxNjczNTcyNjA3OGJmZTM5MzkyN2U1N2YxIn19fQ=="
     ),
     ZOMBIE(
-            CompatibleSkullMaterial.ZOMBIE,
+            BackwardsCompatibleSkullType.ZOMBIE,
             "a1985e68-5743-42f5-b67a-8e8dd3f8eb11",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTZmYzg1NGJiODRjZjRiNzY5NzI5Nzk3M2UwMmI3OWJjMTA2OTg0NjBiNTFhNjM5YzYwZTVlNDE3NzM0ZTExIn19fQ=="
     ),
@@ -194,7 +194,7 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzg5NTdkNTAyM2M5MzdjNGM0MWFhMjQxMmQ0MzQxMGJkYTIzY2Y3OWE5ZjZhYjM2Yjc2ZmVmMmQ3YzQyOSJ9fX0="
     ),
     ENDER_DRAGON(
-            CompatibleSkullMaterial.ENDER_DRAGON,
+            BackwardsCompatibleSkullType.ENDER_DRAGON,
             "069773eb-ed19-4a82-8ea7-b38a7224e10b",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzRlY2MwNDA3ODVlNTQ2NjNlODU1ZWYwNDg2ZGE3MjE1NGQ2OWJiNGI3NDI0YjczODFjY2Y5NWIwOTVhIn19fQ=="
     ),
@@ -343,7 +343,7 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
      *
      * @see org.bukkit.Material#PLAYER_HEAD
      */
-    private final CompatibleSkullMaterial material;
+    private final BackwardsCompatibleSkullType material;
 
     /**
      * an inner class containing mapping information / lookup information for
@@ -369,10 +369,10 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
          * Note: only contains skulltypes with dedicated materials (vanilla
          * drops) and includes Playerhead materials mapping to PLAYER.
          */
-        public static final HashMap<CompatibleSkullMaterial, TexturedSkullType> skullsByMaterial = new HashMap<>();
+        public static final HashMap<BackwardsCompatibleSkullType, TexturedSkullType> skullsByMaterial = new HashMap<>();
     }
 
-    TexturedSkullType(CompatibleSkullMaterial material, String ownerUUID, String texture) {
+    TexturedSkullType(BackwardsCompatibleSkullType material, String ownerUUID, String texture) {
         //this(material,wallMaterial,UUID.fromString(ownerUUID),texture);
         this.owner = UUID.fromString(ownerUUID);
         this.texture = texture;
@@ -384,7 +384,7 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
     }
 
     TexturedSkullType(String ownerUUID, String texture) {
-        this(CompatibleSkullMaterial.PLAYER, ownerUUID, texture);
+        this(BackwardsCompatibleSkullType.PLAYER, ownerUUID, texture);
     }
 
     /**
@@ -413,7 +413,7 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
      *
      * @return the compatible material
      */
-    public CompatibleSkullMaterial getCompatibleMaterial() {
+    public BackwardsCompatibleSkullType getCompatibleMaterial() {
         return material;
     }
 
@@ -430,7 +430,7 @@ public enum TexturedSkullType implements HeadType,HeadDisplay {
         return Mappings.skullsById.get(owner);
     }
 
-    public static TexturedSkullType get(CompatibleSkullMaterial mat) {
+    public static TexturedSkullType get(BackwardsCompatibleSkullType mat) {
         if(mat==null) return null;
         return Mappings.skullsByMaterial.get(mat);
     }

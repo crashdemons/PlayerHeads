@@ -7,7 +7,7 @@ package com.github.crashdemons.playerheads;
 
 import com.github.crashdemons.playerheads.testutils.Mocks;
 import com.github.crashdemons.playerheads.testutils.TestOutput;
-import com.github.crashdemons.playerheads.compatibility.CompatibleSkullMaterial;
+import com.github.crashdemons.playerheads.compatibility.BackwardsCompatibleSkullType;
 //import com.github.crashdemons.playerheads.compatibility.craftbukkit_1_13.Provider;
 import java.util.UUID;
 import org.bukkit.Bukkit;
@@ -115,7 +115,7 @@ public class TexturedSkullTypeTest {
     @Test
     public void testGet_Material() {
         out.println("get by Material");
-        CompatibleSkullMaterial mat = null;
+        BackwardsCompatibleSkullType mat = null;
         TexturedSkullType expResult = null;
         TexturedSkullType result = TexturedSkullType.get(mat);
         assertEquals(expResult, result);

@@ -25,7 +25,7 @@ public class CompatibleSkullMaterialTest {
     @Test
     public void testEntityNameCompatibility(){
         out.println("EntityNameCompatibility");
-        for(CompatibleSkullMaterial csm : CompatibleSkullMaterial.values()){
+        for(BackwardsCompatibleSkullType csm : BackwardsCompatibleSkullType.values()){
             EntityType et = EntityType.valueOf( csm.name() );
             out.println("   "+csm.name()+" => "+et.name());
         }
@@ -33,8 +33,8 @@ public class CompatibleSkullMaterialTest {
     @Test
     public void testSkullTypeCompatibility(){
         out.println("SkullTypeCompatibility");
-        assertEquals( SkullType.values().length, CompatibleSkullMaterial.values().length );
-        assertEquals( org.bukkit.SkullType.values().length, CompatibleSkullMaterial.values().length );
+        assertEquals( SkullType.values().length, BackwardsCompatibleSkullType.values().length );
+        assertEquals( org.bukkit.SkullType.values().length, BackwardsCompatibleSkullType.values().length );
     }
     
     

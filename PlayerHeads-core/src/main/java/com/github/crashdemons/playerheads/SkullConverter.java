@@ -2,7 +2,7 @@
 package com.github.crashdemons.playerheads;
 
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
-import com.github.crashdemons.playerheads.compatibility.CompatibleSkullMaterial;
+import com.github.crashdemons.playerheads.compatibility.BackwardsCompatibleSkullType;
 import java.util.UUID;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.BlockState;
@@ -61,7 +61,7 @@ public final class SkullConverter {
      *         <li>TexturedSkullType.PLAYER (if a playerhead UUID was not associated with any mob)</li></ul>
      */
     public static TexturedSkullType skullTypeFromItemStack(ItemStack stack){
-        CompatibleSkullMaterial mat = CompatibleSkullMaterial.get(stack);
+        BackwardsCompatibleSkullType mat = BackwardsCompatibleSkullType.get(stack);
         if(mat==null) return null;
         if(!mat.getDetails().isBackedByPlayerhead()) return TexturedSkullType.get(mat);
         SkullMeta skullState = (SkullMeta) stack.getItemMeta();
@@ -89,7 +89,7 @@ public final class SkullConverter {
      *         <li>TexturedSkullType.PLAYER (if a playerhead UUID was not associated with any mob)</li></ul>
      */
     public static TexturedSkullType skullTypeFromBlockState(BlockState state){
-        CompatibleSkullMaterial mat = CompatibleSkullMaterial.get(state);
+        BackwardsCompatibleSkullType mat = BackwardsCompatibleSkullType.get(state);
         if(mat==null) return null;
         if(!mat.getDetails().isBackedByPlayerhead()) return TexturedSkullType.get(mat);
         Skull skullState = (Skull) state;

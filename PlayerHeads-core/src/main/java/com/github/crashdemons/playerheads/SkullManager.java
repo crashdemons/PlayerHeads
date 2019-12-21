@@ -3,7 +3,7 @@ package com.github.crashdemons.playerheads;
 
 import com.github.crashdemons.playerheads.api.HeadIdentity;
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
-import com.github.crashdemons.playerheads.compatibility.CompatibleSkullMaterial;
+import com.github.crashdemons.playerheads.compatibility.BackwardsCompatibleSkullType;
 import java.util.UUID;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,12 +38,12 @@ public final class SkullManager {
     public static ItemStack CustomSkull(HeadIdentity identity, HeadDisplay display, int quantity, boolean useVanillaHeads){
         TexturedSkullType type = ((TexturedSkullType) identity.getType());
         if(type==null) return null;
-        CompatibleSkullMaterial mat = type.getCompatibleMaterial();
+        BackwardsCompatibleSkullType mat = type.getCompatibleMaterial();
         
         if(type.hasDedicatedItem()){
             if(useVanillaHeads)
                 return mat.getDetails().createItemStack(quantity);//new ItemStack(mat,quantity);
-            else mat=CompatibleSkullMaterial.PLAYER;
+            else mat=BackwardsCompatibleSkullType.PLAYER;
         }
         
         ItemStack stack = mat.getDetails().createItemStack(quantity);//new ItemStack(mat,quantity);
@@ -113,12 +113,12 @@ public final class SkullManager {
      * @return The ItemStack of heads desired.
      */
     public static ItemStack MobSkull(TexturedSkullType type,int quantity,boolean useVanillaHeads, boolean addLore){
-        CompatibleSkullMaterial mat = type.getCompatibleMaterial();
+        BackwardsCompatibleSkullType mat = type.getCompatibleMaterial();
         
         if(type.hasDedicatedItem()){
             if(useVanillaHeads)
                 return mat.getDetails().createItemStack(quantity);//new ItemStack(mat,quantity);
-            else mat=CompatibleSkullMaterial.PLAYER;
+            else mat=BackwardsCompatibleSkullType.PLAYER;
         }
         
         ItemStack stack = mat.getDetails().createItemStack(quantity);//new ItemStack(mat,quantity);
@@ -141,7 +141,7 @@ public final class SkullManager {
         return PlayerSkull(owner,Config.defaultStackSize, addLore);
     }
     private static ItemStack PlayerSkull(OfflinePlayer owner, int quantity, boolean addLore){
-        ItemStack stack = CompatibleSkullMaterial.PLAYER.getDetails().createItemStack(quantity);//new ItemStack(Material.PLAYER_HEAD,quantity);
+        ItemStack stack = BackwardsCompatibleSkullType.PLAYER.getDetails().createItemStack(quantity);//new ItemStack(Material.PLAYER_HEAD,quantity);
         SkullMeta headMeta = (SkullMeta) stack.getItemMeta();
         
         String name=null;

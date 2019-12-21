@@ -14,9 +14,9 @@ import org.bukkit.Material;
  */
 public final class RuntimeReferences {
     private RuntimeReferences(){}
-    public static CompatibleSkullMaterial getCompatibleMaterialByName(String name){
+    public static BackwardsCompatibleSkullType getCompatibleMaterialByName(String name){
         try{
-            return CompatibleSkullMaterial.valueOf(name);
+            return BackwardsCompatibleSkullType.valueOf(name);
         }catch(IllegalArgumentException e){
             return null;
         }

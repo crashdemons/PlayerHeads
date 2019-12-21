@@ -25,7 +25,7 @@ import org.bukkit.inventory.ItemStack;
  * @see SkullType
  * @author crashdemons (crashenator at gmail.com)
  */
-public enum CompatibleSkullMaterial {//should maintain compatibility with EntityType
+public enum BackwardsCompatibleSkullType {//should maintain compatibility with EntityType
     SKELETON(SkullType.SKELETON),
     WITHER_SKELETON(SkullType.WITHER_SKELETON),
     ZOMBIE(SkullType.ZOMBIE),
@@ -39,7 +39,7 @@ public enum CompatibleSkullMaterial {//should maintain compatibility with Entity
     private final SkullType skullType;
     private SkullDetails cachedDetails = null;
 
-    CompatibleSkullMaterial(SkullType type) {
+    BackwardsCompatibleSkullType(SkullType type) {
         skullType = type;
     }
 
@@ -75,7 +75,7 @@ public enum CompatibleSkullMaterial {//should maintain compatibility with Entity
      * @param type the vanilla skull type to reference
      * @return the skull material enum entry
      */
-    public static CompatibleSkullMaterial get(SkullType type) {
+    public static BackwardsCompatibleSkullType get(SkullType type) {
         if (type == null) {
             return null;
         }
@@ -99,7 +99,7 @@ public enum CompatibleSkullMaterial {//should maintain compatibility with Entity
      * @return the skull material enum entry
      * @see CompatibilityProvider#getSkullType(org.bukkit.inventory.ItemStack)
      */
-    public static CompatibleSkullMaterial get(ItemStack stack) {
+    public static BackwardsCompatibleSkullType get(ItemStack stack) {
         return get(Compatibility.getProvider().getSkullType(stack));
     }
 
@@ -114,7 +114,7 @@ public enum CompatibleSkullMaterial {//should maintain compatibility with Entity
      * @return the skull material enum entry
      * @see CompatibilityProvider#getSkullType(org.bukkit.block.BlockState)
      */
-    public static CompatibleSkullMaterial get(BlockState state) {
+    public static BackwardsCompatibleSkullType get(BlockState state) {
         return get(Compatibility.getProvider().getSkullType(state));
     }
 
