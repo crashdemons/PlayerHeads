@@ -30,24 +30,49 @@ public final class SkullManager {
     
     private SkullManager(){}
     
-    
-    public static void Skull(HeadIdentity representation, HeadDisplay display){
-        
+    //untested / unused
+    public static ItemStack CustomSkull(CustomHead customHead, int quantity, boolean useVanillaHeads){
+        return CustomSkull(customHead, customHead, quantity, useVanillaHeads);
     }
+    //untested / unused
+    public static ItemStack CustomSkull(HeadIdentity identity, HeadDisplay display, int quantity, boolean useVanillaHeads){
+        TexturedSkullType type = ((TexturedSkullType) identity.getType());
+        if(type==null) return null;
+        CompatibleSkullMaterial mat = type.getCompatibleMaterial();
+        
+        if(type.hasDedicatedItem()){
+            if(useVanillaHeads)
+                return mat.getDetails().createItemStack(quantity);//new ItemStack(mat,quantity);
+            else mat=CompatibleSkullMaterial.PLAYER;
+        }
+        
+        ItemStack stack = mat.getDetails().createItemStack(quantity);//new ItemStack(mat,quantity);
+        SkullMeta headMeta = (SkullMeta) stack.getItemMeta();
+        applyCustomHeadDetails(new BukkitOwnable(headMeta), identity, display);
+        stack.setItemMeta(headMeta);
+        return stack;
+    }
+    
+    
+    
+    
     public static void applyCustomHeadDetails(BukkitOwnable bukkitHead, CustomHead customHead){
+        applyCustomHeadDetails(bukkitHead, customHead, customHead);
+    }
+    public static void applyCustomHeadDetails(BukkitOwnable bukkitHead, HeadIdentity identity, HeadDisplay display){
         if(bukkitHead.getBaseObject() instanceof ItemMeta){
             ItemMeta meta = (ItemMeta) bukkitHead.getBaseObject();
-            meta.setDisplayName(customHead.getDisplayName());
-            List<String> lore = customHead.getLore();
+            meta.setDisplayName(display.getDisplayName());
+            List<String> lore = display.getLore();
             if(lore!=null){
                 meta.setLore(new ArrayList<>(lore));
             }
         }
-        UUID id = customHead.getOwnerId();
+        UUID id = identity.getOwnerId();
         OfflinePlayer op = Bukkit.getOfflinePlayer(id);
-        
+        bukkitHead.setOwner(identity.getOwnerName());
         bukkitHead.setOwningPlayer(op);
-        bukkitHead.setProfile(id, customHead.getTexture());
+        bukkitHead.setProfile(id, display.getTexture());
     }
 
     /**
