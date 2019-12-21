@@ -51,17 +51,18 @@ public final class SkullManager {
     }
 
     /**
-     * Applies Lore text (including the PlayerHeads plugin name) to a playerhead's meta.
-     * @param headMeta The SkullMeta associated with the playerhead to modify
+     * Gets full PlayerHeads Lore text (including the PlayerHeads plugin name).
      * @param extra Extra lore text to display under the "PlayerHeads" line.
      */
-    private static void applyLoreX(ItemMeta headMeta,String extra){
+    private static List<String> getExtendedLore(String extra){
         ArrayList<String> lore = new ArrayList<>();
         lore.add(" ");
         if(!Lang.LORE_PLUGIN_NAME.isEmpty()) lore.add(ChatColor.BLUE+""+ChatColor.ITALIC+Lang.LORE_PLUGIN_NAME);
         if(!extra.isEmpty()) lore.add(extra);
-        headMeta.setLore(lore);
+        return lore;
     }
+    
+    
     
     /**
      * Creates a stack of heads for the specified Mob's SkullType.
@@ -102,7 +103,7 @@ public final class SkullManager {
         String spawnString = type.getSpawnName();
         String texture = type.getTexture();
         UUID owner = type.getOwner();
-        List<String> lore = Arrays.asList(ChatColor.GREEN+Lang.LORE_HEAD_MOB);//TODO: FIX LORE TO include "extra"
+        List<String> lore = getExtendedLore(ChatColor.GREEN+Lang.LORE_HEAD_MOB);
         
         
         CustomHead customHead = new CustomHead(owner, null, spawnString, displayName, texture, lore);
@@ -126,7 +127,7 @@ public final class SkullManager {
         String displayName = ChatColor.RESET + "" + ChatColor.YELLOW + TexturedSkullType.getDisplayName(name);
         String spawnString = name.toLowerCase();
         String texture = null;
-        List<String> lore = Arrays.asList(ChatColor.RED+Lang.LORE_HEAD_PLAYER);//TODO: FIX LORE TO include "extra"
+        List<String> lore = getExtendedLore(ChatColor.RED+Lang.LORE_HEAD_PLAYER);
         
         CustomHead customHead = new CustomHead(owner.getUniqueId(), owner.getName(), spawnString, displayName, texture, lore);
         
