@@ -26,8 +26,8 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author meiskam
  */
 
-public final class PlayerHeads extends JavaPlugin implements Listener,PlayerHeadsPlugin {
-    public static PlayerHeads instance;
+public final class PHPlugin extends JavaPlugin implements Listener,PlayerHeadsPlugin {
+    public static PHPlugin instance;
     private PlayerHeadsListener listener;
     //private PlayerHeadsDraftListener draftListener=null;
     public Logger logger;
@@ -88,7 +88,7 @@ public final class PlayerHeads extends JavaPlugin implements Listener,PlayerHead
         //System.out.println(" head drop task #"+tasknum+" @ "+tick_delay+" ticks ("+(tick_delay/20.0)+"s");
     }
     
-    public PlayerHeads(){
+    public PHPlugin(){
         super();
         instance=this;
         api=new ApiProvider(this);

@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.shininet.bukkit.playerheads.Formatter;
 import org.shininet.bukkit.playerheads.Lang;
-import org.shininet.bukkit.playerheads.PlayerHeads;
+import org.shininet.bukkit.playerheads.PHPlugin;
 
 /**
  *
@@ -43,7 +43,7 @@ public class BroadcastManager {
             broadcast(plugin,message);
         }
     }
-    public static void broadcastMobBehead(PlayerHeads plugin, Player killer, Entity entity){
+    public static void broadcastMobBehead(PHPlugin plugin, Player killer, Entity entity){
         if (plugin.configFile.getBoolean("broadcastmob") && killer!=null) { //mob-on-mob broadcasts would be extremely annoying!
             String entityName = entity.getCustomName​();
             if (entityName==null) entityName = entity.getName(); //notnull
@@ -53,7 +53,7 @@ public class BroadcastManager {
         }
     }
     
-    public static void broadcastPlayerBehead(PlayerHeads plugin, Player killer, Player player){
+    public static void broadcastPlayerBehead(PHPlugin plugin, Player killer, Player player){
         if (plugin.configFile.getBoolean("broadcast")) { //mob-on-mob broadcasts would be extremely annoying!
             String message;
             if (killer == null) {
@@ -69,7 +69,7 @@ public class BroadcastManager {
         }
     }
     
-    public static void broadcastBehead(PlayerHeads plugin, Player killer, Entity entity){
+    public static void broadcastBehead(PHPlugin plugin, Player killer, Entity entity){
         if(entity instanceof Player){ broadcastPlayerBehead(plugin,killer,(Player)entity); return; }
         broadcastMobBehead(plugin, killer, entity);
     }

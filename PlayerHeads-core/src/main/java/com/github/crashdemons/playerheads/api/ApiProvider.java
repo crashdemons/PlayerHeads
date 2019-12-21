@@ -24,7 +24,7 @@ import org.shininet.bukkit.playerheads.Config;
 import org.shininet.bukkit.playerheads.Formatter;
 import org.shininet.bukkit.playerheads.Lang;
 import org.shininet.bukkit.playerheads.PlayerHeadsPlugin;
-import org.shininet.bukkit.playerheads.PlayerHeads;
+import org.shininet.bukkit.playerheads.PHPlugin;
 
 /**
  * Implements the API by wrapping internal methods
@@ -33,7 +33,7 @@ import org.shininet.bukkit.playerheads.PlayerHeads;
  */
 public class ApiProvider implements PlayerHeadsAPI {
 
-    private final PlayerHeads plugin;
+    private final PHPlugin plugin;
 
     private PHHeadType headFromApiHead(HeadType h) {
         if(!(h instanceof PHHeadType)){
@@ -43,7 +43,7 @@ public class ApiProvider implements PlayerHeadsAPI {
     }
     
     public ApiProvider(PlayerHeadsPlugin plugin) {
-        this.plugin = (PlayerHeads) plugin;
+        this.plugin = (PHPlugin) plugin;
     }
 
     @Override

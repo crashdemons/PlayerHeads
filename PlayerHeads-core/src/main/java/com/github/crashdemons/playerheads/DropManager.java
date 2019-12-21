@@ -22,7 +22,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.shininet.bukkit.playerheads.Config;
-import org.shininet.bukkit.playerheads.PlayerHeads;
+import org.shininet.bukkit.playerheads.PHPlugin;
 import org.shininet.bukkit.playerheads.events.BlockDropHeadEvent;
 
 /**
@@ -45,7 +45,7 @@ public class DropManager {
         }
     }
 
-    public static void scheduleItemDrops(PlayerHeads plugin, List<ItemStack> drops, final Location location, final boolean naturally, final boolean delayDrop, final long tickDelay) {
+    public static void scheduleItemDrops(PHPlugin plugin, List<ItemStack> drops, final Location location, final boolean naturally, final boolean delayDrop, final long tickDelay) {
         for (final ItemStack drop : drops) {
             if (drop == null) {
                 continue;
@@ -65,7 +65,7 @@ public class DropManager {
         }
     }
 
-    public static void requestNewDrops(PlayerHeads plugin, List<ItemStack> drops, boolean isWitherDrop, @NotNull Location location) {
+    public static void requestNewDrops(PHPlugin plugin, List<ItemStack> drops, boolean isWitherDrop, @NotNull Location location) {
         if (drops.isEmpty()) {
             return;
         }
@@ -77,14 +77,14 @@ public class DropManager {
             scheduleItemDrops(plugin, drops, location, true, false, 0);
         }
     }
-    public static void requestNewDrops(PlayerHeads plugin, List<ItemStack> drops, boolean isWitherDrop, @NotNull BukkitLocatable locatable) {
+    public static void requestNewDrops(PHPlugin plugin, List<ItemStack> drops, boolean isWitherDrop, @NotNull BukkitLocatable locatable) {
         requestNewDrops(plugin,drops,isWitherDrop,locatable.getLocation());
     }
-    public static void requestNewDrops(PlayerHeads plugin, List<ItemStack> drops, boolean isWitherDrop, @NotNull BukkitLocatableEvent event) {
+    public static void requestNewDrops(PHPlugin plugin, List<ItemStack> drops, boolean isWitherDrop, @NotNull BukkitLocatableEvent event) {
         requestNewDrops(plugin,drops,isWitherDrop,event.getLocation());
     }
 
-    public static void requestDrops(PlayerHeads plugin, List<ItemStack> drops, boolean isWitherDrop, @NotNull EntityDeathEvent event) {
+    public static void requestDrops(PHPlugin plugin, List<ItemStack> drops, boolean isWitherDrop, @NotNull EntityDeathEvent event) {
         if (drops.isEmpty()) {
             return;
         }
@@ -100,7 +100,7 @@ public class DropManager {
         }
     }
 
-    public static ItemStack createConvertedMobhead(PlayerHeads plugin, PHHeadType skullType, boolean isSourceSkinnable, boolean addLore, int quantity) {
+    public static ItemStack createConvertedMobhead(PHPlugin plugin, PHHeadType skullType, boolean isSourceSkinnable, boolean addLore, int quantity) {
         boolean usevanillaskull = plugin.configFile.getBoolean("dropvanillaheads");
         boolean convertvanillahead = plugin.configFile.getBoolean("convertvanillaheads");
 
@@ -115,7 +115,7 @@ public class DropManager {
 
     //drop a head based on a block being broken in some fashion
     //NOTE: the blockbreak handler expects this to unconditionally drop the item unless the new event is cancelled.
-    public static BlockDropResult blockDrop(PlayerHeads plugin, BlockEvent event, Block block, BlockState state) {
+    public static BlockDropResult blockDrop(PHPlugin plugin, BlockEvent event, Block block, BlockState state) {
         PHHeadType skullType = SkullConverter.skullTypeFromBlockState(state);
         Location location = block.getLocation();
         ItemStack item = null;

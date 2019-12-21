@@ -26,9 +26,9 @@ import org.bukkit.inventory.ItemStack;
  */
 class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
 
-    private final PlayerHeads plugin;
+    private final PHPlugin plugin;
 
-    public PlayerHeadsCommandExecutor(PlayerHeads plugin) {
+    public PlayerHeadsCommandExecutor(PHPlugin plugin) {
         this.plugin = plugin;
     }
 
@@ -247,7 +247,7 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
             return true;
         }
         
-        skullOutput = PlayerHeads.instance.api.getHeadItemFromSpawnString(spawnName, skullInput.getAmount(), false);
+        skullOutput = PHPlugin.instance.api.getHeadItemFromSpawnString(spawnName, skullInput.getAmount(), false);
         if(skullOutput==null){
             return false;//no message available - head not spawned.
         }

@@ -29,9 +29,9 @@ public final class InventoryManager {
     }
 
     public static boolean addHead(Player player, String spawnName, int quantity){
-        HeadIdentity hr = PlayerHeads.instance.api.getHeadIdentityFromSpawnString(spawnName, false);
+        HeadIdentity hr = PHPlugin.instance.api.getHeadIdentityFromSpawnString(spawnName, false);
         if(hr==null) throw new IllegalArgumentException("Unable to retrieve head-representation from spawn string");
-        ItemStack stack = PlayerHeads.instance.api.getHeadItem(hr, quantity);
+        ItemStack stack = PHPlugin.instance.api.getHeadItem(hr, quantity);
         if(stack==null) throw new IllegalArgumentException("unable to get item from head representation");
         return addItem(player, stack);
     }

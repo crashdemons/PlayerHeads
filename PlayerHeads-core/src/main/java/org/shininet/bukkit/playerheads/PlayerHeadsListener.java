@@ -60,7 +60,7 @@ import org.shininet.bukkit.playerheads.events.modifiers.DropRateModifierType;
 class PlayerHeadsListener implements Listener {
 
     private final Random prng = new Random();
-    private final PlayerHeads plugin;
+    private final PHPlugin plugin;
     private volatile InteractSpamPreventer clickSpamPreventer;
     private volatile PlayerDeathSpamPreventer deathSpamPreventer;
     
@@ -84,7 +84,7 @@ class PlayerHeadsListener implements Listener {
         }
     };
 
-    protected PlayerHeadsListener(PlayerHeads plugin) {
+    protected PlayerHeadsListener(PHPlugin plugin) {
         this.plugin = plugin;
         reloadConfig();
     }
