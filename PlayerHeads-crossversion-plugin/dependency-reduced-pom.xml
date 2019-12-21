@@ -147,13 +147,14 @@
               <artifactSet>
                 <includes>
                   <include>org.shininet.bukkit:PlayerHeads-api:jar:</include>
-                  <include>org.shininet.bukkit:PlayerHeads-core:jar:</include>
+                  <include>org.shininet.bukkit:PlayerHeads-corelib:jar:</include>
                   <include>org.shininet.bukkit:PlayerHeads-craftbukkit-support:jar:</include>
                   <include>org.shininet.bukkit:PlayerHeads-legacy-support:jar:</include>
                   <include>org.shininet.bukkit:PlayerHeads-craftbukkit-1.14-support:jar:</include>
                   <include>org.shininet.bukkit:PlayerHeads-craftbukkit-1.13-support:jar:</include>
                   <include>org.shininet.bukkit:PlayerHeads-craftbukkit-1.8-support:jar:</include>
                   <include>org.shininet.bukkit:PlayerHeads-glowstone-1.12-support:jar:</include>
+                  <include>org.shininet.bukkit:PlayerHeads-coreext:jar:</include>
                 </includes>
               </artifactSet>
               <filters>
@@ -246,7 +247,7 @@
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
-      <version>1.14.4-R0.1-SNAPSHOT</version>
+      <version>1.15.1-R0.1-SNAPSHOT</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
