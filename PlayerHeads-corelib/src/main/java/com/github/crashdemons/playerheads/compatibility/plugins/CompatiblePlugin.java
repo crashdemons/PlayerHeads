@@ -82,6 +82,10 @@ public abstract class CompatiblePlugin {
     public String getName() {
         return pluginName;
     }
+    
+    public void reloadConfig(){
+        
+    }
 
     /**
      * Get the plugin instance for the third-party plugin being supported.

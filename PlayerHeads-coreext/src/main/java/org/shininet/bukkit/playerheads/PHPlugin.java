@@ -151,6 +151,7 @@ public final class PHPlugin extends JavaPlugin implements PlayerHeadsPlugin,Play
     
     public void onConfigReloaded(){
         listener.reloadConfig();
+        CompatiblePlugins.reloadConfig();
     }
 
     private void initUpdater() {
