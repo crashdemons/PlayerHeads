@@ -5,12 +5,14 @@
  */
 package com.github.crashdemons.playerheads.compatibility.legacy;
 
+import com.github.crashdemons.playerheads.compatibility.SkullBlockAttachment;
 import com.github.crashdemons.playerheads.compatibility.SkullDetails;
 import com.github.crashdemons.playerheads.compatibility.SkullType;
 import com.github.crashdemons.playerheads.compatibility.Version;
 import com.github.crashdemons.playerheads.compatibility.common.SkullDetails_common;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * SkullDetails implementation for 1.8+ support
@@ -42,4 +44,12 @@ public class SkullDetails_legacy extends SkullDetails_common implements SkullDet
     //@Override public Material getItemMaterial(){ return materialItem; }
     @Override public Material getFloorMaterial(){ return materialBlock; }
     @Override public Material getWallMaterial(){ return materialBlock; }
+    
+    
+    @Override
+    public Material getBlockMaterial(SkullBlockAttachment attachment){
+        return materialBlock;
+    }
+    
+    
 }
