@@ -48,4 +48,16 @@ public class SkullDetails_modern extends SkullDetails_common implements SkullDet
     //@Override public Material getItemMaterial(){ return material; }
     @Override public Material getFloorMaterial(){ return material; }
     @Override public Material getWallMaterial(){ return materialWall; }
+    
+    @Override
+    public Material getBlockMaterial(SkullBlockAttachment attachment){
+        switch (attachment){
+            case FLOOR:
+                return getFloorMaterial();
+            case WALL:
+                return getWallMaterial();
+            default:
+                return getFloorMaterial();
+        }
+    }
 }
