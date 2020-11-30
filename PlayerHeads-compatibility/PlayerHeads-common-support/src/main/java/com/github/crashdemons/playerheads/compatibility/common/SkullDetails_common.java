@@ -5,9 +5,14 @@
  */
 package com.github.crashdemons.playerheads.compatibility.common;
 
+import com.github.crashdemons.playerheads.compatibility.SkullBlockAttachment;
 import com.github.crashdemons.playerheads.compatibility.SkullDetails;
 import com.github.crashdemons.playerheads.compatibility.SkullType;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 
 /**
  * SkullDetails implementation for 1.8+ support
@@ -27,5 +32,17 @@ public abstract class SkullDetails_common implements SkullDetails {
     @Override
     public Material getItemMaterial() {
         return materialItem;
+    }
+    
+    
+    @Override
+    public Block setBlock(Location loc, BlockFace rotation, SkullBlockAttachment attachment){
+        World w = loc.getWorld();
+        if(w==null) return null;
+        Block b = w.getBlockAt(loc);
+        if(b==null) return null;
+        Material blockMat = getBlockMaterial(attachment);
+        b.setType(blockMat);
+        return b;
     }
 }
