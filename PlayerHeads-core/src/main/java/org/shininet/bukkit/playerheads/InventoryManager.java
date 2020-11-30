@@ -5,8 +5,14 @@
  */
 package org.shininet.bukkit.playerheads;
 
+import com.github.crashdemons.playerheads.SkullConverter;
 import com.github.crashdemons.playerheads.SkullManager;
+import com.github.crashdemons.playerheads.TexturedSkullType;
+import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 /**
@@ -50,5 +56,17 @@ public final class InventoryManager {
             inv.setItem(firstEmpty, SkullManager.spawnSkull(skullOwner, quantity, usevanillaskulls, addLore));
             return true;
         }
+    }
+    
+    public static boolean setBlock(World w, int x, int y, int z, String skullOwner, BlockFace facing, String blocktype, boolean usevanillaskulls){
+        ItemStack stack = SkullManager.spawnSkull(skullOwner, 1, usevanillaskulls, false);
+        TexturedSkullType skullType = SkullConverter.skullTypeFromItemStack(stack);
+        
+        Block block =w.getBlockAt(x, y, z);
+        if(block == null) return false;
+        
+        skullType.getImplementationDetails().
+        
+        type.
     }
 }

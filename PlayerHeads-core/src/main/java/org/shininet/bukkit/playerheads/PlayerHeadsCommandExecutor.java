@@ -12,6 +12,8 @@ import java.util.List;
 import org.bukkit.Bukkit;
 
 import org.bukkit.OfflinePlayer;
+import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -30,6 +32,68 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
 
     public PlayerHeadsCommandExecutor(PlayerHeads plugin) {
         this.plugin = plugin;
+    }
+    
+    private boolean onCommandSetblock(CommandSender sender, Command cmd, String label, String[] args, String scope){
+        if (!sender.hasPermission("playerheads.setblock")) {
+            formatMsg(sender, scope, Lang.ERROR_PERMISSION);
+            return true;
+        }
+        String skullOwner;
+        boolean isConsoleSender = !(sender instanceof Player);
+
+
+        boolean usevanillaskull = plugin.configFile.getBoolean("dropvanillaheads");
+        
+        
+        //ph setblock <world> <x> <y> <z> <headname> [facing] [blocktype]
+        if(args.length<6) return false;
+        World w = null;
+        int x = 0, y=0, z=0;
+        
+        w = Bukkit.getWorld(args[1]);
+        if(w==null){
+            //TODO: error invalid world name
+            return true;
+        }
+        try { x = Integer.parseInt(args[2]); } catch (NumberFormatException ignored) {}
+        try { y = Integer.parseInt(args[3]); } catch (NumberFormatException ignored) {}
+        try { z = Integer.parseInt(args[4]); } catch (NumberFormatException ignored) {}
+        skullOwner = args[5];
+        
+        if (plugin.configFile.getBoolean("fixcase")) {
+            skullOwner = fixcase(skullOwner);
+        }
+        boolean addLore = plugin.configFile.getBoolean("addlore");
+        
+        Block block =w.getBlockAt(x, y, z);
+        if(block==null){
+            //TODO: error getting block
+            return true;
+        }
+        TexturedSkullType type = TexturedSkullType.getBySpawnName(skullOwner);
+        String headName = null;
+        if(type==null){
+            type = TexturedSkullType.PLAYER;
+            headName = TexturedSkullType.getDisplayName(skullOwner);
+        }else{
+            headName = type.getDisplayName();
+        }
+        
+        type.
+        
+        
+        block.set
+        
+        if (InventoryManager.addHead(receiver, skullOwner, quantity, usevanillaskull, addLore)) {
+            TexturedSkullType type = TexturedSkullType.getBySpawnName(skullOwner);
+            String headName = (type==null) ? TexturedSkullType.getDisplayName(skullOwner) : type.getDisplayName();
+            String forWhom = receiver.getName();
+            formatMsg(sender, scope, Lang.SPAWNED_HEAD2, headName, forWhom, ""+quantity);
+        } else {
+            formatMsg(sender, scope, Lang.ERROR_INV_FULL);
+        }
+        return true;
     }
 
     private void formatMsg(CommandSender sender, String commandscope, String message, String... replacements) {
@@ -325,6 +389,7 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
         final String cmd_rename = Formatter.formatStrip(Lang.CMD_RENAME);
         final String cmd_set = Formatter.formatStrip(Lang.CMD_SET);
         final String cmd_spawn = Formatter.formatStrip(Lang.CMD_SPAWN);
+        final String cmd_setblock = Formatter.formatStrip(Lang.CMD_SETBLOCK);
 
         if (args.length == 1) {
             if (cmd_config.startsWith(args[0])) {
@@ -336,7 +401,13 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
             if (cmd_rename.startsWith(args[0])) {
                 completions.add(cmd_rename);
             }
+            if (cmd_setblock.startsWith(args[0])) {
+                completions.add(cmd_setblock);
+            }
             return sort(completions);
+        }
+        if (args[0].equals(cmd_setblock)) {
+            
         }
         if (args[0].equals(cmd_config)) {
             if (args.length == 2) {
