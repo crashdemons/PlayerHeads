@@ -45,7 +45,7 @@ public enum SkullBlockAttachment {
             BlockFace.WEST_SOUTH_WEST
     ));
     
-    protected static boolean isValidOrientation(BlockFace rotation, SkullBlockAttachment attachment){
+    public static boolean isValidOrientation(BlockFace rotation, SkullBlockAttachment attachment){
         if(attachment==SkullBlockAttachment.WALL) return WALL_DIRECTIONS.contains(rotation);
         return FLOOR_DIRECTIONS.contains(rotation);
     }
