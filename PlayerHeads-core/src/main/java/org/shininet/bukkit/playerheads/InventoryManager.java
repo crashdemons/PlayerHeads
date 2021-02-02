@@ -81,7 +81,7 @@ public final class InventoryManager {
         if(meta instanceof SkullMeta) profile = Compatibility.getProvider().getCompatibleProfile(meta);
         
         if(profile==null || (!profile.hasId() && !profile.hasName())){//TODO: DEBUG
-            PlayerHeads.instance.getLogger().warning("setblock Profile from itemstack is null or invalid");
+            PlayerHeads.instance.getLogger().warning("setblock Profile from itemstack is null or invalid");//TODO:DEBUG
         }else{
             PlayerHeads.instance.getLogger().info("setblock profile "+profile.getName()+" "+profile.getId()+" "+profile.getTextures());//TODO: debug
         }
@@ -94,8 +94,15 @@ public final class InventoryManager {
         
         //TODO: set block facing direction???
         SkullDetails skullImplementation = skullType.getImplementationDetails();
+        
+        if(!SkullBlockAttachment.isValidOrientation(facing,attachment)){
+            PlayerHeads.instance.getLogger().warning("setblock invalid orientation");//TODO:DEBUG
+            return false;
+        }
+        
         Block block = skullImplementation.setBlock(loc, facing, attachment);
         if(block == null){//cannot get block for position
+            PlayerHeads.instance.getLogger().warning("setblock block returned null");//TODO:DEBUG
             return false;
         }
         
@@ -103,7 +110,7 @@ public final class InventoryManager {
         if(state instanceof Skull && profile!=null){
             boolean success = Compatibility.getProvider().setCompatibleProfile(state, profile);
             if(!success){//TODO: DEBUG
-                PlayerHeads.instance.getLogger().warning("setblock Profile setting on block failed");
+                PlayerHeads.instance.getLogger().warning("setblock Profile setting on block failed");//TODO:DEBUG
             }else{
                 PlayerHeads.instance.getLogger().info("setblock setprofile succeeded");//TODO: debug
                 state.update();

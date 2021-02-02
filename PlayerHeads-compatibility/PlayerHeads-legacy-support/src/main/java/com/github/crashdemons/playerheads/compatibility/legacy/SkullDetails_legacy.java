@@ -81,14 +81,22 @@ public class SkullDetails_legacy extends SkullDetails_common implements SkullDet
         LegacyHeadData legacyData = LegacyHeadData.get(rotation, attachment);
         if(legacyData!=null){
             b.setData(legacyData.value, true);
+            System.out.println("LegacyData set on block "+rotation+" "+attachment);//TODO: DEBUG
             if(legacyData.needsTileData){
                 MaterialData matData = state.getData();
                 if(matData instanceof Directional){
                     Directional skullMatData = (Directional) matData;
                     skullMatData.setFacingDirection(rotation);
                     state.setData(matData);//probably not necessary but might as well
+                    System.out.println("MaterialData set to rotation "+rotation);//TODO: DEBUG
+                }else{
+                    System.out.println("MaterialData was not directional :( ");//TODO: DEBUG
                 }
+            }else{
+                System.out.println("LegacyData did not need additional tile data");//TODO: DEBUG
             }
+        }else{
+            System.out.println("LegacyData was null - "+rotation+" "+attachment);//TODO: DEBUG
         }
         state.update();
     }

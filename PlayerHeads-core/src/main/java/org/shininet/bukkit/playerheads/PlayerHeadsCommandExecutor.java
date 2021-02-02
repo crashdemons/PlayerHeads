@@ -111,6 +111,12 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
             }
         }
         
+        if(!SkullBlockAttachment.isValidOrientation(facing,attachment)){
+            //TODO: error invalid facing/attachment combination
+            sender.sendMessage("Error: Invalid combination of attachment and rotation: "+attachment+" "+facing);
+            return false;
+        }
+        
         
         //if (InventoryManager.addHead(receiver, skullOwner, quantity, usevanillaskull, addLore)) {
         
