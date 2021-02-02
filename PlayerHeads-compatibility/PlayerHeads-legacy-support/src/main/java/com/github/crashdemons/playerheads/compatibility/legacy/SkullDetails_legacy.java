@@ -11,8 +11,11 @@ import com.github.crashdemons.playerheads.compatibility.SkullType;
 import com.github.crashdemons.playerheads.compatibility.Version;
 import com.github.crashdemons.playerheads.compatibility.common.SkullDetails_common;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
+import org.bukkit.material.MaterialData;
 
 /**
  * SkullDetails implementation for 1.8+ support
@@ -24,6 +27,31 @@ public class SkullDetails_legacy extends SkullDetails_common implements SkullDet
     public final Material materialBlock;
     public final short datavalue;
     //private final SkullType skullType;
+    
+    
+    private enum LegacyHeadData{
+        FLOOR(0x1,true),// On the floor (rotation is stored in the tile entity)
+        WALL_NORTH(0x2,false),// On a wall, facing north
+        WALL_SOUTH(0x3,false),// On a wall, facing south
+        WALL_EAST(0x4,false),// On a wall, facing east
+        WALL_WEST(0x5,false)// On a wall, facing west
+        ;
+        public final byte value;
+        public final boolean needsTileData;
+        private LegacyHeadData(int b, boolean needsMoreData){
+            value = (byte) b;
+            needsTileData = needsMoreData;
+        }
+        
+        public static LegacyHeadData get(BlockFace rotation, SkullBlockAttachment attachment){
+            if(attachment==SkullBlockAttachment.FLOOR) return LegacyHeadData.FLOOR;
+            try{
+                return LegacyHeadData.valueOf("WALL_"+rotation.name().toUpperCase());
+            }catch(Exception e){
+                return null;
+            }
+        }
+    }
     
     public SkullDetails_legacy(SkullType skullType){
         materialBlock=Material.SKULL;
@@ -44,6 +72,25 @@ public class SkullDetails_legacy extends SkullDetails_common implements SkullDet
     //@Override public Material getItemMaterial(){ return materialItem; }
     @Override public Material getFloorMaterial(){ return materialBlock; }
     @Override public Material getWallMaterial(){ return materialBlock; }
+    
+    
+    @Override
+    protected void setBlockDetails(Block b, BlockFace rotation, SkullBlockAttachment attachment){
+        BlockState state = b.getState();
+        LegacyHeadData legacyData = LegacyHeadData.get(rotation, attachment);
+        if(legacyData!=null){
+            b.setData(legacyData.value, true);
+            if(legacyData.needsTileData){
+                MaterialData matData = state.getData();
+                if(matData instanceof org.bukkit.material.Skull){
+                    org.bukkit.material.Skull skullMatData = (org.bukkit.material.Skull) matData;
+                    skullMatData.setFacingDirection(rotation);
+                    state.setData(skullMatData);
+                }
+            }
+        }
+        state.update();
+    }
     
     
     @Override
