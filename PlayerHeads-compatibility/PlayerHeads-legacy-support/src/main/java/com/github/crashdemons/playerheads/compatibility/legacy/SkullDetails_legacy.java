@@ -10,10 +10,12 @@ import com.github.crashdemons.playerheads.compatibility.SkullDetails;
 import com.github.crashdemons.playerheads.compatibility.SkullType;
 import com.github.crashdemons.playerheads.compatibility.Version;
 import com.github.crashdemons.playerheads.compatibility.common.SkullDetails_common;
+import java.util.Arrays;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
+import org.bukkit.block.Skull;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Directional;
 import org.bukkit.material.MaterialData;
@@ -59,10 +61,10 @@ public class SkullDetails_legacy extends SkullDetails_common implements SkullDet
         materialItem=Material.SKULL_ITEM;
         if( skullType==null || (skullType==SkullType.DRAGON && Version.checkUnder(1, 9)) ){
             this.skullType=SkullType.PLAYER;
-            datavalue=(short)SkullType.PLAYER.ordinal();
+            datavalue=SkullType.PLAYER.legacyDataValue;
         }else{
             this.skullType=skullType;
-            datavalue=(short) skullType.ordinal();
+            datavalue=skullType.legacyDataValue;
         }
     }
     
@@ -75,13 +77,16 @@ public class SkullDetails_legacy extends SkullDetails_common implements SkullDet
     @Override public Material getWallMaterial(){ return materialBlock; }
     
     
-    @Override
-    protected void setBlockDetails(Block b, BlockFace rotation, SkullBlockAttachment attachment){
-        BlockState state = b.getState();
+    
+    private void setBlockOrientation(Block b, BlockState state, BlockFace rotation, SkullBlockAttachment attachment){
+        
+        //TODO: orientation changes fine for FLOOR type but not for WALL (always facing east)
+        //
+        
         LegacyHeadData legacyData = LegacyHeadData.get(rotation, attachment);
         if(legacyData!=null){
             b.setData(legacyData.value, true);
-            System.out.println("LegacyData set on block "+rotation+" "+attachment);//TODO: DEBUG
+            System.out.println("LegacyData set on block "+rotation+" "+attachment+" => "+legacyData);//TODO: DEBUG
             if(legacyData.needsTileData){
                 MaterialData matData = state.getData();
                 if(matData instanceof Directional){
@@ -92,12 +97,49 @@ public class SkullDetails_legacy extends SkullDetails_common implements SkullDet
                 }else{
                     System.out.println("MaterialData was not directional :( ");//TODO: DEBUG
                 }
+                
+                
+                if(state instanceof Skull){
+                    ((Skull) state).setRotation(rotation);
+                    System.out.println("SkullState set to rotation "+rotation);//TODO: DEBUG
+                }else{
+                    System.out.println("State was not skull :( ");//TODO: DEBUG
+                }
+                
             }else{
                 System.out.println("LegacyData did not need additional tile data");//TODO: DEBUG
             }
         }else{
             System.out.println("LegacyData was null - "+rotation+" "+attachment);//TODO: DEBUG
         }
+    }
+    
+    private void setBlockSkullType(Block b, BlockState state){
+        //set skull
+        if(state instanceof Skull){
+            
+            short legacyDV = skullType.legacyDataValue;
+            
+            org.bukkit.SkullType[] bukkitSkullTypes = org.bukkit.SkullType.values();
+            if(legacyDV > bukkitSkullTypes.length){
+                System.out.println("attempting to create skull that isn't supported: "+legacyDV+"; max="+(bukkitSkullTypes.length-1));//TODO: DEBUG
+                return;
+            }
+            
+            org.bukkit.SkullType bukkitSkullType = bukkitSkullTypes[legacyDV];
+            ((Skull) state).setSkullType(bukkitSkullType);
+            System.out.println("SkullType set to rotation "+bukkitSkullType);//TODO: DEBUG
+        }else{
+            System.out.println("State was not skull :( ");//TODO: DEBUG
+        }
+    }
+    
+    
+    @Override
+    protected void setBlockDetails(Block b, BlockFace rotation, SkullBlockAttachment attachment){
+        BlockState state = b.getState();
+        setBlockOrientation(b,state,rotation,attachment);
+        setBlockSkullType(b,state);
         state.update();
     }
     
