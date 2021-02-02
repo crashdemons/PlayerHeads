@@ -11,6 +11,8 @@ import com.github.crashdemons.playerheads.TexturedSkullType;
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import com.github.crashdemons.playerheads.compatibility.CompatibleProfile;
 import com.github.crashdemons.playerheads.compatibility.SkullBlockAttachment;
+import com.github.crashdemons.playerheads.compatibility.SkullDetails;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -69,6 +71,9 @@ public final class InventoryManager {
     public static boolean setBlock(World w, int x, int y, int z, SkullBlockAttachment attachment, String skullOwner, BlockFace facing, boolean usevanillaskulls){
         ItemStack stack = SkullManager.spawnSkull(skullOwner, 1, usevanillaskulls, false);
         
+        Location loc = new Location(w,x,y,z);
+        
+        
         ItemMeta meta = stack.getItemMeta();
         CompatibleProfile profile = null;
         if(meta instanceof SkullMeta) profile = Compatibility.getProvider().getCompatibleProfile(stack);
@@ -78,18 +83,14 @@ public final class InventoryManager {
             return false;
         }
         
-        Block block =w.getBlockAt(x, y, z); //TODO: use SkullDetails:setblock instead!
+        //TODO: set block facing direction???
+        SkullDetails skullImplementation = skullType.getImplementationDetails();
+        Block block = skullImplementation.setBlock(loc, facing, attachment);
         if(block == null){//cannot get block for position
             return false;
         }
         
-        //TODO: set block facing direction???
-        
-        Material skullBlockMat = skullType.getImplementationDetails().getBlockMaterial(attachment);
-        block.setType(skullBlockMat);
-        
         BlockState state = block.getState();
-        
         if(state instanceof Skull && profile!=null) Compatibility.getProvider().setCompatibleProfile(state, profile);
         
         return true;
