@@ -27,32 +27,6 @@ public abstract class SkullDetails_common implements SkullDetails {
     protected Material materialItem;
     protected SkullType skullType;
     
-    protected static final Set<BlockFace> WALL_DIRECTIONS = new HashSet<>(Arrays.asList(
-            BlockFace.EAST,
-            BlockFace.WEST,
-            BlockFace.NORTH,
-            BlockFace.SOUTH
-    ));
-    protected static final Set<BlockFace> FLOOR_DIRECTIONS = new HashSet<>(Arrays.asList(
-            BlockFace.EAST,
-            BlockFace.EAST_NORTH_EAST,
-            BlockFace.EAST_SOUTH_EAST,
-            BlockFace.NORTH,
-            BlockFace.NORTH_EAST,
-            BlockFace.NORTH_NORTH_EAST,
-            BlockFace.NORTH_NORTH_WEST,
-            BlockFace.NORTH_WEST,
-            BlockFace.SOUTH,
-            BlockFace.SOUTH_EAST,
-            BlockFace.SOUTH_SOUTH_EAST,
-            BlockFace.SOUTH_SOUTH_WEST,
-            BlockFace.SOUTH_WEST,
-            BlockFace.UP,
-            BlockFace.WEST,
-            BlockFace.WEST_NORTH_WEST,
-            BlockFace.WEST_SOUTH_WEST
-    ));
-    
 
     @Override
     public boolean isSkinnable() {
@@ -82,12 +56,5 @@ public abstract class SkullDetails_common implements SkullDetails {
         return b;
     }
     
-    protected static boolean isValidHeadOrientation(BlockFace rotation, SkullBlockAttachment attachment){
-        if(attachment==SkullBlockAttachment.WALL) return WALL_DIRECTIONS.contains(rotation);
-        return FLOOR_DIRECTIONS.contains(rotation);
-    }
-    
-    public boolean isValidOrientation(BlockFace rotation, SkullBlockAttachment attachment){
-        return isValidHeadOrientation(rotation,attachment);
-    }
+
 }

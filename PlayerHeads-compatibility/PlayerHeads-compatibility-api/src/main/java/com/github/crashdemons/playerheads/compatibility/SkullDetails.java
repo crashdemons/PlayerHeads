@@ -104,6 +104,5 @@ public interface SkullDetails {
      * @return the material requested
      */
     public Material getWallMaterial();
-    
-    public boolean isValidOrientation(BlockFace rotation, SkullBlockAttachment attachment);
+   
 }
