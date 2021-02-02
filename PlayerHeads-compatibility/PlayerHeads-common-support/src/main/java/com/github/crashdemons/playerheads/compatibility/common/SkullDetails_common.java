@@ -34,6 +34,9 @@ public abstract class SkullDetails_common implements SkullDetails {
         return materialItem;
     }
     
+    protected void setBlockDetails(Block b, BlockFace rotation, SkullBlockAttachment attachment){
+        
+    }
     
     @Override
     public Block setBlock(Location loc, BlockFace rotation, SkullBlockAttachment attachment){
@@ -43,6 +46,7 @@ public abstract class SkullDetails_common implements SkullDetails {
         if(b==null) return null;
         Material blockMat = getBlockMaterial(attachment);
         b.setType(blockMat);
+        setBlockDetails(b, rotation, attachment);
         return b;
     }
 }
