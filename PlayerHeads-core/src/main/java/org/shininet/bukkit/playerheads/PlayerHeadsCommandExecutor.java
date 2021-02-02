@@ -7,6 +7,7 @@ import com.github.crashdemons.playerheads.SkullConverter;
 import com.github.crashdemons.playerheads.SkullManager;
 import com.github.crashdemons.playerheads.TexturedSkullType;
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
+import com.github.crashdemons.playerheads.compatibility.SkullBlockAttachment;
 import java.util.ArrayList;
 import java.util.List;
 import org.bukkit.Bukkit;
@@ -14,6 +15,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -45,53 +47,84 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
 
         boolean usevanillaskull = plugin.configFile.getBoolean("dropvanillaheads");
         
-        
-        //ph setblock <world> <x> <y> <z> <headname> [facing] [blocktype]
+        //ph setblock <world> <x> <y> <z> <headname> [facing] [attachment]
         if(args.length<6) return false;
         World w = null;
         int x = 0, y=0, z=0;
         
-        w = Bukkit.getWorld(args[1]);
+        if(!isConsoleSender && args[1].equals("~")){
+            Player player = (Player) sender;
+            w = player.getWorld();
+        }else{
+            w = Bukkit.getWorld(args[1]);
+        }
+        
         if(w==null){
             //TODO: error invalid world name
+            sender.sendMessage("Error: unknown world name: "+args[1]);
             return true;
         }
-        try { x = Integer.parseInt(args[2]); } catch (NumberFormatException ignored) {}
-        try { y = Integer.parseInt(args[3]); } catch (NumberFormatException ignored) {}
-        try { z = Integer.parseInt(args[4]); } catch (NumberFormatException ignored) {}
+        try{
+            x = Integer.parseInt(args[2]);
+            y = Integer.parseInt(args[3]);
+            z = Integer.parseInt(args[4]);
+        } catch (NumberFormatException e) { 
+            //TODO: error invalid coords
+            sender.sendMessage("Error: invalid coordinates: "+args[2]+" "+args[3]+" "+args[4]);
+        }
+        
         skullOwner = args[5];
         
         if (plugin.configFile.getBoolean("fixcase")) {
             skullOwner = fixcase(skullOwner);
         }
-        boolean addLore = plugin.configFile.getBoolean("addlore");
         
         Block block =w.getBlockAt(x, y, z);
-        if(block==null){
+        if(block==null){//make sure it's a valid block to change
             //TODO: error getting block
+            sender.sendMessage("Error: Can't change block at that position!");
             return true;
         }
-        TexturedSkullType type = TexturedSkullType.getBySpawnName(skullOwner);
-        String headName = null;
-        if(type==null){
-            type = TexturedSkullType.PLAYER;
-            headName = TexturedSkullType.getDisplayName(skullOwner);
-        }else{
-            headName = type.getDisplayName();
+        
+        
+        BlockFace facing = BlockFace.NORTH;
+        if(args.length>6){
+            String facingName = args[6].toUpperCase();
+            try{
+                facing = BlockFace.valueOf(facingName);
+            }catch(Exception e){
+                //TODO: error invalid facing direction
+                sender.sendMessage("Error: Invalid facing direction: "+facingName);
+                return true;
+            }
         }
         
-        type.
+        SkullBlockAttachment attachment = SkullBlockAttachment.FLOOR;
+        if(args.length>7){
+            String attachmentName = args[7].toUpperCase();
+            try{
+                attachment = SkullBlockAttachment.valueOf(attachmentName);
+            }catch(Exception e){
+                //TODO: error invalid block attachment state
+                sender.sendMessage("Error: Invalid block attachment: "+attachmentName);
+                return true;
+            }
+        }
         
         
-        block.set
+        //if (InventoryManager.addHead(receiver, skullOwner, quantity, usevanillaskull, addLore)) {
         
-        if (InventoryManager.addHead(receiver, skullOwner, quantity, usevanillaskull, addLore)) {
+        if (InventoryManager.setBlock(w, x, y, z, attachment, skullOwner, facing, usevanillaskull)) {
             TexturedSkullType type = TexturedSkullType.getBySpawnName(skullOwner);
             String headName = (type==null) ? TexturedSkullType.getDisplayName(skullOwner) : type.getDisplayName();
-            String forWhom = receiver.getName();
-            formatMsg(sender, scope, Lang.SPAWNED_HEAD2, headName, forWhom, ""+quantity);
+            String forWhom = sender.getName();
+            //TODO: success message
+            sender.sendMessage("Successfully set block to head.");
+            //formatMsg(sender, scope, Lang.SPAWNED_HEAD2, headName, forWhom, ""+quantity);
         } else {
-            formatMsg(sender, scope, Lang.ERROR_INV_FULL);
+            //TODO: failure message
+            sender.sendMessage("Error: failed to set block to head");
+            //formatMsg(sender, scope, Lang.ERROR_INV_FULL);
         }
         return true;
     }
@@ -364,6 +397,8 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
             return onCommandSpawn(sender, cmd, label, args, scope + Lang.COLON + Lang.CMD_SPAWN);
         } else if (args[0].equalsIgnoreCase(Formatter.formatStrip(Lang.CMD_RENAME))) {
             return onCommandRename(sender, cmd, label, args, scope + Lang.COLON + Lang.CMD_RENAME);
+        } else if (args[0].equalsIgnoreCase(Formatter.formatStrip(Lang.CMD_SETBLOCK))) {
+            return onCommandSetblock(sender, cmd, label, args, scope + Lang.COLON + Lang.CMD_SETBLOCK);
         } else {
             scope += Lang.COLON + Lang.CMD_UNKNOWN;
             formatMsg(sender, scope, Lang.ERROR_INVALID_SUBCOMMAND);

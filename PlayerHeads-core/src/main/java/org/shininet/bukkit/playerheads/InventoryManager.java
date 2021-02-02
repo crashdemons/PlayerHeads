@@ -8,12 +8,20 @@ package org.shininet.bukkit.playerheads;
 import com.github.crashdemons.playerheads.SkullConverter;
 import com.github.crashdemons.playerheads.SkullManager;
 import com.github.crashdemons.playerheads.TexturedSkullType;
+import com.github.crashdemons.playerheads.compatibility.Compatibility;
+import com.github.crashdemons.playerheads.compatibility.CompatibleProfile;
+import com.github.crashdemons.playerheads.compatibility.SkullBlockAttachment;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.Skull;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 /**
  * Defines a collection of utility methods for the plugin inventory management, item management
@@ -58,15 +66,32 @@ public final class InventoryManager {
         }
     }
     
-    public static boolean setBlock(World w, int x, int y, int z, String skullOwner, BlockFace facing, String blocktype, boolean usevanillaskulls){
+    public static boolean setBlock(World w, int x, int y, int z, SkullBlockAttachment attachment, String skullOwner, BlockFace facing, boolean usevanillaskulls){
         ItemStack stack = SkullManager.spawnSkull(skullOwner, 1, usevanillaskulls, false);
-        TexturedSkullType skullType = SkullConverter.skullTypeFromItemStack(stack);
+        
+        ItemMeta meta = stack.getItemMeta();
+        CompatibleProfile profile = null;
+        if(meta instanceof SkullMeta) profile = Compatibility.getProvider().getCompatibleProfile(stack);
+        
+        TexturedSkullType skullType = SkullConverter.skullTypeFromItemStack(stack,false,false);
+        if(skullType==null){//not a known type of skull - possibly internal error since we spawned it ourself?
+            return false;
+        }
         
         Block block =w.getBlockAt(x, y, z);
-        if(block == null) return false;
+        if(block == null){//cannot get block for position
+            return false;
+        }
         
-        skullType.getImplementationDetails().
+        //TODO: set block facing direction???
         
-        type.
+        Material skullBlockMat = skullType.getImplementationDetails().getBlockMaterial(attachment);
+        block.setType(skullBlockMat);
+        
+        BlockState state = block.getState();
+        
+        if(state instanceof Skull && profile!=null) Compatibility.getProvider().setCompatibleProfile(state, profile);
+        
+        return true;
     }
 }
