@@ -74,9 +74,18 @@ public final class InventoryManager {
         Location loc = new Location(w,x,y,z);
         
         
+        PlayerHeads.instance.getLogger().info("setblock "+attachment+" "+facing);//TODO: debug
+        
         ItemMeta meta = stack.getItemMeta();
         CompatibleProfile profile = null;
         if(meta instanceof SkullMeta) profile = Compatibility.getProvider().getCompatibleProfile(meta);
+        
+        if(profile==null || (!profile.hasId() && !profile.hasName())){//TODO: DEBUG
+            PlayerHeads.instance.getLogger().warning("setblock Profile from itemstack is null or invalid");
+        }else{
+            PlayerHeads.instance.getLogger().info("setblock profile "+profile.getName()+" "+profile.getId()+" "+profile.getTextures());//TODO: debug
+        }
+        
         
         TexturedSkullType skullType = SkullConverter.skullTypeFromItemStack(stack,false,false);
         if(skullType==null){//not a known type of skull - possibly internal error since we spawned it ourself?
@@ -91,7 +100,16 @@ public final class InventoryManager {
         }
         
         BlockState state = block.getState();
-        if(state instanceof Skull && profile!=null) Compatibility.getProvider().setCompatibleProfile(state, profile);
+        if(state instanceof Skull && profile!=null){
+            boolean success = Compatibility.getProvider().setCompatibleProfile(state, profile);
+            if(!success){//TODO: DEBUG
+                PlayerHeads.instance.getLogger().warning("setblock Profile setting on block failed");
+            }else{
+                PlayerHeads.instance.getLogger().info("setblock setprofile succeeded");//TODO: debug
+            }
+        }else{
+            PlayerHeads.instance.getLogger().warning("Blockstate wasn't a skull");
+        }
         
         return true;
     }
