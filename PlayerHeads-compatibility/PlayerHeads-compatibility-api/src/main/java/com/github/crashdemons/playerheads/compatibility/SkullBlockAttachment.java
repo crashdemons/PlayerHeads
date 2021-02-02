@@ -39,7 +39,6 @@ public enum SkullBlockAttachment {
             BlockFace.SOUTH_SOUTH_EAST,
             BlockFace.SOUTH_SOUTH_WEST,
             BlockFace.SOUTH_WEST,
-            BlockFace.UP,
             BlockFace.WEST,
             BlockFace.WEST_NORTH_WEST,
             BlockFace.WEST_SOUTH_WEST
