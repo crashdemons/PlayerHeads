@@ -77,6 +77,7 @@ public interface SkullDetails {
      * If there is no type for the given attachment, a default type should be given instead. 
      * @param attachment how the block should be attached to others
      * @return The block material
+     * @since 5.2.14-SNAPSHOT
      */
     @NotNull
     public Material getBlockMaterial(SkullBlockAttachment attachment);
