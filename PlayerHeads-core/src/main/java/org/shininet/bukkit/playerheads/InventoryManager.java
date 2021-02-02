@@ -106,6 +106,7 @@ public final class InventoryManager {
                 PlayerHeads.instance.getLogger().warning("setblock Profile setting on block failed");
             }else{
                 PlayerHeads.instance.getLogger().info("setblock setprofile succeeded");//TODO: debug
+                state.update();
             }
         }else{
             PlayerHeads.instance.getLogger().warning("Blockstate wasn't a skull");
