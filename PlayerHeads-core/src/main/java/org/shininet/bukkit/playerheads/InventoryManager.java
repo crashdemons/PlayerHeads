@@ -80,7 +80,7 @@ public final class InventoryManager {
         CompatibleProfile profile = null;
         if(meta instanceof SkullMeta) profile = Compatibility.getProvider().getCompatibleProfile(meta);
         
-        if(profile==null || (!profile.hasId() && !profile.hasName())){//TODO: DEBUG
+        if(CompatibleProfile.isValid(profile)){//TODO: DEBUG
             PlayerHeads.instance.getLogger().warning("setblock Profile from itemstack is null or invalid");//TODO:DEBUG
         }else{
             PlayerHeads.instance.getLogger().info("setblock profile "+profile.getName()+" "+profile.getId()+" "+profile.getTextures());//TODO: debug
@@ -107,7 +107,7 @@ public final class InventoryManager {
         }
         
         BlockState state = block.getState();
-        if(state instanceof Skull && profile!=null){
+        if(state instanceof Skull && CompatibleProfile.isValid(profile)){
             boolean success = Compatibility.getProvider().setCompatibleProfile(state, profile);
             if(!success){//TODO: DEBUG
                 PlayerHeads.instance.getLogger().warning("setblock Profile setting on block failed");//TODO:DEBUG
@@ -116,7 +116,7 @@ public final class InventoryManager {
                 state.update();
             }
         }else{
-            PlayerHeads.instance.getLogger().warning("Blockstate wasn't a skull");
+            PlayerHeads.instance.getLogger().warning("Blockstate wasn't a skull or profile wasn't valid "+(state instanceof Skull)+" "+CompatibleProfile.isValid(profile));//TODO: DEBUG
         }
         
         return true;
