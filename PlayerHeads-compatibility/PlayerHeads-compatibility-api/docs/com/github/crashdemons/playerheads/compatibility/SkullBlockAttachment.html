@@ -15,8 +15,8 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.min.js"></script>
 </head>
 <body class="class-declaration-page">
-<script type="text/javascript">var data = {"i0":9,"i1":9};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
+<script type="text/javascript">var data = {"i0":10,"i1":9,"i2":9,"i3":9};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "alt-color";
 var rowColor = "row-color";
 var tableTab = "table-tab";
@@ -140,7 +140,7 @@ extends java.lang.Enum&lt;<a href="SkullBlockAttachment.html" title="enum in com
 <section class="method-summary" id="method.summary">
 <h2>Method Summary</h2>
 <div class="member-summary" id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" id="t0" class="active-table-tab">All Methods</button><button role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t1" class="table-tab" onclick="show(1);">Static Methods</button><button role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t4" class="table-tab" onclick="show(8);">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" id="t0" class="active-table-tab">All Methods</button><button role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t1" class="table-tab" onclick="show(1);">Static Methods</button><button role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t2" class="table-tab" onclick="show(2);">Instance Methods</button><button role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t4" class="table-tab" onclick="show(8);">Concrete Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel">
 <table class="summary-table" aria-labelledby="t0">
 <thead>
@@ -152,13 +152,24 @@ extends java.lang.Enum&lt;<a href="SkullBlockAttachment.html" title="enum in com
 </thead>
 <tbody>
 <tr class="alt-color" id="i0">
+<td class="col-first"><code>boolean</code></td>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#isValidOrientation(org.bukkit.block.BlockFace)">isValidOrientation</a></span>&#8203;(<a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/block/BlockFace.html" title="class or interface in org.bukkit.block" class="external-link">BlockFace</a>&nbsp;rotation)</code></th>
+<td class="col-last">&nbsp;</td>
+</tr>
+<tr class="row-color" id="i1">
+<td class="col-first"><code>static boolean</code></td>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#isValidOrientation(org.bukkit.block.BlockFace,com.github.crashdemons.playerheads.compatibility.SkullBlockAttachment)">isValidOrientation</a></span>&#8203;(<a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/block/BlockFace.html" title="class or interface in org.bukkit.block" class="external-link">BlockFace</a>&nbsp;rotation,
+<a href="SkullBlockAttachment.html" title="enum in com.github.crashdemons.playerheads.compatibility">SkullBlockAttachment</a>&nbsp;attachment)</code></th>
+<td class="col-last">&nbsp;</td>
+</tr>
+<tr class="alt-color" id="i2">
 <td class="col-first"><code>static <a href="SkullBlockAttachment.html" title="enum in com.github.crashdemons.playerheads.compatibility">SkullBlockAttachment</a></code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#valueOf(java.lang.String)">valueOf</a></span>&#8203;(java.lang.String&nbsp;name)</code></th>
 <td class="col-last">
 <div class="block">Returns the enum constant of this type with the specified name.</div>
 </td>
 </tr>
-<tr class="row-color" id="i1">
+<tr class="row-color" id="i3">
 <td class="col-first"><code>static <a href="SkullBlockAttachment.html" title="enum in com.github.crashdemons.playerheads.compatibility">SkullBlockAttachment</a>[]</code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#values()">values</a></span>()</code></th>
 <td class="col-last">
@@ -236,6 +247,19 @@ not permitted.)</div>
 <dd><code>java.lang.IllegalArgumentException</code> - if this enum type has no constant with the specified name</dd>
 <dd><code>java.lang.NullPointerException</code> - if the argument is null</dd>
 </dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isValidOrientation(org.bukkit.block.BlockFace,com.github.crashdemons.playerheads.compatibility.SkullBlockAttachment)">
+<h3>isValidOrientation</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="member-name">isValidOrientation</span>&#8203;(<span class="parameters"><a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/block/BlockFace.html" title="class or interface in org.bukkit.block" class="external-link">BlockFace</a>&nbsp;rotation,
+<a href="SkullBlockAttachment.html" title="enum in com.github.crashdemons.playerheads.compatibility">SkullBlockAttachment</a>&nbsp;attachment)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="isValidOrientation(org.bukkit.block.BlockFace)">
+<h3>isValidOrientation</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="member-name">isValidOrientation</span>&#8203;(<span class="parameters"><a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/block/BlockFace.html" title="class or interface in org.bukkit.block" class="external-link">BlockFace</a>&nbsp;rotation)</span></div>
 </section>
 </li>
 </ul>
