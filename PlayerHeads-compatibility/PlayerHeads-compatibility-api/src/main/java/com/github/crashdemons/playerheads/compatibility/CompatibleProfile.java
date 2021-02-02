@@ -103,6 +103,14 @@ public abstract class CompatibleProfile{
      * @return whether the texture string is present (not null)
      */
     public boolean hasTextures(){ return hasField(textures); }
+    
+    /**
+     * 
+     * @since 5.2.14-SNAPSHOT
+     */
+    public boolean hasRequiredFields(){
+       return hasRequiredFields(id,name);
+    }
 
     /**
      * Get the UUID associated with the head profile.
