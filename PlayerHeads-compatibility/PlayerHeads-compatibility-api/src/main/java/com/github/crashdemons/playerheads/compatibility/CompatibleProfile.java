@@ -33,6 +33,10 @@ public abstract class CompatibleProfile{
         return (hasField(id) || hasField(name));
     }
     
+    public static boolean isValid(CompatibleProfile profile){
+        return profile!=null && profile.hasRequiredFields();
+    }
+    
     //--------------------------------------------------------
     
     /**
