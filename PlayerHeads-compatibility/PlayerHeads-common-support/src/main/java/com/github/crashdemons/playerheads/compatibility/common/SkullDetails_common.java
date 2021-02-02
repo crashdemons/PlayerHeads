@@ -35,7 +35,8 @@ public abstract class SkullDetails_common implements SkullDetails {
     }
     
     protected void setBlockDetails(Block b, BlockFace rotation, SkullBlockAttachment attachment){
-        
+        //TODO: modern provider - set rotation (attachment already done by material type)
+        //TODO: legacy provider - set rotation and attachment type.
     }
     
     @Override

@@ -7,6 +7,7 @@ package com.github.crashdemons.playerheads.compatibility.modern;
 
 import com.github.crashdemons.playerheads.compatibility.common.SkullDetails_common;
 import com.github.crashdemons.playerheads.compatibility.RuntimeReferences;
+import com.github.crashdemons.playerheads.compatibility.SkullBlockAttachment;
 import com.github.crashdemons.playerheads.compatibility.SkullDetails;
 import com.github.crashdemons.playerheads.compatibility.SkullType;
 import org.bukkit.Material;

@@ -39,7 +39,7 @@ public class ProfileUtils {
         try {
             return (GameProfile) getProfileField(skull).get(skull);
         } catch (IllegalArgumentException | NoSuchFieldException | SecurityException | IllegalAccessException error) {
-            throw new IllegalStateException("The profile field value could not be retrieved");
+            throw new IllegalStateException("The profile field value could not be retrieved", error);
         }
     }
     public static CompatibleProfile getProfile(Object skull) throws IllegalStateException{
@@ -52,7 +52,7 @@ public class ProfileUtils {
             getProfileField(skull).set(skull, profile);
             return true;
         } catch (IllegalArgumentException | NoSuchFieldException | SecurityException | IllegalAccessException error) {
-            throw new IllegalStateException("The profile field value could not be retrieved");
+            throw new IllegalStateException("The profile field value could not be retrieved/set", error);
         }
     }
     public static boolean setProfile(Object skull, CompatibleProfile profile) throws IllegalStateException{
