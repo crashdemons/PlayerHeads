@@ -76,7 +76,7 @@ public final class InventoryManager {
         
         ItemMeta meta = stack.getItemMeta();
         CompatibleProfile profile = null;
-        if(meta instanceof SkullMeta) profile = Compatibility.getProvider().getCompatibleProfile(stack);
+        if(meta instanceof SkullMeta) profile = Compatibility.getProvider().getCompatibleProfile(meta);
         
         TexturedSkullType skullType = SkullConverter.skullTypeFromItemStack(stack,false,false);
         if(skullType==null){//not a known type of skull - possibly internal error since we spawned it ourself?
