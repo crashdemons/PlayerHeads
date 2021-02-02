@@ -8,6 +8,9 @@ package com.github.crashdemons.playerheads.compatibility.common;
 import com.github.crashdemons.playerheads.compatibility.SkullBlockAttachment;
 import com.github.crashdemons.playerheads.compatibility.SkullDetails;
 import com.github.crashdemons.playerheads.compatibility.SkullType;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -23,6 +26,33 @@ public abstract class SkullDetails_common implements SkullDetails {
 
     protected Material materialItem;
     protected SkullType skullType;
+    
+    protected static final Set<BlockFace> WALL_DIRECTIONS = new HashSet<>(Arrays.asList(
+            BlockFace.EAST,
+            BlockFace.WEST,
+            BlockFace.NORTH,
+            BlockFace.SOUTH
+    ));
+    protected static final Set<BlockFace> FLOOR_DIRECTIONS = new HashSet<>(Arrays.asList(
+            BlockFace.EAST,
+            BlockFace.EAST_NORTH_EAST,
+            BlockFace.EAST_SOUTH_EAST,
+            BlockFace.NORTH,
+            BlockFace.NORTH_EAST,
+            BlockFace.NORTH_NORTH_EAST,
+            BlockFace.NORTH_NORTH_WEST,
+            BlockFace.NORTH_WEST,
+            BlockFace.SOUTH,
+            BlockFace.SOUTH_EAST,
+            BlockFace.SOUTH_SOUTH_EAST,
+            BlockFace.SOUTH_SOUTH_WEST,
+            BlockFace.SOUTH_WEST,
+            BlockFace.UP,
+            BlockFace.WEST,
+            BlockFace.WEST_NORTH_WEST,
+            BlockFace.WEST_SOUTH_WEST
+    ));
+    
 
     @Override
     public boolean isSkinnable() {
@@ -34,10 +64,10 @@ public abstract class SkullDetails_common implements SkullDetails {
         return materialItem;
     }
     
-    protected void setBlockDetails(Block b, BlockFace rotation, SkullBlockAttachment attachment){
+    protected abstract void setBlockDetails(Block b, BlockFace rotation, SkullBlockAttachment attachment);
         //TODO: modern provider - set rotation (attachment already done by material type)
         //TODO: legacy provider - set rotation and attachment type.
-    }
+    
     
     @Override
     public Block setBlock(Location loc, BlockFace rotation, SkullBlockAttachment attachment){
@@ -46,8 +76,18 @@ public abstract class SkullDetails_common implements SkullDetails {
         Block b = w.getBlockAt(loc);
         if(b==null) return null;
         Material blockMat = getBlockMaterial(attachment);
+        System.out.println("SkullDetails setblock - got material "+blockMat+" for attachment "+attachment+" rot "+rotation);//TODO: debug
         b.setType(blockMat);
         setBlockDetails(b, rotation, attachment);
         return b;
+    }
+    
+    protected static boolean isValidHeadOrientation(BlockFace rotation, SkullBlockAttachment attachment){
+        if(attachment==SkullBlockAttachment.WALL) return WALL_DIRECTIONS.contains(rotation);
+        return FLOOR_DIRECTIONS.contains(rotation);
+    }
+    
+    public boolean isValidOrientation(BlockFace rotation, SkullBlockAttachment attachment){
+        return isValidHeadOrientation(rotation,attachment);
     }
 }
