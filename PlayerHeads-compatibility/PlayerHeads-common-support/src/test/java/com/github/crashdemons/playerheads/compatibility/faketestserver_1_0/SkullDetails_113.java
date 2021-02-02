@@ -10,6 +10,8 @@ import com.github.crashdemons.playerheads.compatibility.SkullBlockAttachment;
 import com.github.crashdemons.playerheads.compatibility.SkullType;
 import com.github.crashdemons.playerheads.compatibility.common.SkullDetails_common;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.inventory.ItemStack;
 
 /**
@@ -45,6 +47,7 @@ class SkullDetails_113 extends SkullDetails_common{
     @Override public Material getItemMaterial(){ return material; }
     @Override public Material getFloorMaterial(){ return material; }
     @Override public Material getWallMaterial(){ return materialWall; }
+    @Override protected void setBlockDetails(Block b,BlockFace r, SkullBlockAttachment a){}
     
     
     @Override
