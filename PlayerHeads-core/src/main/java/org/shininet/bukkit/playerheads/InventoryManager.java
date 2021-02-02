@@ -78,7 +78,7 @@ public final class InventoryManager {
             return false;
         }
         
-        Block block =w.getBlockAt(x, y, z);
+        Block block =w.getBlockAt(x, y, z); //TODO: use SkullDetails:setblock instead!
         if(block == null){//cannot get block for position
             return false;
         }
