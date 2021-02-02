@@ -15,6 +15,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.Directional;
 import org.bukkit.material.MaterialData;
 
 /**
@@ -82,10 +83,10 @@ public class SkullDetails_legacy extends SkullDetails_common implements SkullDet
             b.setData(legacyData.value, true);
             if(legacyData.needsTileData){
                 MaterialData matData = state.getData();
-                if(matData instanceof org.bukkit.material.Skull){
-                    org.bukkit.material.Skull skullMatData = (org.bukkit.material.Skull) matData;
+                if(matData instanceof Directional){
+                    Directional skullMatData = (Directional) matData;
                     skullMatData.setFacingDirection(rotation);
-                    state.setData(skullMatData);
+                    state.setData(matData);//probably not necessary but might as well
                 }
             }
         }
