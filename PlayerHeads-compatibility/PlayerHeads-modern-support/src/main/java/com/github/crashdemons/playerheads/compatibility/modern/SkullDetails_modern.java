@@ -5,6 +5,7 @@
  */
 package com.github.crashdemons.playerheads.compatibility.modern;
 
+import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import com.github.crashdemons.playerheads.compatibility.common.SkullDetails_common;
 import com.github.crashdemons.playerheads.compatibility.RuntimeReferences;
 import com.github.crashdemons.playerheads.compatibility.SkullBlockAttachment;
@@ -13,6 +14,7 @@ import com.github.crashdemons.playerheads.compatibility.SkullType;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
 import org.bukkit.inventory.ItemStack;
 import playerheads.library.jasperbouwman.util.BlockRotationUtil;
 
@@ -61,6 +63,11 @@ public class SkullDetails_modern extends SkullDetails_common implements SkullDet
     
     @Override
     protected void setBlockDetails(Block b, BlockFace rotation, SkullBlockAttachment attachment){
+        BlockState state = b.getState();
+        if(state instanceof org.bukkit.block.Skull){
+            Compatibility.getProvider().clearProfile( (org.bukkit.block.Skull) state);
+            state.update(true);
+        }
         BlockRotationUtil.setBlockRotation(b, rotation);
     }
     
