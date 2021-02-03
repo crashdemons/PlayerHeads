@@ -41,6 +41,9 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
             formatMsg(sender, scope, Lang.ERROR_PERMISSION);
             return true;
         }
+        
+        String invalidSyntaxMsg = Lang.SYNTAX + Lang.COLON_SPACE + scope + Lang.SPACE + Lang.CMD_SETBLOCK  + Lang.SPACE + Lang.OPT_WORLD_REQUIRED + Lang.SPACE +  Lang.OPT_COORDS_REQUIRED + Lang.SPACE + Lang.OPT_HEADNAME_REQUIRED + Lang.SPACE + Lang.OPT_ATTACHMENT_OPTIONAL + Lang.SPACE + Lang.OPT_FACING_OPTIONAL;
+        
         String skullOwner;
         boolean isConsoleSender = !(sender instanceof Player);
 
@@ -48,7 +51,11 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
         boolean usevanillaskull = plugin.configFile.getBoolean("dropvanillaheads");
         
         //ph setblock <world> <x> <y> <z> <headname> [attachment] [facing]
-        if(args.length<6) return false;
+        if(args.length<6){
+            formatMsg(sender, scope, invalidSyntaxMsg);
+            return false;
+        }
+        
         World w = null;
         int x = 0, y=0, z=0;
         
@@ -60,8 +67,7 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
         }
         
         if(w==null){
-            //TODO: error invalid world name
-            sender.sendMessage("Error: unknown world name: "+args[1]);
+            formatMsg(sender, scope, Lang.ERROR_INVALID_WORLD, args[1]);
             return true;
         }
         try{
@@ -69,8 +75,8 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
             y = Integer.parseInt(args[3]);
             z = Integer.parseInt(args[4]);
         } catch (NumberFormatException e) { 
-            //TODO: error invalid coords
-            sender.sendMessage("Error: invalid coordinates: "+args[2]+" "+args[3]+" "+args[4]);
+            formatMsg(sender, scope, Lang.ERROR_INVALID_COORDS, args[2], args[3], args[4]);
+            return true;
         }
         
         skullOwner = args[5];
@@ -81,8 +87,7 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
         
         Block block =w.getBlockAt(x, y, z);
         if(block==null){//make sure it's a valid block to change
-            //TODO: error getting block
-            sender.sendMessage("Error: Can't change block at that position!");
+            formatMsg(sender, scope, Lang.ERROR_CANNOT_SETBLOCK);
             return true;
         }
         
@@ -93,8 +98,7 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
             try{
                 attachment = SkullBlockAttachment.valueOf(attachmentName);
             }catch(Exception e){
-                //TODO: error invalid block attachment state
-                sender.sendMessage("Error: Invalid block attachment: "+attachmentName);
+                formatMsg(sender, scope, Lang.ERROR_INVALID_ATTACHMENT, attachmentName);
                 return true;
             }
         }
@@ -105,17 +109,15 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
             try{
                 facing = BlockFace.valueOf(facingName);
             }catch(Exception e){
-                //TODO: error invalid facing direction
-                sender.sendMessage("Error: Invalid facing direction: "+facingName);
+                formatMsg(sender, scope, Lang.ERROR_INVALID_FACING, facingName);
                 return true;
             }
         }
         
         
         if(!SkullBlockAttachment.isValidOrientation(facing,attachment)){
-            //TODO: error invalid facing/attachment combination
-            sender.sendMessage("Error: Invalid combination of attachment and rotation: "+attachment+" "+facing);
-            return false;
+            formatMsg(sender, scope, Lang.ERROR_INVALID_COMBINATION, attachment.name(), facing.name());
+            return true;
         }
         
         
@@ -125,13 +127,9 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
             TexturedSkullType type = TexturedSkullType.getBySpawnName(skullOwner);
             String headName = (type==null) ? TexturedSkullType.getDisplayName(skullOwner) : type.getDisplayName();
             String forWhom = sender.getName();
-            //TODO: success message
-            sender.sendMessage("Successfully set block to head.");
-            //formatMsg(sender, scope, Lang.SPAWNED_HEAD2, headName, forWhom, ""+quantity);
+            formatMsg(sender, scope, Lang.SET_BLOCK, headName);
         } else {
-            //TODO: failure message
-            sender.sendMessage("Error: failed to set block to head");
-            //formatMsg(sender, scope, Lang.ERROR_INV_FULL);
+            formatMsg(sender, scope, Lang.ERROR_SETBLOCK_FAILED);
         }
         return true;
     }
