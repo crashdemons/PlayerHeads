@@ -136,7 +136,7 @@ public class SkullDetails_legacy extends SkullDetails_common implements SkullDet
             b.setData((byte) 1);
             final org.bukkit.block.Skull skullState = (org.bukkit.block.Skull) b.getState();
             skullState.setSkullType(bukkitSkullType);
-            skullState.setOwner(null);
+            //skullState.setOwner(null);
             Compatibility.getProvider().clearProfile(skullState);
             skullState.setRotation(rotation);
             skullState.update();
@@ -146,7 +146,7 @@ public class SkullDetails_legacy extends SkullDetails_common implements SkullDet
             b.setData(legacydata.value);
             final org.bukkit.block.Skull skullState = (org.bukkit.block.Skull) b.getState();
             skullState.setSkullType(bukkitSkullType);
-            skullState.setOwner(null);
+            //skullState.setOwner(null);
             Compatibility.getProvider().clearProfile(skullState);
             skullState.setRotation(BlockFace.NORTH);
             skullState.update();
