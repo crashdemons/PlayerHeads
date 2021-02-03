@@ -47,7 +47,7 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
 
         boolean usevanillaskull = plugin.configFile.getBoolean("dropvanillaheads");
         
-        //ph setblock <world> <x> <y> <z> <headname> [facing] [attachment]
+        //ph setblock <world> <x> <y> <z> <headname> [attachment] [facing]
         if(args.length<6) return false;
         World w = null;
         int x = 0, y=0, z=0;
@@ -87,9 +87,21 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
         }
         
         
-        BlockFace facing = BlockFace.NORTH;
+        SkullBlockAttachment attachment = SkullBlockAttachment.FLOOR;
         if(args.length>6){
-            String facingName = args[6].toUpperCase();
+            String attachmentName = args[6].toUpperCase();
+            try{
+                attachment = SkullBlockAttachment.valueOf(attachmentName);
+            }catch(Exception e){
+                //TODO: error invalid block attachment state
+                sender.sendMessage("Error: Invalid block attachment: "+attachmentName);
+                return true;
+            }
+        }
+        
+        BlockFace facing = BlockFace.NORTH;
+        if(args.length>7){
+            String facingName = args[7].toUpperCase();
             try{
                 facing = BlockFace.valueOf(facingName);
             }catch(Exception e){
@@ -99,17 +111,6 @@ class PlayerHeadsCommandExecutor implements CommandExecutor, TabCompleter {
             }
         }
         
-        SkullBlockAttachment attachment = SkullBlockAttachment.FLOOR;
-        if(args.length>7){
-            String attachmentName = args[7].toUpperCase();
-            try{
-                attachment = SkullBlockAttachment.valueOf(attachmentName);
-            }catch(Exception e){
-                //TODO: error invalid block attachment state
-                sender.sendMessage("Error: Invalid block attachment: "+attachmentName);
-                return true;
-            }
-        }
         
         if(!SkullBlockAttachment.isValidOrientation(facing,attachment)){
             //TODO: error invalid facing/attachment combination
