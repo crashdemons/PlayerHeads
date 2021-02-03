@@ -29,7 +29,7 @@ public class SkullDetails_legacy extends SkullDetails_common implements SkullDet
     //public final Material materialItem;
     public final Material materialBlock;
     public final short datavalue;
-    //private final SkullType skullType;
+    private final org.bukkit.SkullType bukkitSkullType;
     
     
     private enum LegacyHeadData{
@@ -66,6 +66,15 @@ public class SkullDetails_legacy extends SkullDetails_common implements SkullDet
             this.skullType=skullType;
             datavalue=skullType.legacyDataValue;
         }
+        
+        org.bukkit.SkullType foundBukkitSkullType = null;
+        try{
+            foundBukkitSkullType = org.bukkit.SkullType.valueOf(skullType.name().toUpperCase());
+        }catch(Exception e){
+            foundBukkitSkullType = null;//this should not happen
+        }
+        bukkitSkullType = foundBukkitSkullType;
+        
     }
     
     @Override public boolean isVariant(){ return true; }//always SKULL_ITEM
@@ -126,8 +135,9 @@ public class SkullDetails_legacy extends SkullDetails_common implements SkullDet
         if(attachment==SkullBlockAttachment.FLOOR){
             b.setData((byte) 1);
             final org.bukkit.block.Skull skullState = (org.bukkit.block.Skull) b.getState();
-            skullState.setSkullType(org.bukkit.SkullType.PLAYER);
+            skullState.setSkullType(bukkitSkullType);
             skullState.setOwner(null);
+            Compatibility.getProvider().clearProfile(skullState);
             skullState.setRotation(rotation);
             skullState.update();
         }
@@ -135,8 +145,9 @@ public class SkullDetails_legacy extends SkullDetails_common implements SkullDet
             LegacyHeadData legacydata = LegacyHeadData.get(rotation, attachment);
             b.setData(legacydata.value);
             final org.bukkit.block.Skull skullState = (org.bukkit.block.Skull) b.getState();
-            skullState.setSkullType(org.bukkit.SkullType.PLAYER);
+            skullState.setSkullType(bukkitSkullType);
             skullState.setOwner(null);
+            Compatibility.getProvider().clearProfile(skullState);
             skullState.setRotation(BlockFace.NORTH);
             skullState.update();
         }
