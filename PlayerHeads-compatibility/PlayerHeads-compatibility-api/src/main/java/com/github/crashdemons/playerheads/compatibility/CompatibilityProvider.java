@@ -465,9 +465,12 @@ public interface CompatibilityProvider {
      */
     public boolean isCustomHead(Object skull);
     
-    
-    
-    
-    
+    /**
+     * Clears internal profile information from a skull.
+     * @param skull a Skull blockstate or SkullMeta object to clear the profile from
+     * @return false if clearing the profile failed or was unsupported, otherwise true.
+     * @since 5.2.14-SNAPSHOT
+     */
+    public boolean clearProfile(Object skull) throws IllegalArgumentException;
 
 }
