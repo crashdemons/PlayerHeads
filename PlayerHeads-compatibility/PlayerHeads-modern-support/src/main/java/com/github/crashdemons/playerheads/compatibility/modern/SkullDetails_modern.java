@@ -10,19 +10,11 @@ import com.github.crashdemons.playerheads.compatibility.RuntimeReferences;
 import com.github.crashdemons.playerheads.compatibility.SkullBlockAttachment;
 import com.github.crashdemons.playerheads.compatibility.SkullDetails;
 import com.github.crashdemons.playerheads.compatibility.SkullType;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import org.bukkit.Axis;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.BlockState;
-import org.bukkit.block.data.BlockData;
-import org.bukkit.block.data.Directional;
-import org.bukkit.block.data.Orientable;
-import org.bukkit.block.data.Rotatable;
 import org.bukkit.inventory.ItemStack;
+import playerheads.library.jasperbouwman.util.BlockRotationUtil;
 
 /**
  * SkullDetails implementation for 1.13+ support
@@ -55,48 +47,7 @@ public class SkullDetails_modern extends SkullDetails_common implements SkullDet
     }
     
 
-    
-    /**
-     * see https://bukkit.org/threads/set-block-direction-easy.474786/
-     * @author The_Spaceman
-     */
-    private static Axis convertBlockFaceToAxis(BlockFace face) {
-        switch (face) {
-            case NORTH:
-            case SOUTH:
-                return Axis.Z;
-            case EAST:
-            case WEST:
-                return Axis.X;
-            case UP:
-            case DOWN:
-                return Axis.Y;
-                default:
-                    return Axis.X;
-        }
-    }
-    /**
-     * see https://bukkit.org/threads/set-block-direction-easy.474786/
-     * @author The_Spaceman
-     */
-    protected static void setBlockRotation(Block block, BlockFace blockFace) {
-        BlockState state = block.getState();
-        BlockData blockData = state.getBlockData();
-        if (blockData instanceof Directional) {
-            System.out.println("Directional : "+blockFace);//TODO: DEBUG
-            ((Directional) blockData).setFacing(blockFace);
-        }
-        if (blockData instanceof Orientable) {
-            System.out.println("Orientable : "+blockFace);//TODO: DEBUG
-            ((Orientable) blockData).setAxis(convertBlockFaceToAxis(blockFace));
-        }
-        if (blockData instanceof Rotatable) {
-            System.out.println("Rotable : "+blockFace);//TODO: DEBUG
-            ((Rotatable) blockData).setRotation(blockFace);
-        }
-        state.setBlockData(blockData);
-        state.update(false,true);
-    }
+ 
     
     
     
@@ -110,7 +61,7 @@ public class SkullDetails_modern extends SkullDetails_common implements SkullDet
     
     @Override
     protected void setBlockDetails(Block b, BlockFace rotation, SkullBlockAttachment attachment){
-        setBlockRotation(b, rotation);
+        BlockRotationUtil.setBlockRotation(b, rotation);
     }
     
     
