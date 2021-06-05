@@ -6,7 +6,9 @@
 package org.shininet.bukkit.playerheads.events.modifiers;
 
 /**
- * Indicates the type of modifier to the effective droprate
+ * Indicates the type of modifier to the effective droprate.
+ * 
+ * @since 5.2.16-SNAPSHOT
  * @author crashdemons (crashenator at gmail.com)
  */
 public enum DropRateModifierType {

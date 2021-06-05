@@ -8,6 +8,7 @@ package org.shininet.bukkit.playerheads.events.modifiers;
 /**
  * A modifier for the droprate including type and value information
  *
+ * @since 5.2.16-SNAPSHOT
  * @author crashdemons (crashenator at gmail.com)
  */
 public class DropRateModifier {
