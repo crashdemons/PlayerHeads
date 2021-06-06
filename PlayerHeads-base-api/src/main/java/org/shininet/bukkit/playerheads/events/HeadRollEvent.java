@@ -256,6 +256,8 @@ public class HeadRollEvent extends Event {
      * make a new determination of the head drop's success. Modifiers are not
      * considered by this method, only the two effective values. Note: if
      * killerAlwaysBeheads is enabled, the effective droproll will be set to 0.
+     * 
+     * This is equivalent to recalculateSuccess(false).
      *
      * @since 5.2.16-SNAPSHOT
      */
@@ -286,6 +288,8 @@ public class HeadRollEvent extends Event {
      * determine suuccess. This method will discard the current effective
      * droprate, if you want to retain the original values, you should copy them
      * before calling this method.
+     * 
+     * This is equivalent to recalculateSuccess(true) or applyModifiers();applyDropRate();
      *
      * @since 5.2.16-SNAPSHOT
      */
@@ -293,6 +297,24 @@ public class HeadRollEvent extends Event {
         applyModifiers();
         applyDropRate();
     }
+    /**
+     * Re-apply all relevant factors (droprate modifiers then effective values) to
+     * determine suuccess. This method will discard the current effective
+     * droprate (if set), if you want to retain the original values, you should copy them
+     * before calling this method.
+     * 
+     * When the applyModifiers is true, this is equivalent to recalculateSuccess() or applyModifiers();applyDropRate().
+     * When the applyModifiers is false, this is equivalent to applyDropRate().
+     * 
+     * @param applyModifiers If this is set, the current effective droprate will be discarded and recalculated from modifiers.
+     *
+     * @since 5.2.17-SNAPSHOT
+     */
+    public void recalculateSuccess(boolean applyModifiers) {
+        applyModifiers();
+        applyDropRate();
+    }
+    
 
     /**
      * Retrieve the value of a modifier of the effective droprate. Note: this
