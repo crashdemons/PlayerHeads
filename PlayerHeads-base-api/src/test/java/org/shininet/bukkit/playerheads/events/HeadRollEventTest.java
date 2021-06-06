@@ -52,6 +52,7 @@ public class HeadRollEventTest {
             assertEquals(a.getOriginalDropRoll(),b.getOriginalDropRoll(),epsilon);
             assertEquals(a.getEffectiveDropRate(),b.getEffectiveDropRate(),epsilon);
             assertEquals(a.getEffectiveDropRoll(),b.getEffectiveDropRoll(),epsilon);
+            assertEquals(a.getDropSuccess(),b.getDropSuccess());
             
             b.recalculateSuccess();//applyModifiers and applyDroprate
             
@@ -61,6 +62,7 @@ public class HeadRollEventTest {
             assertEquals(a.getOriginalDropRate(),b.getOriginalDropRate(),epsilon);
             assertEquals(a.getOriginalDropRoll(),b.getOriginalDropRoll(),epsilon);
             assertEquals(a.getEffectiveDropRate(),b.getEffectiveDropRate(),epsilon);
+            assertEquals(a.getDropSuccess(),b.getDropSuccess());
         }
     }
     
