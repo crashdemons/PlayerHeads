@@ -6,6 +6,7 @@
 package org.shininet.bukkit.playerheads.events;
 
 import java.util.Map;
+import java.util.Random;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.Plugin;
@@ -20,9 +21,57 @@ import org.shininet.bukkit.playerheads.events.modifiers.DropRateModifierType;
  */
 public class HeadRollEventTest {
     
+    PHListenerDummy listener = new PHListenerDummy();
+    private final Random rand = new Random();
+    private final double epsilon = Math.ulp(1.0);
+    
     public HeadRollEventTest() {
     }
 
+    
+    public double getTestValue(){//randomish value between -2.0 and +2.0
+        double value = rand.nextDouble() + rand.nextDouble();//choose a value between 0.0 and 2.0 (not necessarily uniform but that's fine)
+        return rand.nextBoolean() ? +value : -value; //choose randomly whether it will be negative
+    }
+    
+    public void testNewOldRandParams(){
+        Double droprateOriginal = getTestValue();
+        Double lootingModifier = getTestValue();
+        Double slimeModifier = getTestValue();
+        Double chargedcreeperModifier = getTestValue();
+        //System.out.println(droprateOriginal);
+        Object[] arr = listener.MobDeathHelper(null, null, null,  droprateOriginal,  lootingModifier,  slimeModifier,  chargedcreeperModifier);
+        if(arr!=null){
+            HeadRollEvent_old a = (HeadRollEvent_old) arr[0];
+            HeadRollEvent b = (HeadRollEvent) arr[1];
+            
+            assertEquals(a.getChargedCreeperModifier(),b.getChargedCreeperModifier(),epsilon);
+            assertEquals(a.getSlimeModifier(),b.getSlimeModifier(),epsilon);
+            assertEquals(a.getLootingModifier(),b.getLootingModifier(),epsilon);
+            assertEquals(a.getOriginalDropRate(),b.getOriginalDropRate(),epsilon);
+            assertEquals(a.getOriginalDropRoll(),b.getOriginalDropRoll(),epsilon);
+            assertEquals(a.getEffectiveDropRate(),b.getEffectiveDropRate(),epsilon);
+            assertEquals(a.getEffectiveDropRoll(),b.getEffectiveDropRoll(),epsilon);
+            
+            b.recalculateSuccess();//applyModifiers and applyDroprate
+            
+            assertEquals(a.getChargedCreeperModifier(),b.getChargedCreeperModifier(),epsilon);
+            assertEquals(a.getSlimeModifier(),b.getSlimeModifier(),epsilon);
+            assertEquals(a.getLootingModifier(),b.getLootingModifier(),epsilon);
+            assertEquals(a.getOriginalDropRate(),b.getOriginalDropRate(),epsilon);
+            assertEquals(a.getOriginalDropRoll(),b.getOriginalDropRoll(),epsilon);
+            assertEquals(a.getEffectiveDropRate(),b.getEffectiveDropRate(),epsilon);
+        }
+    }
+    
+    @Test
+    public void testNewOldN(){ //test 5.3 (now 5.2.16) headrollevent against 5.2.15 calculation
+        System.out.println("epsilon = "+epsilon);
+        for(int i=0;i<100000;i++){
+            testNewOldRandParams();
+        }
+    }
+    
     @Test
     public void testGetModifiers() {
         System.out.println("getModifiers");
