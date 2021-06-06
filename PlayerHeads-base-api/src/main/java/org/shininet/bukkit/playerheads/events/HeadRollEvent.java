@@ -392,6 +392,24 @@ public class HeadRollEvent extends Event {
         String customModifierName = getCustomModifierName(yourPlugin.getName(), modifierName);
         modifiers.put(customModifierName, modifierValue);
     }
+    /**
+     * Add or change a note about your custom modifier to the head-roll event.
+     * Note: this value does not impact calculations unless applyModifiers+applyDropRate or recalculateSuccess is called.<br>
+     * Note: the name of the modifier will be prepended with "PluginName:"
+     * depending on your plugin's name.<br>
+     * Note: new modifies are generally applied AFTER other modifiers<br>
+     *
+     * @since 5.2.17-SNAPSHOT
+     * @param yourPlugin the plugin adding the modifier
+     * @param modifierName the name of the modifier, excluding any prefix
+     * @param modifierValue the value of the modifier
+     * @param recalculateSuccess whether to force recalculation of success by applying this modifier. Note: this will erase any changes to the effective droprate.
+     */
+    public void setCustomModifier(final Plugin yourPlugin, final String modifierName, final DropRateModifier modifierValue, boolean recalculateSuccess) {
+        String customModifierName = getCustomModifierName(yourPlugin.getName(), modifierName);
+        modifiers.put(customModifierName, modifierValue);
+        if(recalculateSuccess) recalculateSuccess();
+    }
 
     /**
      * Gets a custom (plugin-added) modifier to the head-roll event. Note: this
