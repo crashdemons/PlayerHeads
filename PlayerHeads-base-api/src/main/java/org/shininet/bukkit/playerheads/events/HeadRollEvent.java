@@ -555,9 +555,9 @@ public class HeadRollEvent extends Event {
     }
 
     /**
-     * Sets the effective droprate value for the event. Note: this value is only
-     * for indication purposes to other plugins, and will be overwritten by
-     * apply and recalculate methods.
+     * Sets the effective droprate value for the event.
+     * Note: this value will be overwritten by applyModifiers and recalculateSuccess methods and does not impact the success of the event unless you run applyDropRate().
+     * Since other plugins are likely to overwrite this change, you are strongly recommended to use a Modifier instead (which is not likely to be erased) to get the result you want.
      *
      * @since 5.2.16-SNAPSHOT
      * @param effectiveRate the effective droprate/fractional-chance value to set (0.0-1.0 inclusive)
