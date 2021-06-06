@@ -35,11 +35,15 @@ public enum DropRateModifierType {
     
     /**
      * Sets the droprate to a constant value, erasing changes by modifiers before it. (further modifiers can still be applied after this though)
+     * 
+     * @since 5.2.17-SNAPSHOT
      */
     SET_CONSTANT,
     
     /**
      * Performs no change to the droprate. This is a dummy modifier used for a placeholder, plugin-determined logic, or indication to other plugins even when no action is desired.
+     * 
+     * @since 5.2.17-SNAPSHOT
      */
     NO_EFFECT,
     
