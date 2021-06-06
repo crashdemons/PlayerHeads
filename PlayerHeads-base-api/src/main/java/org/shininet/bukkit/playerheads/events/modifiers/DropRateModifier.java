@@ -124,6 +124,10 @@ public class DropRateModifier {
                 return droprate * (1.0 + value * level);
             case ADD_CONSTANT:
                 return droprate + value;
+            case SET_CONSTANT:
+                return value;
+            case NO_EFFECT:
+                return droprate;
             default:
                 throw new IllegalArgumentException("An unsupported droprate modifier type was detected.");
         }
