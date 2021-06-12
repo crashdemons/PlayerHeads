@@ -88,7 +88,7 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-        <plugins>
+        <plugins><!--
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
@@ -107,11 +107,11 @@
                             <allowSnapshots>true</allowSnapshots>
                         </configuration>
                         <goals>
-                           <!-- <goal>use-latest-versions</goal> -->
+                            <goal>use-latest-versions</goal> 
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
 
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
@@ -132,9 +132,9 @@
                 </executions>
             </plugin>
         </plugins>
-        <pluginManagement>
+        <!--<pluginManagement>
             <plugins>
-                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+                This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
                     <artifactId>lifecycle-mapping</artifactId>
@@ -148,7 +148,7 @@
                                         <artifactId>versions-maven-plugin</artifactId>
                                         <versionRange>[2.2,)</versionRange>
                                         <goals>
-                                            <!--<goal>use-latest-versions</goal>-->
+                                            <goal>use-latest-versions</goal>
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
@@ -160,6 +160,6 @@
                     </configuration>
                 </plugin>
             </plugins>
-        </pluginManagement>
+        </pluginManagement>-->
     </build>
 </project>
