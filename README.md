@@ -27,10 +27,10 @@ Otherwise, you can check out the **-support** modules for any server-specific im
  * Browse to and select the folder you cloned the project into (do not enter into it)
  * You should see a list of POMs to import as projects.
  * Optional - for a cleaner workspace
- * * Click "Deselect All"
- * * Check only the first /pom.xml entry
+   * Click "Deselect All"
+   * Check only the first /pom.xml entry
  * Alternatively - for a separate project for each module:
- * * All POMs should be already checked by default.
+   * All POMs should be already checked by default.
  * Click Finish
  * Now you can built the project with the `Run` menu by selecting Maven Install or Maven Build.
   
