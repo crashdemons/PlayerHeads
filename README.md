@@ -19,3 +19,18 @@ For the code behind core plugin behavior see the **PlayerHeads-core** module.
 For an API to use the plugin from your own plugins there is also a lighter-weight API available from the **PlayerHeads-api** module.
 
 Otherwise, you can check out the **-support** modules for any server-specific implementation code
+
+
+# Importing the project into Eclipse (as of version 2021-03/4.19)
+ * In the menu click `File`  then `Import ...`
+ * On the new `Select` window, expand the `Maven` option and select `Existing Maven Projects` and click `Next`
+ * Browse to and select the folder you cloned the project into (do not enter into it)
+ * You should see a list of POMs to import as projects.
+ * Optional - for a cleaner workspace
+   * Click "Deselect All"
+   * Check only the first /pom.xml entry
+ * Alternatively - for a separate project for each module:
+   * All POMs should be already checked by default.
+ * Click Finish
+ * Now you can built the project with the `Run` menu by selecting Maven Install or Maven Build.
+  
