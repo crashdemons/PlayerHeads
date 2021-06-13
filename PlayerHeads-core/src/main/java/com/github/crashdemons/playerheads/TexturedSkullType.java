@@ -35,17 +35,14 @@ public enum TexturedSkullType implements HeadType {
     //provisional Caves & Cliffs entries
     
     //Caves and cliffs provisional heads
-    @Deprecated
     AXOLOTL(
             "fa074329-ea4a-4535-acbd-4f0f490448f7",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZThhOGEyZDdjY2YwYzM3NDZlMjNhYjU0OTEwNzBlMDkyM2YwNWIyMzVmOWEyZjVkNTNkMzg0MzUzODUzYmRkYyJ9fX0=" //TODO: provisional texture
     ),
-    @Deprecated
     GLOW_SQUID(
             "7ed5a68c-c3ec-4ddb-9355-cee7ab526570",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmVjZDBiNWViNmIzODRkYjA3NmQ4NDQ2MDY1MjAyOTU5ZGRkZmYwMTYxZTBkNzIzYjNkZjBjYzU4NmQxNmJiZCJ9fX0=" //TODO: provisional texture
     ),
-    @Deprecated
     GOAT(
             "5485c31d-e250-4764-a761-3e2c8b9745c4",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTU3NjA3MDk5ZDA2YjdhOGIxMzI3MDkzY2QwYTQ4OGJlN2M5ZjUwYjYxMjFiMjIxNTEyNzFiNTkxNzBmM2MyMSJ9fX0=" //TODO: Provisional texture?
