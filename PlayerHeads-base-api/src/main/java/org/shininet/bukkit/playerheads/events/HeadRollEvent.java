@@ -311,7 +311,7 @@ public class HeadRollEvent extends Event {
      * @since 5.2.17-SNAPSHOT
      */
     public void recalculateSuccess(boolean applyModifiers) {
-        applyModifiers();
+        if(applyModifiers) applyModifiers();
         applyDropRate();
     }
     
