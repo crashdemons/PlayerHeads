@@ -708,6 +708,7 @@ class PlayerHeadsListener implements Listener {
                 SkullMeta skull = (SkullMeta) stack.getItemMeta();
                 if(Compatibility.getProvider().isCustomHead(skull)) return;//TODO: redundant code - SkullConverter checks custom & external heads now
                 String owner = Compatibility.getProvider().getOwner(skull);//SkullConverter.getSkullOwner(skull);
+                if(owner==null || owner.isEmpty()) return;
                 newstack = SkullManager.PlayerSkull(owner, stack.getAmount(), addLore, savedProfile); //override with the profile if possible instead of the username
                 break;
             default:
@@ -758,6 +759,7 @@ class PlayerHeadsListener implements Listener {
                 Skull skull = (Skull) block.getState();
                 if(Compatibility.getProvider().isCustomHead(skull)) return BlockDropResult.FAILED_CUSTOM_HEAD;//TODO: redundant code - SkullConverter checks custom & external heads now
                 String owner = Compatibility.getProvider().getOwner(skull);//SkullConverter.getSkullOwner(skull);
+                if(owner==null || owner.isEmpty()) return BlockDropResult.FAILED_DEFERRED_TO_VANILLA;
                 item = SkullManager.PlayerSkull(owner, addLore);
                 break;
             default:
