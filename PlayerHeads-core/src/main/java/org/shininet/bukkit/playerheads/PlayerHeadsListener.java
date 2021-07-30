@@ -596,33 +596,33 @@ class PlayerHeadsListener implements Listener {
             } else {
                 event.getDrops().add(finalDrop);
             }
-        }
-        
-        //broadcast message about the beheading.
-        if (plugin.configFile.getBoolean("broadcastmob") && killer!=null) { //mob-on-mob broadcasts would be extremely annoying!
-            String entityName = entity.getCustomName();
-            if (entityName==null) entityName = entity.getName(); //notnull
-            
-            
-            String message = Formatter.format(Lang.BEHEAD_OTHER, entityName + ChatColor.RESET, killer.getDisplayName() + ChatColor.RESET);
 
-            int broadcastRange = plugin.configFile.getInt("broadcastmobrange");
-            if (broadcastRange > 0) {
-                broadcastRange *= broadcastRange;
-                Location location = entity.getLocation();
-                List<Player> players = entity.getWorld().getPlayers();
+            //broadcast message about the beheading.
+            if (plugin.configFile.getBoolean("broadcastmob") && killer!=null) { //mob-on-mob broadcasts would be extremely annoying!
+                String entityName = entity.getCustomName();
+                if (entityName==null) entityName = entity.getName(); //notnull
 
-                for (Player loopPlayer : players) {
-                    try{
-                        if (location.distanceSquared(loopPlayer.getLocation()) <= broadcastRange) {
-                            loopPlayer.sendMessage(message);
+
+                String message = Formatter.format(Lang.BEHEAD_OTHER, entityName + ChatColor.RESET, killer.getDisplayName() + ChatColor.RESET);
+
+                int broadcastRange = plugin.configFile.getInt("broadcastmobrange");
+                if (broadcastRange > 0) {
+                    broadcastRange *= broadcastRange;
+                    Location location = entity.getLocation();
+                    List<Player> players = entity.getWorld().getPlayers();
+
+                    for (Player loopPlayer : players) {
+                        try{
+                            if (location.distanceSquared(loopPlayer.getLocation()) <= broadcastRange) {
+                                loopPlayer.sendMessage(message);
+                            }
+                        }catch(IllegalArgumentException e){
+                            //entities are in different worlds
                         }
-                    }catch(IllegalArgumentException e){
-                        //entities are in different worlds
                     }
+                } else {
+                    plugin.getServer().broadcastMessage(message);
                 }
-            } else {
-                plugin.getServer().broadcastMessage(message);
             }
         }
     }
