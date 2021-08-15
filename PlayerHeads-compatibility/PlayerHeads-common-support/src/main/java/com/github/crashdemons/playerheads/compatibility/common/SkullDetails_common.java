@@ -50,7 +50,7 @@ public abstract class SkullDetails_common implements SkullDetails {
         Block b = w.getBlockAt(loc);
         if(b==null) return null;
         Material blockMat = getBlockMaterial(attachment);
-        System.out.println("SkullDetails setblock - got material "+blockMat+" for attachment "+attachment+" rot "+rotation);//TODO: debug
+        //System.out.println("SkullDetails setblock - got material "+blockMat+" for attachment "+attachment+" rot "+rotation);//TODO: debug
         b.setType(blockMat);
         setBlockDetails(b, rotation, attachment);
         return b;

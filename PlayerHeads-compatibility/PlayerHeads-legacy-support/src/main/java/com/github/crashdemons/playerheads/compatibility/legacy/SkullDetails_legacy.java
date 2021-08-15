@@ -87,6 +87,7 @@ public class SkullDetails_legacy extends SkullDetails_common implements SkullDet
     
     
     private void debugBlockState(Block b, BlockState state, BlockFace rotation, SkullBlockAttachment attachment){
+        /*
         System.out.println(" debug block "+b+" "+state+" | requested "+rotation+" "+attachment);
         System.out.println(" - block type "+b.getType()+" "+b.getTypeId());
         System.out.println(" - block data "+b.getData());
@@ -117,6 +118,7 @@ public class SkullDetails_legacy extends SkullDetails_common implements SkullDet
             System.out.println(" - - materialdata matskull "+matSkull);
             System.out.println(" - - materialdata matskull facing "+matSkull.getFacing());
         }
+*/
     }
     
     
@@ -130,7 +132,7 @@ public class SkullDetails_legacy extends SkullDetails_common implements SkullDet
         //System.out.println("converted BlockFace."+rotation+" -> BlockFaceXZ."+rotationXZ);
         
         
-        debugBlockState(b,b.getState(),rotation,attachment);
+        //debugBlockState(b,b.getState(),rotation,attachment);
 
         if(attachment==SkullBlockAttachment.FLOOR){
             b.setData((byte) 1);
@@ -152,7 +154,7 @@ public class SkullDetails_legacy extends SkullDetails_common implements SkullDet
             skullState.update();
         }
         
-        debugBlockState(b,b.getState(),rotation,attachment);
+        //debugBlockState(b,b.getState(),rotation,attachment);
         
         
         //setBlockOrientation(b,state,rotation,attachment);
