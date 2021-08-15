@@ -169,7 +169,7 @@ public final class Config {
                 interpretedID=null;
             }
             if(interpretedID==null){
-               System.out.println("Invalid UUID: "+id);
+                if(PlayerHeads.instance!=null) PlayerHeads.instance.getLogger().warning("Invalid Config UUID: "+id);
             }
             return (interpretedID!=null);
         }
@@ -182,7 +182,7 @@ public final class Config {
                 return true;
             }
             else{
-                System.out.println("Unsupported material: "+matname);
+                if(PlayerHeads.instance!=null) PlayerHeads.instance.getLogger().warning("Unsupported Config material: "+matname);
                 return false;
             }
         }
