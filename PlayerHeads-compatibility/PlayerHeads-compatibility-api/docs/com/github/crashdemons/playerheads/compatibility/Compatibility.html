@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":41};
+var data = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":41};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -197,12 +197,19 @@ extends <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>static boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#init(org.bukkit.plugin.Plugin)">init</a></span>&#8203;(<a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/Plugin.html?is-external=true" title="class or interface in org.bukkit.plugin" class="externalLink">Plugin</a>&nbsp;parentPlugin)</code></th>
+<td class="colLast">
+<div class="block">Initialize compatibility support.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>static boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isProviderAvailable()">isProviderAvailable</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Determine if a compatibility implementation has been registered yet.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>static void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#registerProvider(com.github.crashdemons.playerheads.compatibility.CompatibilityProvider)">registerProvider</a></span>&#8203;(<a href="CompatibilityProvider.html" title="interface in com.github.crashdemons.playerheads.compatibility">CompatibilityProvider</a>&nbsp;obj)</code></th>
 <td class="colLast">
@@ -210,7 +217,7 @@ extends <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html
  implementation) for the session with the compatibility class.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>static boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unregisterProvider()">unregisterProvider</a></span>()</code></th>
 <td class="colLast">
@@ -290,6 +297,56 @@ extends <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html
  init and registerProvider.</dd>
 <dd><code><a href="exceptions/CompatibilityMisconfiguredException.html" title="class in com.github.crashdemons.playerheads.compatibility.exceptions">CompatibilityMisconfiguredException</a></code> - If the compatibility library 
  was not properly built (with supported versions finalized).</dd>
+</dl>
+</li>
+</ul>
+<a id="init(org.bukkit.plugin.Plugin)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>init</h4>
+<pre class="methodSignature">public static&nbsp;boolean&nbsp;init&#8203;(<a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/plugin/Plugin.html?is-external=true" title="class or interface in org.bukkit.plugin" class="externalLink">Plugin</a>&nbsp;parentPlugin)</pre>
+<div class="block">Initialize compatibility support.
+ <p>
+ This method initializes server version-detection and selects
+ compatibility providers (specific Bukkit implementations) for use later.
+ This method also makes a determination as to what the recommended
+ implementation version is.
+ <p>
+ The "recommended" version is the highest implementation version available
+ (for your server's type) that is under or equal to your server version.
+ If no provider with a matching type can be found, this method will
+ look for one with the 'fallback' server type (which at this time defaults
+ to "craftbukkit").
+ <p>
+ Provider implementations are expected to exist in the same package as the compatibility library (com.github.crashdemons.playerheads.compatibility by default).
+ followed by the server type name and major/minor version.  For example: com.github.crashdemons.playerheads.compatibility.craftbukkit_1_16
+ the class in this package must be named "Provider" and must not be abstract.
+ <p>
+ This method, in contrast to the version without the plugin argument, registers a parent plugin to use for logging.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Whether the recommended implementation version was used. True:
+ the best implementation version for your server that was supported was
+ loaded. False: a fallback implementation was used - possibly because you
+ loaded a backport implementation onto a newer server improperly.</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="exceptions/UnknownVersionException.html" title="class in com.github.crashdemons.playerheads.compatibility.exceptions">UnknownVersionException</a></code> - If the server version string could not be
+ understood during detection.</dd>
+<dd><code><a href="exceptions/CompatibilityUnsupportedException.html" title="class in com.github.crashdemons.playerheads.compatibility.exceptions">CompatibilityUnsupportedException</a></code> - If the server version was lower
+ than is supported by the compatibility package (minimum 1.8)</dd>
+<dd><code><a href="exceptions/CompatibilityUnavailableException.html" title="class in com.github.crashdemons.playerheads.compatibility.exceptions">CompatibilityUnavailableException</a></code> - If no implementation could be
+ found that is compatible with your server. This may happen if all 
+ available providers (of a compatible type) are newer than your server 
+ version, or no matches can be found for your server type or fallback type.</dd>
+<dd><code><a href="exceptions/CompatibilityConflictException.html" title="class in com.github.crashdemons.playerheads.compatibility.exceptions">CompatibilityConflictException</a></code> - If an implementation provider was
+ already registered - this happens when there is more than one call to
+ init and registerProvider.</dd>
+<dd><code><a href="exceptions/CompatibilityMisconfiguredException.html" title="class in com.github.crashdemons.playerheads.compatibility.exceptions">CompatibilityMisconfiguredException</a></code> - If the compatibility library 
+ was not properly built (with supported versions finalized).</dd>
+<dt><span class="simpleTagLabel">Since:</span></dt>
+<dd>5.2.17-SNAPSHOT</dd>
 </dl>
 </li>
 </ul>
