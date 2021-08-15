@@ -70,7 +70,7 @@ public class CompatibilityLoader {
     public void initializeCompatibility(){
         boolean isUsingRecommendedVersion=true;
         try{
-            isUsingRecommendedVersion = Compatibility.init();
+            isUsingRecommendedVersion = Compatibility.init(this.plugin);
         }catch(UnknownVersionException e){
             logCompatibilityBug(Lang.ERROR_COMPATIBILITY_UNKNOWN_VERSION);
             throw e;//ensure the plugin is not loaded

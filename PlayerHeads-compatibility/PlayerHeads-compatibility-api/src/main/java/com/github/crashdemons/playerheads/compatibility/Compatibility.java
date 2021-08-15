@@ -13,6 +13,7 @@ import com.github.crashdemons.playerheads.compatibility.exceptions.Compatibility
 import com.github.crashdemons.playerheads.compatibility.exceptions.UnknownVersionException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import org.bukkit.plugin.Plugin;
 
 /**
  * Compatibility class controlling implementation and version support.
@@ -32,6 +33,7 @@ public final class Compatibility {
     }
 
     private static CompatibilityProvider provider = null;
+    private static Plugin parentPlugin = null;
 
     private static final String FALLBACK_PROVIDER_TYPE = "craftbukkit";
 
@@ -102,6 +104,51 @@ public final class Compatibility {
         }
         registerProvider(bestprovider);
         return !isUsingFallback;
+    }
+
+    /**
+     * Initialize compatibility support.
+     * <p>
+     * This method initializes server version-detection and selects
+     * compatibility providers (specific Bukkit implementations) for use later.
+     * This method also makes a determination as to what the recommended
+     * implementation version is.
+     * <p>
+     * The "recommended" version is the highest implementation version available
+     * (for your server's type) that is under or equal to your server version.
+     * If no provider with a matching type can be found, this method will
+     * look for one with the 'fallback' server type (which at this time defaults
+     * to "craftbukkit").
+     * <p>
+     * Provider implementations are expected to exist in the same package as the compatibility library (com.github.crashdemons.playerheads.compatibility by default).
+     * followed by the server type name and major/minor version.  For example: com.github.crashdemons.playerheads.compatibility.craftbukkit_1_16
+     * the class in this package must be named "Provider" and must not be abstract.
+     * <p>
+     * This method, in contrast to the version without the plugin argument, registers a parent plugin to use for logging.
+     * 
+     * @since 5.2.17-SNAPSHOT
+     * 
+     * @return Whether the recommended implementation version was used. True:
+     * the best implementation version for your server that was supported was
+     * loaded. False: a fallback implementation was used - possibly because you
+     * loaded a backport implementation onto a newer server improperly.
+     * @throws UnknownVersionException If the server version string could not be
+     * understood during detection.
+     * @throws CompatibilityUnsupportedException If the server version was lower
+     * than is supported by the compatibility package (minimum 1.8)
+     * @throws CompatibilityUnavailableException If no implementation could be
+     * found that is compatible with your server. This may happen if all 
+     * available providers (of a compatible type) are newer than your server 
+     * version, or no matches can be found for your server type or fallback type.
+     * @throws CompatibilityConflictException If an implementation provider was
+     * already registered - this happens when there is more than one call to
+     * init and registerProvider.
+     * @throws CompatibilityMisconfiguredException If the compatibility library 
+     * was not properly built (with supported versions finalized).
+     */
+    public static synchronized boolean init(Plugin parentPlugin){
+        Compatibility.parentPlugin = parentPlugin;
+        return init();
     }
 
     /**
@@ -271,7 +318,7 @@ public final class Compatibility {
      * inaccessible, or could not be instantiated.
      */
     private static CompatibilityProvider loadProviderByVersion(String type, int major, int minor) throws CompatibilityUnavailableException {
-        System.out.println("Trying provider: " + type + "_" + major + "_" + minor);
+        if(parentPlugin!=null) parentPlugin.getLogger().info("Trying provider: " + type + "_" + major + "_" + minor);
         String pkg = Compatibility.class.getPackage().getName();
         String classname = pkg + "." + type + "_" + major + "_" + minor + ".Provider";
         try {
