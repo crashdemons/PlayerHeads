@@ -14,6 +14,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 public class InteractSpamPreventer extends EventSpamPreventer {
 
     private final long interactThresholdMs;
+    
+    private static final boolean checkLocation = false; //TODO: change this or make it configurable?
 
     public InteractSpamPreventer(int numRecords, long timeMS) {
         super(numRecords);
@@ -41,10 +43,11 @@ public class InteractSpamPreventer extends EventSpamPreventer {
                 return false;
             }
             if (record.playerId.equals(playerId)) {
-                if (record.location == null || location == null) {
+                
+                if(checkLocation) if (record.location == null || location == null) {
                     return false;
                 }
-                if (record.location.equals(location)) {
+                if ((!checkLocation) || record.location.equals(location)) {
                     if (super.closeTo(record, interactThresholdMs)) {
                         return true;
                     }
