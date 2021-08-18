@@ -640,19 +640,18 @@ class PlayerHeadsListener implements Listener {
         Block block = event.getClickedBlock();
         Player player = event.getPlayer();
         if (block != null) {
+            if (!player.hasPermission("playerheads.clickinfo")) return;
+            if (clickSpamPreventer.recordEvent(event).isSpam()) return; //this doesn't really go here (before determining IF this is a head) BUT there was no other option if a user lags on getExternalHeadHandling
             BlockState state = block.getState();
-            if(CompatiblePlugins.heads.getExternalHeadHandling(state)==HeadModificationHandling.NO_INTERACTION) return; //TODO: redundant code - SkullConverter checks custom & external heads now
             TexturedSkullType skullType = SkullConverter.skullTypeFromBlockState(state,true,true);
             if (skullType == null) {
                 return;
             }
             //System.out.println(skullType.name());
 
-            if (clickSpamPreventer.recordEvent(event).isSpam()) {
-                return;
-            }
-
-            if (player.hasPermission("playerheads.clickinfo")) {
+            if(CompatiblePlugins.heads.getExternalHeadHandling(state)==HeadModificationHandling.NO_INTERACTION) return; //TODO: redundant code - SkullConverter checks custom & external heads now
+            
+            //if (player.hasPermission("playerheads.clickinfo")) {
                 switch (skullType) {
                     case PLAYER:
                         Skull skullState = (Skull) block.getState();
@@ -670,7 +669,7 @@ class PlayerHeadsListener implements Listener {
                         Formatter.formatMsg(player, Lang.CLICKINFO2, skullType.getDisplayName());
                         break;
                 }
-            }
+           // }
             SkullManager.updatePlayerSkullState(state);
 
         }
