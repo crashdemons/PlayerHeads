@@ -113,9 +113,9 @@ dropvanillaheads: true
 convertvanillaheads: false
 nerfdeathspam: false
 addlore: true
-clickspamcount: 5
+clickspamcount: 100
 clickspamthreshold: 1000
-deathspamcount: 5
+deathspamcount: 100
 deathspamthreshold: 300000
 fixdroppedheads: true
 
