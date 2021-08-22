@@ -514,6 +514,7 @@ class PlayerHeadsListener implements Listener {
             } else {
                 message = Formatter.format(Lang.BEHEAD_OTHER, player.getDisplayName() + ChatColor.RESET, killer.getDisplayName() + ChatColor.RESET);
             }
+            String nearby = Formatter.format(Lang.BEHEAD_NEARBY_SUFFIX,player.getDisplayName() + ChatColor.RESET, killer.getDisplayName() + ChatColor.RESET);
 
             int broadcastRange = plugin.configFile.getInt("broadcastrange");
             if (broadcastRange > 0) {
@@ -524,7 +525,7 @@ class PlayerHeadsListener implements Listener {
                 for (Player loopPlayer : players) {
                     try{
                         if (location.distanceSquared(loopPlayer.getLocation()) <= broadcastRange) {
-                            loopPlayer.sendMessage(message);
+                            loopPlayer.sendMessage(message+nearby);
                         }
                     }catch(IllegalArgumentException e){
                         //entities are in different worlds
@@ -602,7 +603,7 @@ class PlayerHeadsListener implements Listener {
                 String entityName = entity.getCustomName();
                 if (entityName==null) entityName = entity.getName(); //notnull
 
-
+                String nearby = Formatter.format(Lang.BEHEAD_NEARBY_SUFFIX,entityName + ChatColor.RESET, killer.getDisplayName() + ChatColor.RESET);
                 String message = Formatter.format(Lang.BEHEAD_OTHER, entityName + ChatColor.RESET, killer.getDisplayName() + ChatColor.RESET);
 
                 int broadcastRange = plugin.configFile.getInt("broadcastmobrange");
@@ -614,7 +615,7 @@ class PlayerHeadsListener implements Listener {
                     for (Player loopPlayer : players) {
                         try{
                             if (location.distanceSquared(loopPlayer.getLocation()) <= broadcastRange) {
-                                loopPlayer.sendMessage(message);
+                                loopPlayer.sendMessage(message+nearby);
                             }
                         }catch(IllegalArgumentException e){
                             //entities are in different worlds
