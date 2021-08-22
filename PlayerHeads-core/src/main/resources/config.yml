@@ -11,6 +11,7 @@
 # broadcastrange: 0             [positive int]  Radial distance in meters in which other players will hear the broadcast message (0 is unlimited)
 # broadcastmob: false           [true/false]    Sends a message when a mob gets beheaded (v5.0 alpha 2+)
 # broadcastmobrange: 0          [positive int]  Radial distance in meters in which other players will hear the mob broadcast message (0 is unlimited) (v5.0 alpha 2+)
+# broadcastaddnearby            [true/false]    Add a note that the broadcasted beheading message was "nearby" if the range is set.
 # antideathchest: false         [true/false]    Do not allow other plugins to fiddle with dropping player heads, makes certain they drop on the ground
 # dropboringplayerheads: false  [true/false]    Drop plain heads when a player dies, instead of the player's head
 # dropvanillaheads: true        [true/false]    Drop vanilla mob heads whenever possible on death and on breaking head (for creeper/skeleton/zombie/witherskeleton/dragon)  (version 4.1+)
@@ -107,6 +108,7 @@ broadcast: true
 broadcastrange: 0
 broadcastmob: false
 broadcastmobrange: 0
+broadcastaddnearby: false
 antideathchest: false
 dropboringplayerheads: false
 dropvanillaheads: true

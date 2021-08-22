@@ -66,6 +66,7 @@ public final class Lang {
      * Formatting arguments(1): player name
      */
     public static String BEHEAD_SELF;
+    public static String BEHEAD_NEARBY_SUFFIX;
     public static String BRACKET_LEFT;
     public static String BRACKET_RIGHT;
     /**
