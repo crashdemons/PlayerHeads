@@ -53,6 +53,14 @@ public class TexturedSkullTypeTest {
     @After
     public void tearDown() {
     }
+    
+    @Test
+    public void testJunk() {
+        for(TexturedSkullType type : TexturedSkullType.values()){
+            System.out.println(type.name());
+            //System
+        }
+    }
 
     @Test
     public void testSkullConfigName_Player(){
