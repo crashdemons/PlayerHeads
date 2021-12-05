@@ -283,5 +283,11 @@ glowsquiddroprate: 0.002
 goatdroprate: 0.002
 
 #provisional Caves and Cliffs mobs
+allaydroprate: 0.002
+frogdroprate: 0.002
+fireflydroprate: 0.002
+tadpoledroprate: 0.002
 wardendroprate: 0.002
+
+
 
