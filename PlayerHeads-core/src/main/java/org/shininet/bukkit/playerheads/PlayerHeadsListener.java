@@ -507,14 +507,18 @@ class PlayerHeadsListener implements Listener {
         //broadcast message about the beheading.
         if (plugin.configFile.getBoolean("broadcast")) {
             String message;
+            String killerName = "";
+            if(killer!=null){
+                killerName = killer.getDisplayName();
+            }
             if (killer == null) {
                 message = Formatter.format(Lang.BEHEAD_GENERIC, player.getDisplayName() + ChatColor.RESET);
             } else if (killer == player) {
                 message = Formatter.format(Lang.BEHEAD_SELF, player.getDisplayName() + ChatColor.RESET);
             } else {
-                message = Formatter.format(Lang.BEHEAD_OTHER, player.getDisplayName() + ChatColor.RESET, killer.getDisplayName() + ChatColor.RESET);
+                message = Formatter.format(Lang.BEHEAD_OTHER, player.getDisplayName() + ChatColor.RESET, killerName + ChatColor.RESET);
             }
-            String nearby = Formatter.format(Lang.BEHEAD_NEARBY_SUFFIX,player.getDisplayName() + ChatColor.RESET, killer.getDisplayName() + ChatColor.RESET);
+            String nearby = Formatter.format(Lang.BEHEAD_NEARBY_SUFFIX,player.getDisplayName() + ChatColor.RESET, killerName + ChatColor.RESET);
 
             int broadcastRange = plugin.configFile.getInt("broadcastrange");
             if (broadcastRange > 0) {
