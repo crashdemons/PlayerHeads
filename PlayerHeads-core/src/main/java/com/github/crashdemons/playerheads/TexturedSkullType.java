@@ -32,13 +32,11 @@ public enum TexturedSkullType implements HeadType {
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWI3YWY5ZTQ0MTEyMTdjN2RlOWM2MGFjYmQzYzNmZDY1MTk3ODMzMzJhMWIzYmM1NmZiZmNlOTA3MjFlZjM1In19fQ=="
     ),
     
-    //provisional Caves & Cliffs II - 1.19? entries
-    @Deprecated
+    //Caves & Cliffs II - 1.19 entries
     ALLAY(
             "b9995cf6-f729-4c8a-8975-d4ec4da86973",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDBlMWM3MDY0YWY3ZGVlNjg2NzdlZmFhOTVmNmU2ZTAxNDMwYjAwNmRkOTE2MzhlYTJhNjE4NDkyNTQ0ODhlYyJ9fX0="
     ),
-    @Deprecated
     FROG(
             "cd7dde80-9422-4945-85c0-4d69a7af4976",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzI4MzQxMjE2OWQxZGJkMTUwMzJjMTFjNWEyMjVjZDExYmUzODc1ZDYxMmRhZDgxOGQxZDZmY2NmY2I5YmZhIn19fQ=="
@@ -48,12 +46,10 @@ public enum TexturedSkullType implements HeadType {
             "d915222a-930c-4075-a987-9ad2f88023d0",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmY5MmQzZjM4NWNjMTZjNzc2NzVhNDZkZTNlODMzYWMxN2M3NGFkYTNlMTk0NmVmNzAyMWVjZGJmOWYxYmEifX19"
     ),
-    @Deprecated
     TADPOLE(
             "9121441a-6bd4-40a3-973e-721bf78518c0",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzUyYTRkNzg4YTI5NTQyODYzYWMxY2I4MjhkMTEyMTFmNmQxMjNjNmVjMDQ2MDk4YTY1MzgxZTJjMzdjMzdlMCJ9fX0="
     ),
-    @Deprecated
     WARDEN(
             "5463f08a-7a0e-4bb4-bd3f-05133effa66f",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzViMjZjYThkMjUzOGY3ZjZkZjA4YzgxZjBhZGI4MzA1ODAxNmZiNDE5M2I5YWE1M2ZkMDRiNDEyMDAwYWZkMiJ9fX0=" //TODO: Provisional texture
