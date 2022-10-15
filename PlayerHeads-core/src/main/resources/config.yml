@@ -285,9 +285,12 @@ goatdroprate: 0.002
 #Caves and Cliffs mobs
 allaydroprate: 0.002
 frogdroprate: 0.002
-fireflydroprate: 0.002
 tadpoledroprate: 0.002
 wardendroprate: 0.002
+fireflydroprate: 0.002
 
+#1.20 provisional mobs
+cameldroprate: 0.002
+snifferdroprate: 0.002
 
 

@@ -32,6 +32,20 @@ public enum TexturedSkullType implements HeadType {
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWI3YWY5ZTQ0MTEyMTdjN2RlOWM2MGFjYmQzYzNmZDY1MTk3ODMzMzJhMWIzYmM1NmZiZmNlOTA3MjFlZjM1In19fQ=="
     ),
     
+    //provisional 1.20 heads
+    @Deprecated
+    CAMEL(
+            "23393c75-845c-4043-a8f3-7422e2f0de8b",
+            "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTEwOTFjZTZlNTU5YzI2YmU3N2VlNjA0NTZiNjIxMjI5OTBmOTUxOWY1MTRiMTFkZjM1NjQxNDljMjcyOWQwNSJ9fX0="
+    ),
+    @Deprecated
+    SNIFFER(
+            "a62feef4-5db5-4bc2-a27d-c70403e0caea",
+            //TODO: CHANGE THIS TEXTURE - currently a placeholder
+            "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2Q0ODdhNzlhMDExNzMzOGZlYWRkYmQyZjJhYzRlODk2NjQzZjliZDk2MTJhZDg2NWE4NGQ0MWVkOGY5ZjAifX19"
+    ),
+    
+    
     //Caves & Cliffs II - 1.19 entries
     ALLAY(
             "b9995cf6-f729-4c8a-8975-d4ec4da86973",
