@@ -41,8 +41,8 @@ public enum TexturedSkullType implements HeadType {
     @Deprecated
     SNIFFER(
             "a62feef4-5db5-4bc2-a27d-c70403e0caea",
-            //TODO: CHANGE THIS TEXTURE - currently a placeholder
-            "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2Q0ODdhNzlhMDExNzMzOGZlYWRkYmQyZjJhYzRlODk2NjQzZjliZDk2MTJhZDg2NWE4NGQ0MWVkOGY5ZjAifX19"
+            //TODO: review texture
+            "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDNmM2JlMDlhNzM1M2VlYWU5NGQ4ODMyMGNiNWIyNDJkZTJmNzE5YzBlNWMxNmE0ODYzMjdjNjA1ZGIxZDQ2MyJ9fX0="
     ),
     
     
