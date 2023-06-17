@@ -8,6 +8,7 @@ package com.github.crashdemons.playerheads.compatibility.craftbukkit_1_14;
 import com.github.crashdemons.playerheads.compatibility.CompatibilityProvider;
 import com.github.crashdemons.playerheads.compatibility.RuntimeReferences;
 import com.github.crashdemons.playerheads.compatibility.SkullType;
+import com.github.crashdemons.playerheads.compatibility.Version;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Entity;
@@ -45,22 +46,4 @@ public class Provider extends com.github.crashdemons.playerheads.compatibility.c
     public boolean supportsEntityTagType(boolean persistent){
         return true;
     }
-    
-    @Override
-    protected SkullType getSkullType(Material mat){
-        String typeName = mat.name();
-        typeName=typeName.replaceFirst("_WALL", "").replaceFirst("_HEAD", "").replaceFirst("_SKULL", "");
-        return RuntimeReferences.getSkullTypeByName(typeName);
-    }
-    
-    protected org.bukkit.SkullType adaptSkullType(SkullType compatType){
-        if(compatType==SkullType.PIGLIN && Version.checkUnder(1, 9)) return org.bukkit.SkullType.PLAYER;
-        try{
-            return org.bukkit.SkullType.values()[compatType.ordinal()];
-        }catch(Exception e){
-            return null;
-        }
-    }
-    
-
 }
