@@ -34,7 +34,12 @@ public enum CompatibleSkullMaterial {//should maintain compatibility with Entity
     /**
      * 1.9 dragon head
      */
-    ENDER_DRAGON(SkullType.DRAGON);
+    ENDER_DRAGON(SkullType.DRAGON),
+    /**
+     * 1.20 piglin head
+     */
+    PIGLIN(SkullType.PIGLIN),
+    ;
 
     private final SkullType skullType;
     private SkullDetails cachedDetails = null;

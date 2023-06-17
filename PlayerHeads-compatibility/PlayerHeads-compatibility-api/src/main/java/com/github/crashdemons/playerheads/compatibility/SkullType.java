@@ -31,7 +31,8 @@ public enum SkullType {
     ZOMBIE(false,2,true), 
     PLAYER(false,3,false), 
     CREEPER(false,4,true), 
-    DRAGON(false,5,false);
+    DRAGON(false,5,false),
+    PIGLIN(false,6,true);
 
     /**
      * A property specifying whether the skulltype entry is a proper skull (semantically - for types of skeletons, etc) or a

@@ -35,6 +35,14 @@ public class CompatibleSkullMaterialTest {
     @Test
     public void testSkullTypeCompatibility(){
         out.println("SkullTypeCompatibility");
+        out.println("PHC.SkullType.len "+SkullType.values().length);
+        out.println("bukkit.SkullType.len "+org.bukkit.SkullType.values().length);
+        out.println("CompatibleSkullMaterial.len "+CompatibleSkullMaterial.values().length);
+        for(org.bukkit.SkullType st : org.bukkit.SkullType.values()){
+            out.println("   bukkit.Skulltype "+st.name()+" "+st.ordinal());
+        }
+        
+        
         assertEquals( SkullType.values().length, CompatibleSkullMaterial.values().length );
         assertEquals( org.bukkit.SkullType.values().length, CompatibleSkullMaterial.values().length );
     }
