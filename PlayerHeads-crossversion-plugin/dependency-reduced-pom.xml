@@ -3,7 +3,7 @@
   <parent>
     <artifactId>PlayerHeads</artifactId>
     <groupId>org.shininet.bukkit</groupId>
-    <version>5.20.0-SNAPSHOT</version>
+    <version>5.20.1-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.shininet.bukkit</groupId>
@@ -68,7 +68,7 @@
     <plugins>
       <plugin>
         <artifactId>maven-enforcer-plugin</artifactId>
-        <version>3.0.0-M3</version>
+        <version>3.0.0</version>
         <executions>
           <execution>
             <id>enforce-bytecode-version</id>
@@ -78,7 +78,7 @@
             <configuration>
               <rules>
                 <enforceBytecodeVersion>
-                  <maxJdkVersion>1.7</maxJdkVersion>
+                  <maxJdkVersion>1.8</maxJdkVersion>
                   <includes>
                     <include>com.github.crashdemons:*</include>
                     <include>org.shininet.bukkit:*</include>
@@ -93,7 +93,7 @@
           <dependency>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>extra-enforcer-rules</artifactId>
-            <version>1.3</version>
+            <version>1.6.0</version>
           </dependency>
         </dependencies>
       </plugin>
@@ -186,14 +186,6 @@
       <version>1.20.1-R0.1-SNAPSHOT</version>
       <scope>test</scope>
       <exclusions>
-        <exclusion>
-          <artifactId>guava</artifactId>
-          <groupId>com.google.guava</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>gson</artifactId>
-          <groupId>com.google.code.gson</groupId>
-        </exclusion>
         <exclusion>
           <artifactId>joml</artifactId>
           <groupId>org.joml</groupId>
