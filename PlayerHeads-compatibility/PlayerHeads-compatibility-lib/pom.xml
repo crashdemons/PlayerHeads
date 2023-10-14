@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.shininet.bukkit</groupId>
         <artifactId>PlayerHeads-compatibility</artifactId>
-        <version>5.20.1-SNAPSHOT</version>
+        <version>5.20.2-SNAPSHOT</version>
     </parent>
     <artifactId>PlayerHeads-compatibility-lib</artifactId>
     <packaging>jar</packaging>
@@ -31,7 +31,7 @@
             <!-- This shouldn't be a dep which is packaging: pom -->
             <groupId>${project.groupId}</groupId>
             <artifactId>PlayerHeads-craftbukkit-support</artifactId>
-            <version>5.20.1-SNAPSHOT</version>
+            <version>5.20.2-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.bukkit</groupId>
@@ -67,7 +67,7 @@
             <!-- This shouldn't be a dep which is packaging: pom -->
             <groupId>${project.groupId}</groupId>
             <artifactId>PlayerHeads-craftbukkit-1.8-support</artifactId>
-            <version>5.20.1-SNAPSHOT</version>
+            <version>5.20.2-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.bukkit</groupId>
@@ -79,13 +79,13 @@
             <!-- This shouldn't be a dep which is packaging: pom -->
             <groupId>${project.groupId}</groupId>
             <artifactId>PlayerHeads-craftbukkit-1.13-support</artifactId>
-            <version>5.20.1-SNAPSHOT</version>
+            <version>5.20.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <!-- This shouldn't be a dep which is packaging: pom -->
             <groupId>${project.groupId}</groupId>
             <artifactId>PlayerHeads-craftbukkit-1.14-support</artifactId>
-            <version>5.20.1-SNAPSHOT</version>
+            <version>5.20.2-SNAPSHOT</version>
         </dependency>
         
         <dependency>
@@ -133,7 +133,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.20.1-R0.1-SNAPSHOT</version>
+            <version>1.20.2-R0.1-SNAPSHOT</version>
             <scope>test</scope>
             <!-- per md_5: spigot will no longer distribute Bukkit as of 1.16.1, only spigot-api -->
         </dependency>
