@@ -9,6 +9,7 @@ import com.github.crashdemons.playerheads.compatibility.CompatibleProfile;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -47,8 +48,17 @@ public class CompatibleProfileCB extends CompatibleProfile {
     private static Collection<Property> getInternalTextures(GameProfile profile){
         return profile.getProperties().get("textures");
     }
+    private static Iterable<CompatiblePropertyCB> getTextures(GameProfile profile){
+        return new CompatiblePropertyContainerCB(getInternalTextures(profile));
+    }
+    @Deprecated
     private static Optional<Property> getInternalTexture(GameProfile profile){
-        for(Property prop : getInternalTextures(profile)){
+        Optional<CompatiblePropertyCB> prop = getTexture(profile);
+        if(!prop.isPresent()) return Optional.empty();
+        return Optional.of(prop.get().getBackingObject());
+    }
+    private static Optional<CompatiblePropertyCB> getTexture(GameProfile profile){
+        for(CompatiblePropertyCB prop : getTextures(profile)){
             if(prop.getName().equals("textures"))
                 return Optional.of(prop);
         }
@@ -68,9 +78,9 @@ public class CompatibleProfileCB extends CompatibleProfile {
         id = profile.getId();
         name = profile.getName();
         
-        Optional<Property> texturePropOptional = getInternalTexture(profile);
+        Optional<CompatiblePropertyCB> texturePropOptional = getTexture(profile);
         if(texturePropOptional.isPresent()){
-            Property textureProp = texturePropOptional.get();
+            CompatiblePropertyCB textureProp = texturePropOptional.get();
             textures = textureProp.getValue();
         }
         if(!hasRequiredFields(id,name)) throw new IllegalArgumentException("Name or ID must be present for a valid profile.");

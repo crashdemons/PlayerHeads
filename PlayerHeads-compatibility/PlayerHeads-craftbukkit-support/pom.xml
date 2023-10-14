@@ -9,7 +9,7 @@
     <parent>
         <artifactId>PlayerHeads-compatibility</artifactId>
         <groupId>org.shininet.bukkit</groupId>
-        <version>5.20.1-SNAPSHOT</version>
+        <version>5.20.2-SNAPSHOT</version>
     </parent>
     
 
@@ -48,7 +48,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.20.1-R0.1-SNAPSHOT</version>
+            <version>1.14-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.shininet.bukkit</groupId>
