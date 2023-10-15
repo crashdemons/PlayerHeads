@@ -15,6 +15,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Skull;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -28,16 +29,16 @@ public abstract class Provider_paperapi_112 extends Provider_legacy {
     @Override public OfflinePlayer getOwningPlayer(SkullMeta skull){ return getOwningPlayerDirect(skull); }
     @Override public OfflinePlayer getOwningPlayer(Skull skull){ return getOwningPlayerDirect(skull); }
     
-    @Override public boolean setProfile(ItemMeta headMeta, UUID uuid, String texture){
-        return ProfileUtils.setProfile(headMeta, uuid, texture);
+    @Override public boolean setProfile(ItemMeta headMeta, @NotNull UUID uuid, @NotNull String username, String texture){
+        return ProfileUtils.setProfile(headMeta, uuid,username, texture);
     }
-    @Override public boolean setProfile(Skull skull, UUID uuid, String texture){
+    @Override public boolean setProfile(Skull skull, @NotNull UUID uuid,@NotNull String username, String texture){
         //return ProfileUtils.setProfile(headBlockState, uuid, texture);
         //TODO: find glowstone implementations for texturing!
         //OfflinePlayer op=Bukkit.getOfflinePlayer(uuid);
         //setPlayerProfile(headBlockState, createProfile(uuid,texture));
         //headBlockState.setPlayerProfile(createProfile(uuid,texture));// doesn't exist in this version of paper-api
-        return ProfileUtils.setProfile(skull, uuid, texture);
+        return ProfileUtils.setProfile(skull, uuid,username, texture);
     }
     
     //-----------5.2.12 providers-----------//
@@ -92,7 +93,7 @@ public abstract class Provider_paperapi_112 extends Provider_legacy {
     }
     
     @Override
-    public CompatibleProfile createCompatibleProfile(@Nullable String name, @Nullable UUID id, @Nullable String texture){
+    public CompatibleProfile createCompatibleProfile(@NotNull  String name, @NotNull  UUID id, @Nullable String texture){
         CompatibleProfile profile = new CompatibleProfilePA(id,name);
         profile.setTextures(texture);
         return profile;

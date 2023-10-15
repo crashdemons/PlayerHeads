@@ -84,10 +84,10 @@ public class Provider extends Provider_common implements CompatibilityProvider {
         return getOwnerDirect(skull);
     }
     
-    @Override public boolean setProfile(ItemMeta headMeta, UUID uuid, String texture){
+    @Override public boolean setProfile(ItemMeta headMeta, UUID uuid,String username, String texture){
         return false;
     }
-    @Override public boolean setProfile(Skull headBlockState, UUID uuid, String texture){
+    @Override public boolean setProfile(Skull headBlockState, UUID uuid, String username, String texture){
         return false;
     }
     

@@ -63,11 +63,11 @@ public abstract class Provider_craftbukkit_113 extends Provider_modern {
         return owner;
     }
     
-    @Override public boolean setProfile(ItemMeta headMeta, UUID uuid, String texture){
-        return ProfileUtils.setProfile(headMeta, uuid, texture);
+    @Override public boolean setProfile(ItemMeta headMeta, UUID uuid, String username, String texture){
+        return ProfileUtils.setProfile(headMeta, uuid,username, texture);
     }
-    @Override public boolean setProfile(Skull headBlockState, UUID uuid, String texture){
-        return ProfileUtils.setProfile(headBlockState, uuid, texture);
+    @Override public boolean setProfile(Skull headBlockState, UUID uuid, String username, String texture){
+        return ProfileUtils.setProfile(headBlockState, uuid,username, texture);
     }
     
     //-----------5.2.12 providers-----------//

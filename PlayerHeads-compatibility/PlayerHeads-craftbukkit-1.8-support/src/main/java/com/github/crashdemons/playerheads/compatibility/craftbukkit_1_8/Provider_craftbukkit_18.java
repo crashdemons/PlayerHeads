@@ -15,6 +15,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Skull;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -23,11 +24,11 @@ import org.jetbrains.annotations.Nullable;
  */
 public abstract class Provider_craftbukkit_18 extends Provider_legacy {
     
-    @Override public boolean setProfile(ItemMeta headMeta, UUID uuid, String texture){
-        return ProfileUtils.setProfile(headMeta, uuid, texture);
+    @Override public boolean setProfile(ItemMeta headMeta, @NotNull UUID uuid, @NotNull String username, String texture){
+        return ProfileUtils.setProfile(headMeta, uuid,username, texture);
     }
-    @Override public boolean setProfile(Skull headBlockState, UUID uuid, String texture){
-        return ProfileUtils.setProfile(headBlockState, uuid, texture);
+    @Override public boolean setProfile(Skull headBlockState, @NotNull UUID uuid, @NotNull String username, String texture){
+        return ProfileUtils.setProfile(headBlockState, uuid,username, texture);
     }
     @Override public OfflinePlayer getOwningPlayer(SkullMeta skull){
         //OfflinePlayer op = getOwningPlayer(skull);//skullMeta.getOwningPlayer();
@@ -79,7 +80,7 @@ public abstract class Provider_craftbukkit_18 extends Provider_legacy {
     }
     
     @Override
-    public CompatibleProfile createCompatibleProfile(@Nullable String name, @Nullable UUID id, @Nullable String texture){
+    public CompatibleProfile createCompatibleProfile(@NotNull String name, @NotNull UUID id, @Nullable String texture){
         CompatibleProfile profile = new CompatibleProfileCB(id,name);
         profile.setTextures(texture);
         return profile;

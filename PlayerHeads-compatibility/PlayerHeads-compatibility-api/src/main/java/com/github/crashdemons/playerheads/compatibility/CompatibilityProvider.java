@@ -254,20 +254,26 @@ public interface CompatibilityProvider {
     public EntityType getEntityTypeFromTypename(String ename); //determine forward-portable name of entity even if they are variants.
     /**
      * Set a profile field in the supplied item meta using a UUID and Texture string
+     * 
+     * As of 2023, UUID and Name are no longer mutually optional in authlib - both must be supplied as non-null, not either.
      * @param headMeta the item meta to apply the profile on
      * @param uuid A UUID to be associated with this profile and texture
+     * @param username a username (or unique plugin identifier) to be associated with the profile.
      * @param texture The Base64-encoded Texture-URL tags.
      * @return True: the profile was successfully set. False: the profile could not be set.
      */
-    public boolean setProfile(ItemMeta headMeta, UUID uuid, String texture);
+    public boolean setProfile(ItemMeta headMeta, @NotNull UUID uuid,@NotNull String username, String texture);
     /**
-     * Set a profile field in the supplied block state using a UUID and Texture string
+     * Set a profile field in the supplied block state using a UUID and Texture string.
+     * 
+     * As of 2023, UUID and Name are no longer mutually optional in authlib - both must be supplied as non-null, not either.
      * @param headBlockState the block state to apply the profile on
      * @param uuid A UUID to be associated with this profile and texture
+     * @param username a username (or unique plugin identifier) to be associated with the profile.
      * @param texture The Base64-encoded Texture-URL tags.
      * @return True: the profile was successfully set. False: the profile could not be set.
      */
-    public boolean setProfile(Skull headBlockState, UUID uuid, String texture);
+    public boolean setProfile(Skull headBlockState, @NotNull UUID uuid,@NotNull String username, String texture);
     /**
      * Gets a player by their username
      * @param username the username of the player
@@ -424,14 +430,14 @@ public interface CompatibilityProvider {
     /**
      * Create a compatible profile object with the provided parameters.
      * Note: name and id cannot both be null, only one can be null.
-     * @param name the owner username of the head (this should not be a custom name - use null instead)
+     * @param name the owner username of the head (if this is a custom head, the convention is pluginnamehere:uniqueid)
      * @param id A UUID to be associated with this profile and texture (this may be a custom/unique value that you manage - you are strongly recommended to choose a static but randomly-generated ID)
      * @param texture The Base64-encoded Texture-URL tags. (this may be null to set no texture)
      * @return the CompatibleProfile object
      * @throws IllegalArgumentException if both the name and id are null.
      * @since 5.2.13-SNAPSHOT
      */
-    public CompatibleProfile createCompatibleProfile(@Nullable String name, @Nullable UUID id, @Nullable String texture) throws IllegalArgumentException;
+    public CompatibleProfile createCompatibleProfile(@NotNull String name, @NotNull UUID id, @Nullable String texture) throws IllegalArgumentException;
     
     
     /**

@@ -12,6 +12,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.block.BlockState;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.jetbrains.annotations.NotNull;
 
 import org.shininet.bukkit.playerheads.Config;
 import org.shininet.bukkit.playerheads.Lang;
@@ -21,6 +22,10 @@ import org.shininet.bukkit.playerheads.Lang;
  * @author crash
  */
 public final class SkullManager {
+    
+    public static final String PLUGIN_CUSTOM_HEAD_USERNAME_PREFIX="PlayerHeads";
+    public static final String PLUGIN_CUSTOM_HEAD_USERNAME_SEPARATOR=":";
+    
     
     private SkullManager(){}
     
@@ -62,8 +67,8 @@ public final class SkullManager {
      * @return true: the information was properly set on the playerhead; false: there was an error setting the profile field.
      * @author x7aSv
      */
-    private static boolean applyTexture(SkullMeta headMeta, UUID uuid, String texture){
-        return Compatibility.getProvider().setProfile(headMeta, uuid, texture);
+    private static boolean applyTexture(SkullMeta headMeta, @NotNull UUID uuid,@NotNull String username, String texture){
+        return Compatibility.getProvider().setProfile(headMeta, uuid,username, texture);
     }
     
     /**
@@ -103,7 +108,10 @@ public final class SkullManager {
         ItemStack stack = mat.getDetails().createItemStack(quantity);//new ItemStack(mat,quantity);
         SkullMeta headMeta = (SkullMeta) stack.getItemMeta();
         //applyOwningPlayer(headMeta,Bukkit.getOfflinePlayer(type.getOwner()));
-        applyTexture(headMeta,type.getOwner(),type.getTexture());
+        
+        String username = PLUGIN_CUSTOM_HEAD_USERNAME_PREFIX + PLUGIN_CUSTOM_HEAD_USERNAME_SEPARATOR + type.getOwner().toString();
+        
+        applyTexture(headMeta,type.getOwner(),username,type.getTexture());
         applyDisplayName(headMeta,ChatColor.RESET + "" + ChatColor.YELLOW + type.getDisplayName());
         //System.out.println("DEBUG: addlore "+addLore);
         if(addLore) applyLore(headMeta,ChatColor.GREEN+Lang.LORE_HEAD_MOB);

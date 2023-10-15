@@ -13,6 +13,7 @@ import java.lang.reflect.Method;
 import java.util.UUID;
 import org.bukkit.block.Skull;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Provides methods for working with profiles on items and blocks.
@@ -82,27 +83,29 @@ public class ProfileUtils {
     //-------------------------------------------------------------------------
     
     /**
-     * Set a profile field in the supplied item meta using a UUID and Texture string
+     * Set a profile field in the supplied item meta using a UUID, name, and Texture string
      * @param skull the item/block skull object to apply the profile on
      * @param uuid A UUID to be associated with this profile and texture
+     * @param username A username (or a unique plugin identifier) to be associated with this profile.
      * @param texture The Base64-encoded Texture-URL tags.
      * @return True: the profile was successfully set. False: the profile could not be set.
      */
-    public static boolean setProfile(Object skull, UUID uuid, String texture) throws IllegalStateException{//credit to x7aSv for original
+    public static boolean setProfile(Object skull, @NotNull UUID uuid, @NotNull String username, String texture) throws IllegalStateException{//credit to x7aSv for original
         CompatibleProfile profile = new CompatibleProfilePA(uuid,null);
         profile.setTextures(texture);
         return setProfile(skull, profile);
     }
     
     /**
-     * Set a profile field in the supplied block state using a UUID and Texture string
+     * Set a profile field in the supplied block state using a UUID, name, and Texture string
      * @param headBlockState the block state to apply the profile on
      * @param uuid A UUID to be associated with this profile and texture
+     * @param username A username (or a unique plugin identifier) to be associated with this profile.
      * @param texture The Base64-encoded Texture-URL tags.
      * @return True: the profile was successfully set. False: the profile could not be set.
      */
-    public static boolean setProfile(Skull headBlockState, UUID uuid, String texture) throws IllegalStateException{
-        return setProfile((Object)headBlockState, uuid, texture);
+    public static boolean setProfile(Skull headBlockState, UUID uuid, @NotNull String username, String texture) throws IllegalStateException{
+        return setProfile((Object)headBlockState, uuid, username, texture);
     }
     
     public static boolean clearProfile(Object skull){

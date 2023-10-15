@@ -15,7 +15,7 @@
             <!-- This shouldn't be a dep which is packaging: pom -->
             <groupId>${project.groupId}</groupId>
             <artifactId>PlayerHeads-compatibility-api</artifactId>
-            <version>5.20.1-SNAPSHOT</version>
+            <version>5.20.2-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.bukkit</groupId>
@@ -43,7 +43,7 @@
             <!-- This shouldn't be a dep which is packaging: pom -->
             <groupId>${project.groupId}</groupId>
             <artifactId>PlayerHeads-legacy-support</artifactId>
-            <version>5.20.1-SNAPSHOT</version>
+            <version>5.20.2-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.bukkit</groupId>
@@ -55,7 +55,7 @@
             <!-- This shouldn't be a dep which is packaging: pom -->
             <groupId>${project.groupId}</groupId>
             <artifactId>PlayerHeads-modern-support</artifactId>
-            <version>5.20.1-SNAPSHOT</version>
+            <version>5.20.2-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.bukkit</groupId>
@@ -92,7 +92,7 @@
             <!-- This shouldn't be a dep which is packaging: pom -->
             <groupId>${project.groupId}</groupId>
             <artifactId>PlayerHeads-paperapi-support</artifactId>
-            <version>5.20.1-SNAPSHOT</version>
+            <version>5.20.2-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.bukkit</groupId>
@@ -113,7 +113,7 @@
             <!-- This shouldn't be a dep which is packaging: pom -->
             <groupId>${project.groupId}</groupId>
             <artifactId>PlayerHeads-glowstone-1.12-support</artifactId>
-            <version>5.20.1-SNAPSHOT</version>
+            <version>5.20.2-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.bukkit</groupId>

@@ -14,6 +14,7 @@ import java.util.UUID;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import org.bukkit.Bukkit;
+import org.jetbrains.annotations.NotNull;
 
 /**
  *
@@ -26,7 +27,7 @@ public class CompatibleProfilePA extends CompatibleProfile {
     }
     
     
-    public CompatibleProfilePA(UUID id, String name){
+    public CompatibleProfilePA(@NotNull UUID id, @NotNull String name){
         super(id,name);
     }
     
@@ -42,7 +43,7 @@ public class CompatibleProfilePA extends CompatibleProfile {
         }               
     };
     
-    private static PlayerProfile createInternalObject(UUID id, String name){
+    private static PlayerProfile createInternalObject(@NotNull UUID id, @NotNull String name){
         PlayerProfile profile = Bukkit.createProfile(id,name);
         return profile;
     }
@@ -84,7 +85,7 @@ public class CompatibleProfilePA extends CompatibleProfile {
             ProfileProperty textureProp = texturePropOptional.get();
             textures = textureProp.getValue();
         }
-        if(!hasRequiredFields(id,name)) throw new IllegalArgumentException("Name or ID must be present for a valid profile.");
+        if(!hasRequiredFields(id,name)) throw new IllegalArgumentException("Name and ID must be present for a valid profile.");
     }
     
     

@@ -18,7 +18,7 @@
         <dependency>
             <groupId>org.shininet.bukkit</groupId>
             <artifactId>PlayerHeads-compatibility-api</artifactId>
-            <version>5.20.1-SNAPSHOT</version>
+            <version>5.20.2-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <build>

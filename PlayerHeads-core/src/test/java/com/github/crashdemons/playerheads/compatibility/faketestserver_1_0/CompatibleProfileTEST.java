@@ -7,6 +7,7 @@ package com.github.crashdemons.playerheads.compatibility.faketestserver_1_0;
 
 import com.github.crashdemons.playerheads.compatibility.CompatibleProfile;
 import java.util.UUID;
+import org.jetbrains.annotations.NotNull;
 
 /**
  *
@@ -18,7 +19,7 @@ public class CompatibleProfileTEST extends CompatibleProfile {
         super();
     }
     
-    public CompatibleProfileTEST(UUID id, String name){
+    public CompatibleProfileTEST(@NotNull UUID id, @NotNull String name){
         super(id,name);
     }
     public CompatibleProfileTEST(Object internal){

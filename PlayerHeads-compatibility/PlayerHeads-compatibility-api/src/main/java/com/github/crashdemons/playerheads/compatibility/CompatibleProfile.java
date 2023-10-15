@@ -9,6 +9,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Utility class that may be used by compatibility providers to handle head profile information.
@@ -62,7 +63,7 @@ public abstract class CompatibleProfile{
      * @return whether the preconditions are filled for a profile.
      */
     protected static boolean hasRequiredFields(UUID id, String name){
-        return (hasField(id) || hasField(name));
+        return (hasField(id) && hasField(name));
     }
     
     /**
@@ -90,10 +91,10 @@ public abstract class CompatibleProfile{
     /**
      * Constructs an object containing information about a head.
      * @param id the UUID of the head (either a player's or a unique one for each head type)
-     * @param name the username of the head (custom heads should be null)
+     * @param name the username of the head (custom heads should contain a non-username identifier. Preferably like pluginnamehere:uniqueid with a colon)
      */
-    public CompatibleProfile(@Nullable UUID id, @Nullable String name){
-        if(!hasRequiredFields(id,name)) throw new IllegalArgumentException("Name or ID must be present for a valid profile.");
+    public CompatibleProfile(@NotNull UUID id, @NotNull String name){
+        if(!hasRequiredFields(id,name)) throw new IllegalArgumentException("Name and ID must be present for a valid profile.");
         this.id=id;
         this.name=name;
         this.textures=null;
@@ -170,8 +171,8 @@ public abstract class CompatibleProfile{
      * This should be either the UUID of a player or a unique ID for each head type.
      * @param id the ID to set
      */
-    public void setId(UUID id) {
-        if(!hasRequiredFields(id,name)) throw new IllegalArgumentException("Name or ID must be present for a valid profile.");
+    public void setId(@NotNull UUID id) {
+        if(!hasRequiredFields(id,name)) throw new IllegalArgumentException("Name and ID must be present for a valid profile.");
         this.id = id;
     }
 
@@ -188,8 +189,8 @@ public abstract class CompatibleProfile{
      * Set the username associated with the head profile.
      * @param name the username
      */
-    public void setName(String name) {
-        if(!hasRequiredFields(id,name)) throw new IllegalArgumentException("Name or ID must be present for a valid profile.");
+    public void setName(@NotNull String name) {
+        if(!hasRequiredFields(id,name)) throw new IllegalArgumentException("Name and ID must be present for a valid profile.");
         this.name = name;
     }
 

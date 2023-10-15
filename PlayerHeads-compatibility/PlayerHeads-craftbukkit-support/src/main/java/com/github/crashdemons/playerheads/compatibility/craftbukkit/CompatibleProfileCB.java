@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Optional;
 import java.util.UUID;
+import org.jetbrains.annotations.NotNull;
 
 /**
  *
@@ -22,7 +23,7 @@ public class CompatibleProfileCB extends CompatibleProfile {
     public CompatibleProfileCB(){
         super();
     }
-    public CompatibleProfileCB(UUID id, String name){
+    public CompatibleProfileCB(@NotNull UUID id, @NotNull String name){
         super(id,name);
     }
     
@@ -33,7 +34,7 @@ public class CompatibleProfileCB extends CompatibleProfile {
     }
     
     
-    private static GameProfile createInternalObject(UUID id, String name){
+    private static GameProfile createInternalObject(@NotNull UUID id, @NotNull String name){
         return new GameProfile(id, name);
     }
     private static GameProfile setInternalTextures(GameProfile profile, String textures){
@@ -83,7 +84,7 @@ public class CompatibleProfileCB extends CompatibleProfile {
             CompatiblePropertyCB textureProp = texturePropOptional.get();
             textures = textureProp.getValue();
         }
-        if(!hasRequiredFields(id,name)) throw new IllegalArgumentException("Name or ID must be present for a valid profile.");
+        if(!hasRequiredFields(id,name)) throw new IllegalArgumentException("Name and ID must be present for a valid profile.");
     }
     
     
