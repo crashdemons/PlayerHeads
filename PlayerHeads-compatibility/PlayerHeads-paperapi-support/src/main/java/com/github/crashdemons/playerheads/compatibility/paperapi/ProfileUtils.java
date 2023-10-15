@@ -91,7 +91,7 @@ public class ProfileUtils {
      * @return True: the profile was successfully set. False: the profile could not be set.
      */
     public static boolean setProfile(Object skull, @NotNull UUID uuid, @NotNull String username, String texture) throws IllegalStateException{//credit to x7aSv for original
-        CompatibleProfile profile = new CompatibleProfilePA(uuid,null);
+        CompatibleProfile profile = new CompatibleProfilePA(uuid,username);
         profile.setTextures(texture);
         return setProfile(skull, profile);
     }
