@@ -13,6 +13,7 @@ import java.util.Enumeration;
 import java.util.Optional;
 import java.util.UUID;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  *
@@ -26,6 +27,12 @@ public class CompatibleProfileCB extends CompatibleProfile {
     public CompatibleProfileCB(@NotNull UUID id, @NotNull String name){
         super(id,name);
     }
+    public CompatibleProfileCB(@NotNull UUID id, @Nullable String name, boolean usernameCompatibilityMode){
+        super(id,name,usernameCompatibilityMode);
+    }
+    public CompatibleProfileCB(@Nullable UUID id, @Nullable String name, boolean usernameCompatibilityMode, boolean idCompatibilityMode){
+        super(id,name,usernameCompatibilityMode,idCompatibilityMode);
+    }
     
     public CompatibleProfileCB(Object internalProfile){
          super();
@@ -33,10 +40,16 @@ public class CompatibleProfileCB extends CompatibleProfile {
          setFromInternalObject(internalProfile);
     }
     
-    
     private static GameProfile createInternalObject(@NotNull UUID id, @NotNull String name){
+        if(!hasRequiredFields(id,name)) throw new IllegalArgumentException("Name and ID must be present for a valid profile.");
         return new GameProfile(id, name);
     }
+    private static GameProfile createInternalObject(@Nullable UUID id, @Nullable String name, boolean usernameCompatibilityMode, boolean idCompatibilityMode){
+        if(usernameCompatibilityMode && name==null) name = CompatibleProfile.PLACEHOLDER_NAME;
+        if(idCompatibilityMode && id==null) id = CompatibleProfile.PLACEHOLDER_ID;
+        return new GameProfile(id, name);
+    }
+    
     private static GameProfile setInternalTextures(GameProfile profile, String textures){
         if(CompatibleProfile.hasField(textures))
             profile.getProperties().put("textures", new Property("textures", textures));

@@ -20,6 +20,10 @@ import org.jetbrains.annotations.NotNull;
  * @since 5.2.13-SNAPSHOT
  */
 public abstract class CompatibleProfile{
+    
+    public static final String PLACEHOLDER_NAME = "UNKNOWN:NAME";
+    public static final UUID PLACEHOLDER_ID = UUID.fromString("00000000-ffff-473b-918d-ecf5c6010858");
+    
     /**
      * The head/profile owner's UUID.
      * Can be null if 'name' is not null.
@@ -94,6 +98,32 @@ public abstract class CompatibleProfile{
      * @param name the username of the head (custom heads should contain a non-username identifier. Preferably like pluginnamehere:uniqueid with a colon)
      */
     public CompatibleProfile(@NotNull UUID id, @NotNull String name){
+        if(!hasRequiredFields(id,name)) throw new IllegalArgumentException("Name and ID must be present for a valid profile.");
+        this.id=id;
+        this.name=name;
+        this.textures=null;
+    }
+    /**
+     * Constructs an object containing information about a head.
+     * @param id the UUID of the head (either a player's or a unique one for each head type)
+     * @param name the username of the head (custom heads should contain a non-username identifier. Preferably like pluginnamehere:uniqueid with a colon)
+     * @param usernameCompatibilityMode whether to interpret null usernames as a placeholder value for backend compatibility reasons.
+     */
+    public CompatibleProfile(@NotNull UUID id, @Nullable String name, boolean usernameCompatibilityMode){
+        if(usernameCompatibilityMode && name==null) name = CompatibleProfile.PLACEHOLDER_NAME;
+        if(!hasRequiredFields(id,name)) throw new IllegalArgumentException("Name and ID must be present for a valid profile.");
+        this.id=id;
+        this.name=name;
+        this.textures=null;
+    }
+    /**
+     * Constructs an object containing information about a head.
+     * @param id the UUID of the head (either a player's or a unique one for each head type)
+     * @param name the username of the head (custom heads should contain a non-username identifier. Preferably like pluginnamehere:uniqueid with a colon)
+     */
+    public CompatibleProfile(@Nullable UUID id, @Nullable String name, boolean usernameCompatibilityMode, boolean idCompatibilityMode){
+        if(usernameCompatibilityMode && name==null) name = CompatibleProfile.PLACEHOLDER_NAME;
+        if(idCompatibilityMode && id==null) id = CompatibleProfile.PLACEHOLDER_ID;
         if(!hasRequiredFields(id,name)) throw new IllegalArgumentException("Name and ID must be present for a valid profile.");
         this.id=id;
         this.name=name;

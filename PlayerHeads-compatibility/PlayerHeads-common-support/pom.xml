@@ -4,13 +4,13 @@
     <parent>
         <groupId>org.shininet.bukkit</groupId>
         <artifactId>PlayerHeads-compatibility</artifactId>
-        <version>5.20.2-SNAPSHOT</version>
+        <version>5.20.4-SNAPSHOT</version>
     </parent>
     <artifactId>PlayerHeads-common-support</artifactId>
     <packaging>jar</packaging>
     <properties>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
     
   
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>org.shininet.bukkit</groupId>
             <artifactId>PlayerHeads-compatibility-api</artifactId>
-            <version>5.20.2-SNAPSHOT</version>
+            <version>5.20.4-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>fr.neatmonster</groupId>
@@ -41,14 +41,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.20.1-R0.1-SNAPSHOT</version>
-  		<scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>1.13-R0.1-SNAPSHOT</version>
-  		<scope>test</scope>
+            <version>1.20.4-R0.1-SNAPSHOT</version>
         </dependency>
         <!--
         <dependency>
@@ -134,8 +127,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -155,5 +148,6 @@
         </plugins>
     </reporting>
     -->
+    <version>5.20.4-SNAPSHOT</version>
 </project>
     

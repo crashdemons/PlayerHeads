@@ -24,12 +24,11 @@ public class CompatibilitySupport {
         VERSIONS=new HashMap<>();
         VERSIONS.put("craftbukkit", new Integer[][]{
             {1,14},
-            {1,13},
-            {1,8}
+            {1,13}
         });
-        VERSIONS.put("glowstone", new Integer[][]{
+        /*VERSIONS.put("glowstone", new Integer[][]{
             {1,12}
-        });
+        });*/
     }
     /**
      * Specifies whether compatibility support has been added by a downstream project yet.

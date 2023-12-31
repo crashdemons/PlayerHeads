@@ -9,7 +9,7 @@
     <parent>
         <artifactId>PlayerHeads-compatibility</artifactId>
         <groupId>org.shininet.bukkit</groupId>
-        <version>5.20.2-SNAPSHOT</version>
+        <version>5.20.4-SNAPSHOT</version>
     </parent>
     
 
@@ -42,18 +42,17 @@
         <dependency>
             <groupId>com.mojang</groupId>
             <artifactId>authlib</artifactId>
-            <!--<version>3.11.49</version>--><!--COMPILED LOCALLY, but I don't want to force you to need Java 17-->
-            <version>2.1.28</version>
+            <version>6.0.52</version><!--COMPILED LOCALLY, but I don't want to force you to need Java 17-->
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.14-R0.1-SNAPSHOT</version>
+            <version>1.18.2-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.shininet.bukkit</groupId>
             <artifactId>PlayerHeads-compatibility-api</artifactId>
-            <version>5.20.2-SNAPSHOT</version>
+            <version>5.20.4-SNAPSHOT</version>
         </dependency>
         <!--
         <dependency>
