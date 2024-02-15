@@ -648,7 +648,7 @@ class PlayerHeadsListener implements Listener {
             if (!player.hasPermission("playerheads.clickinfo")) return;
             if (clickSpamPreventer.recordEvent(event).isSpam()) return; //this doesn't really go here (before determining IF this is a head) BUT there was no other option if a user lags on getExternalHeadHandling
             BlockState state = block.getState();
-            TexturedSkullType skullType = SkullConverter.skullTypeFromBlockState(state,true,true);
+            TexturedSkullType skullType = SkullConverter.skullTypeFromBlockState_NoException(state,true,true);
             if (skullType == null) {
                 return;
             }
