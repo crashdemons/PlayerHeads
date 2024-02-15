@@ -14,6 +14,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.plugin.PluginLogger;
+import org.shininet.bukkit.playerheads.PlayerHeads;
 
 /**
  * Abstract class defining methods for converting between entities, custom skullState type, and legacy username-skulls, etc.
@@ -91,6 +93,28 @@ public final class SkullConverter {
         OfflinePlayer op =Compatibility.getProvider().getOwningPlayer(skullState);//getSkullOwningPlayer(skullState);
         
         return determineSkullType(op,skullState,filterCustomPlayerHeads,filterBlockedHeads);
+    }
+
+    @Deprecated
+    public static TexturedSkullType skullTypeFromItemStack_NoException(ItemStack stack, boolean filterCustomPlayerHeads, boolean filterBlockedHeads){
+        TexturedSkullType skullType = null;
+        try{ //FIXME: Temporary workaround!
+            skullType = SkullConverter.skullTypeFromItemStack(stack,filterCustomPlayerHeads,filterBlockedHeads);
+        }catch (IllegalArgumentException e){
+            PlayerHeads.instance.getLogger().warning("Ignoring unsupported legacy head profile from custom head: "+e.getMessage());
+        }
+        return skullType;
+    }
+
+    @Deprecated
+    public static TexturedSkullType skullTypeFromBlockState_NoException(BlockState state, boolean filterCustomPlayerHeads, boolean filterBlockedHeads){
+        TexturedSkullType skullType = null;
+        try{ //FIXME: Temporary workaround!
+            skullType = SkullConverter.skullTypeFromBlockState(state,filterCustomPlayerHeads,filterBlockedHeads);
+        }catch (IllegalArgumentException e){
+            PlayerHeads.instance.getLogger().warning("Ignoring unsupported legacy head profile from custom head: "+e.getMessage());
+        }
+        return skullType;
     }
     
 

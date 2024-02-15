@@ -689,7 +689,7 @@ class PlayerHeadsListener implements Listener {
         if (!fixDroppedHeads) {
             return;
         }
-        TexturedSkullType skullType = SkullConverter.skullTypeFromItemStack(stack,true,true);
+        TexturedSkullType skullType = SkullConverter.skullTypeFromItemStack_NoException(stack,true,true);
         if (skullType == null) {
             return;
         }
@@ -753,7 +753,7 @@ class PlayerHeadsListener implements Listener {
     //NOTE: the blockbreak handler expects this to unconditionally drop the item unless the new event is cancelled.
     private BlockDropResult blockDrop(BlockEvent event, Block block, BlockState state, CompatibleProfile oldProfile) {
         if(CompatiblePlugins.heads.getExternalHeadHandling(state)==HeadModificationHandling.NO_INTERACTION) return BlockDropResult.FAILED_BLOCKED_HEAD;//TODO: redundant code - SkullConverter checks custom & external heads now
-        TexturedSkullType skullType = SkullConverter.skullTypeFromBlockState(state,true,true);
+        TexturedSkullType skullType = SkullConverter.skullTypeFromBlockState_NoException(state,true,true);
         if(skullType==null) return BlockDropResult.FAILED_BLOCKED_HEAD;
         Location location = block.getLocation();
         ItemStack item = null;
@@ -807,7 +807,7 @@ class PlayerHeadsListener implements Listener {
         if(CompatiblePlugins.heads.getExternalHeadHandling(block.getState())==HeadModificationHandling.NO_INTERACTION) return;//TODO: redundant code - SkullConverter checks custom & external heads now
         if (player.getGameMode() != GameMode.CREATIVE) {
             BlockState state = block.getState();
-            TexturedSkullType skullType = SkullConverter.skullTypeFromBlockState(state,true,true);
+            TexturedSkullType skullType = SkullConverter.skullTypeFromBlockState_NoException(state,true,true);
             if (skullType != null) {
 
                 boolean canBreak = true;
