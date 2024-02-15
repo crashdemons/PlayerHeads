@@ -289,8 +289,13 @@ tadpoledroprate: 0.002
 wardendroprate: 0.002
 fireflydroprate: 0.002
 
-#1.20 provisional mobs
+#1.20 mobs
 cameldroprate: 0.002
 snifferdroprate: 0.002
+
+#1.21 provisional mobs
+breezedroprate: 0.002
+armadillodroprate: 0.002
+boggeddroprate: 0.002
 
 

@@ -32,7 +32,24 @@ public enum TexturedSkullType implements HeadType {
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWI3YWY5ZTQ0MTEyMTdjN2RlOWM2MGFjYmQzYzNmZDY1MTk3ODMzMzJhMWIzYmM1NmZiZmNlOTA3MjFlZjM1In19fQ=="
     ),
     
-    //provisional 1.20 heads
+    //provisional 1.21 heads
+
+    @Deprecated
+    BREEZE(
+            "2c9b79fb-adc3-4c6c-a59b-25d7c559e73d",
+            "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2Q2ZTYwMmY3NmY4MGMwNjU3YjVhZWQ2NGUyNjdlZWVhNzAyYjMxZTZkYWU4NjM0NmM4NTA2ZjI1MzVjZWQwMiJ9fX0="
+    ),
+@Deprecated
+    ARMADILLO(
+            "4be5ae47-6395-46ab-8f48-be800a83cfc6",
+            "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzljMWU5NmNlOTg1NzI1ZTIyZWQ2Y2NmMGY0YzQ4MTBjNzI5YTI1MzhiOTdiZGEwNmZhZWIzYjkyNzk5Yzg3OCJ9fX0="
+    ),
+@Deprecated
+    BOGGED(
+            "038b44c3-a528-4bac-a9af-14f3f77e1cf7",
+            "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODZjODA1NDQ5MGRlNzgwYTk4NDRiZDVlNTEzZmRiZTQ1ZThmMWI5OWQ4Y2M1ZmVmZmMwMjhmOWQ3OTNiM2JhYSJ9fX0=" //PLACEHOLDER TEXTURE ONLY
+    ),
+
     CAMEL(
             "23393c75-845c-4043-a8f3-7422e2f0de8b",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTEwOTFjZTZlNTU5YzI2YmU3N2VlNjA0NTZiNjIxMjI5OTBmOTUxOWY1MTRiMTFkZjM1NjQxNDljMjcyOWQwNSJ9fX0="
