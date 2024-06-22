@@ -10,7 +10,6 @@ import com.github.crashdemons.playerheads.compatibility.CompatibleProfile;
 import com.github.crashdemons.playerheads.compatibility.RuntimeReferences;
 import com.github.crashdemons.playerheads.compatibility.SkullDetails;
 import com.github.crashdemons.playerheads.compatibility.SkullType;
-import com.github.crashdemons.playerheads.compatibility.common.Provider_common;
 import java.util.UUID;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -31,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
  * @author crashdemons (crashenator at gmail.com)
  */
 @SuppressWarnings( "deprecation" )
-public class Provider extends Provider_common implements CompatibilityProvider {
+public class Provider extends com.github.crashdemons.playerheads.compatibility.spigot_1_21.Provider implements CompatibilityProvider {
     public Provider(){}
     @Override public String getType(){ return "faketestserver"; }
     @Override public String getVersion(){ return "1.0"; }
@@ -88,8 +87,9 @@ public class Provider extends Provider_common implements CompatibilityProvider {
     @Override public boolean setProfile(Skull headBlockState, UUID uuid,String username, String texture){
         return false;
     }
-    
-    private SkullType getSkullType(Material mat){
+
+    @Override
+    public SkullType getSkullType(Material mat){
         String typeName = mat.name();
         typeName=typeName.replaceFirst("_WALL", "").replaceFirst("_HEAD", "").replaceFirst("_SKULL", "");
         return RuntimeReferences.getSkullTypeByName(typeName);

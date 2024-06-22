@@ -35,11 +35,15 @@ public class CompatibilitySupportTest {
         for(Map.Entry<String,Integer[][]> serverSupport : CompatibilitySupport.VERSIONS.entrySet()){
             String serverType = serverSupport.getKey();
             Integer[][] serverVers = serverSupport.getValue();
+            out.println("  serverType: "+serverType);
             for (Integer[] serverVer : serverVers) {
                 String packagename=serverType + "_" + serverVer[0]+"_"+serverVer[1];
+                out.println("   ver: "+serverVer[0]+";"+serverVer[1]);
+                out.println("   packagename: "+packagename);
                 String classPath="com.github.crashdemons.playerheads.compatibility."+packagename;
                 String classCanonical=classPath+".Provider";
-                out.println("   testing for: "+classCanonical);
+                out.println("   testing for: "+classCanonical+" "+(RuntimeReferences.hasClass(classCanonical)?"Y":"N"));
+
                 assertEquals(true,RuntimeReferences.hasClass(classCanonical));
             }
         }

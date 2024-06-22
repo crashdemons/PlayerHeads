@@ -22,9 +22,8 @@ public class CompatibilitySupport {
     public static final HashMap<String,Integer[][]> VERSIONS;
     static{
         VERSIONS=new HashMap<>();
-        VERSIONS.put("craftbukkit", new Integer[][]{
-            {1,14},
-            {1,13}
+        VERSIONS.put("spigot", new Integer[][]{
+            {1,21},
         });
         /*VERSIONS.put("glowstone", new Integer[][]{
             {1,12}

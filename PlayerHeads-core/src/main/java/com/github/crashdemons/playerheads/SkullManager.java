@@ -109,7 +109,8 @@ public final class SkullManager {
         SkullMeta headMeta = (SkullMeta) stack.getItemMeta();
         //applyOwningPlayer(headMeta,Bukkit.getOfflinePlayer(type.getOwner()));
         
-        String username = PLUGIN_CUSTOM_HEAD_USERNAME_PREFIX + PLUGIN_CUSTOM_HEAD_USERNAME_SEPARATOR + type.getOwner().toString();
+        //String username = PLUGIN_CUSTOM_HEAD_USERNAME_PREFIX + PLUGIN_CUSTOM_HEAD_USERNAME_SEPARATOR + type.getOwner().toString();
+        String username=PLUGIN_CUSTOM_HEAD_USERNAME_PREFIX + PLUGIN_CUSTOM_HEAD_USERNAME_SEPARATOR+"mob";
         
         applyTexture(headMeta,type.getOwner(),username,type.getTexture());
         applyDisplayName(headMeta,ChatColor.RESET + "" + ChatColor.YELLOW + type.getDisplayName());

@@ -7,6 +7,8 @@ package com.github.crashdemons.playerheads.compatibility;
 
 import java.util.Optional;
 import java.util.UUID;
+
+import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.block.BlockState;
@@ -293,6 +295,9 @@ public interface CompatibilityProvider {
     
     
     //-----------5.2.12 providers-----------//
+
+    SkullType getSkullType(Material mat);
+
     /**
      * Gets the Profile object associated with a head, if possible.
      * The return type is offered as an Object to remove reliance on authlib.

@@ -35,7 +35,7 @@ public final class Compatibility {
     private static CompatibilityProvider provider = null;
     private static Plugin parentPlugin = null;
 
-    private static final String FALLBACK_PROVIDER_TYPE = "craftbukkit";
+    private static final String FALLBACK_PROVIDER_TYPE = "spigot";
 
     private static Integer[] recommendedVersion = null;
     private static String recommendedType = "";
@@ -55,7 +55,7 @@ public final class Compatibility {
      * (for your server's type) that is under or equal to your server version.
      * If no provider with a matching type can be found, this method will
      * look for one with the 'fallback' server type (which at this time defaults
-     * to "craftbukkit").
+     * to "spigot").
      * <p>
      * Provider implementations are expected to exist in the same package as the compatibility library (com.github.crashdemons.playerheads.compatibility by default).
      * followed by the server type name and major/minor version.  For example: com.github.crashdemons.playerheads.compatibility.craftbukkit_1_16

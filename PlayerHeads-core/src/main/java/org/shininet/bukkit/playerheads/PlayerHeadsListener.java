@@ -246,7 +246,7 @@ class PlayerHeadsListener implements Listener {
                     String weaponType = weapon.getType().name().toLowerCase();
                     if(!plugin.configFile.getStringList("requireditems").contains(weaponType)) return params.cancel();
                 }
-                params.lootingrate = 1 + (plugin.configFile.getDouble("lootingrate") * weapon.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS));
+                params.lootingrate = 1 + (plugin.configFile.getDouble("lootingrate") * weapon.getEnchantmentLevel(Enchantment.LOOTING));
             }
         }
 
@@ -403,7 +403,7 @@ class PlayerHeadsListener implements Listener {
                     String weaponType = weapon.getType().name().toLowerCase();
                     if(!plugin.configFile.getStringList("requireditems").contains(weaponType)) return;
                 }
-                lootingrate = 1 + (plugin.configFile.getDouble("lootingrate") * weapon.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS));
+                lootingrate = 1 + (plugin.configFile.getDouble("lootingrate") * weapon.getEnchantmentLevel(Enchantment.LOOTING));
             }
         }
 

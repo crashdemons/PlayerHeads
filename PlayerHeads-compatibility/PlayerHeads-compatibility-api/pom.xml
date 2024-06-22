@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.shininet.bukkit</groupId>
         <artifactId>PlayerHeads-compatibility</artifactId>
-        <version>5.20.4-SNAPSHOT</version>
+        <version>5.21.0-SNAPSHOT</version>
     </parent>
     <artifactId>PlayerHeads-compatibility-api</artifactId>
     <packaging>jar</packaging>
@@ -13,35 +13,16 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.19-R0.1-SNAPSHOT</version>
+            <version>1.21-R0.1-SNAPSHOT</version>
         </dependency>
         
         
         <dependency>
             <groupId>org.shininet.bukkit</groupId>
             <artifactId>PlayerHeads-base-api</artifactId>
-            <version>5.20.4-SNAPSHOT</version>
+            <version>5.21.0-SNAPSHOT</version>
         </dependency>
 
-        <dependency>
-            <groupId>fr.neatmonster</groupId>
-            <artifactId>ncpplugin</artifactId>
-            <version>static</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.spigotmc</groupId>
-                    <artifactId>spigot-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bukkit</groupId>
-                    <artifactId>bukkit</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bukkit</groupId>
-                    <artifactId>craftbukkit</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -71,7 +52,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.5.0</version>
                 <configuration>
                     <quiet>true</quiet>
                     <notimestamp>true</notimestamp>
@@ -86,7 +67,7 @@
                       <dependencySourceInclude>org.shininet.bukkit:*</dependencySourceInclude>
                       <dependencySourceInclude>com.github.crashdemons:*</dependencySourceInclude>
                     </dependencySourceIncludes>
-                    <source>8</source>
+                    <source>21</source>
                 </configuration>
                 <executions>
                     <execution>
@@ -101,7 +82,7 @@
 
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.8</version>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -145,10 +126,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.13.0</version>
                 <configuration>
-                    <source>17</source>
-                    <target>17</target>
+                    <source>21</source>
+                    <target>21</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -158,7 +139,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.3.0</version>
                     <configuration>
                         <configLocation>${basedir}/checkstyle.xml</configLocation>
                       <suppressionsLocation>${basedir}/checkstyle-suppression.xml</suppressionsLocation>
@@ -166,5 +147,5 @@
             </plugin>
         </plugins>
     </reporting>
-    <version>5.20.4-SNAPSHOT</version>
+    <version>5.21.0-SNAPSHOT</version>
 </project>

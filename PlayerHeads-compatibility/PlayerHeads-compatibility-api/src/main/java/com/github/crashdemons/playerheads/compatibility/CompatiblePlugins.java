@@ -6,7 +6,6 @@
 package com.github.crashdemons.playerheads.compatibility;
 
 import com.github.crashdemons.playerheads.compatibility.plugins.HeadPluginCompatibility;
-import com.github.crashdemons.playerheads.compatibility.plugins.NoCheatPlusCompatibility;
 import com.github.crashdemons.playerheads.compatibility.plugins.ProtectionPluginCompatibility;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
@@ -26,13 +25,6 @@ public final class CompatiblePlugins {
 
     private CompatiblePlugins() {
     }
-    /**
-     * NoCheatPlus compatibility class instance
-     *
-     * @see
-     * com.github.crashdemons.playerheads.compatibility.plugins.NoCheatPlusCompatibility
-     */
-    public static NoCheatPlusCompatibility nocheatplus = null;
     /**
      * Generic protection-plugin compatibility class instance
      *
@@ -61,7 +53,6 @@ public final class CompatiblePlugins {
      */
     public static void init(Plugin parentPluginInstance) {
         CompatiblePlugins.parentPlugin = parentPluginInstance;
-        nocheatplus = new NoCheatPlusCompatibility(parentPluginInstance);
         protection = new ProtectionPluginCompatibility(parentPluginInstance);
         heads = new HeadPluginCompatibility(parentPluginInstance);
         reloadConfig();
@@ -80,7 +71,6 @@ public final class CompatiblePlugins {
      */
     public static void init(Plugin parentPluginInstance, ConfigurationSection config) {
         CompatiblePlugins.parentPlugin = parentPluginInstance;
-        nocheatplus = new NoCheatPlusCompatibility(parentPluginInstance);
         protection = new ProtectionPluginCompatibility(parentPluginInstance);
         heads = new HeadPluginCompatibility(parentPluginInstance,config);
         reloadConfig();
@@ -92,7 +82,6 @@ public final class CompatiblePlugins {
      * Uses the config specified in init().
      */
     public static void reloadConfig(){
-        nocheatplus.reloadConfig();
         protection.reloadConfig();
         heads.reloadConfig();
     }
@@ -108,18 +97,9 @@ public final class CompatiblePlugins {
      */
     public static boolean testBlockBreak(Block block, Player player) {
         boolean isNotExempt = false;
-        if (nocheatplus.isPresent()) {
-            isNotExempt = !nocheatplus.isExemptFastbreak(player);
-            if (isNotExempt) {
-                nocheatplus.exemptFastbreak(player);
-            }
-        }
 
         boolean blockBreakSucceeded = protection.testBlockBreak(block, player);
 
-        if (nocheatplus.isPresent() && isNotExempt) {
-            nocheatplus.unexemptFastbreak(player);
-        }
         return blockBreakSucceeded;
     }
 
