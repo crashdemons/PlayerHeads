@@ -34,17 +34,17 @@ public enum TexturedSkullType implements HeadType {
     
     //provisional 1.21 heads
 
-    @Deprecated
+
     BREEZE(
             "2c9b79fb-adc3-4c6c-a59b-25d7c559e73d",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2Q2ZTYwMmY3NmY4MGMwNjU3YjVhZWQ2NGUyNjdlZWVhNzAyYjMxZTZkYWU4NjM0NmM4NTA2ZjI1MzVjZWQwMiJ9fX0="
     ),
-@Deprecated
+
     ARMADILLO(
             "4be5ae47-6395-46ab-8f48-be800a83cfc6",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzljMWU5NmNlOTg1NzI1ZTIyZWQ2Y2NmMGY0YzQ4MTBjNzI5YTI1MzhiOTdiZGEwNmZhZWIzYjkyNzk5Yzg3OCJ9fX0="
     ),
-@Deprecated
+
     BOGGED(
             "038b44c3-a528-4bac-a9af-14f3f77e1cf7",
             "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTNiOTAwM2JhMmQwNTU2MmM3NTExOWI4YTYyMTg1YzY3MTMwZTkyODJmN2FjYmFjNGJjMjgyNGMyMWViOTVkOSJ9fX0="
