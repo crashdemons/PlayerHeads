@@ -53,10 +53,10 @@
 # enderdragondroprate: 0.05     [0.0 -> 1.0]    Chance that a mob trophy will drop when an ender dragon dies
 # slimedroprate: 0.001          [0.0 -> 1.0]    Chance that a mob trophy will drop when a slime dies
 # irongolemdroprate: 0.005      [0.0 -> 1.0]    Chance that a mob trophy will drop when an iron golem dies
-# mushroomcowdroprate: 0.002    [0.0 -> 1.0]    Chance that a mob trophy will drop when a mushroom cow dies
+# mooshroomdroprate: 0.002    [0.0 -> 1.0]    Chance that a mob trophy will drop when a mooshroom dies
 # batdroprate: 0.005            [0.0 -> 1.0]    Chance that a mob trophy will drop when a bat dies
 # zombifiedpiglindroprate: 0.002[0.0 -> 1.0]    Chance that a mob trophy will drop when a pig zombie dies
-# snowmandroprate: 0.002        [0.0 -> 1.0]    Chance that a mob trophy will drop when a snowman dies
+# snowgolemdroprate: 0.002        [0.0 -> 1.0]    Chance that a mob trophy will drop when a snowgolem dies
 # ghastdroprate: 0.005          [0.0 -> 1.0]    Chance that a mob trophy will drop when a ghast dies
 # pigdroprate: 0.002            [0.0 -> 1.0]    Chance that a mob trophy will drop when a pig dies
 # villagerdroprate: 0.002       [0.0 -> 1.0]    Chance that a mob trophy will drop when a villager dies
@@ -207,10 +207,10 @@ silverfishdroprate: 0.005
 enderdragondroprate: 0.05
 slimedroprate: 0.001
 irongolemdroprate: 0.005
-mushroomcowdroprate: 0.002
+mooshroomdroprate: 0.002
 batdroprate: 0.005
 zombifiedpiglindroprate: 0.002
-snowmandroprate: 0.002
+snowgolemdroprate: 0.002
 ghastdroprate: 0.005
 pigdroprate: 0.002
 villagerdroprate: 0.002
