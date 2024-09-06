@@ -28,7 +28,6 @@ permissions:
       playerheads.canbehead: true
       playerheads.canlosehead: true
       playerheads.canbeheadmob: true
-      playerheads.update: true
       playerheads.clickinfo: true
       playerheads.command: true
       playerheads.alwaysbehead: false
