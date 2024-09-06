@@ -97,7 +97,9 @@ public class CompatibleProfileCB extends CompatibleProfile {
             CompatiblePropertyCB textureProp = texturePropOptional.get();
             textures = textureProp.getValue();
         }
-        if(!hasRequiredFields(id,name)) throw new IllegalArgumentException("Name and ID must be present for a valid profile.");
+        if(!hasField(id)) id=PLACEHOLDER_ID;
+        if(!hasField(name)) name=PLACEHOLDER_NAME;
+        //if(!hasRequiredFields(id,name)) throw new IllegalArgumentException("Name and ID must be present for a valid profile.");
     }
     
     
