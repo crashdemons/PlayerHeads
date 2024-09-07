@@ -8,7 +8,7 @@
     <parent>
         <artifactId>PlayerHeads</artifactId>
         <groupId>org.shininet.bukkit</groupId>
-        <version>5.21.0-SNAPSHOT</version>
+        <version>5.21.1-SNAPSHOT</version>
     </parent>
     
 
