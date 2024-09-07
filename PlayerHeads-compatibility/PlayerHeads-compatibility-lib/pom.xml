@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.shininet.bukkit</groupId>
         <artifactId>PlayerHeads-compatibility</artifactId>
-        <version>5.21.0-SNAPSHOT</version>
+        <version>5.21.1-SNAPSHOT</version>
     </parent>
     <artifactId>PlayerHeads-compatibility-lib</artifactId>
     <packaging>jar</packaging>
@@ -14,7 +14,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.21-R0.1-SNAPSHOT</version>
+            <version>1.21.1-R0.1-SNAPSHOT</version>
             <!-- per md_5: spigot will no longer distribute Bukkit as of 1.16.1, only spigot-api -->
         </dependency>
         <dependency>

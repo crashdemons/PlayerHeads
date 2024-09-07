@@ -7,7 +7,7 @@ package com.github.crashdemons.playerheads.compatibility.spigot_1_21;
 
 import com.github.crashdemons.playerheads.compatibility.*;
 import com.github.crashdemons.playerheads.compatibility.SkullType;
-import com.github.crashdemons.playerheads.compatibility.craftbukkit.CompatibleProfileCB;
+import com.github.crashdemons.playerheads.compatibility.craftbukkit.CompatibleProfilePP;
 import com.github.crashdemons.playerheads.compatibility.craftbukkit.ProfileUtils;
 import com.github.crashdemons.playerheads.compatibility.common.SkullDetails_modern;
 import com.mojang.authlib.GameProfile;
@@ -28,6 +28,7 @@ import org.bukkit.metadata.Metadatable;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.profile.PlayerProfile;
 import org.bukkit.projectiles.ProjectileSource;
 import org.jetbrains.annotations.Nullable;
 
@@ -368,14 +369,14 @@ public class Provider implements CompatibilityProvider {
 
     @Override
     public boolean setProfile(ItemMeta headMeta, Object profile) throws IllegalArgumentException{
-        if(!(profile instanceof GameProfile)) throw new IllegalArgumentException("Passed argument was not a GameProfile object");
-        return ProfileUtils.setInternalProfile(headMeta, (GameProfile) profile);
+        if(!(profile instanceof PlayerProfile)) throw new IllegalArgumentException("Passed argument was not a GameProfile object");
+        return ProfileUtils.setInternalProfile(headMeta, (PlayerProfile) profile);
     }
 
     @Override
     public boolean setProfile(Skull headBlockState, Object profile) throws IllegalArgumentException{
-        if(!(profile instanceof GameProfile)) throw new IllegalArgumentException("Passed argument was not a GameProfile object");
-        return ProfileUtils.setInternalProfile(headBlockState, (GameProfile) profile);
+        if(!(profile instanceof PlayerProfile)) throw new IllegalArgumentException("Passed argument was not a GameProfile object");
+        return ProfileUtils.setInternalProfile(headBlockState, (PlayerProfile) profile);
     }
 
 
@@ -392,7 +393,7 @@ public class Provider implements CompatibilityProvider {
 
     @Override
     public CompatibleProfile createCompatibleProfile(@Nullable String name, @Nullable UUID id, @Nullable String texture){
-        CompatibleProfile profile = new CompatibleProfileCB(id,name);
+        CompatibleProfile profile = new CompatibleProfilePP(id,name);
         profile.setTextures(texture);
         return profile;
     }
