@@ -10,7 +10,11 @@ import com.github.crashdemons.playerheads.testutils.TestOutput;
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import com.github.crashdemons.playerheads.compatibility.CompatibleSkullMaterial;
 //import com.github.crashdemons.playerheads.compatibility.craftbukkit_1_13.Provider;
+import java.util.Base64;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.EntityType;
 import org.junit.After;
@@ -61,6 +65,22 @@ public class TexturedSkullTypeTest {
             //System
         }
     }
+    /*
+    private static final Pattern SkinURLPattern = Pattern.compile("\"SKIN\":\\{\"url\":\"([^\"]+)\"");
+    @Test
+    public void testJunk() {
+        Base64.Decoder dec = Base64.getDecoder();
+        for(TexturedSkullType type : TexturedSkullType.values()){
+            String tag = new String(dec.decode(type.getTextureRaw()));
+            Matcher matcher = SkinURLPattern.matcher(tag);
+            matcher.find();
+            System.out.println("\t"+type.name()+"(\r\n\t\t\""+type.getOwner().toString()+"\",\r\n\t\t\""+matcher.group(1)+"\"\r\n\t),");
+
+
+            //System
+        }
+    }
+*/
 
     @Test
     public void testSkullConfigName_Player(){

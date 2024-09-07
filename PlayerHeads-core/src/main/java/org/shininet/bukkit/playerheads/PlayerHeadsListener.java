@@ -10,7 +10,6 @@ import com.github.crashdemons.playerheads.TexturedSkullType;
 import com.github.crashdemons.playerheads.antispam.PlayerDeathSpamPreventer;
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import com.github.crashdemons.playerheads.compatibility.CompatiblePlugins;
-import com.github.crashdemons.playerheads.compatibility.CompatibleProfile;
 import com.github.crashdemons.playerheads.compatibility.SkullType;
 import com.github.crashdemons.playerheads.compatibility.plugins.SimulatedBlockBreakEvent;
 import com.github.crashdemons.playerheads.compatibility.plugins.heads.HeadModificationHandling;
@@ -37,6 +36,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.profile.PlayerProfile;
 import org.shininet.bukkit.playerheads.events.MobDropHeadEvent;
 import org.shininet.bukkit.playerheads.events.PlayerDropHeadEvent;
 
@@ -699,10 +699,10 @@ class PlayerHeadsListener implements Listener {
     private void onHeadItemSpawn(ItemSpawnEvent event, ItemStack stack, TexturedSkullType skullType){
         boolean restoreprofile = plugin.configFile.getBoolean("restoreprofile");
         boolean isSkinnable = Compatibility.getProvider().isPlayerhead(stack);
-        CompatibleProfile savedProfile = null;
+        PlayerProfile savedProfile = null;
         if(isSkinnable && restoreprofile){
             SkullMeta skull = (SkullMeta) stack.getItemMeta();
-            savedProfile = Compatibility.getProvider().getCompatibleProfile(skull);
+            savedProfile = Compatibility.getProvider().getPlayerProfile(skull);
         }
         
         ItemStack newstack = null;
@@ -735,7 +735,7 @@ class PlayerHeadsListener implements Listener {
     }
 
     @Nullable
-    private ItemStack createConvertedMobhead(TexturedSkullType skullType, boolean isSourceSkinnable, boolean addLore, int quantity, boolean avoidVanillaReplacement, CompatibleProfile oldProfile) {
+    private ItemStack createConvertedMobhead(TexturedSkullType skullType, boolean isSourceSkinnable, boolean addLore, int quantity, boolean avoidVanillaReplacement, PlayerProfile oldProfile) {
         boolean dropvanillaheads = plugin.configFile.getBoolean("dropvanillaheads");
         boolean convertvanillaheads = plugin.configFile.getBoolean("convertvanillaheads");
 
@@ -751,7 +751,7 @@ class PlayerHeadsListener implements Listener {
 
     //drop a head based on a block being broken in some fashion
     //NOTE: the blockbreak handler expects this to unconditionally drop the item unless the new event is cancelled.
-    private BlockDropResult blockDrop(BlockEvent event, Block block, BlockState state, CompatibleProfile oldProfile) {
+    private BlockDropResult blockDrop(BlockEvent event, Block block, BlockState state, PlayerProfile oldProfile) {
         if(CompatiblePlugins.heads.getExternalHeadHandling(state)==HeadModificationHandling.NO_INTERACTION) return BlockDropResult.FAILED_BLOCKED_HEAD;//TODO: redundant code - SkullConverter checks custom & external heads now
         TexturedSkullType skullType = SkullConverter.skullTypeFromBlockState_NoException(state,true,true);
         if(skullType==null) return BlockDropResult.FAILED_BLOCKED_HEAD;
@@ -830,10 +830,10 @@ class PlayerHeadsListener implements Listener {
     private void onHeadBreak(BlockBreakEvent event, Block block, BlockState state, TexturedSkullType skullType){
         boolean restoreprofile = plugin.configFile.getBoolean("restoreprofile");
         boolean isSkinnable = Compatibility.getProvider().isPlayerhead(state);
-        CompatibleProfile savedProfile = null;
+        PlayerProfile savedProfile = null;
         if(isSkinnable && restoreprofile){
             Skull skull = (Skull) state;
-            savedProfile = Compatibility.getProvider().getCompatibleProfile(skull);
+            savedProfile = Compatibility.getProvider().getPlayerProfile(skull);
         }
         
         event.setCancelled(true);

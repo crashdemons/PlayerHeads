@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.shininet.bukkit</groupId>
         <artifactId>PlayerHeads-compatibility</artifactId>
-        <version>5.21.1-SNAPSHOT</version>
+        <version>5.21.2-SNAPSHOT</version>
     </parent>
     <artifactId>PlayerHeads-compatibility-lib</artifactId>
     <packaging>jar</packaging>
@@ -26,7 +26,7 @@
             <!-- This shouldn't be a dep which is packaging: pom -->
             <groupId>${project.groupId}</groupId>
             <artifactId>PlayerHeads-compatibility-api</artifactId>
-            <version>5.21.0-SNAPSHOT</version>
+            <version>5.21.2-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.bukkit</groupId>

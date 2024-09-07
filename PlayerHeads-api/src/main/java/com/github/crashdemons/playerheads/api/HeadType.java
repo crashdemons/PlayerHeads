@@ -6,6 +6,8 @@
 package com.github.crashdemons.playerheads.api;
 
 import com.github.crashdemons.playerheads.compatibility.SkullDetails;
+
+import java.net.URL;
 import java.util.UUID;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,7 +41,7 @@ public interface HeadType {
      * @return A base64 string
      */
     @NotNull
-    public String getTexture();
+    public URL getTexture();
 
     /**
      * Gets the item displayname for the associated skulltype, as defined in the

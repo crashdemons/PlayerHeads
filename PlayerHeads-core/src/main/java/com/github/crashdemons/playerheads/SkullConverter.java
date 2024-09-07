@@ -3,7 +3,6 @@ package com.github.crashdemons.playerheads;
 
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
 import com.github.crashdemons.playerheads.compatibility.CompatiblePlugins;
-import com.github.crashdemons.playerheads.compatibility.CompatibleProfile;
 import com.github.crashdemons.playerheads.compatibility.CompatibleSkullMaterial;
 import com.github.crashdemons.playerheads.compatibility.plugins.heads.HeadModificationHandling;
 import java.util.UUID;
@@ -15,6 +14,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.PluginLogger;
+import org.bukkit.profile.PlayerProfile;
 import org.shininet.bukkit.playerheads.PlayerHeads;
 
 /**
@@ -61,9 +61,9 @@ public final class SkullConverter {
                 return null;
             }
             if(filterBlockedHeads && CompatiblePlugins.isReady()){
-                CompatibleProfile profile = Compatibility.getProvider().getCompatibleProfile(skull);
+                PlayerProfile profile = Compatibility.getProvider().getPlayerProfile(skull);
                 if(profile!=null){
-                    if(CompatiblePlugins.heads.getExternalHeadHandling(profile.getName(), profile.getId()) == HeadModificationHandling.NO_INTERACTION){
+                    if(CompatiblePlugins.heads.getExternalHeadHandling(profile.getName(), profile.getUniqueId()) == HeadModificationHandling.NO_INTERACTION){
                         return null;
                     }
                 }

@@ -5,6 +5,7 @@
  */
 package com.github.crashdemons.playerheads.compatibility;
 
+import java.net.URL;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -22,6 +23,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -264,7 +266,7 @@ public interface CompatibilityProvider {
      * @param texture The Base64-encoded Texture-URL tags.
      * @return True: the profile was successfully set. False: the profile could not be set.
      */
-    public boolean setProfile(ItemMeta headMeta, @NotNull UUID uuid,@NotNull String username, String texture);
+    public boolean setProfile(SkullMeta headMeta, @NotNull UUID uuid,@NotNull String username, URL texture);
     /**
      * Set a profile field in the supplied block state using a UUID and Texture string.
      * 
@@ -275,7 +277,10 @@ public interface CompatibilityProvider {
      * @param texture The Base64-encoded Texture-URL tags.
      * @return True: the profile was successfully set. False: the profile could not be set.
      */
-    public boolean setProfile(Skull headBlockState, @NotNull UUID uuid,@NotNull String username, String texture);
+    public boolean setProfile(Skull headBlockState, @NotNull UUID uuid,@NotNull String username, URL texture);
+
+
+
     /**
      * Gets a player by their username
      * @param username the username of the player
@@ -297,69 +302,6 @@ public interface CompatibilityProvider {
     //-----------5.2.12 providers-----------//
 
     SkullType getSkullType(Material mat);
-
-    /**
-     * Gets the Profile object associated with a head, if possible.
-     * The return type is offered as an Object to remove reliance on authlib.
-     * NOTE: depending on server implementation, the Profile is not guaranteed to be a GameProfile - you should not act on this object directly, but only get/set it.
-     * Providers that are not capable of retrieving this should throw an IllegalStateException.
-     * @param headMeta the meta of the head item
-     * @return the Profile object object for the head, or null.
-     * @throws IllegalStateException when the provider does not support GameProfiile access.
-     * @deprecated This method should be avoided entirely or used only for acceptable-failure situations because of server support limitations.
-     * @since 5.2.12
-     */
-    @Deprecated
-    @Nullable
-    public Object getProfile(ItemMeta headMeta) throws IllegalStateException;
-    
-    /**
-     * Gets the Profile object associated with a head, if possible.
-     * The return type is offered as an Object to remove reliance on authlib.
-     * NOTE: depending on server implementation, the Profile is not guaranteed to be a GameProfile - you should not act on this object directly, but only get/set it.
-     * @param headBlockState the blockstate of the head block
-     * @return the Profile object object for the head, or null.
-     * @throws IllegalStateException when the provider does not support GameProfiile access.
-     * @deprecated This method should be avoided entirely or used only for acceptable-failure situations because of server support limitations.
-     * @since 5.2.12
-     */
-    @Deprecated
-    @Nullable
-    public Object getProfile(Skull headBlockState) throws IllegalStateException;
-    
-    
-    
-    /**
-     * Sets the Profile object on a head, if possible.
-     * Providers that are not capable of retrieving this should throw an IllegalStateException.
-     * IllegalArgumentException should be thrown if the input is not null and also not a Profile object type.
-     * NOTE: depending on server implementation, the Profile is not guaranteed to be a GameProfile - you should not act on this object directly, but only get/set it.
-     * @param headMeta the meta of the head item
-     * @param profile the Profile object object to set in the head
-     * @return whether setting the profile field succeeded
-     * @throws IllegalStateException when the provider does not support GameProfiile access.
-     * @throws IllegalArgumentException when the the input profile was not am acceptable Profile object type and not null
-     * @deprecated This method should be avoided entirely or used only for acceptable-failure situations because of server support limitations.
-     * @since 5.2.12
-     */
-    @Deprecated
-    public boolean setProfile(ItemMeta headMeta, Object profile) throws IllegalStateException, IllegalArgumentException;
-    
-    /**
-     * Sets the Profile object on a head, if possible.
-     * Providers that are not capable of retrieving this should throw an IllegalStateException.
-     * IllegalArgumentException should be thrown if the input is not null and also not a Profile object type.
-     * NOTE: depending on server implementation, the Profile is not guaranteed to be a GameProfile - you should not act on this object directly, but only get/set it.
-     * @param headBlockState the blockstate of the head block
-     * @param profile the Profile object object to set in the head
-     * @return whether setting the profile field succeeded
-     * @throws IllegalStateException when the provider does not support GameProfiile access.
-     * @throws IllegalArgumentException when the the input profile was not am acceptable Profile object type and not null
-     * @deprecated This method should be avoided entirely or used only for acceptable-failure situations because of server support limitations.
-     * @since 5.2.12
-     */
-    @Deprecated
-    public boolean setProfile(Skull headBlockState, Object profile) throws IllegalStateException, IllegalArgumentException;
     
     /**
      * Gets the Optional Profile object for a head.
@@ -367,10 +309,10 @@ public interface CompatibilityProvider {
      * Otherwise, the Optional must be 'empty'.
      * @param skullMeta the meta for a head item
      * @return The optional profile object
-     * @deprecated Use CompatibleProfile or profile methods instead. This API may be removed in the future.
+     * @deprecated Use PlayerProfile or profile methods instead. This API may be removed in the future.
      */
     @Deprecated
-    public Optional<Object> getOptionalProfile(ItemMeta skullMeta);
+    public Optional<Object> getOptionalProfile(SkullMeta skullMeta);
     
     /**
      * Gets the Optional Profile object for a head.
@@ -379,7 +321,7 @@ public interface CompatibilityProvider {
      * NOTE: depending on server implementation, the Profile is not guaranteed to be a GameProfile or even present - you should not act on this object directly, but only get/set it.
      * @param skullState the blockstate for a head item
      * @return The optional profile object
-     * @deprecated Use CompatibleProfile or profile methods instead. This API may be removed in the future.
+     * @deprecated Use PlayerProfile or profile methods instead. This API may be removed in the future.
      */
     @Deprecated
     public Optional<Object> getOptionalProfile(Skull skullState);
@@ -392,7 +334,7 @@ public interface CompatibilityProvider {
      * @param skullState the blockstate for a head item
      * @param profile the Optional profile object to set
      * @return whether setting the profile succeeded. (nothing happening is considered failure).
-     * @deprecated Use CompatibleProfile or profile methods instead. This API may be removed in the future.
+     * @deprecated Use PlayerProfile or profile methods instead. This API may be removed in the future.
      */
     @Deprecated
     public boolean setOptionalProfile(Skull skullState, Optional<Object> profile);
@@ -405,10 +347,10 @@ public interface CompatibilityProvider {
      * @param skullMeta the meta for a head item
      * @param profile the Optional profile object to set
      * @return whether setting the profile succeeded. (nothing happening is considered failure).
-     * @deprecated Use CompatibleProfile or profile methods instead. This API may be removed in the future.
+     * @deprecated Use PlayerProfile or profile methods instead. This API may be removed in the future.
      */
     @Deprecated
-    public boolean setOptionalProfile(ItemMeta skullMeta, Optional<Object> profile);
+    public boolean setOptionalProfile(SkullMeta skullMeta, Optional<Object> profile);
     
     
     
@@ -421,7 +363,7 @@ public interface CompatibilityProvider {
      * @throws IllegalArgumentException if the skull parameter was not the specified type
      * @since 5.2.13-SNAPSHOT
      */
-    public boolean setCompatibleProfile(Object skull, CompatibleProfile profile) throws IllegalArgumentException;
+    public boolean setPlayerProfile(Object skull, PlayerProfile profile) throws IllegalArgumentException;
     /**
      * Gets a profile on a block or item.
      * If the skull parameter is not 
@@ -430,7 +372,7 @@ public interface CompatibilityProvider {
      * @throws IllegalArgumentException if the skull parameter was not the specified type
      * @since 5.2.13-SNAPSHOT
      */
-    public CompatibleProfile getCompatibleProfile(Object skull) throws IllegalArgumentException;
+    public PlayerProfile getPlayerProfile(Object skull) throws IllegalArgumentException;
     
     /**
      * Create a compatible profile object with the provided parameters.
@@ -438,11 +380,11 @@ public interface CompatibilityProvider {
      * @param name the owner username of the head (if this is a custom head, the convention is pluginnamehere:uniqueid)
      * @param id A UUID to be associated with this profile and texture (this may be a custom/unique value that you manage - you are strongly recommended to choose a static but randomly-generated ID)
      * @param texture The Base64-encoded Texture-URL tags. (this may be null to set no texture)
-     * @return the CompatibleProfile object
+     * @return the PlayerProfile object
      * @throws IllegalArgumentException if both the name and id are null.
      * @since 5.2.13-SNAPSHOT
      */
-    public CompatibleProfile createCompatibleProfile(@NotNull String name, @NotNull UUID id, @Nullable String texture) throws IllegalArgumentException;
+    public PlayerProfile createPlayerProfile(@NotNull String name, @NotNull UUID id, @Nullable URL texture) throws IllegalArgumentException;
     
     
     /**
@@ -481,7 +423,7 @@ public interface CompatibilityProvider {
      * @return whether it is assumed to be a custom head.
      * @throws IllegalArgumentException if profile is null
      */
-    public boolean isCustomHead(CompatibleProfile profile);
+    public boolean isCustomHead(PlayerProfile profile);
     /**
      * Determine if a head profile is a custom head or not, created by a plugin or for decoration.
      * This is a best-guess determination based on whether a username is set and possibly other details.

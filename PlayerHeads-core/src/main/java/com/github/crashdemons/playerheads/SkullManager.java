@@ -2,18 +2,25 @@
 package com.github.crashdemons.playerheads;
 
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
-import com.github.crashdemons.playerheads.compatibility.CompatibleProfile;
+import com.github.crashdemons.playerheads.compatibility.CompatibilityProvider;
 import com.github.crashdemons.playerheads.compatibility.CompatibleSkullMaterial;
+
+import java.net.URL;
 import java.util.UUID;
 import java.util.ArrayList;
 import java.util.Optional;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.BlockState;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
 
+import org.jetbrains.annotations.Nullable;
 import org.shininet.bukkit.playerheads.Config;
 import org.shininet.bukkit.playerheads.Lang;
 
@@ -63,12 +70,15 @@ public final class SkullManager {
      * Applies a texture-url to a playerhead's meta.
      * @param headMeta The SkullMeta associated with the playerhead to modify
      * @param uuid A UUID to associate with the head and texture
-     * @param texture The Base64-encoded Texture-URL tags.
+     * @param texture The Texture-URL.
      * @return true: the information was properly set on the playerhead; false: there was an error setting the profile field.
      * @author x7aSv
      */
-    private static boolean applyTexture(SkullMeta headMeta, @NotNull UUID uuid,@NotNull String username, String texture){
-        return Compatibility.getProvider().setProfile(headMeta, uuid,username, texture);
+    private static boolean applyTexture(SkullMeta headMeta, @NotNull UUID uuid,@NotNull String username, URL texture){
+        CompatibilityProvider prov = Compatibility.getProvider();
+        if(prov instanceof com.github.crashdemons.playerheads.compatibility.spigot_1_21.Provider p)
+            return p.setProfile(headMeta, uuid,username, texture);
+        return false;
     }
     
     /**
@@ -82,7 +92,7 @@ public final class SkullManager {
      * @return The ItemStack of heads desired.
      * @see org.shininet.bukkit.playerheads.Config#defaultStackSize
      */
-    public static ItemStack MobSkull(TexturedSkullType type, boolean useVanillaHeads, boolean addLore, CompatibleProfile profile){
+    public static ItemStack MobSkull(TexturedSkullType type, boolean useVanillaHeads, boolean addLore, PlayerProfile profile){
         return MobSkull(type,Config.defaultStackSize, useVanillaHeads, addLore, profile);
     }
     
@@ -94,7 +104,7 @@ public final class SkullManager {
      * @param addLore controls whether any lore text should be added to the head (is currently applied only to custom heads).
      * @return The ItemStack of heads desired.
      */
-    public static ItemStack MobSkull(TexturedSkullType type,int quantity,boolean useVanillaHeads, boolean addLore, CompatibleProfile profile){
+    public static ItemStack MobSkull(TexturedSkullType type,int quantity,boolean useVanillaHeads, boolean addLore, PlayerProfile profile){
         CompatibleSkullMaterial mat = type.getCompatibleMaterial();
         
         
@@ -117,7 +127,7 @@ public final class SkullManager {
         //System.out.println("DEBUG: addlore "+addLore);
         if(addLore) applyLore(headMeta,ChatColor.GREEN+Lang.LORE_HEAD_MOB);
         
-        if(CompatibleProfile.isValid(profile)) Compatibility.getProvider().setCompatibleProfile(headMeta, profile);
+        if(profile!=null) Compatibility.getProvider().setPlayerProfile(headMeta, profile);
         
         stack.setItemMeta(headMeta);
         return stack;
@@ -125,19 +135,22 @@ public final class SkullManager {
     private static ItemStack PlayerSkull(OfflinePlayer owner, boolean addLore){
         return PlayerSkull(owner,Config.defaultStackSize, addLore, null);
     }
-    private static ItemStack PlayerSkull(OfflinePlayer owner, int quantity, boolean addLore, CompatibleProfile profile){
+    @SuppressWarnings("SameParameterValue")
+    private static ItemStack PlayerSkull(OfflinePlayer owner, int quantity, boolean addLore, PlayerProfile profile){
         ItemStack stack = CompatibleSkullMaterial.PLAYER.getDetails().createItemStack(quantity);//new ItemStack(Material.PLAYER_HEAD,quantity);
         SkullMeta headMeta = (SkullMeta) stack.getItemMeta();
+        if(headMeta==null) headMeta= (SkullMeta) Bukkit.getServer().getItemFactory().getItemMeta(stack.getType());
         String name=null;
         if(owner!=null){
             applyOwningPlayer(headMeta,owner);
             name = owner.getName();
         }
         if(name==null) name="Player";//only used for display purposes.
+        assert headMeta != null;
         applyDisplayName(headMeta,ChatColor.RESET + "" + ChatColor.YELLOW + TexturedSkullType.getDisplayName(name));
         //System.out.println("DEBUG: addlore "+addLore);
         if(addLore) applyLore(headMeta,ChatColor.RED+Lang.LORE_HEAD_PLAYER);
-        if(CompatibleProfile.isValid(profile)) Compatibility.getProvider().setCompatibleProfile(headMeta, profile);//restore profile, if necessary
+        if(profile!=null) Compatibility.getProvider().setPlayerProfile(headMeta, profile);//restore profile, if necessary
         stack.setItemMeta(headMeta);
         return stack;
     }
@@ -191,7 +204,7 @@ public final class SkullManager {
      * @return The ItemStack of heads desired.
      * @throws IllegalArgumentException passed a null or empty username.
      */
-    public static ItemStack PlayerSkull(String owner, int quantity, boolean addLore, CompatibleProfile profile){
+    public static ItemStack PlayerSkull(String owner, int quantity, boolean addLore, PlayerProfile profile){
         if(owner==null || owner.isEmpty()) throw new IllegalArgumentException("Creating a playerhead with a null or empty username is not possible with this method.");
         OfflinePlayer op = Compatibility.getProvider().getOfflinePlayerByName(owner);
         return PlayerSkull(op,quantity, addLore,profile);

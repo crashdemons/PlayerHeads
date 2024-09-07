@@ -9,7 +9,6 @@ import com.github.crashdemons.playerheads.SkullConverter;
 import com.github.crashdemons.playerheads.SkullManager;
 import com.github.crashdemons.playerheads.TexturedSkullType;
 import com.github.crashdemons.playerheads.compatibility.Compatibility;
-import com.github.crashdemons.playerheads.compatibility.CompatibleProfile;
 import com.github.crashdemons.playerheads.compatibility.SkullBlockAttachment;
 import com.github.crashdemons.playerheads.compatibility.SkullDetails;
 import org.bukkit.Location;
@@ -24,6 +23,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.profile.PlayerProfile;
 
 /**
  * Defines a collection of utility methods for the plugin inventory management, item management
@@ -77,13 +77,13 @@ public final class InventoryManager {
         PlayerHeads.instance.getLogger().info("setblock "+attachment+" "+facing);//TODO: debug
         
         ItemMeta meta = stack.getItemMeta();
-        CompatibleProfile profile = null;
-        if(meta instanceof SkullMeta) profile = Compatibility.getProvider().getCompatibleProfile(meta);
+        PlayerProfile profile = null;
+        if(meta instanceof SkullMeta sm) profile = Compatibility.getProvider().getPlayerProfile(sm);
         
-        if(CompatibleProfile.isValid(profile)){//TODO: DEBUG
+        if(profile==null){//TODO: DEBUG
             PlayerHeads.instance.getLogger().warning("setblock Profile from itemstack is null or invalid");//TODO:DEBUG
         }else{
-            PlayerHeads.instance.getLogger().info("setblock profile "+profile.getName()+" "+profile.getId()+" "+profile.getTextures());//TODO: debug
+            PlayerHeads.instance.getLogger().info("setblock profile "+profile.getName()+" "+profile.getUniqueId()+" "+profile.getTextures());//TODO: debug
         }
         
         
@@ -107,8 +107,8 @@ public final class InventoryManager {
         }
         
         BlockState state = block.getState();
-        if(state instanceof Skull && CompatibleProfile.isValid(profile)){
-            boolean success = Compatibility.getProvider().setCompatibleProfile(state, profile);
+        if(state instanceof Skull && profile!=null){
+            boolean success = Compatibility.getProvider().setPlayerProfile(state, profile);
             if(!success){//TODO: DEBUG
                 PlayerHeads.instance.getLogger().warning("setblock Profile setting on block failed");//TODO:DEBUG
             }else{
@@ -116,7 +116,7 @@ public final class InventoryManager {
                 state.update();
             }
         }else{
-            PlayerHeads.instance.getLogger().warning("Blockstate wasn't a skull or profile wasn't valid "+(state instanceof Skull)+" "+CompatibleProfile.isValid(profile));//TODO: DEBUG
+            PlayerHeads.instance.getLogger().warning("Blockstate wasn't a skull or profile wasn't valid "+(state instanceof Skull)+" "+(profile!=null));//TODO: DEBUG
         }
         
         return true;

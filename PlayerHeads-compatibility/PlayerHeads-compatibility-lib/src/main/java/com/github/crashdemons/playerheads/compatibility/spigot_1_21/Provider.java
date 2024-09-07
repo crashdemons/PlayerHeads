@@ -7,10 +7,7 @@ package com.github.crashdemons.playerheads.compatibility.spigot_1_21;
 
 import com.github.crashdemons.playerheads.compatibility.*;
 import com.github.crashdemons.playerheads.compatibility.SkullType;
-import com.github.crashdemons.playerheads.compatibility.craftbukkit.CompatibleProfilePP;
-import com.github.crashdemons.playerheads.compatibility.craftbukkit.ProfileUtils;
 import com.github.crashdemons.playerheads.compatibility.common.SkullDetails_modern;
-import com.mojang.authlib.GameProfile;
 import org.bukkit.*;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Skull;
@@ -29,9 +26,12 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.profile.PlayerProfile;
+import org.bukkit.profile.PlayerTextures;
 import org.bukkit.projectiles.ProjectileSource;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -147,42 +147,32 @@ public class Provider implements CompatibilityProvider {
 
     //-----------5.2.12 providers-----------//
     @Override
-    public Optional<Object> getOptionalProfile(ItemMeta skullMeta){
-        try{
-            return Optional.of(Compatibility.getProvider().getProfile(skullMeta));
-        }catch(Exception e){
-            return Optional.empty();
-        }
+    public Optional<Object> getOptionalProfile(SkullMeta skullMeta){
+        PlayerProfile pp = skullMeta.getOwnerProfile();
+        if(pp==null) return Optional.empty();
+        return Optional.of(pp);
     }
     @Override
     public Optional<Object> getOptionalProfile(Skull skullState){
-        try{
-            return Optional.of(Compatibility.getProvider().getProfile(skullState));
-        }catch(Exception e){
-            return Optional.empty();
-        }
+        PlayerProfile pp = skullState.getOwnerProfile();
+        if(pp==null) return Optional.empty();
+        return Optional.of(pp);
     }
     @Override
     public boolean setOptionalProfile(Skull skullState, Optional<Object> profile){
-        if(!profile.isPresent()) return false;
-        try{
-            return Compatibility.getProvider().setProfile(skullState,profile.get());
-        }catch(Exception e){
-            return false;
-        }
+        if(profile.isEmpty()) return false;
+        skullState.setOwnerProfile((PlayerProfile)profile.get());
+        return true;
     }
     @Override
-    public boolean setOptionalProfile(ItemMeta skullMeta, Optional<Object> profile){
-        if(!profile.isPresent()) return false;
-        try{
-            return Compatibility.getProvider().setProfile(skullMeta,profile.get());
-        }catch(Exception e){
-            return false;
-        }
+    public boolean setOptionalProfile(SkullMeta skullMeta, Optional<Object> profile){
+        if(profile.isEmpty()) return false;
+        skullMeta.setOwnerProfile((PlayerProfile)profile.get());
+        return true;
     }
 
     @Override
-    public ItemStack getCompatibleHeadItem(CompatibleSkullMaterial material, int amount){
+    public ItemStack getCompatibleHeadItem(@NotNull CompatibleSkullMaterial material, int amount){
         return material.getDetails().createItemStack(amount);
     }
 
@@ -198,15 +188,15 @@ public class Provider implements CompatibilityProvider {
     }
 
     @Override
-    public boolean isCustomHead(CompatibleProfile profile){
+    public boolean isCustomHead(PlayerProfile profile){
         if(profile==null) throw new IllegalArgumentException("profile is null");
-        return isCustomHead(profile.getName(), profile.getId());
+        return isCustomHead(profile.getName(), profile.getUniqueId());
     }
     @Override
     public boolean isCustomHead(Object skull){
         if(skull==null) throw new IllegalArgumentException("skull is null");
         if(skull instanceof Skull || skull instanceof SkullMeta){
-            CompatibleProfile profile = Compatibility.getProvider().getCompatibleProfile(skull);
+            PlayerProfile profile = Compatibility.getProvider().getPlayerProfile(skull);
             if(profile==null) return false;
             return isCustomHead(profile);
         }else throw new IllegalArgumentException("skull provided is not of type Skull or SkullMeta");
@@ -323,19 +313,28 @@ public class Provider implements CompatibilityProvider {
     @Override public OfflinePlayer getOwningPlayer(SkullMeta skull){
         OfflinePlayer op = getOwningPlayerDirect(skull);//skullMeta.getOwningPlayer();
         if(op!=null) return op;
-        return ProfileUtils.getProfile(skull).getOwningPlayer();
+        return getOwningPlayer(skull.getOwnerProfile()) ;
     }
     @Override public OfflinePlayer getOwningPlayer(Skull skull){
         OfflinePlayer op = getOwningPlayerDirect(skull);//skullMeta.getOwningPlayer();
         if(op!=null) return op;
-        return ProfileUtils.getProfile(skull).getOwningPlayer();
+        return getOwningPlayer(skull.getOwnerProfile()) ;
+    }
+
+    private OfflinePlayer getOwningPlayer(@Nullable PlayerProfile pp){
+        if(pp==null) return null;
+        UUID id = pp.getUniqueId();
+        if(id!=null) return Bukkit.getOfflinePlayer(id);
+        String name = pp.getName();
+        if(name!=null) return Bukkit.getOfflinePlayer(name);
+        return null;
     }
 
 
     @Override public String getOwner(SkullMeta skull){
         String owner=null;
         OfflinePlayer op = getOwningPlayerDirect(skull);//skullMeta.getOwningPlayer();
-        if(op==null) op = ProfileUtils.getProfile(skull).getOwningPlayer();//this does happen on textured heads with a profile but without an OwningPlayer
+        if(op==null) op = this.getOwningPlayer(skull);//this does happen on textured heads with a profile but without an OwningPlayer
         if(op!=null) owner=op.getName();
         if(owner==null) owner=getOwnerDirect(skull);//skullMeta.getOwner();
         return owner;
@@ -343,64 +342,63 @@ public class Provider implements CompatibilityProvider {
     @Override public String getOwner(Skull skull){
         String owner=null;
         OfflinePlayer op = getOwningPlayerDirect(skull);//skullMeta.getOwningPlayer();
-        if(op==null) op = ProfileUtils.getProfile(skull).getOwningPlayer();//this does happen on textured heads with a profile but without an OwningPlayer
+        if(op==null) op = this.getOwningPlayer(skull);//this does happen on textured heads with a profile but without an OwningPlayer
         if(op!=null) owner=op.getName();
         if(owner==null) owner=getOwnerDirect(skull);//skullMeta.getOwner();
         return owner;
     }
 
-    @Override public boolean setProfile(ItemMeta headMeta, UUID uuid, String username, String texture){
-        return ProfileUtils.setProfile(headMeta, uuid,username, texture);
+    @Override public boolean setProfile(SkullMeta headMeta, @NotNull UUID uuid, @NotNull String username, URL texture){
+        try{
+            headMeta.setOwnerProfile(this.createPlayerProfile(username,uuid,texture));
+        }catch (Exception e){
+            return false;
+        }
+        return false;
     }
-    @Override public boolean setProfile(Skull headBlockState, UUID uuid, String username, String texture){
-        return ProfileUtils.setProfile(headBlockState, uuid,username, texture);
+    @Override public boolean setProfile(Skull headBlockState, @NotNull UUID uuid, @NotNull String username, URL texture){
+        try{
+            headBlockState.setOwnerProfile(this.createPlayerProfile(username,uuid,texture));
+        }catch (Exception e){
+            return false;
+        }
+        return false;
     }
 
     //-----------5.2.12 providers-----------//
-    @Override
-    public Object getProfile(ItemMeta headMeta) throws IllegalStateException{
-        return ProfileUtils.getProfile(headMeta);
-    }
-
-    @Override
-    public Object getProfile(Skull headBlockState) throws IllegalStateException{
-        return ProfileUtils.getProfile(headBlockState);
-    }
-
-    @Override
-    public boolean setProfile(ItemMeta headMeta, Object profile) throws IllegalArgumentException{
-        if(!(profile instanceof PlayerProfile)) throw new IllegalArgumentException("Passed argument was not a GameProfile object");
-        return ProfileUtils.setInternalProfile(headMeta, (PlayerProfile) profile);
-    }
-
-    @Override
-    public boolean setProfile(Skull headBlockState, Object profile) throws IllegalArgumentException{
-        if(!(profile instanceof PlayerProfile)) throw new IllegalArgumentException("Passed argument was not a GameProfile object");
-        return ProfileUtils.setInternalProfile(headBlockState, (PlayerProfile) profile);
-    }
 
 
     //--------5.2.13 providers -----//
 
     @Override
-    public boolean setCompatibleProfile(Object skull, CompatibleProfile profile) throws IllegalArgumentException{
-        return ProfileUtils.setProfile(skull, profile);
+    public boolean setPlayerProfile(Object skull, PlayerProfile profile) throws IllegalArgumentException{
+        if(skull instanceof Skull sb) try{ sb.setOwnerProfile(profile); return true; }catch (Exception e){ return false; }
+        if(skull instanceof SkullMeta sm) try{ sm.setOwnerProfile(profile); return true; }catch (Exception e){ return false; }
+        return false;
     }
     @Override
-    public CompatibleProfile getCompatibleProfile(Object skull) throws IllegalArgumentException{
-        return ProfileUtils.getProfile(skull);
+    public PlayerProfile getPlayerProfile(Object skull) throws IllegalArgumentException{
+        if(skull instanceof Skull sb) return sb.getOwnerProfile();
+        if(skull instanceof SkullMeta sm) return sm.getOwnerProfile();
+        return null;
     }
 
     @Override
-    public CompatibleProfile createCompatibleProfile(@Nullable String name, @Nullable UUID id, @Nullable String texture){
-        CompatibleProfile profile = new CompatibleProfilePP(id,name);
-        profile.setTextures(texture);
-        return profile;
+    public PlayerProfile createPlayerProfile(@Nullable String name, @Nullable UUID id, @Nullable URL texture){
+        PlayerProfile pp = Bukkit.getServer().createPlayerProfile(id,name);
+        PlayerTextures pt = pp.getTextures();
+        pt.setSkin(texture);
+        pp.setTextures(pt);
+        return pp;
     }
 
     @Override
     public boolean clearProfile(Object skull) throws IllegalArgumentException{
-        return ProfileUtils.clearProfile(skull);
+        PlayerProfile pp = this.getPlayerProfile(skull);
+        if(pp==null) return true;
+        if(skull instanceof Skull sb){ sb.setOwnerProfile(null); return true; }
+        if(skull instanceof SkullMeta sm){ sm.setOwnerProfile(null); return true; }
+        return false;
     }
     //========1.14 Provider ============
 

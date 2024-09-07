@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.shininet.bukkit</groupId>
         <artifactId>PlayerHeads-compatibility</artifactId>
-        <version>5.21.0-SNAPSHOT</version>
+        <version>5.21.2-SNAPSHOT</version>
     </parent>
     <artifactId>PlayerHeads-compatibility-api</artifactId>
     <packaging>jar</packaging>
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>org.shininet.bukkit</groupId>
             <artifactId>PlayerHeads-base-api</artifactId>
-            <version>5.21.0-SNAPSHOT</version>
+            <version>5.21.2-SNAPSHOT</version>
         </dependency>
 
     </dependencies>
@@ -147,5 +147,4 @@
             </plugin>
         </plugins>
     </reporting>
-    <version>5.21.0-SNAPSHOT</version>
 </project>

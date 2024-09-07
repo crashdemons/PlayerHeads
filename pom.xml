@@ -4,7 +4,7 @@
     <groupId>org.shininet.bukkit</groupId>
     <artifactId>PlayerHeads</artifactId>
     <packaging>pom</packaging>
-    <version>5.21.1-SNAPSHOT</version>
+    <version>5.21.2-SNAPSHOT</version>
     <name>PlayerHeads-5.2</name>
     
     <!-- sub modules -->
@@ -47,11 +47,7 @@
 
  <!-- -->
     <repositories>
-        <repository>
-            <id>crashdemons-repo</id>
-            <url>https://meme.tips/java-repos/</url>
-        </repository>
-	<repository>
+	    <repository>
             <id>mojang</id>
             <name>Mojang's Repository</name>
             <url>https://libraries.minecraft.net/</url>

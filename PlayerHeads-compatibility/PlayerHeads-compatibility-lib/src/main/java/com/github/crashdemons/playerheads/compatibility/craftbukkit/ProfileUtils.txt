@@ -20,7 +20,7 @@ import java.util.UUID;
  * @deprecated This class is server implementation-specific and should not be used directly if possible, the namespace may change in the future.
  */
 @Deprecated
-public class ProfileUtils {
+public class ProfileUtilsOLD {
 
     //internal methods - can be typed
 

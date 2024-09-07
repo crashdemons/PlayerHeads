@@ -6,10 +6,11 @@
 package com.github.crashdemons.playerheads.compatibility.faketestserver_1_0;
 
 import com.github.crashdemons.playerheads.compatibility.CompatibilityProvider;
-import com.github.crashdemons.playerheads.compatibility.CompatibleProfile;
 import com.github.crashdemons.playerheads.compatibility.RuntimeReferences;
 import com.github.crashdemons.playerheads.compatibility.SkullDetails;
 import com.github.crashdemons.playerheads.compatibility.SkullType;
+
+import java.net.URL;
 import java.util.UUID;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -23,6 +24,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -81,10 +83,10 @@ public class Provider extends com.github.crashdemons.playerheads.compatibility.s
         return getOwnerDirect(skull);
     }
     
-    @Override public boolean setProfile(ItemMeta headMeta, UUID uuid,String username, String texture){
+    @Override public boolean setProfile(SkullMeta headMeta, UUID uuid,String username, URL texture){
         return false;
     }
-    @Override public boolean setProfile(Skull headBlockState, UUID uuid,String username, String texture){
+    @Override public boolean setProfile(Skull headBlockState, UUID uuid,String username, URL texture){
         return false;
     }
 
@@ -96,34 +98,13 @@ public class Provider extends com.github.crashdemons.playerheads.compatibility.s
     }
     
     //-----------5.2.12 providers-----------//
-    @Override
-    public Object getProfile(ItemMeta headMeta) throws IllegalStateException{
-        throw new IllegalStateException("Not supported by test class");
-    }
-    
-    @Override
-    public Object getProfile(Skull headBlockState) throws IllegalStateException{
-        throw new IllegalStateException("Not supported by test class");
-    }
-    
-    
-    
-    @Override
-    public boolean setProfile(ItemMeta headMeta, Object profile) throws IllegalStateException, IllegalArgumentException{
-        throw new IllegalStateException("Not supported by test class");
-    }
-    
-    
-    @Override
-    public boolean setProfile(Skull headBlockState, Object profile) throws IllegalStateException, IllegalArgumentException{
-        throw new IllegalStateException("Not supported by test class");
-    }
+
     
     //-------------5.2.13 providers ----------------//
-    public boolean setCompatibleProfile(Object skull, CompatibleProfile profile) throws IllegalArgumentException{
+    public boolean setPlayerProfile(Object skull, PlayerProfile profile) throws IllegalArgumentException{
         throw new IllegalStateException("Not supported by test class");
     }
-    public CompatibleProfile getCompatibleProfile(Object possibleSkull) throws IllegalArgumentException{
+    public PlayerProfile getPlayerProfile(Object possibleSkull) throws IllegalArgumentException{
         if(possibleSkull instanceof Skull){
             Skull skull = (Skull) possibleSkull;
             OfflinePlayer op = skull.getOwningPlayer();
@@ -134,7 +115,7 @@ public class Provider extends com.github.crashdemons.playerheads.compatibility.s
         throw new IllegalStateException("Not supported by test class");
     }
     
-    public CompatibleProfile createCompatibleProfile(@Nullable String name, @Nullable UUID id, @Nullable String texture){
+    public PlayerProfile createPlayerProfile(@Nullable String name, @Nullable UUID id, @Nullable String texture){
         throw new IllegalStateException("Not supported by test class");
     }
     

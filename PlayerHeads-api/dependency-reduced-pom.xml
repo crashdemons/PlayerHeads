@@ -3,11 +3,11 @@
   <parent>
     <artifactId>PlayerHeads</artifactId>
     <groupId>org.shininet.bukkit</groupId>
-    <version>5.21.0-SNAPSHOT</version>
+    <version>5.21.2-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>PlayerHeads-api</artifactId>
-  <version>5.21.0-SNAPSHOT</version>
+  <version>5.21.2-SNAPSHOT</version>
   <build>
     <plugins>
       <plugin>
@@ -112,7 +112,7 @@
     <dependency>
       <groupId>org.shininet.bukkit</groupId>
       <artifactId>PlayerHeads-compatibility-api</artifactId>
-      <version>5.21.0-SNAPSHOT</version>
+      <version>5.21.2-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

@@ -5,36 +5,69 @@
  */
 package com.github.crashdemons.playerheads.compatibility.faketestserver_1_0;
 
-import com.github.crashdemons.playerheads.compatibility.CompatibleProfile;
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+
+import org.bukkit.profile.PlayerProfile;
+import org.bukkit.profile.PlayerTextures;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  *
  * @author crashdemons (crashenator at gmail.com)
  */
-public class CompatibleProfileTEST extends CompatibleProfile {
-    
-    public CompatibleProfileTEST(){
-        super();
+public class CompatibleProfileTEST implements PlayerProfile {
+    private UUID uuid;
+    private String username;
+    private PlayerTextures textures=null;
+
+    public CompatibleProfileTEST(@NotNull UUID id, @NotNull  String username){
+        this.uuid=id;
+        this.username=username;
     }
-    
-    public CompatibleProfileTEST(@NotNull UUID id, @NotNull String name){
-        super(id,name);
+
+    @Nullable
+    @Override
+    public UUID getUniqueId() {
+        return uuid;
     }
-    public CompatibleProfileTEST(Object internal){
-        setFromInternalObject(internal);
+
+    @Nullable
+    @Override
+    public String getName() {
+        return username;
     }
-    
-    public Object toInternalObject(){//use this class as he basic type, no lower object.
+
+    @NotNull
+    @Override
+    public PlayerTextures getTextures() {
+        return textures;
+    }
+
+    @Override
+    public void setTextures(@Nullable PlayerTextures playerTextures) {
+        this.textures=playerTextures;
+    }
+
+    @Override
+    public boolean isComplete() {
+        return false;
+    }
+
+    @Override
+    public CompletableFuture<PlayerProfile> update() {
+        return null;
+    }
+
+    @Override
+    public PlayerProfile clone() {
         return this;
     }
-    
-    public void setFromInternalObject(Object test){
-        if(!(test instanceof CompatibleProfileTEST)) throw new IllegalArgumentException("invalid profile type");
-        CompatibleProfileTEST profile = (CompatibleProfileTEST) test;
-        this.id = profile.id;
-        this.name = profile.name;
-        this.textures = profile.textures;
+
+    @Override
+    public Map<String, Object> serialize() {
+        return null;
     }
 }
