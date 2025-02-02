@@ -33,6 +33,10 @@ public enum TexturedSkullType implements HeadType {
             "a1ae4481-f3f0-4af9-a83e-75d3a7f87853",
             "http://textures.minecraft.net/texture/eb7af9e4411217c7de9c60acbd3c3fd6519783332a1b3bc56fbfce90721ef35"
     ),
+    CREAKING(
+            "7915b2aa-0e39-4e05-aca0-73c5be0aa370",
+            "http://textures.minecraft.net/texture/a575bac234cf86b124d3cc870bd6b737d27679673a616faf2e996f9949c6153f"
+    ),
     BREEZE(
             "2c9b79fb-adc3-4c6c-a59b-25d7c559e73d",
             "http://textures.minecraft.net/texture/cd6e602f76f80c0657b5aed64e267eeea702b31e6dae86346c8506f2535ced02"
