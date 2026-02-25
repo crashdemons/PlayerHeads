@@ -10,6 +10,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 import org.bukkit.profile.PlayerProfile;
+import org.bukkit.profile.PlayerSkinPatch;
 import org.bukkit.profile.PlayerTextures;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -49,6 +50,17 @@ public class CompatibleProfileTEST implements PlayerProfile {
     @Override
     public void setTextures(@Nullable PlayerTextures playerTextures) {
         this.textures=playerTextures;
+    }
+
+    @NotNull
+    @Override
+    public PlayerSkinPatch getSkinPatch() {
+        return null;
+    }
+
+    @Override
+    public void setSkinPatch(@Nullable PlayerSkinPatch playerSkinPatch) {
+
     }
 
     @Override
