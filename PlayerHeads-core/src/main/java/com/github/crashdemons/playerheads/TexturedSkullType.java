@@ -49,7 +49,7 @@ public enum TexturedSkullType implements HeadType {
     ),
     CAMEL_HUSK(
             "7450fb65-b98a-497b-81a2-c93a0d0f69ac",
-            "http://textures.minecraft.net/texture/750bfc9b2cc40f4d8d0224ccbabac26b338aa947d99dcde769f859b59b8d0b0e"
+            "http://textures.minecraft.net/texture/3bd7a92a6f67b7500d16c4e12f28058ec2859311556ba03be2d1f581170f2db6"
     ),
 
     MANNEQUIN(
