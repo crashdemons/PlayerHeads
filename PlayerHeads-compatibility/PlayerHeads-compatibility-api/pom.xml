@@ -4,7 +4,8 @@
     <parent>
         <groupId>org.shininet.bukkit</groupId>
         <artifactId>PlayerHeads-compatibility</artifactId>
-        <version>5.21.2-SNAPSHOT</version>
+        <version>5.21.10-SNAPSHOT</version>
+        <relativePath>..</relativePath>
     </parent>
     <artifactId>PlayerHeads-compatibility-api</artifactId>
     <packaging>jar</packaging>
@@ -13,14 +14,14 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.21.1-R0.1-SNAPSHOT</version>
+            <version>1.21.11-R0.2-SNAPSHOT</version>
         </dependency>
         
         
         <dependency>
             <groupId>org.shininet.bukkit</groupId>
             <artifactId>PlayerHeads-base-api</artifactId>
-            <version>5.21.2-SNAPSHOT</version>
+            <version>5.21.10-SNAPSHOT</version>
         </dependency>
 
     </dependencies>
@@ -136,6 +137,7 @@
     </build>
     <reporting>
         <plugins>
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -145,6 +147,7 @@
                       <suppressionsLocation>${basedir}/checkstyle-suppression.xml</suppressionsLocation>
                     </configuration>
             </plugin>
+            -->
         </plugins>
     </reporting>
 </project>

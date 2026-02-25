@@ -4,8 +4,8 @@
     <groupId>org.shininet.bukkit</groupId>
     <artifactId>PlayerHeads</artifactId>
     <packaging>pom</packaging>
-    <version>5.21.4-SNAPSHOT</version>
-    <name>PlayerHeads-5.2</name>
+    <version>5.21.10-SNAPSHOT</version>
+    <name>PlayerHeads</name>
     
     <!-- sub modules -->
     <modules>
@@ -113,7 +113,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.2</version>
+                <version>3.2.5</version>
                 <configuration>
                     <!-- fix errors when using pockermock under JDK 17 -->
                   <argLine>-Dfile.encoding=UTF8 --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.util.regex=ALL-UNNAMED --add-opens java.base/java.security=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED</argLine>
@@ -138,7 +138,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.4.1</version>
                 <configuration>
                     <archive>
                         <manifestEntries>

@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.shininet.bukkit</groupId>
         <artifactId>PlayerHeads-compatibility</artifactId>
-        <version>5.21.2-SNAPSHOT</version>
+        <version>5.21.10-SNAPSHOT</version>
     </parent>
     <artifactId>PlayerHeads-compatibility-lib</artifactId>
     <packaging>jar</packaging>
@@ -14,19 +14,19 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.21.1-R0.1-SNAPSHOT</version>
+            <version>1.21.11-R0.2-SNAPSHOT</version>
             <!-- per md_5: spigot will no longer distribute Bukkit as of 1.16.1, only spigot-api -->
         </dependency>
         <dependency>
             <groupId>com.mojang</groupId>
             <artifactId>authlib</artifactId>
-            <version>6.0.54</version>
+            <version>7.0.61</version>
         </dependency>
         <dependency>
             <!-- This shouldn't be a dep which is packaging: pom -->
             <groupId>${project.groupId}</groupId>
             <artifactId>PlayerHeads-compatibility-api</artifactId>
-            <version>5.21.2-SNAPSHOT</version>
+            <version>5.21.10-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.bukkit</groupId>
