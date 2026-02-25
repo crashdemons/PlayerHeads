@@ -45,7 +45,7 @@ public class Provider implements CompatibilityProvider {
 
     public Provider(){}
     @Override public String getType(){ return "com/github/crashdemons/playerheads/compatibility/craftbukkit"; }
-    @Override public String getVersion(){ return "1.14+"; }
+    @Override public String getVersion(){ return "1.21.11+"; }
 
     //======common and modern support =========
     @Override
