@@ -33,6 +33,41 @@ public enum TexturedSkullType implements HeadType {
             "a1ae4481-f3f0-4af9-a83e-75d3a7f87853",
             "http://textures.minecraft.net/texture/eb7af9e4411217c7de9c60acbd3c3fd6519783332a1b3bc56fbfce90721ef35"
     ),
+
+
+    ZOMBIE_NAUTILUS(
+            "c16f7081-dae4-40b8-881c-fee403e33cd8",
+            "http://textures.minecraft.net/texture/fd9a933376da44c3391307cb9f4cf03f16f3a54f495fd5a11bad8a373f9d5720"
+    ),
+    PARCHED(
+            "719758cb-d141-4cec-a8e4-79de7bbf062e",
+            "http://textures.minecraft.net/texture/24aeceff5f26dd8413c5c03547c234ac03108d187af0b9cd834a8ce12598591c"
+    ),
+    NAUTILUS(
+            "a6d7f67e-10cb-4eac-92e2-d1c88369b1bf",
+            "http://textures.minecraft.net/texture/b53d63eb175b00fb35285f4330d0be68a0713db94e00e6fdd85832d41e3a08b"
+    ),
+    CAMEL_HUSK(
+            "7450fb65-b98a-497b-81a2-c93a0d0f69ac",
+            "http://textures.minecraft.net/texture/750bfc9b2cc40f4d8d0224ccbabac26b338aa947d99dcde769f859b59b8d0b0e"
+    ),
+
+    MANNEQUIN(
+            "6dedcdc9-900b-4265-9fc3-86434aa1f739",
+            "http://textures.minecraft.net/texture/b93a9c9b6846310bd746b248974d837e1539bfd92d57d14aaa8518b4f83e9941"
+    ),
+    COPPER_GOLEM(
+            "52a99f17-bde0-46a0-8b3f-8e2d11dd38b1",
+            "http://textures.minecraft.net/texture/99e24e94dbe42e230d83293a77d61ff7101a8c68ab68bbc6a93f9630fb2fdb4"
+    ),
+    HAPPY_GHAST(
+            "0bf2199c-abae-4f7f-92bc-da613851b642",
+            "http://textures.minecraft.net/texture/a1a36cb93d01675c4622dd5c8d872110911ec12c372e89afa8ba03862867f6fb"
+    ),
+
+
+
+
     CREAKING(
             "7915b2aa-0e39-4e05-aca0-73c5be0aa370",
             "http://textures.minecraft.net/texture/a575bac234cf86b124d3cc870bd6b737d27679673a616faf2e996f9949c6153f"
