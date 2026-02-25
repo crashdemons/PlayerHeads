@@ -190,7 +190,7 @@
           <groupId>org.joml</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>bungeecord-chat</artifactId>
+          <artifactId>bungeecord-serializer</artifactId>
           <groupId>net.md-5</groupId>
         </exclusion>
         <exclusion>
