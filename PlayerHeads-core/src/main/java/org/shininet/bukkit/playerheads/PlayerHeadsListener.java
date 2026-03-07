@@ -13,6 +13,8 @@ import com.github.crashdemons.playerheads.compatibility.CompatiblePlugins;
 import com.github.crashdemons.playerheads.compatibility.SkullType;
 import com.github.crashdemons.playerheads.compatibility.plugins.SimulatedBlockBreakEvent;
 import com.github.crashdemons.playerheads.compatibility.plugins.heads.HeadModificationHandling;
+
+import java.security.SecureRandom;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -63,7 +65,7 @@ import org.shininet.bukkit.playerheads.events.VanillaLivingEntityDropHeadEvent;
  */
 class PlayerHeadsListener implements Listener {
 
-    private final Random prng = new Random();
+    private final Random prng = new SecureRandom();
     private final PlayerHeads plugin;
     private volatile InteractSpamPreventer clickSpamPreventer;
     private volatile PlayerDeathSpamPreventer deathSpamPreventer;
