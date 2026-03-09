@@ -14,13 +14,7 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.5.0</version>
         <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <phase>package</phase>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
+          <execution />
         </executions>
         <configuration>
           <quiet>false</quiet>
@@ -74,8 +68,6 @@
                 <copy />
                 <copy />
                 <copy />
-                <copy />
-                <copy />
               </target>
             </configuration>
           </execution>
@@ -86,14 +78,7 @@
               <goal>run</goal>
             </goals>
             <configuration>
-              <target>
-                <delete>
-                  <fileset />
-                </delete>
-                <copy>
-                  <fileset />
-                </copy>
-              </target>
+              <target />
             </configuration>
           </execution>
         </executions>
